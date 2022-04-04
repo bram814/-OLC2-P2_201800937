@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>[OLC2]Proyecto</title>
+        <link rel="shortcut icon" href="#">
+        <!-- <link href="index.css" rel="stylesheet" type="text/css"> -->
+        <!-- Script Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <!-- Styles for Codemirror -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+            integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Scripts for Codemirror -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"
+                integrity="sha512-xwrAU5yhWwdTvvmMNheFn9IyuDbl/Kyghz2J3wQRDR8tyNmT8ZIYOd0V3iPYY/g4XdNPy0n/g0NvqGu9f0fPJQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Theme isotope -->
+        <link rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/isotope.min.css" 
+            integrity="sha512-5QfxfU2pxxWqMfmJGYivSJXujFi/3lk4MTaMdzO9jEs7pXw30xlDaKkICpFRN954vGq+wIg2ZpxSGjMjg6oQlQ==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" 
+            />
+        
+        <!-- Mode js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"
+                integrity="sha512-IS1FyxQkiJHT1SAvLXBaJu1UTFSIw0GT/DuzxHl69djqyLoEwGmR2davcZUnB8M7ppi9nfTGZR/vdfqmWt+i6A=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/rust/rust.min.js" 
+        integrity="sha512-g3Nhw36S0p4ZJQcky87D5M+vZbFvLrgsHWYltUy5IW0zKbvi8GlPRjJSo2CyUyQiU01Ier7u+rBABDs3BawKyQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+        <!-- Mode powershell -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/powershell/powershell.min.js"
+                integrity="sha512-LqqYYiphtlUW/A/ctvWI7aJspzPsy3ZhoUT59+3X5vpNVp8u+U+kMkA5Isl/l8jmZX2lRyUBInVKjxYbWwab/w=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    </head>
+    <body style="background-color:#000000;">
+       
+
+        <form action="http://127.0.0.1:3000/compilar" method="post" id="IDform">
+            <header>
+                
+                <nav class="navbar navbar-expand-lg navbar-dark dark fixed-top">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="http://127.0.0.1:3000">RUST </a>
+                        
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <div>
+                                <button class="btn btn-outline-success">Compilar </button>
+                            </div>
+                            <div>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-danger" color="black" href="#tablaErroresSL">Tabla de Errores</a>
+                                </li>
+                            </div>
+                            <div>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-info" color="black" href="#tablaSimbolosSL">Tabla de Simbolos</a>
+                                </li>
+                            </div>
+                            
+                                
+                        </div>
+                    </div>
+                </nav>
+                
+            
+            </header>
+            
+            <br>
+        
+            <div class="container-fluid mt-5 mb-3">
+                <div class="row" id="salidaConsola">
+                    <div class="col">
+                        <center>
+                            <h1>
+                                <font color="#ffffff" face="Times New Roman">
+                                    ENTRADA
+                                </font>   
+                            </h1>
+                        </center>
+                        {{ if (eq .CODE_INPUT "") }}
+                            <textarea name="editor" id="editor">
+fn main() {
+    println!("hello World!")
+}</textarea>
+                        {{ else }}
+                            <textarea name="editor" id="editor">{{ .CODE_INPUT }}</textarea>
+                        {{ end }}
+                    </div>
+                    <div class="col">
+                        <center>
+                            <h1>
+                                <font color="#ffffff" face="Times New Roman">
+                                    SALIDA
+                                </font>   
+                            </h1>
+                        </center>
+                        {{ if (eq .CODE_OUT "") }}
+                            <textarea name="out_data" id="out"></textarea>
+                        {{ else }}
+                            <textarea name="out_data" id="out">{{ .CODE_OUT }}</textarea>
+                        {{ end }}
+                            
+                    
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="container-fluid mt-5" id="tablaErroresSL">
+        
+                <div class="tabla-report">
+                    <center>
+                        <h1>
+                            <font color="#ffffff" face="Times New Roman">
+                                TABLA DE ERRORES
+                            </font>
+                        </h1>
+                        
+                    </center>
+                    <table class="table table-dark table-hover shadow p-3 mb-5 bg-body rounded" id="tabla-reporte">
+                        <head>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descripcion</th>
+                                <th>Ambito</th>
+                                <th>Fila</th>
+                                <th>Columna</th>
+                                <th>Fecha y Hora</th>
+                            </tr>
+                        </head>
+
+                        <tbody>
+                            {{ range .Tabla_Error }}
+                            
+                                <tr>
+                                    <td> {{ .Id          }}    </td>
+                                    <td> {{ .Tipo        }}   </td> 		
+                                    <td> {{ .Descripcion }}   </td> 
+                                    <td> {{ .Row         }}   </td>			
+                                    <td> {{ .Column      }}   </td> 		
+                                    <td> {{ .Time        }}   </td> 		
+                                </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+
+            <div class="container-fluid mt-5" id="tablaSimbolosSL">
+        
+                <div class="tabla-report">
+                    <center>
+                        <h1>
+                            <font color="#ffffff" face="Times New Roman">
+                                TABLA DE SIMBOLOS
+                            </font>
+                        </h1>
+                        
+                    </center>
+                    <table class="table table-dark table-hover shadow p-3 mb-5 bg-body rounded" id="tabla-reporte">
+                        <head>
+                            <tr>
+                                <th>Id</th>
+                                <th>Tipo Símbolo</th>
+                                <th>Tipo de Dato</th>
+                                <th>Ámbito</th>
+                                <th>Fila</th>
+                                <th>Columna</th>
+                            </tr>
+                        </head>
+
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+
+        </form>
+    </body>
+</html>
+
+<script>
+    CM_ENTRADA = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        theme: 'isotope',
+        mode: 'javascript',
+        lineNumbers: true,
+        styleActivateLine: true,
+        
+    })
+
+    CM_SALIDA = CodeMirror.fromTextArea(document.getElementById("out"), {
+        theme: 'isotope',
+        mode: null,
+        lineNumbers: true,
+        styleActivateLine: true,
+        
+    })
+    
+    /* SIZE */
+    CM_ENTRADA.setSize(null, "500")
+    CM_SALIDA.setSize(null, "500")
+
+</script>
