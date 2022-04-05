@@ -117,43 +117,51 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	
 	// var contMain int = 0
 
-
 	for _, s := range result.ToArray() {
 		s.(interfaces.Instruction).Compilar(globalEnv, tree, gen)
 	}
 
 	_salida += "#include <stdio.h>\n"
 	_salida += "#include <math.h>\n"
-	_salida += "double HEAP[82000];\n"
-	_salida += "double STACK[82000];\n"
+	_salida += "double heap[23111998];\n"
+	_salida += "double stack[23111998];\n"
 	_salida += "double P;\n"
 	_salida += "double H;\n"
-	_salida += "double "
 
-	_salida += fmt.Sprintf("%v", gen.GetTemp().GetValue(0))
-	gen.GetTemp().RemoveAtIndex(0)
+	if gen.GetTemp().Len() != 0 {
+		_salida += "double "
 
-	for _, s := range gen.GetTemp().ToArray() {
-		_salida += ", "
-		_salida += fmt.Sprintf("%v", s)
+		_salida += fmt.Sprintf("%v", gen.GetTemp().GetValue(0))
+		gen.GetTemp().RemoveAtIndex(0)
+
+		for _, s := range gen.GetTemp().ToArray() {
+			_salida += ", "
+			_salida += fmt.Sprintf("%v", s)
+		}
+
+		_salida += ";\n\n"
+
 	}
 
-	_salida += ";\n\n"
-	_salida += "\nvoid main(){\n"
+	_salida += "/************ NATIVE PRINTF STRING ************/"
+	for _, s := range gen.GetNative().ToArray() {
+		_salida += "\t" + fmt.Sprintf("%v", s)
+		_salida += "\n"
+	}
 
+	
+	_salida += "\nvoid main(){\n"
+	_salida += "\tP = 0; H = 0;\n\n"
 
 	for _, s := range gen.GetCode().ToArray() {
-		_salida += fmt.Sprintf("%v", s)
+		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"
 	}
 
 	_salida += "\nreturn;\n}\n"
 
 
-
 	CODE_OUT_ = _salida
-
-
 
 }
 

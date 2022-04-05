@@ -8,41 +8,36 @@
         <!-- Script Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+        <!-- 5.65.2 -->
         <!-- Styles for Codemirror -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
             integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Scripts for Codemirror -->
+         <!-- Scripts for Codemirror -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"
                 integrity="sha512-xwrAU5yhWwdTvvmMNheFn9IyuDbl/Kyghz2J3wQRDR8tyNmT8ZIYOd0V3iPYY/g4XdNPy0n/g0NvqGu9f0fPJQ=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+     
 
+       
         <!-- Theme isotope -->
-        <link rel="stylesheet" 
+        <!-- <link rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/isotope.min.css" 
             integrity="sha512-5QfxfU2pxxWqMfmJGYivSJXujFi/3lk4MTaMdzO9jEs7pXw30xlDaKkICpFRN954vGq+wIg2ZpxSGjMjg6oQlQ==" 
             crossorigin="anonymous" 
             referrerpolicy="no-referrer" 
-            />
-        
-        <!-- Mode js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"
-                integrity="sha512-IS1FyxQkiJHT1SAvLXBaJu1UTFSIw0GT/DuzxHl69djqyLoEwGmR2davcZUnB8M7ppi9nfTGZR/vdfqmWt+i6A=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/rust/rust.min.js" 
-        integrity="sha512-g3Nhw36S0p4ZJQcky87D5M+vZbFvLrgsHWYltUy5IW0zKbvi8GlPRjJSo2CyUyQiU01Ier7u+rBABDs3BawKyQ==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+            /> -->
 
-        <!-- Mode powershell -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/powershell/powershell.min.js"
-                integrity="sha512-LqqYYiphtlUW/A/ctvWI7aJspzPsy3ZhoUT59+3X5vpNVp8u+U+kMkA5Isl/l8jmZX2lRyUBInVKjxYbWwab/w=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/moxer.min.css" integrity="sha512-zrCGHGmTpiZpzVJ6BdiDfsUT6t8+oOKmOtfU82GhBo/7sk/cns7phhKXSWmGH6uACPqgjP8QmgczNBY7HMB9TQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
     </head>
     <body style="background-color:#000000;">
-       
+        
 
         <form action="http://127.0.0.1:3000/compilar" method="post" id="IDform">
             <header>
@@ -189,27 +184,49 @@ fn main() {
 
         </form>
     </body>
+
+
 </html>
+         <!-- Mode c -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js" integrity="sha512-hVV7wKBA5Cy5BNo3JkDte8hAobbeXMF8ZTgmmVrshoxcBSSfXn3Z+sigvV6o7bbk6zHSEMWp8RxCbWyPIuPB6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
-    CM_ENTRADA = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        theme: 'isotope',
-        mode: 'javascript',
-        lineNumbers: true,
-        styleActivateLine: true,
-        
-    })
-
-    CM_SALIDA = CodeMirror.fromTextArea(document.getElementById("out"), {
-        theme: 'isotope',
-        mode: null,
-        lineNumbers: true,
-        styleActivateLine: true,
-        
-    })
+       <!-- Mode js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"
+                integrity="sha512-IS1FyxQkiJHT1SAvLXBaJu1UTFSIw0GT/DuzxHl69djqyLoEwGmR2davcZUnB8M7ppi9nfTGZR/vdfqmWt+i6A=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+     
+       
     
-    /* SIZE */
-    CM_ENTRADA.setSize(null, "500")
-    CM_SALIDA.setSize(null, "500")
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/rust/rust.min.js" integrity="sha512-g3Nhw36S0p4ZJQcky87D5M+vZbFvLrgsHWYltUy5IW0zKbvi8GlPRjJSo2CyUyQiU01Ier7u+rBABDs3BawKyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-</script>
+       
+       
+ <script>
+            CM_ENTRADA = CodeMirror.fromTextArea(document.getElementById("editor"), {
+                theme: 'moxer',
+                mode: 'javascript',
+                lineNumbers: true,
+                styleActivateLine: true,
+                
+            })
+
+            CM_SALIDA = CodeMirror.fromTextArea(document.getElementById("out"), {
+                theme: 'moxer',
+                mode: 'javascript',
+                lineNumbers: true,
+                styleActivateLine: true,
+                
+            })
+            
+            /* SIZE */
+            CM_ENTRADA.setSize(null, "500")
+            CM_SALIDA.setSize(null, "500")
+
+        </script>
+
+<!-- 
+
+Codemirror:
+    https://cdnjs.com/libraries/codemirror 
+
+-->

@@ -9,8 +9,10 @@ import (
 )
 
 type Arbol struct {
-	Code     	*arrayList.List
-	_Exception  *arrayList.List
+	Code     	 *arrayList.List
+	StackGlobal  int
+	IsPrimitive  bool
+	_Exception   *arrayList.List
 	// Tabla_Global environment.Environment
 }
 
@@ -24,7 +26,11 @@ type Exception struct {
 
 
 func NewArbol() *Arbol {
-	tree := Arbol{Code: arrayList.New(), _Exception: arrayList.New()} 	
+	tree := Arbol{
+		Code 		: arrayList.New(),
+		StackGlobal : 0,
+		IsPrimitive : false, 
+		_Exception	: arrayList.New()} 	
 	return &tree
 }
 
@@ -62,4 +68,15 @@ func (a *Arbol) AddException(e Exception) {
 /* Get Exception */
 func (a Arbol) GetException() *arrayList.List {
 	return a._Exception
+}
+
+
+
+/* POS GLOBAL */
+func (a *Arbol) GetPos() int {
+	return a.StackGlobal
+}
+
+func (a *Arbol) NewPos() {
+	a.StackGlobal = a.StackGlobal + 1
 }
