@@ -116,10 +116,12 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 
 	
 	// var contMain int = 0
-
+	gen.AddFunction("void","main()")
+	gen.StachHeap()
 	for _, s := range result.ToArray() {
 		s.(interfaces.Instruction).Compilar(globalEnv, tree, gen)
 	}
+	gen.AddFunctionEnd()
 
 	_salida += "#include <stdio.h>\n"
 	_salida += "#include <math.h>\n"

@@ -21,66 +21,84 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 63, 143,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 63, 184,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
-	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 3, 2, 3, 2, 3, 2, 3, 3, 6, 3, 25,
-	10, 3, 13, 3, 14, 3, 26, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 5, 4, 34, 10, 4,
-	3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 43, 10, 5, 3, 6, 3, 6,
-	3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6,
-	3, 6, 3, 6, 5, 6, 61, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7,
-	3, 7, 3, 7, 3, 8, 3, 8, 3, 8, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9,
-	3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 5, 9, 88, 10, 9, 3, 9, 3, 9, 3, 9,
-	3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9,
-	3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 7, 9, 110, 10, 9, 12, 9, 14, 9, 113, 11,
-	9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10,
-	3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3,
-	10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 5, 10, 141, 10, 10, 3, 10, 2, 3,
-	16, 11, 2, 4, 6, 8, 10, 12, 14, 16, 18, 2, 7, 4, 2, 50, 50, 60, 60, 3,
-	2, 46, 48, 3, 2, 49, 50, 4, 2, 38, 39, 42, 45, 3, 2, 57, 58, 2, 151, 2,
-	20, 3, 2, 2, 2, 4, 24, 3, 2, 2, 2, 6, 33, 3, 2, 2, 2, 8, 42, 3, 2, 2, 2,
-	10, 60, 3, 2, 2, 2, 12, 62, 3, 2, 2, 2, 14, 71, 3, 2, 2, 2, 16, 87, 3,
-	2, 2, 2, 18, 140, 3, 2, 2, 2, 20, 21, 5, 4, 3, 2, 21, 22, 8, 2, 1, 2, 22,
-	3, 3, 2, 2, 2, 23, 25, 5, 8, 5, 2, 24, 23, 3, 2, 2, 2, 25, 26, 3, 2, 2,
-	2, 26, 24, 3, 2, 2, 2, 26, 27, 3, 2, 2, 2, 27, 28, 3, 2, 2, 2, 28, 29,
-	8, 3, 1, 2, 29, 5, 3, 2, 2, 2, 30, 31, 7, 34, 2, 2, 31, 34, 8, 4, 1, 2,
-	32, 34, 8, 4, 1, 2, 33, 30, 3, 2, 2, 2, 33, 32, 3, 2, 2, 2, 34, 7, 3, 2,
-	2, 2, 35, 36, 5, 10, 6, 2, 36, 37, 5, 6, 4, 2, 37, 38, 8, 5, 1, 2, 38,
-	43, 3, 2, 2, 2, 39, 40, 5, 12, 7, 2, 40, 41, 8, 5, 1, 2, 41, 43, 3, 2,
-	2, 2, 42, 35, 3, 2, 2, 2, 42, 39, 3, 2, 2, 2, 43, 9, 3, 2, 2, 2, 44, 45,
-	7, 4, 2, 2, 45, 46, 7, 51, 2, 2, 46, 47, 5, 14, 8, 2, 47, 48, 7, 52, 2,
-	2, 48, 49, 7, 34, 2, 2, 49, 50, 8, 6, 1, 2, 50, 61, 3, 2, 2, 2, 51, 52,
-	7, 4, 2, 2, 52, 53, 7, 51, 2, 2, 53, 54, 7, 29, 2, 2, 54, 55, 7, 35, 2,
-	2, 55, 56, 5, 14, 8, 2, 56, 57, 7, 52, 2, 2, 57, 58, 7, 34, 2, 2, 58, 59,
-	8, 6, 1, 2, 59, 61, 3, 2, 2, 2, 60, 44, 3, 2, 2, 2, 60, 51, 3, 2, 2, 2,
-	61, 11, 3, 2, 2, 2, 62, 63, 7, 19, 2, 2, 63, 64, 7, 18, 2, 2, 64, 65, 7,
-	51, 2, 2, 65, 66, 7, 52, 2, 2, 66, 67, 7, 53, 2, 2, 67, 68, 5, 4, 3, 2,
-	68, 69, 7, 54, 2, 2, 69, 70, 8, 7, 1, 2, 70, 13, 3, 2, 2, 2, 71, 72, 5,
-	16, 9, 2, 72, 73, 8, 8, 1, 2, 73, 15, 3, 2, 2, 2, 74, 75, 8, 9, 1, 2, 75,
-	76, 9, 2, 2, 2, 76, 77, 5, 16, 9, 5, 77, 78, 8, 9, 1, 2, 78, 88, 3, 2,
-	2, 2, 79, 80, 5, 18, 10, 2, 80, 81, 8, 9, 1, 2, 81, 88, 3, 2, 2, 2, 82,
-	83, 7, 51, 2, 2, 83, 84, 5, 14, 8, 2, 84, 85, 7, 52, 2, 2, 85, 86, 8, 9,
-	1, 2, 86, 88, 3, 2, 2, 2, 87, 74, 3, 2, 2, 2, 87, 79, 3, 2, 2, 2, 87, 82,
-	3, 2, 2, 2, 88, 111, 3, 2, 2, 2, 89, 90, 12, 9, 2, 2, 90, 91, 9, 3, 2,
-	2, 91, 92, 5, 16, 9, 10, 92, 93, 8, 9, 1, 2, 93, 110, 3, 2, 2, 2, 94, 95,
-	12, 8, 2, 2, 95, 96, 9, 4, 2, 2, 96, 97, 5, 16, 9, 9, 97, 98, 8, 9, 1,
-	2, 98, 110, 3, 2, 2, 2, 99, 100, 12, 7, 2, 2, 100, 101, 9, 5, 2, 2, 101,
-	102, 5, 16, 9, 8, 102, 103, 8, 9, 1, 2, 103, 110, 3, 2, 2, 2, 104, 105,
-	12, 6, 2, 2, 105, 106, 9, 6, 2, 2, 106, 107, 5, 16, 9, 7, 107, 108, 8,
-	9, 1, 2, 108, 110, 3, 2, 2, 2, 109, 89, 3, 2, 2, 2, 109, 94, 3, 2, 2, 2,
-	109, 99, 3, 2, 2, 2, 109, 104, 3, 2, 2, 2, 110, 113, 3, 2, 2, 2, 111, 109,
-	3, 2, 2, 2, 111, 112, 3, 2, 2, 2, 112, 17, 3, 2, 2, 2, 113, 111, 3, 2,
-	2, 2, 114, 115, 7, 26, 2, 2, 115, 141, 8, 10, 1, 2, 116, 117, 7, 27, 2,
-	2, 117, 141, 8, 10, 1, 2, 118, 119, 7, 29, 2, 2, 119, 141, 8, 10, 1, 2,
-	120, 121, 7, 30, 2, 2, 121, 141, 8, 10, 1, 2, 122, 123, 7, 28, 2, 2, 123,
-	141, 8, 10, 1, 2, 124, 125, 7, 26, 2, 2, 125, 126, 7, 20, 2, 2, 126, 127,
-	7, 21, 2, 2, 127, 141, 8, 10, 1, 2, 128, 129, 7, 26, 2, 2, 129, 130, 7,
-	20, 2, 2, 130, 131, 7, 22, 2, 2, 131, 141, 8, 10, 1, 2, 132, 133, 7, 27,
-	2, 2, 133, 134, 7, 20, 2, 2, 134, 135, 7, 21, 2, 2, 135, 141, 8, 10, 1,
-	2, 136, 137, 7, 27, 2, 2, 137, 138, 7, 20, 2, 2, 138, 139, 7, 22, 2, 2,
-	139, 141, 8, 10, 1, 2, 140, 114, 3, 2, 2, 2, 140, 116, 3, 2, 2, 2, 140,
-	118, 3, 2, 2, 2, 140, 120, 3, 2, 2, 2, 140, 122, 3, 2, 2, 2, 140, 124,
-	3, 2, 2, 2, 140, 128, 3, 2, 2, 2, 140, 132, 3, 2, 2, 2, 140, 136, 3, 2,
-	2, 2, 141, 19, 3, 2, 2, 2, 10, 26, 33, 42, 60, 87, 109, 111, 140,
+	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
+	9, 13, 3, 2, 3, 2, 3, 2, 3, 3, 6, 3, 31, 10, 3, 13, 3, 14, 3, 32, 3, 3,
+	3, 3, 3, 4, 3, 4, 3, 4, 5, 4, 40, 10, 4, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5,
+	3, 5, 3, 5, 5, 5, 49, 10, 5, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6,
+	3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 5, 6, 67, 10, 6,
+	3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 8, 3, 8, 3, 8,
+	3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 87, 10, 8, 3, 9, 3, 9, 3, 9,
+	3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 5, 9, 97, 10, 9, 3, 9, 3, 9, 3, 9, 3, 9,
+	3, 9, 7, 9, 104, 10, 9, 12, 9, 14, 9, 107, 11, 9, 3, 10, 3, 10, 3, 10,
+	3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 7, 10, 118, 10, 10, 12, 10, 14,
+	10, 121, 11, 10, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11,
+	3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 5, 11, 136, 10, 11, 3, 11, 3, 11, 3,
+	11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 7, 11, 148, 10, 11,
+	12, 11, 14, 11, 151, 11, 11, 3, 12, 3, 12, 3, 12, 3, 13, 3, 13, 3, 13,
+	3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3,
+	13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13,
+	3, 13, 3, 13, 5, 13, 182, 10, 13, 3, 13, 2, 5, 16, 18, 20, 14, 2, 4, 6,
+	8, 10, 12, 14, 16, 18, 20, 22, 24, 2, 6, 3, 2, 57, 58, 4, 2, 38, 39, 42,
+	45, 3, 2, 46, 48, 3, 2, 49, 50, 2, 192, 2, 26, 3, 2, 2, 2, 4, 30, 3, 2,
+	2, 2, 6, 39, 3, 2, 2, 2, 8, 48, 3, 2, 2, 2, 10, 66, 3, 2, 2, 2, 12, 68,
+	3, 2, 2, 2, 14, 86, 3, 2, 2, 2, 16, 96, 3, 2, 2, 2, 18, 108, 3, 2, 2, 2,
+	20, 135, 3, 2, 2, 2, 22, 152, 3, 2, 2, 2, 24, 181, 3, 2, 2, 2, 26, 27,
+	5, 4, 3, 2, 27, 28, 8, 2, 1, 2, 28, 3, 3, 2, 2, 2, 29, 31, 5, 8, 5, 2,
+	30, 29, 3, 2, 2, 2, 31, 32, 3, 2, 2, 2, 32, 30, 3, 2, 2, 2, 32, 33, 3,
+	2, 2, 2, 33, 34, 3, 2, 2, 2, 34, 35, 8, 3, 1, 2, 35, 5, 3, 2, 2, 2, 36,
+	37, 7, 34, 2, 2, 37, 40, 8, 4, 1, 2, 38, 40, 8, 4, 1, 2, 39, 36, 3, 2,
+	2, 2, 39, 38, 3, 2, 2, 2, 40, 7, 3, 2, 2, 2, 41, 42, 5, 10, 6, 2, 42, 43,
+	5, 6, 4, 2, 43, 44, 8, 5, 1, 2, 44, 49, 3, 2, 2, 2, 45, 46, 5, 12, 7, 2,
+	46, 47, 8, 5, 1, 2, 47, 49, 3, 2, 2, 2, 48, 41, 3, 2, 2, 2, 48, 45, 3,
+	2, 2, 2, 49, 9, 3, 2, 2, 2, 50, 51, 7, 4, 2, 2, 51, 52, 7, 51, 2, 2, 52,
+	53, 5, 14, 8, 2, 53, 54, 7, 52, 2, 2, 54, 55, 7, 34, 2, 2, 55, 56, 8, 6,
+	1, 2, 56, 67, 3, 2, 2, 2, 57, 58, 7, 4, 2, 2, 58, 59, 7, 51, 2, 2, 59,
+	60, 7, 29, 2, 2, 60, 61, 7, 35, 2, 2, 61, 62, 5, 14, 8, 2, 62, 63, 7, 52,
+	2, 2, 63, 64, 7, 34, 2, 2, 64, 65, 8, 6, 1, 2, 65, 67, 3, 2, 2, 2, 66,
+	50, 3, 2, 2, 2, 66, 57, 3, 2, 2, 2, 67, 11, 3, 2, 2, 2, 68, 69, 7, 19,
+	2, 2, 69, 70, 7, 18, 2, 2, 70, 71, 7, 51, 2, 2, 71, 72, 7, 52, 2, 2, 72,
+	73, 7, 53, 2, 2, 73, 74, 5, 4, 3, 2, 74, 75, 7, 54, 2, 2, 75, 76, 8, 7,
+	1, 2, 76, 13, 3, 2, 2, 2, 77, 78, 5, 16, 9, 2, 78, 79, 8, 8, 1, 2, 79,
+	87, 3, 2, 2, 2, 80, 81, 5, 18, 10, 2, 81, 82, 8, 8, 1, 2, 82, 87, 3, 2,
+	2, 2, 83, 84, 5, 20, 11, 2, 84, 85, 8, 8, 1, 2, 85, 87, 3, 2, 2, 2, 86,
+	77, 3, 2, 2, 2, 86, 80, 3, 2, 2, 2, 86, 83, 3, 2, 2, 2, 87, 15, 3, 2, 2,
+	2, 88, 89, 8, 9, 1, 2, 89, 90, 7, 60, 2, 2, 90, 91, 5, 16, 9, 5, 91, 92,
+	8, 9, 1, 2, 92, 97, 3, 2, 2, 2, 93, 94, 5, 18, 10, 2, 94, 95, 8, 9, 1,
+	2, 95, 97, 3, 2, 2, 2, 96, 88, 3, 2, 2, 2, 96, 93, 3, 2, 2, 2, 97, 105,
+	3, 2, 2, 2, 98, 99, 12, 4, 2, 2, 99, 100, 9, 2, 2, 2, 100, 101, 5, 16,
+	9, 5, 101, 102, 8, 9, 1, 2, 102, 104, 3, 2, 2, 2, 103, 98, 3, 2, 2, 2,
+	104, 107, 3, 2, 2, 2, 105, 103, 3, 2, 2, 2, 105, 106, 3, 2, 2, 2, 106,
+	17, 3, 2, 2, 2, 107, 105, 3, 2, 2, 2, 108, 109, 8, 10, 1, 2, 109, 110,
+	5, 20, 11, 2, 110, 111, 8, 10, 1, 2, 111, 119, 3, 2, 2, 2, 112, 113, 12,
+	4, 2, 2, 113, 114, 9, 3, 2, 2, 114, 115, 5, 18, 10, 5, 115, 116, 8, 10,
+	1, 2, 116, 118, 3, 2, 2, 2, 117, 112, 3, 2, 2, 2, 118, 121, 3, 2, 2, 2,
+	119, 117, 3, 2, 2, 2, 119, 120, 3, 2, 2, 2, 120, 19, 3, 2, 2, 2, 121, 119,
+	3, 2, 2, 2, 122, 123, 8, 11, 1, 2, 123, 124, 7, 50, 2, 2, 124, 125, 5,
+	20, 11, 7, 125, 126, 8, 11, 1, 2, 126, 136, 3, 2, 2, 2, 127, 128, 5, 22,
+	12, 2, 128, 129, 8, 11, 1, 2, 129, 136, 3, 2, 2, 2, 130, 131, 7, 51, 2,
+	2, 131, 132, 5, 14, 8, 2, 132, 133, 7, 52, 2, 2, 133, 134, 8, 11, 1, 2,
+	134, 136, 3, 2, 2, 2, 135, 122, 3, 2, 2, 2, 135, 127, 3, 2, 2, 2, 135,
+	130, 3, 2, 2, 2, 136, 149, 3, 2, 2, 2, 137, 138, 12, 6, 2, 2, 138, 139,
+	9, 4, 2, 2, 139, 140, 5, 20, 11, 7, 140, 141, 8, 11, 1, 2, 141, 148, 3,
+	2, 2, 2, 142, 143, 12, 5, 2, 2, 143, 144, 9, 5, 2, 2, 144, 145, 5, 20,
+	11, 6, 145, 146, 8, 11, 1, 2, 146, 148, 3, 2, 2, 2, 147, 137, 3, 2, 2,
+	2, 147, 142, 3, 2, 2, 2, 148, 151, 3, 2, 2, 2, 149, 147, 3, 2, 2, 2, 149,
+	150, 3, 2, 2, 2, 150, 21, 3, 2, 2, 2, 151, 149, 3, 2, 2, 2, 152, 153, 5,
+	24, 13, 2, 153, 154, 8, 12, 1, 2, 154, 23, 3, 2, 2, 2, 155, 156, 7, 26,
+	2, 2, 156, 182, 8, 13, 1, 2, 157, 158, 7, 27, 2, 2, 158, 182, 8, 13, 1,
+	2, 159, 160, 7, 29, 2, 2, 160, 182, 8, 13, 1, 2, 161, 162, 7, 30, 2, 2,
+	162, 182, 8, 13, 1, 2, 163, 164, 7, 28, 2, 2, 164, 182, 8, 13, 1, 2, 165,
+	166, 7, 26, 2, 2, 166, 167, 7, 20, 2, 2, 167, 168, 7, 21, 2, 2, 168, 182,
+	8, 13, 1, 2, 169, 170, 7, 26, 2, 2, 170, 171, 7, 20, 2, 2, 171, 172, 7,
+	22, 2, 2, 172, 182, 8, 13, 1, 2, 173, 174, 7, 27, 2, 2, 174, 175, 7, 20,
+	2, 2, 175, 176, 7, 21, 2, 2, 176, 182, 8, 13, 1, 2, 177, 178, 7, 27, 2,
+	2, 178, 179, 7, 20, 2, 2, 179, 180, 7, 22, 2, 2, 180, 182, 8, 13, 1, 2,
+	181, 155, 3, 2, 2, 2, 181, 157, 3, 2, 2, 2, 181, 159, 3, 2, 2, 2, 181,
+	161, 3, 2, 2, 2, 181, 163, 3, 2, 2, 2, 181, 165, 3, 2, 2, 2, 181, 169,
+	3, 2, 2, 2, 181, 173, 3, 2, 2, 2, 181, 177, 3, 2, 2, 2, 182, 25, 3, 2,
+	2, 2, 14, 32, 39, 48, 66, 86, 96, 105, 119, 135, 147, 149, 181,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
@@ -109,7 +127,8 @@ var symbolicNames = []string{
 
 var ruleNames = []string{
 	"start", "instrucciones", "end_instr", "instruccion", "instr_println",
-	"instr_main", "expressions", "instr_expre", "primitivo",
+	"instr_main", "expressions", "expre_log", "expre_rel", "expre_arit", "expre_valor",
+	"primitivo",
 }
 var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
 
@@ -212,8 +231,11 @@ const (
 	ChemsRULE_instr_println = 4
 	ChemsRULE_instr_main    = 5
 	ChemsRULE_expressions   = 6
-	ChemsRULE_instr_expre   = 7
-	ChemsRULE_primitivo     = 8
+	ChemsRULE_expre_log     = 7
+	ChemsRULE_expre_rel     = 8
+	ChemsRULE_expre_arit    = 9
+	ChemsRULE_expre_valor   = 10
+	ChemsRULE_primitivo     = 11
 )
 
 // IStartContext is an interface to support dynamic dispatch.
@@ -328,7 +350,7 @@ func (p *Chems) Start() (localctx IStartContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(18)
+		p.SetState(24)
 
 		var _x = p.Instrucciones()
 
@@ -478,13 +500,13 @@ func (p *Chems) Instrucciones() (localctx IInstruccionesContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(22)
+	p.SetState(28)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for ok := true; ok; ok = _la == ChemsR_PRINTLN || _la == ChemsR_FUNCTION {
 		{
-			p.SetState(21)
+			p.SetState(27)
 
 			var _x = p.Instruccion()
 
@@ -492,7 +514,7 @@ func (p *Chems) Instrucciones() (localctx IInstruccionesContext) {
 		}
 		localctx.(*InstruccionesContext).list = append(localctx.(*InstruccionesContext).list, localctx.(*InstruccionesContext)._instruccion)
 
-		p.SetState(24)
+		p.SetState(30)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -598,14 +620,14 @@ func (p *Chems) End_instr() (localctx IEnd_instrContext) {
 		}
 	}()
 
-	p.SetState(31)
+	p.SetState(37)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsTK_PUNTOCOMA:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(28)
+			p.SetState(34)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*End_instrContext).v = 1
@@ -762,21 +784,21 @@ func (p *Chems) Instruccion() (localctx IInstruccionContext) {
 		}
 	}()
 
-	p.SetState(40)
+	p.SetState(46)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsR_PRINTLN:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(33)
+			p.SetState(39)
 
 			var _x = p.Instr_println()
 
 			localctx.(*InstruccionContext)._instr_println = _x
 		}
 		{
-			p.SetState(34)
+			p.SetState(40)
 			p.End_instr()
 		}
 		localctx.(*InstruccionContext).instr = localctx.(*InstruccionContext).Get_instr_println().GetInstr()
@@ -784,7 +806,7 @@ func (p *Chems) Instruccion() (localctx IInstruccionContext) {
 	case ChemsR_FUNCTION:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(37)
+			p.SetState(43)
 
 			var _x = p.Instr_main()
 
@@ -944,35 +966,35 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 		}
 	}()
 
-	p.SetState(58)
+	p.SetState(64)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 3, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(42)
+			p.SetState(48)
 
 			var _m = p.Match(ChemsR_PRINTLN)
 
 			localctx.(*Instr_printlnContext)._R_PRINTLN = _m
 		}
 		{
-			p.SetState(43)
+			p.SetState(49)
 			p.Match(ChemsTK_PARA)
 		}
 		{
-			p.SetState(44)
+			p.SetState(50)
 
 			var _x = p.Expressions()
 
 			localctx.(*Instr_printlnContext)._expressions = _x
 		}
 		{
-			p.SetState(45)
+			p.SetState(51)
 			p.Match(ChemsTK_PARC)
 		}
 		{
-			p.SetState(46)
+			p.SetState(52)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_expressions().GetP(), (func() int {
@@ -986,37 +1008,37 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(49)
+			p.SetState(55)
 
 			var _m = p.Match(ChemsR_PRINTLN)
 
 			localctx.(*Instr_printlnContext)._R_PRINTLN = _m
 		}
 		{
-			p.SetState(50)
+			p.SetState(56)
 			p.Match(ChemsTK_PARA)
 		}
 		{
-			p.SetState(51)
+			p.SetState(57)
 			p.Match(ChemsSTRING)
 		}
 		{
-			p.SetState(52)
+			p.SetState(58)
 			p.Match(ChemsTK_COMA)
 		}
 		{
-			p.SetState(53)
+			p.SetState(59)
 
 			var _x = p.Expressions()
 
 			localctx.(*Instr_printlnContext)._expressions = _x
 		}
 		{
-			p.SetState(54)
+			p.SetState(60)
 			p.Match(ChemsTK_PARC)
 		}
 		{
-			p.SetState(55)
+			p.SetState(61)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_expressions().GetP(), (func() int {
@@ -1179,37 +1201,37 @@ func (p *Chems) Instr_main() (localctx IInstr_mainContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(60)
+		p.SetState(66)
 		p.Match(ChemsR_FUNCTION)
 	}
 	{
-		p.SetState(61)
+		p.SetState(67)
 
 		var _m = p.Match(ChemsR_MAIN)
 
 		localctx.(*Instr_mainContext)._R_MAIN = _m
 	}
 	{
-		p.SetState(62)
+		p.SetState(68)
 		p.Match(ChemsTK_PARA)
 	}
 	{
-		p.SetState(63)
+		p.SetState(69)
 		p.Match(ChemsTK_PARC)
 	}
 	{
-		p.SetState(64)
+		p.SetState(70)
 		p.Match(ChemsTK_LLAVEA)
 	}
 	{
-		p.SetState(65)
+		p.SetState(71)
 
 		var _x = p.Instrucciones()
 
 		localctx.(*Instr_mainContext)._instrucciones = _x
 	}
 	{
-		p.SetState(66)
+		p.SetState(72)
 		p.Match(ChemsTK_LLAVEC)
 	}
 	localctx.(*Instr_mainContext).instr = instruction.NewMain(localctx.(*Instr_mainContext).Get_instrucciones().GetL(), (func() int {
@@ -1230,11 +1252,23 @@ type IExpressionsContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// Get_instr_expre returns the _instr_expre rule contexts.
-	Get_instr_expre() IInstr_expreContext
+	// Get_expre_log returns the _expre_log rule contexts.
+	Get_expre_log() IExpre_logContext
 
-	// Set_instr_expre sets the _instr_expre rule contexts.
-	Set_instr_expre(IInstr_expreContext)
+	// Get_expre_rel returns the _expre_rel rule contexts.
+	Get_expre_rel() IExpre_relContext
+
+	// Get_expre_arit returns the _expre_arit rule contexts.
+	Get_expre_arit() IExpre_aritContext
+
+	// Set_expre_log sets the _expre_log rule contexts.
+	Set_expre_log(IExpre_logContext)
+
+	// Set_expre_rel sets the _expre_rel rule contexts.
+	Set_expre_rel(IExpre_relContext)
+
+	// Set_expre_arit sets the _expre_arit rule contexts.
+	Set_expre_arit(IExpre_aritContext)
 
 	// GetP returns the p attribute.
 	GetP() interfaces.Expression
@@ -1248,9 +1282,11 @@ type IExpressionsContext interface {
 
 type ExpressionsContext struct {
 	*antlr.BaseParserRuleContext
-	parser       antlr.Parser
-	p            interfaces.Expression
-	_instr_expre IInstr_expreContext
+	parser      antlr.Parser
+	p           interfaces.Expression
+	_expre_log  IExpre_logContext
+	_expre_rel  IExpre_relContext
+	_expre_arit IExpre_aritContext
 }
 
 func NewEmptyExpressionsContext() *ExpressionsContext {
@@ -1275,22 +1311,50 @@ func NewExpressionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 
 func (s *ExpressionsContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ExpressionsContext) Get_instr_expre() IInstr_expreContext { return s._instr_expre }
+func (s *ExpressionsContext) Get_expre_log() IExpre_logContext { return s._expre_log }
 
-func (s *ExpressionsContext) Set_instr_expre(v IInstr_expreContext) { s._instr_expre = v }
+func (s *ExpressionsContext) Get_expre_rel() IExpre_relContext { return s._expre_rel }
+
+func (s *ExpressionsContext) Get_expre_arit() IExpre_aritContext { return s._expre_arit }
+
+func (s *ExpressionsContext) Set_expre_log(v IExpre_logContext) { s._expre_log = v }
+
+func (s *ExpressionsContext) Set_expre_rel(v IExpre_relContext) { s._expre_rel = v }
+
+func (s *ExpressionsContext) Set_expre_arit(v IExpre_aritContext) { s._expre_arit = v }
 
 func (s *ExpressionsContext) GetP() interfaces.Expression { return s.p }
 
 func (s *ExpressionsContext) SetP(v interfaces.Expression) { s.p = v }
 
-func (s *ExpressionsContext) Instr_expre() IInstr_expreContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem(), 0)
+func (s *ExpressionsContext) Expre_log() IExpre_logContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_logContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IInstr_expreContext)
+	return t.(IExpre_logContext)
+}
+
+func (s *ExpressionsContext) Expre_rel() IExpre_relContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_relContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_relContext)
+}
+
+func (s *ExpressionsContext) Expre_arit() IExpre_aritContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_aritContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_aritContext)
 }
 
 func (s *ExpressionsContext) GetRuleContext() antlr.RuleContext {
@@ -1333,21 +1397,49 @@ func (p *Chems) Expressions() (localctx IExpressionsContext) {
 		}
 	}()
 
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(69)
+	p.SetState(84)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 4, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(75)
 
-		var _x = p.instr_expre(0)
+			var _x = p.expre_log(0)
 
-		localctx.(*ExpressionsContext)._instr_expre = _x
+			localctx.(*ExpressionsContext)._expre_log = _x
+		}
+		localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_expre_log().GetP()
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(78)
+
+			var _x = p.expre_rel(0)
+
+			localctx.(*ExpressionsContext)._expre_rel = _x
+		}
+		localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_expre_rel().GetP()
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(81)
+
+			var _x = p.expre_arit(0)
+
+			localctx.(*ExpressionsContext)._expre_arit = _x
+		}
+		localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_expre_arit().GetP()
+
 	}
-	localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_instr_expre().GetP()
 
 	return localctx
 }
 
-// IInstr_expreContext is an interface to support dynamic dispatch.
-type IInstr_expreContext interface {
+// IExpre_logContext is an interface to support dynamic dispatch.
+type IExpre_logContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
@@ -1360,28 +1452,22 @@ type IInstr_expreContext interface {
 	SetOp(antlr.Token)
 
 	// GetLeft returns the left rule contexts.
-	GetLeft() IInstr_expreContext
+	GetLeft() IExpre_logContext
 
-	// Get_primitivo returns the _primitivo rule contexts.
-	Get_primitivo() IPrimitivoContext
-
-	// Get_expressions returns the _expressions rule contexts.
-	Get_expressions() IExpressionsContext
+	// Get_expre_rel returns the _expre_rel rule contexts.
+	Get_expre_rel() IExpre_relContext
 
 	// GetRight returns the right rule contexts.
-	GetRight() IInstr_expreContext
+	GetRight() IExpre_logContext
 
 	// SetLeft sets the left rule contexts.
-	SetLeft(IInstr_expreContext)
+	SetLeft(IExpre_logContext)
 
-	// Set_primitivo sets the _primitivo rule contexts.
-	Set_primitivo(IPrimitivoContext)
-
-	// Set_expressions sets the _expressions rule contexts.
-	Set_expressions(IExpressionsContext)
+	// Set_expre_rel sets the _expre_rel rule contexts.
+	Set_expre_rel(IExpre_relContext)
 
 	// SetRight sets the right rule contexts.
-	SetRight(IInstr_expreContext)
+	SetRight(IExpre_logContext)
 
 	// GetP returns the p attribute.
 	GetP() interfaces.Expression
@@ -1389,206 +1475,139 @@ type IInstr_expreContext interface {
 	// SetP sets the p attribute.
 	SetP(interfaces.Expression)
 
-	// IsInstr_expreContext differentiates from other interfaces.
-	IsInstr_expreContext()
+	// IsExpre_logContext differentiates from other interfaces.
+	IsExpre_logContext()
 }
 
-type Instr_expreContext struct {
+type Expre_logContext struct {
 	*antlr.BaseParserRuleContext
-	parser       antlr.Parser
-	p            interfaces.Expression
-	left         IInstr_expreContext
-	op           antlr.Token
-	_primitivo   IPrimitivoContext
-	_expressions IExpressionsContext
-	right        IInstr_expreContext
+	parser     antlr.Parser
+	p          interfaces.Expression
+	left       IExpre_logContext
+	op         antlr.Token
+	_expre_rel IExpre_relContext
+	right      IExpre_logContext
 }
 
-func NewEmptyInstr_expreContext() *Instr_expreContext {
-	var p = new(Instr_expreContext)
+func NewEmptyExpre_logContext() *Expre_logContext {
+	var p = new(Expre_logContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = ChemsRULE_instr_expre
+	p.RuleIndex = ChemsRULE_expre_log
 	return p
 }
 
-func (*Instr_expreContext) IsInstr_expreContext() {}
+func (*Expre_logContext) IsExpre_logContext() {}
 
-func NewInstr_expreContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Instr_expreContext {
-	var p = new(Instr_expreContext)
+func NewExpre_logContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Expre_logContext {
+	var p = new(Expre_logContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = ChemsRULE_instr_expre
+	p.RuleIndex = ChemsRULE_expre_log
 
 	return p
 }
 
-func (s *Instr_expreContext) GetParser() antlr.Parser { return s.parser }
+func (s *Expre_logContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Instr_expreContext) GetOp() antlr.Token { return s.op }
+func (s *Expre_logContext) GetOp() antlr.Token { return s.op }
 
-func (s *Instr_expreContext) SetOp(v antlr.Token) { s.op = v }
+func (s *Expre_logContext) SetOp(v antlr.Token) { s.op = v }
 
-func (s *Instr_expreContext) GetLeft() IInstr_expreContext { return s.left }
+func (s *Expre_logContext) GetLeft() IExpre_logContext { return s.left }
 
-func (s *Instr_expreContext) Get_primitivo() IPrimitivoContext { return s._primitivo }
+func (s *Expre_logContext) Get_expre_rel() IExpre_relContext { return s._expre_rel }
 
-func (s *Instr_expreContext) Get_expressions() IExpressionsContext { return s._expressions }
+func (s *Expre_logContext) GetRight() IExpre_logContext { return s.right }
 
-func (s *Instr_expreContext) GetRight() IInstr_expreContext { return s.right }
+func (s *Expre_logContext) SetLeft(v IExpre_logContext) { s.left = v }
 
-func (s *Instr_expreContext) SetLeft(v IInstr_expreContext) { s.left = v }
+func (s *Expre_logContext) Set_expre_rel(v IExpre_relContext) { s._expre_rel = v }
 
-func (s *Instr_expreContext) Set_primitivo(v IPrimitivoContext) { s._primitivo = v }
+func (s *Expre_logContext) SetRight(v IExpre_logContext) { s.right = v }
 
-func (s *Instr_expreContext) Set_expressions(v IExpressionsContext) { s._expressions = v }
+func (s *Expre_logContext) GetP() interfaces.Expression { return s.p }
 
-func (s *Instr_expreContext) SetRight(v IInstr_expreContext) { s.right = v }
+func (s *Expre_logContext) SetP(v interfaces.Expression) { s.p = v }
 
-func (s *Instr_expreContext) GetP() interfaces.Expression { return s.p }
+func (s *Expre_logContext) TK_NOT() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_NOT, 0)
+}
 
-func (s *Instr_expreContext) SetP(v interfaces.Expression) { s.p = v }
-
-func (s *Instr_expreContext) AllInstr_expre() []IInstr_expreContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem())
-	var tst = make([]IInstr_expreContext, len(ts))
+func (s *Expre_logContext) AllExpre_log() []IExpre_logContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IExpre_logContext)(nil)).Elem())
+	var tst = make([]IExpre_logContext, len(ts))
 
 	for i, t := range ts {
 		if t != nil {
-			tst[i] = t.(IInstr_expreContext)
+			tst[i] = t.(IExpre_logContext)
 		}
 	}
 
 	return tst
 }
 
-func (s *Instr_expreContext) Instr_expre(i int) IInstr_expreContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem(), i)
+func (s *Expre_logContext) Expre_log(i int) IExpre_logContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_logContext)(nil)).Elem(), i)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IInstr_expreContext)
+	return t.(IExpre_logContext)
 }
 
-func (s *Instr_expreContext) TK_NOT() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_NOT, 0)
-}
-
-func (s *Instr_expreContext) TK_MENOS() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MENOS, 0)
-}
-
-func (s *Instr_expreContext) Primitivo() IPrimitivoContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPrimitivoContext)(nil)).Elem(), 0)
+func (s *Expre_logContext) Expre_rel() IExpre_relContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_relContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IPrimitivoContext)
+	return t.(IExpre_relContext)
 }
 
-func (s *Instr_expreContext) TK_PARA() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_PARA, 0)
-}
-
-func (s *Instr_expreContext) Expressions() IExpressionsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpressionsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IExpressionsContext)
-}
-
-func (s *Instr_expreContext) TK_PARC() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_PARC, 0)
-}
-
-func (s *Instr_expreContext) TK_MULT() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MULT, 0)
-}
-
-func (s *Instr_expreContext) TK_DIV() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_DIV, 0)
-}
-
-func (s *Instr_expreContext) TK_MODULO() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MODULO, 0)
-}
-
-func (s *Instr_expreContext) TK_MAS() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MAS, 0)
-}
-
-func (s *Instr_expreContext) TK_MENOR() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MENOR, 0)
-}
-
-func (s *Instr_expreContext) TK_MENORIGUAL() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MENORIGUAL, 0)
-}
-
-func (s *Instr_expreContext) TK_MAYORIGUAL() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MAYORIGUAL, 0)
-}
-
-func (s *Instr_expreContext) TK_MAYOR() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_MAYOR, 0)
-}
-
-func (s *Instr_expreContext) TK_DIFIGUAL() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_DIFIGUAL, 0)
-}
-
-func (s *Instr_expreContext) TK_IGUALIGUAL() antlr.TerminalNode {
-	return s.GetToken(ChemsTK_IGUALIGUAL, 0)
-}
-
-func (s *Instr_expreContext) TK_AND() antlr.TerminalNode {
+func (s *Expre_logContext) TK_AND() antlr.TerminalNode {
 	return s.GetToken(ChemsTK_AND, 0)
 }
 
-func (s *Instr_expreContext) TK_OR() antlr.TerminalNode {
+func (s *Expre_logContext) TK_OR() antlr.TerminalNode {
 	return s.GetToken(ChemsTK_OR, 0)
 }
 
-func (s *Instr_expreContext) GetRuleContext() antlr.RuleContext {
+func (s *Expre_logContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *Instr_expreContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *Expre_logContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *Instr_expreContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *Expre_logContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(ChemsListener); ok {
-		listenerT.EnterInstr_expre(s)
+		listenerT.EnterExpre_log(s)
 	}
 }
 
-func (s *Instr_expreContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *Expre_logContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(ChemsListener); ok {
-		listenerT.ExitInstr_expre(s)
+		listenerT.ExitExpre_log(s)
 	}
 }
 
-func (p *Chems) Instr_expre() (localctx IInstr_expreContext) {
-	return p.instr_expre(0)
+func (p *Chems) Expre_log() (localctx IExpre_logContext) {
+	return p.expre_log(0)
 }
 
-func (p *Chems) instr_expre(_p int) (localctx IInstr_expreContext) {
+func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
 	_parentState := p.GetState()
-	localctx = NewInstr_expreContext(p, p.GetParserRuleContext(), _parentState)
-	var _prevctx IInstr_expreContext = localctx
+	localctx = NewExpre_logContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IExpre_logContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
 	_startState := 14
-	p.EnterRecursionRule(localctx, 14, ChemsRULE_instr_expre, _p)
+	p.EnterRecursionRule(localctx, 14, ChemsRULE_expre_log, _p)
 	var _la int
 
 	defer func() {
@@ -1610,83 +1629,54 @@ func (p *Chems) instr_expre(_p int) (localctx IInstr_expreContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(85)
+	p.SetState(94)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case ChemsTK_MENOS, ChemsTK_NOT:
+	case ChemsTK_NOT:
 		{
-			p.SetState(73)
+			p.SetState(87)
 
-			var _lt = p.GetTokenStream().LT(1)
+			var _m = p.Match(ChemsTK_NOT)
 
-			localctx.(*Instr_expreContext).op = _lt
-
-			_la = p.GetTokenStream().LA(1)
-
-			if !(_la == ChemsTK_MENOS || _la == ChemsTK_NOT) {
-				var _ri = p.GetErrorHandler().RecoverInline(p)
-
-				localctx.(*Instr_expreContext).op = _ri
-			} else {
-				p.GetErrorHandler().ReportMatch(p)
-				p.Consume()
-			}
+			localctx.(*Expre_logContext).op = _m
 		}
 		{
-			p.SetState(74)
+			p.SetState(88)
 
-			var _x = p.instr_expre(3)
+			var _x = p.expre_log(3)
 
-			localctx.(*Instr_expreContext).left = _x
+			localctx.(*Expre_logContext).left = _x
 		}
-		localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
-			if localctx.(*Instr_expreContext).GetOp() == nil {
+		localctx.(*Expre_logContext).p = expression.NewOperacion(localctx.(*Expre_logContext).GetLeft().GetP(), (func() string {
+			if localctx.(*Expre_logContext).GetOp() == nil {
 				return ""
 			} else {
-				return localctx.(*Instr_expreContext).GetOp().GetText()
+				return localctx.(*Expre_logContext).GetOp().GetText()
 			}
 		}()), nil, true, (func() int {
-			if localctx.(*Instr_expreContext).GetOp() == nil {
+			if localctx.(*Expre_logContext).GetOp() == nil {
 				return 0
 			} else {
-				return localctx.(*Instr_expreContext).GetOp().GetLine()
+				return localctx.(*Expre_logContext).GetOp().GetLine()
 			}
-		}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+		}()), localctx.(*Expre_logContext).GetOp().GetColumn())
 
-	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN:
+	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN, ChemsTK_MENOS, ChemsTK_PARA:
 		{
-			p.SetState(77)
+			p.SetState(91)
 
-			var _x = p.Primitivo()
+			var _x = p.expre_rel(0)
 
-			localctx.(*Instr_expreContext)._primitivo = _x
+			localctx.(*Expre_logContext)._expre_rel = _x
 		}
-		localctx.(*Instr_expreContext).p = localctx.(*Instr_expreContext).Get_primitivo().GetP()
-
-	case ChemsTK_PARA:
-		{
-			p.SetState(80)
-			p.Match(ChemsTK_PARA)
-		}
-		{
-			p.SetState(81)
-
-			var _x = p.Expressions()
-
-			localctx.(*Instr_expreContext)._expressions = _x
-		}
-		{
-			p.SetState(82)
-			p.Match(ChemsTK_PARC)
-		}
-		localctx.(*Instr_expreContext).p = localctx.(*Instr_expreContext).Get_expressions().GetP()
+		localctx.(*Expre_logContext).p = localctx.(*Expre_logContext).Get_expre_rel().GetP()
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(109)
+	p.SetState(103)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
 
@@ -1696,208 +1686,873 @@ func (p *Chems) instr_expre(_p int) (localctx IInstr_expreContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(107)
-			p.GetErrorHandler().Sync(p)
-			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext()) {
-			case 1:
-				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
-				localctx.(*Instr_expreContext).left = _prevctx
-				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
-				p.SetState(87)
+			localctx = NewExpre_logContext(p, _parentctx, _parentState)
+			localctx.(*Expre_logContext).left = _prevctx
+			p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_log)
+			p.SetState(96)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 7)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 7)", ""))
+			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
+				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+			}
+			{
+				p.SetState(97)
+
+				var _lt = p.GetTokenStream().LT(1)
+
+				localctx.(*Expre_logContext).op = _lt
+
+				_la = p.GetTokenStream().LA(1)
+
+				if !(_la == ChemsTK_AND || _la == ChemsTK_OR) {
+					var _ri = p.GetErrorHandler().RecoverInline(p)
+
+					localctx.(*Expre_logContext).op = _ri
+				} else {
+					p.GetErrorHandler().ReportMatch(p)
+					p.Consume()
+				}
+			}
+			{
+				p.SetState(98)
+
+				var _x = p.expre_log(3)
+
+				localctx.(*Expre_logContext).right = _x
+			}
+			localctx.(*Expre_logContext).p = expression.NewOperacion(localctx.(*Expre_logContext).GetLeft().GetP(), (func() string {
+				if localctx.(*Expre_logContext).GetOp() == nil {
+					return ""
+				} else {
+					return localctx.(*Expre_logContext).GetOp().GetText()
+				}
+			}()), localctx.(*Expre_logContext).GetRight().GetP(), false, (func() int {
+				if localctx.(*Expre_logContext).GetOp() == nil {
+					return 0
+				} else {
+					return localctx.(*Expre_logContext).GetOp().GetLine()
+				}
+			}()), localctx.(*Expre_logContext).GetOp().GetColumn())
+
+		}
+		p.SetState(105)
+		p.GetErrorHandler().Sync(p)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
+	}
+
+	return localctx
+}
+
+// IExpre_relContext is an interface to support dynamic dispatch.
+type IExpre_relContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetOp returns the op token.
+	GetOp() antlr.Token
+
+	// SetOp sets the op token.
+	SetOp(antlr.Token)
+
+	// GetLeft returns the left rule contexts.
+	GetLeft() IExpre_relContext
+
+	// Get_expre_arit returns the _expre_arit rule contexts.
+	Get_expre_arit() IExpre_aritContext
+
+	// GetRight returns the right rule contexts.
+	GetRight() IExpre_relContext
+
+	// SetLeft sets the left rule contexts.
+	SetLeft(IExpre_relContext)
+
+	// Set_expre_arit sets the _expre_arit rule contexts.
+	Set_expre_arit(IExpre_aritContext)
+
+	// SetRight sets the right rule contexts.
+	SetRight(IExpre_relContext)
+
+	// GetP returns the p attribute.
+	GetP() interfaces.Expression
+
+	// SetP sets the p attribute.
+	SetP(interfaces.Expression)
+
+	// IsExpre_relContext differentiates from other interfaces.
+	IsExpre_relContext()
+}
+
+type Expre_relContext struct {
+	*antlr.BaseParserRuleContext
+	parser      antlr.Parser
+	p           interfaces.Expression
+	left        IExpre_relContext
+	_expre_arit IExpre_aritContext
+	op          antlr.Token
+	right       IExpre_relContext
+}
+
+func NewEmptyExpre_relContext() *Expre_relContext {
+	var p = new(Expre_relContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = ChemsRULE_expre_rel
+	return p
+}
+
+func (*Expre_relContext) IsExpre_relContext() {}
+
+func NewExpre_relContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Expre_relContext {
+	var p = new(Expre_relContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = ChemsRULE_expre_rel
+
+	return p
+}
+
+func (s *Expre_relContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Expre_relContext) GetOp() antlr.Token { return s.op }
+
+func (s *Expre_relContext) SetOp(v antlr.Token) { s.op = v }
+
+func (s *Expre_relContext) GetLeft() IExpre_relContext { return s.left }
+
+func (s *Expre_relContext) Get_expre_arit() IExpre_aritContext { return s._expre_arit }
+
+func (s *Expre_relContext) GetRight() IExpre_relContext { return s.right }
+
+func (s *Expre_relContext) SetLeft(v IExpre_relContext) { s.left = v }
+
+func (s *Expre_relContext) Set_expre_arit(v IExpre_aritContext) { s._expre_arit = v }
+
+func (s *Expre_relContext) SetRight(v IExpre_relContext) { s.right = v }
+
+func (s *Expre_relContext) GetP() interfaces.Expression { return s.p }
+
+func (s *Expre_relContext) SetP(v interfaces.Expression) { s.p = v }
+
+func (s *Expre_relContext) Expre_arit() IExpre_aritContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_aritContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_aritContext)
+}
+
+func (s *Expre_relContext) AllExpre_rel() []IExpre_relContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IExpre_relContext)(nil)).Elem())
+	var tst = make([]IExpre_relContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IExpre_relContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *Expre_relContext) Expre_rel(i int) IExpre_relContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_relContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_relContext)
+}
+
+func (s *Expre_relContext) TK_MENOR() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENOR, 0)
+}
+
+func (s *Expre_relContext) TK_MENORIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENORIGUAL, 0)
+}
+
+func (s *Expre_relContext) TK_MAYORIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAYORIGUAL, 0)
+}
+
+func (s *Expre_relContext) TK_MAYOR() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAYOR, 0)
+}
+
+func (s *Expre_relContext) TK_DIFIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_DIFIGUAL, 0)
+}
+
+func (s *Expre_relContext) TK_IGUALIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_IGUALIGUAL, 0)
+}
+
+func (s *Expre_relContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Expre_relContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Expre_relContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.EnterExpre_rel(s)
+	}
+}
+
+func (s *Expre_relContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.ExitExpre_rel(s)
+	}
+}
+
+func (p *Chems) Expre_rel() (localctx IExpre_relContext) {
+	return p.expre_rel(0)
+}
+
+func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewExpre_relContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IExpre_relContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 16
+	p.EnterRecursionRule(localctx, 16, ChemsRULE_expre_rel, _p)
+	var _la int
+
+	defer func() {
+		p.UnrollRecursionContexts(_parentctx)
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	var _alt int
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(107)
+
+		var _x = p.expre_arit(0)
+
+		localctx.(*Expre_relContext)._expre_arit = _x
+	}
+	localctx.(*Expre_relContext).p = localctx.(*Expre_relContext).Get_expre_arit().GetP()
+
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(117)
+	p.GetErrorHandler().Sync(p)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext())
+
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
+			}
+			_prevctx = localctx
+			localctx = NewExpre_relContext(p, _parentctx, _parentState)
+			localctx.(*Expre_relContext).left = _prevctx
+			p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_rel)
+			p.SetState(110)
+
+			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
+				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+			}
+			{
+				p.SetState(111)
+
+				var _lt = p.GetTokenStream().LT(1)
+
+				localctx.(*Expre_relContext).op = _lt
+
+				_la = p.GetTokenStream().LA(1)
+
+				if !(((_la-36)&-(0x1f+1)) == 0 && ((1<<uint((_la-36)))&((1<<(ChemsTK_IGUALIGUAL-36))|(1<<(ChemsTK_MAYORIGUAL-36))|(1<<(ChemsTK_MENORIGUAL-36))|(1<<(ChemsTK_DIFIGUAL-36))|(1<<(ChemsTK_MAYOR-36))|(1<<(ChemsTK_MENOR-36)))) != 0) {
+					var _ri = p.GetErrorHandler().RecoverInline(p)
+
+					localctx.(*Expre_relContext).op = _ri
+				} else {
+					p.GetErrorHandler().ReportMatch(p)
+					p.Consume()
+				}
+			}
+			{
+				p.SetState(112)
+
+				var _x = p.expre_rel(3)
+
+				localctx.(*Expre_relContext).right = _x
+			}
+			localctx.(*Expre_relContext).p = expression.NewOperacion(localctx.(*Expre_relContext).GetLeft().GetP(), (func() string {
+				if localctx.(*Expre_relContext).GetOp() == nil {
+					return ""
+				} else {
+					return localctx.(*Expre_relContext).GetOp().GetText()
+				}
+			}()), localctx.(*Expre_relContext).GetRight().GetP(), false, (func() int {
+				if localctx.(*Expre_relContext).GetOp() == nil {
+					return 0
+				} else {
+					return localctx.(*Expre_relContext).GetOp().GetLine()
+				}
+			}()), localctx.(*Expre_relContext).GetOp().GetColumn())
+
+		}
+		p.SetState(119)
+		p.GetErrorHandler().Sync(p)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext())
+	}
+
+	return localctx
+}
+
+// IExpre_aritContext is an interface to support dynamic dispatch.
+type IExpre_aritContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetOp returns the op token.
+	GetOp() antlr.Token
+
+	// SetOp sets the op token.
+	SetOp(antlr.Token)
+
+	// GetLeft returns the left rule contexts.
+	GetLeft() IExpre_aritContext
+
+	// Get_expre_valor returns the _expre_valor rule contexts.
+	Get_expre_valor() IExpre_valorContext
+
+	// Get_expressions returns the _expressions rule contexts.
+	Get_expressions() IExpressionsContext
+
+	// GetRight returns the right rule contexts.
+	GetRight() IExpre_aritContext
+
+	// SetLeft sets the left rule contexts.
+	SetLeft(IExpre_aritContext)
+
+	// Set_expre_valor sets the _expre_valor rule contexts.
+	Set_expre_valor(IExpre_valorContext)
+
+	// Set_expressions sets the _expressions rule contexts.
+	Set_expressions(IExpressionsContext)
+
+	// SetRight sets the right rule contexts.
+	SetRight(IExpre_aritContext)
+
+	// GetP returns the p attribute.
+	GetP() interfaces.Expression
+
+	// SetP sets the p attribute.
+	SetP(interfaces.Expression)
+
+	// IsExpre_aritContext differentiates from other interfaces.
+	IsExpre_aritContext()
+}
+
+type Expre_aritContext struct {
+	*antlr.BaseParserRuleContext
+	parser       antlr.Parser
+	p            interfaces.Expression
+	left         IExpre_aritContext
+	op           antlr.Token
+	_expre_valor IExpre_valorContext
+	_expressions IExpressionsContext
+	right        IExpre_aritContext
+}
+
+func NewEmptyExpre_aritContext() *Expre_aritContext {
+	var p = new(Expre_aritContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = ChemsRULE_expre_arit
+	return p
+}
+
+func (*Expre_aritContext) IsExpre_aritContext() {}
+
+func NewExpre_aritContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Expre_aritContext {
+	var p = new(Expre_aritContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = ChemsRULE_expre_arit
+
+	return p
+}
+
+func (s *Expre_aritContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Expre_aritContext) GetOp() antlr.Token { return s.op }
+
+func (s *Expre_aritContext) SetOp(v antlr.Token) { s.op = v }
+
+func (s *Expre_aritContext) GetLeft() IExpre_aritContext { return s.left }
+
+func (s *Expre_aritContext) Get_expre_valor() IExpre_valorContext { return s._expre_valor }
+
+func (s *Expre_aritContext) Get_expressions() IExpressionsContext { return s._expressions }
+
+func (s *Expre_aritContext) GetRight() IExpre_aritContext { return s.right }
+
+func (s *Expre_aritContext) SetLeft(v IExpre_aritContext) { s.left = v }
+
+func (s *Expre_aritContext) Set_expre_valor(v IExpre_valorContext) { s._expre_valor = v }
+
+func (s *Expre_aritContext) Set_expressions(v IExpressionsContext) { s._expressions = v }
+
+func (s *Expre_aritContext) SetRight(v IExpre_aritContext) { s.right = v }
+
+func (s *Expre_aritContext) GetP() interfaces.Expression { return s.p }
+
+func (s *Expre_aritContext) SetP(v interfaces.Expression) { s.p = v }
+
+func (s *Expre_aritContext) TK_MENOS() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENOS, 0)
+}
+
+func (s *Expre_aritContext) AllExpre_arit() []IExpre_aritContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IExpre_aritContext)(nil)).Elem())
+	var tst = make([]IExpre_aritContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IExpre_aritContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *Expre_aritContext) Expre_arit(i int) IExpre_aritContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_aritContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_aritContext)
+}
+
+func (s *Expre_aritContext) Expre_valor() IExpre_valorContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpre_valorContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpre_valorContext)
+}
+
+func (s *Expre_aritContext) TK_PARA() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_PARA, 0)
+}
+
+func (s *Expre_aritContext) Expressions() IExpressionsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpressionsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionsContext)
+}
+
+func (s *Expre_aritContext) TK_PARC() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_PARC, 0)
+}
+
+func (s *Expre_aritContext) TK_MULT() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MULT, 0)
+}
+
+func (s *Expre_aritContext) TK_DIV() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_DIV, 0)
+}
+
+func (s *Expre_aritContext) TK_MODULO() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MODULO, 0)
+}
+
+func (s *Expre_aritContext) TK_MAS() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAS, 0)
+}
+
+func (s *Expre_aritContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Expre_aritContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Expre_aritContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.EnterExpre_arit(s)
+	}
+}
+
+func (s *Expre_aritContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.ExitExpre_arit(s)
+	}
+}
+
+func (p *Chems) Expre_arit() (localctx IExpre_aritContext) {
+	return p.expre_arit(0)
+}
+
+func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewExpre_aritContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IExpre_aritContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 18
+	p.EnterRecursionRule(localctx, 18, ChemsRULE_expre_arit, _p)
+	var _la int
+
+	defer func() {
+		p.UnrollRecursionContexts(_parentctx)
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	var _alt int
+
+	p.EnterOuterAlt(localctx, 1)
+	p.SetState(133)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case ChemsTK_MENOS:
+		{
+			p.SetState(121)
+
+			var _m = p.Match(ChemsTK_MENOS)
+
+			localctx.(*Expre_aritContext).op = _m
+		}
+		{
+			p.SetState(122)
+
+			var _x = p.expre_arit(5)
+
+			localctx.(*Expre_aritContext).left = _x
+		}
+		localctx.(*Expre_aritContext).p = expression.NewOperacion(localctx.(*Expre_aritContext).GetLeft().GetP(), (func() string {
+			if localctx.(*Expre_aritContext).GetOp() == nil {
+				return ""
+			} else {
+				return localctx.(*Expre_aritContext).GetOp().GetText()
+			}
+		}()), nil, true, (func() int {
+			if localctx.(*Expre_aritContext).GetOp() == nil {
+				return 0
+			} else {
+				return localctx.(*Expre_aritContext).GetOp().GetLine()
+			}
+		}()), localctx.(*Expre_aritContext).GetOp().GetColumn())
+
+	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN:
+		{
+			p.SetState(125)
+
+			var _x = p.Expre_valor()
+
+			localctx.(*Expre_aritContext)._expre_valor = _x
+		}
+		localctx.(*Expre_aritContext).p = localctx.(*Expre_aritContext).Get_expre_valor().GetP()
+
+	case ChemsTK_PARA:
+		{
+			p.SetState(128)
+			p.Match(ChemsTK_PARA)
+		}
+		{
+			p.SetState(129)
+
+			var _x = p.Expressions()
+
+			localctx.(*Expre_aritContext)._expressions = _x
+		}
+		{
+			p.SetState(130)
+			p.Match(ChemsTK_PARC)
+		}
+		localctx.(*Expre_aritContext).p = localctx.(*Expre_aritContext).Get_expressions().GetP()
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(147)
+	p.GetErrorHandler().Sync(p)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
+
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
+			}
+			_prevctx = localctx
+			p.SetState(145)
+			p.GetErrorHandler().Sync(p)
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext()) {
+			case 1:
+				localctx = NewExpre_aritContext(p, _parentctx, _parentState)
+				localctx.(*Expre_aritContext).left = _prevctx
+				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_arit)
+				p.SetState(135)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 				}
 				{
-					p.SetState(88)
+					p.SetState(136)
 
 					var _lt = p.GetTokenStream().LT(1)
 
-					localctx.(*Instr_expreContext).op = _lt
+					localctx.(*Expre_aritContext).op = _lt
 
 					_la = p.GetTokenStream().LA(1)
 
 					if !(((_la-44)&-(0x1f+1)) == 0 && ((1<<uint((_la-44)))&((1<<(ChemsTK_MULT-44))|(1<<(ChemsTK_DIV-44))|(1<<(ChemsTK_MODULO-44)))) != 0) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
-						localctx.(*Instr_expreContext).op = _ri
+						localctx.(*Expre_aritContext).op = _ri
 					} else {
 						p.GetErrorHandler().ReportMatch(p)
 						p.Consume()
 					}
 				}
 				{
-					p.SetState(89)
+					p.SetState(137)
 
-					var _x = p.instr_expre(8)
+					var _x = p.expre_arit(5)
 
-					localctx.(*Instr_expreContext).right = _x
+					localctx.(*Expre_aritContext).right = _x
 				}
-				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
+				localctx.(*Expre_aritContext).p = expression.NewOperacion(localctx.(*Expre_aritContext).GetLeft().GetP(), (func() string {
+					if localctx.(*Expre_aritContext).GetOp() == nil {
 						return ""
 					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetText()
+						return localctx.(*Expre_aritContext).GetOp().GetText()
 					}
-				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
+				}()), localctx.(*Expre_aritContext).GetRight().GetP(), false, (func() int {
+					if localctx.(*Expre_aritContext).GetOp() == nil {
 						return 0
 					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetLine()
+						return localctx.(*Expre_aritContext).GetOp().GetLine()
 					}
-				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+				}()), localctx.(*Expre_aritContext).GetOp().GetColumn())
 
 			case 2:
-				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
-				localctx.(*Instr_expreContext).left = _prevctx
-				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
-				p.SetState(92)
+				localctx = NewExpre_aritContext(p, _parentctx, _parentState)
+				localctx.(*Expre_aritContext).left = _prevctx
+				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_arit)
+				p.SetState(140)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 6)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 6)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
-					p.SetState(93)
+					p.SetState(141)
 
 					var _lt = p.GetTokenStream().LT(1)
 
-					localctx.(*Instr_expreContext).op = _lt
+					localctx.(*Expre_aritContext).op = _lt
 
 					_la = p.GetTokenStream().LA(1)
 
 					if !(_la == ChemsTK_MAS || _la == ChemsTK_MENOS) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
-						localctx.(*Instr_expreContext).op = _ri
+						localctx.(*Expre_aritContext).op = _ri
 					} else {
 						p.GetErrorHandler().ReportMatch(p)
 						p.Consume()
 					}
 				}
 				{
-					p.SetState(94)
+					p.SetState(142)
 
-					var _x = p.instr_expre(7)
+					var _x = p.expre_arit(4)
 
-					localctx.(*Instr_expreContext).right = _x
+					localctx.(*Expre_aritContext).right = _x
 				}
-				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
+				localctx.(*Expre_aritContext).p = expression.NewOperacion(localctx.(*Expre_aritContext).GetLeft().GetP(), (func() string {
+					if localctx.(*Expre_aritContext).GetOp() == nil {
 						return ""
 					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetText()
+						return localctx.(*Expre_aritContext).GetOp().GetText()
 					}
-				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
+				}()), localctx.(*Expre_aritContext).GetRight().GetP(), false, (func() int {
+					if localctx.(*Expre_aritContext).GetOp() == nil {
 						return 0
 					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetLine()
+						return localctx.(*Expre_aritContext).GetOp().GetLine()
 					}
-				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
-
-			case 3:
-				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
-				localctx.(*Instr_expreContext).left = _prevctx
-				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
-				p.SetState(97)
-
-				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
-				}
-				{
-					p.SetState(98)
-
-					var _lt = p.GetTokenStream().LT(1)
-
-					localctx.(*Instr_expreContext).op = _lt
-
-					_la = p.GetTokenStream().LA(1)
-
-					if !(((_la-36)&-(0x1f+1)) == 0 && ((1<<uint((_la-36)))&((1<<(ChemsTK_IGUALIGUAL-36))|(1<<(ChemsTK_MAYORIGUAL-36))|(1<<(ChemsTK_MENORIGUAL-36))|(1<<(ChemsTK_DIFIGUAL-36))|(1<<(ChemsTK_MAYOR-36))|(1<<(ChemsTK_MENOR-36)))) != 0) {
-						var _ri = p.GetErrorHandler().RecoverInline(p)
-
-						localctx.(*Instr_expreContext).op = _ri
-					} else {
-						p.GetErrorHandler().ReportMatch(p)
-						p.Consume()
-					}
-				}
-				{
-					p.SetState(99)
-
-					var _x = p.instr_expre(6)
-
-					localctx.(*Instr_expreContext).right = _x
-				}
-				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
-						return ""
-					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetText()
-					}
-				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
-						return 0
-					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetLine()
-					}
-				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
-
-			case 4:
-				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
-				localctx.(*Instr_expreContext).left = _prevctx
-				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
-				p.SetState(102)
-
-				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
-					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
-				}
-				{
-					p.SetState(103)
-
-					var _lt = p.GetTokenStream().LT(1)
-
-					localctx.(*Instr_expreContext).op = _lt
-
-					_la = p.GetTokenStream().LA(1)
-
-					if !(_la == ChemsTK_AND || _la == ChemsTK_OR) {
-						var _ri = p.GetErrorHandler().RecoverInline(p)
-
-						localctx.(*Instr_expreContext).op = _ri
-					} else {
-						p.GetErrorHandler().ReportMatch(p)
-						p.Consume()
-					}
-				}
-				{
-					p.SetState(104)
-
-					var _x = p.instr_expre(5)
-
-					localctx.(*Instr_expreContext).right = _x
-				}
-				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
-						return ""
-					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetText()
-					}
-				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
-					if localctx.(*Instr_expreContext).GetOp() == nil {
-						return 0
-					} else {
-						return localctx.(*Instr_expreContext).GetOp().GetLine()
-					}
-				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+				}()), localctx.(*Expre_aritContext).GetOp().GetColumn())
 
 			}
 
 		}
-		p.SetState(111)
+		p.SetState(149)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
 	}
+
+	return localctx
+}
+
+// IExpre_valorContext is an interface to support dynamic dispatch.
+type IExpre_valorContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Get_primitivo returns the _primitivo rule contexts.
+	Get_primitivo() IPrimitivoContext
+
+	// Set_primitivo sets the _primitivo rule contexts.
+	Set_primitivo(IPrimitivoContext)
+
+	// GetP returns the p attribute.
+	GetP() interfaces.Expression
+
+	// SetP sets the p attribute.
+	SetP(interfaces.Expression)
+
+	// IsExpre_valorContext differentiates from other interfaces.
+	IsExpre_valorContext()
+}
+
+type Expre_valorContext struct {
+	*antlr.BaseParserRuleContext
+	parser     antlr.Parser
+	p          interfaces.Expression
+	_primitivo IPrimitivoContext
+}
+
+func NewEmptyExpre_valorContext() *Expre_valorContext {
+	var p = new(Expre_valorContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = ChemsRULE_expre_valor
+	return p
+}
+
+func (*Expre_valorContext) IsExpre_valorContext() {}
+
+func NewExpre_valorContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Expre_valorContext {
+	var p = new(Expre_valorContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = ChemsRULE_expre_valor
+
+	return p
+}
+
+func (s *Expre_valorContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Expre_valorContext) Get_primitivo() IPrimitivoContext { return s._primitivo }
+
+func (s *Expre_valorContext) Set_primitivo(v IPrimitivoContext) { s._primitivo = v }
+
+func (s *Expre_valorContext) GetP() interfaces.Expression { return s.p }
+
+func (s *Expre_valorContext) SetP(v interfaces.Expression) { s.p = v }
+
+func (s *Expre_valorContext) Primitivo() IPrimitivoContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPrimitivoContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IPrimitivoContext)
+}
+
+func (s *Expre_valorContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Expre_valorContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Expre_valorContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.EnterExpre_valor(s)
+	}
+}
+
+func (s *Expre_valorContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.ExitExpre_valor(s)
+	}
+}
+
+func (p *Chems) Expre_valor() (localctx IExpre_valorContext) {
+	localctx = NewExpre_valorContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 20, ChemsRULE_expre_valor)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(150)
+
+		var _x = p.Primitivo()
+
+		localctx.(*Expre_valorContext)._primitivo = _x
+	}
+	localctx.(*Expre_valorContext).p = localctx.(*Expre_valorContext).Get_primitivo().GetP()
 
 	return localctx
 }
@@ -2060,7 +2715,7 @@ func (s *PrimitivoContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	localctx = NewPrimitivoContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 16, ChemsRULE_primitivo)
+	p.EnterRule(localctx, 22, ChemsRULE_primitivo)
 
 	defer func() {
 		p.ExitRule()
@@ -2078,13 +2733,13 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 		}
 	}()
 
-	p.SetState(138)
+	p.SetState(179)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(112)
+			p.SetState(153)
 
 			var _m = p.Match(ChemsNUMBER)
 
@@ -2113,7 +2768,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(114)
+			p.SetState(155)
 
 			var _m = p.Match(ChemsDOUBLE)
 
@@ -2141,7 +2796,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(116)
+			p.SetState(157)
 
 			var _m = p.Match(ChemsSTRING)
 
@@ -2172,7 +2827,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(118)
+			p.SetState(159)
 
 			var _m = p.Match(ChemsBOOLEAN)
 
@@ -2198,7 +2853,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(120)
+			p.SetState(161)
 
 			var _m = p.Match(ChemsCHAR)
 
@@ -2223,18 +2878,18 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 6:
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(122)
+			p.SetState(163)
 
 			var _m = p.Match(ChemsNUMBER)
 
 			localctx.(*PrimitivoContext)._NUMBER = _m
 		}
 		{
-			p.SetState(123)
+			p.SetState(164)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(124)
+			p.SetState(165)
 			p.Match(ChemsR_INT)
 		}
 
@@ -2260,18 +2915,18 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 7:
 		p.EnterOuterAlt(localctx, 7)
 		{
-			p.SetState(126)
+			p.SetState(167)
 
 			var _m = p.Match(ChemsNUMBER)
 
 			localctx.(*PrimitivoContext)._NUMBER = _m
 		}
 		{
-			p.SetState(127)
+			p.SetState(168)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(128)
+			p.SetState(169)
 			p.Match(ChemsR_FLOAT)
 		}
 
@@ -2297,18 +2952,18 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 8:
 		p.EnterOuterAlt(localctx, 8)
 		{
-			p.SetState(130)
+			p.SetState(171)
 
 			var _m = p.Match(ChemsDOUBLE)
 
 			localctx.(*PrimitivoContext)._DOUBLE = _m
 		}
 		{
-			p.SetState(131)
+			p.SetState(172)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(132)
+			p.SetState(173)
 			p.Match(ChemsR_INT)
 		}
 
@@ -2333,18 +2988,18 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 9:
 		p.EnterOuterAlt(localctx, 9)
 		{
-			p.SetState(134)
+			p.SetState(175)
 
 			var _m = p.Match(ChemsDOUBLE)
 
 			localctx.(*PrimitivoContext)._DOUBLE = _m
 		}
 		{
-			p.SetState(135)
+			p.SetState(176)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(136)
+			p.SetState(177)
 			p.Match(ChemsR_FLOAT)
 		}
 
@@ -2374,30 +3029,58 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 func (p *Chems) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
 	case 7:
-		var t *Instr_expreContext = nil
+		var t *Expre_logContext = nil
 		if localctx != nil {
-			t = localctx.(*Instr_expreContext)
+			t = localctx.(*Expre_logContext)
 		}
-		return p.Instr_expre_Sempred(t, predIndex)
+		return p.Expre_log_Sempred(t, predIndex)
+
+	case 8:
+		var t *Expre_relContext = nil
+		if localctx != nil {
+			t = localctx.(*Expre_relContext)
+		}
+		return p.Expre_rel_Sempred(t, predIndex)
+
+	case 9:
+		var t *Expre_aritContext = nil
+		if localctx != nil {
+			t = localctx.(*Expre_aritContext)
+		}
+		return p.Expre_arit_Sempred(t, predIndex)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(ruleIndex))
 	}
 }
 
-func (p *Chems) Instr_expre_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+func (p *Chems) Expre_log_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
-		return p.Precpred(p.GetParserRuleContext(), 7)
+		return p.Precpred(p.GetParserRuleContext(), 2)
 
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
+}
+
+func (p *Chems) Expre_rel_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	switch predIndex {
 	case 1:
-		return p.Precpred(p.GetParserRuleContext(), 6)
+		return p.Precpred(p.GetParserRuleContext(), 2)
 
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
+}
+
+func (p *Chems) Expre_arit_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	switch predIndex {
 	case 2:
-		return p.Precpred(p.GetParserRuleContext(), 5)
+		return p.Precpred(p.GetParserRuleContext(), 4)
 
 	case 3:
-		return p.Precpred(p.GetParserRuleContext(), 4)
+		return p.Precpred(p.GetParserRuleContext(), 3)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))

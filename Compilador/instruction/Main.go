@@ -31,14 +31,14 @@ func (p Main) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) int
 	newTable = environment.NewEnvironment(env.(environment.Environment))
 
 	if p.Instrucciones != nil {
-		gen.AddFunction("void","main()")
-		gen.StachHeap()
+		// gen.AddFunction("void","main()")
+		// gen.StachHeap()
 		for _, s := range p.Instrucciones.ToArray() {
 			s.(interfaces.Instruction).Compilar(newTable, tree, gen)
 
 		}
 
-		gen.AddFunctionEnd()
+		// gen.AddFunctionEnd()
 	}
 	
 	return nil

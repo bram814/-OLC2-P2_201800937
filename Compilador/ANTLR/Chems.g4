@@ -55,23 +55,36 @@ instr_main returns [interfaces.Instruction instr]
 ;
 
 expressions returns [interfaces.Expression p]
-  : instr_expre                                  { $p = $instr_expre.p       }
+  : expre_log                                   { $p = $expre_log.p }
+  | expre_rel                                   { $p = $expre_rel.p } 
+  | expre_arit                                  { $p = $expre_arit.p }
 
 ;
 
-instr_expre returns [interfaces.Expression p]
-  : left=instr_expre op=('*'|'/'|'%') right=instr_expre                   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
-  | left=instr_expre op=('+'|'-') right=instr_expre                       { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
-  | left=instr_expre op=('<'|'<='|'>='|'>'|'!='|'==') right=instr_expre   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
-  | left=instr_expre op=('&&'|'||') right=instr_expre                     { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
-  | op=('!'|'-') left=instr_expre                                         { $p = expression.NewOperacion($left.p, $op.text, nil,      true,  $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+expre_log returns [interfaces.Expression p]
+  : op='!' left=expre_log                                               { $p = expression.NewOperacion($left.p, $op.text, nil,      true,  $op.line, localctx.(*Expre_logContext).GetOp().GetColumn()) }
+  | left=expre_log op=('&&'|'||') right=expre_log                       { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Expre_logContext).GetOp().GetColumn()) }
+  | expre_rel                                                           { $p = $expre_rel.p } 
+;
+
+expre_rel returns [interfaces.Expression p]
+  : left=expre_rel op=('<'|'<='|'>='|'>'|'!='|'==') right=expre_rel     { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Expre_relContext).GetOp().GetColumn()) }
+  | expre_arit                                                          { $p = $expre_arit.p }
+;
+
+expre_arit returns [interfaces.Expression p]
+  : op='-' left=expre_arit                                              { $p = expression.NewOperacion($left.p, $op.text, nil,      true,  $op.line, localctx.(*Expre_aritContext).GetOp().GetColumn()) }
+  | left=expre_arit op=('*'|'/'|'%') right=expre_arit                   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Expre_aritContext).GetOp().GetColumn()) }
+  | left=expre_arit op=('+'|'-') right=expre_arit                       { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Expre_aritContext).GetOp().GetColumn()) }
+  | expre_valor                                                         { $p = $expre_valor.p }
+  | TK_PARA expressions TK_PARC                                         { $p = $expressions.p }
+;
+
+
+expre_valor returns [interfaces.Expression p]
+  : primitivo                                                             { $p = $primitivo.p }
   
-  | primitivo                                                             { $p = $primitivo.p        }
-  | TK_PARA expressions TK_PARC                                           { $p = $expressions.p      }
 ;
-
-
-
 
 primitivo returns[interfaces.Expression p]
     :NUMBER {

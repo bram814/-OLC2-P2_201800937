@@ -29,8 +29,17 @@ type ChemsListener interface {
 	// EnterExpressions is called when entering the expressions production.
 	EnterExpressions(c *ExpressionsContext)
 
-	// EnterInstr_expre is called when entering the instr_expre production.
-	EnterInstr_expre(c *Instr_expreContext)
+	// EnterExpre_log is called when entering the expre_log production.
+	EnterExpre_log(c *Expre_logContext)
+
+	// EnterExpre_rel is called when entering the expre_rel production.
+	EnterExpre_rel(c *Expre_relContext)
+
+	// EnterExpre_arit is called when entering the expre_arit production.
+	EnterExpre_arit(c *Expre_aritContext)
+
+	// EnterExpre_valor is called when entering the expre_valor production.
+	EnterExpre_valor(c *Expre_valorContext)
 
 	// EnterPrimitivo is called when entering the primitivo production.
 	EnterPrimitivo(c *PrimitivoContext)
@@ -56,8 +65,17 @@ type ChemsListener interface {
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
 
-	// ExitInstr_expre is called when exiting the instr_expre production.
-	ExitInstr_expre(c *Instr_expreContext)
+	// ExitExpre_log is called when exiting the expre_log production.
+	ExitExpre_log(c *Expre_logContext)
+
+	// ExitExpre_rel is called when exiting the expre_rel production.
+	ExitExpre_rel(c *Expre_relContext)
+
+	// ExitExpre_arit is called when exiting the expre_arit production.
+	ExitExpre_arit(c *Expre_aritContext)
+
+	// ExitExpre_valor is called when exiting the expre_valor production.
+	ExitExpre_valor(c *Expre_valorContext)
 
 	// ExitPrimitivo is called when exiting the primitivo production.
 	ExitPrimitivo(c *PrimitivoContext)

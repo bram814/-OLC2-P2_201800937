@@ -63,11 +63,29 @@ func (s *BaseChemsListener) EnterExpressions(ctx *ExpressionsContext) {}
 // ExitExpressions is called when production expressions is exited.
 func (s *BaseChemsListener) ExitExpressions(ctx *ExpressionsContext) {}
 
-// EnterInstr_expre is called when production instr_expre is entered.
-func (s *BaseChemsListener) EnterInstr_expre(ctx *Instr_expreContext) {}
+// EnterExpre_log is called when production expre_log is entered.
+func (s *BaseChemsListener) EnterExpre_log(ctx *Expre_logContext) {}
 
-// ExitInstr_expre is called when production instr_expre is exited.
-func (s *BaseChemsListener) ExitInstr_expre(ctx *Instr_expreContext) {}
+// ExitExpre_log is called when production expre_log is exited.
+func (s *BaseChemsListener) ExitExpre_log(ctx *Expre_logContext) {}
+
+// EnterExpre_rel is called when production expre_rel is entered.
+func (s *BaseChemsListener) EnterExpre_rel(ctx *Expre_relContext) {}
+
+// ExitExpre_rel is called when production expre_rel is exited.
+func (s *BaseChemsListener) ExitExpre_rel(ctx *Expre_relContext) {}
+
+// EnterExpre_arit is called when production expre_arit is entered.
+func (s *BaseChemsListener) EnterExpre_arit(ctx *Expre_aritContext) {}
+
+// ExitExpre_arit is called when production expre_arit is exited.
+func (s *BaseChemsListener) ExitExpre_arit(ctx *Expre_aritContext) {}
+
+// EnterExpre_valor is called when production expre_valor is entered.
+func (s *BaseChemsListener) EnterExpre_valor(ctx *Expre_valorContext) {}
+
+// ExitExpre_valor is called when production expre_valor is exited.
+func (s *BaseChemsListener) ExitExpre_valor(ctx *Expre_valorContext) {}
 
 // EnterPrimitivo is called when production primitivo is entered.
 func (s *BaseChemsListener) EnterPrimitivo(ctx *PrimitivoContext) {}
