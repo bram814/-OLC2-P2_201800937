@@ -6,8 +6,9 @@ const (
 	INTEGER TypeExpression = iota 	// 0
 	FLOAT							// 1
 	STRING							// 2
-	BOOLEAN							// 3
-	ARRAY							// 4
-	NULL							// 5
-	EXCEPTION 						// 6
+	CHAR 							// 3
+	BOOLEAN							// 4
+	ARRAY							// 5
+	NULL							// 6
+	EXCEPTION 						// 7
 )

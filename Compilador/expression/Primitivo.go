@@ -23,13 +23,12 @@ func NewPrimitivo(val interface{}, tipo interfaces.TypeExpression, row int, colu
 func (p Primitivo) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
 
 
-	if p.Type == interfaces.STRING {
+	if p.Type == interfaces.STRING || p.Type == interfaces.CHAR {
 
 		temp := gen.NewTemp()
 		gen.AddExpression(temp,"H","0","+")
 
 		for i := 0; i < len(p.Value.(string)); i++ {
-			fmt.Println(p.Value.(string)[i])
 			gen.AddHeap("H",fmt.Sprintf("%v", p.Value.(string)[i]))
 			gen.AddExpression("H","H","1","+")
 		}

@@ -84,4 +84,11 @@ primitivo returns[interfaces.Expression p]
               exp,_ := strconv.ParseBool($BOOLEAN.text)
               $p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, $BOOLEAN.line, localctx.(*PrimitivoContext).Get_BOOLEAN().GetColumn())
             }
+
+    |CHAR {
+
+            str:= $CHAR.text[1]
+            $p = expression.NewPrimitivo(string(str), interfaces.CHAR, $CHAR.line, localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
+          
+          }
 ;

@@ -37,7 +37,7 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 	} else if result.Type == interfaces.FLOAT {
 		gen.AddPrintf("f", "(double)"+fmt.Sprintf("%v", result.Value))
 
-	}else if result.Type == interfaces.STRING {
+	}else if result.Type == interfaces.STRING || result.Type == interfaces.CHAR {
 		if !tree.IsPrimitive {
 			gen.AddPrintfString()
 			tree.IsPrimitive = true

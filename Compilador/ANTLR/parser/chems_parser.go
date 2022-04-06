@@ -21,32 +21,33 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 64, 67, 4,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 64, 69, 4,
 	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7, 4,
 	8, 9, 8, 3, 2, 3, 2, 3, 2, 3, 3, 6, 3, 21, 10, 3, 13, 3, 14, 3, 22, 3,
 	3, 3, 3, 3, 4, 3, 4, 3, 4, 5, 4, 30, 10, 4, 3, 5, 3, 5, 3, 5, 3, 5, 3,
 	6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3,
 	6, 3, 6, 3, 6, 3, 6, 5, 6, 52, 10, 6, 3, 7, 3, 7, 3, 7, 3, 8, 3, 8, 3,
-	8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 65, 10, 8, 3, 8, 2, 2, 9, 2, 4,
-	6, 8, 10, 12, 14, 2, 2, 2, 65, 2, 16, 3, 2, 2, 2, 4, 20, 3, 2, 2, 2, 6,
-	29, 3, 2, 2, 2, 8, 31, 3, 2, 2, 2, 10, 51, 3, 2, 2, 2, 12, 53, 3, 2, 2,
-	2, 14, 64, 3, 2, 2, 2, 16, 17, 5, 4, 3, 2, 17, 18, 8, 2, 1, 2, 18, 3, 3,
-	2, 2, 2, 19, 21, 5, 8, 5, 2, 20, 19, 3, 2, 2, 2, 21, 22, 3, 2, 2, 2, 22,
-	20, 3, 2, 2, 2, 22, 23, 3, 2, 2, 2, 23, 24, 3, 2, 2, 2, 24, 25, 8, 3, 1,
-	2, 25, 5, 3, 2, 2, 2, 26, 27, 7, 35, 2, 2, 27, 30, 8, 4, 1, 2, 28, 30,
-	8, 4, 1, 2, 29, 26, 3, 2, 2, 2, 29, 28, 3, 2, 2, 2, 30, 7, 3, 2, 2, 2,
-	31, 32, 5, 10, 6, 2, 32, 33, 5, 6, 4, 2, 33, 34, 8, 5, 1, 2, 34, 9, 3,
-	2, 2, 2, 35, 36, 7, 4, 2, 2, 36, 37, 7, 52, 2, 2, 37, 38, 5, 12, 7, 2,
-	38, 39, 7, 53, 2, 2, 39, 40, 7, 35, 2, 2, 40, 41, 8, 6, 1, 2, 41, 52, 3,
-	2, 2, 2, 42, 43, 7, 4, 2, 2, 43, 44, 7, 52, 2, 2, 44, 45, 7, 30, 2, 2,
-	45, 46, 7, 36, 2, 2, 46, 47, 5, 12, 7, 2, 47, 48, 7, 53, 2, 2, 48, 49,
-	7, 35, 2, 2, 49, 50, 8, 6, 1, 2, 50, 52, 3, 2, 2, 2, 51, 35, 3, 2, 2, 2,
-	51, 42, 3, 2, 2, 2, 52, 11, 3, 2, 2, 2, 53, 54, 5, 14, 8, 2, 54, 55, 8,
-	7, 1, 2, 55, 13, 3, 2, 2, 2, 56, 57, 7, 27, 2, 2, 57, 65, 8, 8, 1, 2, 58,
-	59, 7, 28, 2, 2, 59, 65, 8, 8, 1, 2, 60, 61, 7, 30, 2, 2, 61, 65, 8, 8,
-	1, 2, 62, 63, 7, 31, 2, 2, 63, 65, 8, 8, 1, 2, 64, 56, 3, 2, 2, 2, 64,
-	58, 3, 2, 2, 2, 64, 60, 3, 2, 2, 2, 64, 62, 3, 2, 2, 2, 65, 15, 3, 2, 2,
-	2, 6, 22, 29, 51, 64,
+	8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 67, 10, 8, 3, 8, 2,
+	2, 9, 2, 4, 6, 8, 10, 12, 14, 2, 2, 2, 68, 2, 16, 3, 2, 2, 2, 4, 20, 3,
+	2, 2, 2, 6, 29, 3, 2, 2, 2, 8, 31, 3, 2, 2, 2, 10, 51, 3, 2, 2, 2, 12,
+	53, 3, 2, 2, 2, 14, 66, 3, 2, 2, 2, 16, 17, 5, 4, 3, 2, 17, 18, 8, 2, 1,
+	2, 18, 3, 3, 2, 2, 2, 19, 21, 5, 8, 5, 2, 20, 19, 3, 2, 2, 2, 21, 22, 3,
+	2, 2, 2, 22, 20, 3, 2, 2, 2, 22, 23, 3, 2, 2, 2, 23, 24, 3, 2, 2, 2, 24,
+	25, 8, 3, 1, 2, 25, 5, 3, 2, 2, 2, 26, 27, 7, 35, 2, 2, 27, 30, 8, 4, 1,
+	2, 28, 30, 8, 4, 1, 2, 29, 26, 3, 2, 2, 2, 29, 28, 3, 2, 2, 2, 30, 7, 3,
+	2, 2, 2, 31, 32, 5, 10, 6, 2, 32, 33, 5, 6, 4, 2, 33, 34, 8, 5, 1, 2, 34,
+	9, 3, 2, 2, 2, 35, 36, 7, 4, 2, 2, 36, 37, 7, 52, 2, 2, 37, 38, 5, 12,
+	7, 2, 38, 39, 7, 53, 2, 2, 39, 40, 7, 35, 2, 2, 40, 41, 8, 6, 1, 2, 41,
+	52, 3, 2, 2, 2, 42, 43, 7, 4, 2, 2, 43, 44, 7, 52, 2, 2, 44, 45, 7, 30,
+	2, 2, 45, 46, 7, 36, 2, 2, 46, 47, 5, 12, 7, 2, 47, 48, 7, 53, 2, 2, 48,
+	49, 7, 35, 2, 2, 49, 50, 8, 6, 1, 2, 50, 52, 3, 2, 2, 2, 51, 35, 3, 2,
+	2, 2, 51, 42, 3, 2, 2, 2, 52, 11, 3, 2, 2, 2, 53, 54, 5, 14, 8, 2, 54,
+	55, 8, 7, 1, 2, 55, 13, 3, 2, 2, 2, 56, 57, 7, 27, 2, 2, 57, 67, 8, 8,
+	1, 2, 58, 59, 7, 28, 2, 2, 59, 67, 8, 8, 1, 2, 60, 61, 7, 30, 2, 2, 61,
+	67, 8, 8, 1, 2, 62, 63, 7, 31, 2, 2, 63, 67, 8, 8, 1, 2, 64, 65, 7, 29,
+	2, 2, 65, 67, 8, 8, 1, 2, 66, 56, 3, 2, 2, 2, 66, 58, 3, 2, 2, 2, 66, 60,
+	3, 2, 2, 2, 66, 62, 3, 2, 2, 2, 66, 64, 3, 2, 2, 2, 67, 15, 3, 2, 2, 2,
+	6, 22, 29, 51, 66,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
@@ -1098,6 +1099,9 @@ type IPrimitivoContext interface {
 	// Get_BOOLEAN returns the _BOOLEAN token.
 	Get_BOOLEAN() antlr.Token
 
+	// Get_CHAR returns the _CHAR token.
+	Get_CHAR() antlr.Token
+
 	// Set_NUMBER sets the _NUMBER token.
 	Set_NUMBER(antlr.Token)
 
@@ -1109,6 +1113,9 @@ type IPrimitivoContext interface {
 
 	// Set_BOOLEAN sets the _BOOLEAN token.
 	Set_BOOLEAN(antlr.Token)
+
+	// Set_CHAR sets the _CHAR token.
+	Set_CHAR(antlr.Token)
 
 	// GetP returns the p attribute.
 	GetP() interfaces.Expression
@@ -1128,6 +1135,7 @@ type PrimitivoContext struct {
 	_DOUBLE  antlr.Token
 	_STRING  antlr.Token
 	_BOOLEAN antlr.Token
+	_CHAR    antlr.Token
 }
 
 func NewEmptyPrimitivoContext() *PrimitivoContext {
@@ -1160,6 +1168,8 @@ func (s *PrimitivoContext) Get_STRING() antlr.Token { return s._STRING }
 
 func (s *PrimitivoContext) Get_BOOLEAN() antlr.Token { return s._BOOLEAN }
 
+func (s *PrimitivoContext) Get_CHAR() antlr.Token { return s._CHAR }
+
 func (s *PrimitivoContext) Set_NUMBER(v antlr.Token) { s._NUMBER = v }
 
 func (s *PrimitivoContext) Set_DOUBLE(v antlr.Token) { s._DOUBLE = v }
@@ -1167,6 +1177,8 @@ func (s *PrimitivoContext) Set_DOUBLE(v antlr.Token) { s._DOUBLE = v }
 func (s *PrimitivoContext) Set_STRING(v antlr.Token) { s._STRING = v }
 
 func (s *PrimitivoContext) Set_BOOLEAN(v antlr.Token) { s._BOOLEAN = v }
+
+func (s *PrimitivoContext) Set_CHAR(v antlr.Token) { s._CHAR = v }
 
 func (s *PrimitivoContext) GetP() interfaces.Expression { return s.p }
 
@@ -1186,6 +1198,10 @@ func (s *PrimitivoContext) STRING() antlr.TerminalNode {
 
 func (s *PrimitivoContext) BOOLEAN() antlr.TerminalNode {
 	return s.GetToken(ChemsBOOLEAN, 0)
+}
+
+func (s *PrimitivoContext) CHAR() antlr.TerminalNode {
+	return s.GetToken(ChemsCHAR, 0)
 }
 
 func (s *PrimitivoContext) GetRuleContext() antlr.RuleContext {
@@ -1228,7 +1244,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 		}
 	}()
 
-	p.SetState(62)
+	p.SetState(64)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
@@ -1345,6 +1361,31 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_BOOLEAN().GetLine()
 			}
 		}()), localctx.(*PrimitivoContext).Get_BOOLEAN().GetColumn())
+
+	case ChemsCHAR:
+		p.EnterOuterAlt(localctx, 5)
+		{
+			p.SetState(62)
+
+			var _m = p.Match(ChemsCHAR)
+
+			localctx.(*PrimitivoContext)._CHAR = _m
+		}
+
+		str := (func() string {
+			if localctx.(*PrimitivoContext).Get_CHAR() == nil {
+				return ""
+			} else {
+				return localctx.(*PrimitivoContext).Get_CHAR().GetText()
+			}
+		}())[1]
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(string(str), interfaces.CHAR, (func() int {
+			if localctx.(*PrimitivoContext).Get_CHAR() == nil {
+				return 0
+			} else {
+				return localctx.(*PrimitivoContext).Get_CHAR().GetLine()
+			}
+		}()), localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
