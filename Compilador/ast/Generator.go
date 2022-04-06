@@ -155,6 +155,18 @@ func (g *Generator) PrintfString() {
 
  }
 
+  func (g *Generator) Boolean(EV string, EF string, newLabel string, temp string) {
+
+ 	g.AddLabel(EV)
+ 	g.AddExpression(temp,"1","0","+")
+ 	g.AddGoto(newLabel)
+ 	g.AddLabel(EF)
+ 	g.AddExpression(temp,"0","0","+")
+ 	g.AddGoto(newLabel)
+ 	g.AddLabel(newLabel)
+
+ }
+
 
 /************************************************* [FUNCIONES] *************************************************/
 func (g *Generator) StachHeap() {

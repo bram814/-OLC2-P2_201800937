@@ -29,16 +29,16 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 	var exp_left interfaces.Value
 	var exp_right interfaces.Value
 
-	if p.Unario == true {
-		exp_left = p.left.Compilar(env, tree, gen)
-	} else {
-		exp_left = p.left.Compilar(env, tree, gen)
-		exp_right = p.right.Compilar(env, tree, gen)
-	}
 
 	switch p.Operator {
 	case "+":
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
 			
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
@@ -52,29 +52,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				isType = interfaces.FLOAT
 				
 			} else {
-
-			
 				excep := ast.NewException("Semantico","No es posible Sumar, Tipos de datos Incorrectos.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      temp,
-				IsTemp:     true,
-				Type:       isType,
-				TrueLabel:  "",
-				FalseLabel: "",
-			}
+			return interfaces.Value{Value: temp, IsTemp: true, Type: isType, TrueLabel: "", FalseLabel: ""}
 		}
 	case "-":
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
 			
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
@@ -88,29 +80,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				isType = interfaces.FLOAT
 				
 			} else {
-
-			
 				excep := ast.NewException("Semantico","No es posible Restar, Tipos de datos Incorrectos.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      temp,
-				IsTemp:     true,
-				Type:       isType,
-				TrueLabel:  "",
-				FalseLabel: "",
-			}
+			return interfaces.Value{Value: temp, IsTemp: true, Type: isType, TrueLabel: "", FalseLabel: ""}
 		}
 	case "*":
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
 			
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
@@ -124,29 +108,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				isType = interfaces.FLOAT
 				
 			} else {
-
-			
 				excep := ast.NewException("Semantico","No es posible Multiplicar, Tipos de datos Incorrectos.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      temp,
-				IsTemp:     true,
-				Type:       isType,
-				TrueLabel:  "",
-				FalseLabel: "",
-			}
+			return interfaces.Value{Value: temp, IsTemp: true, Type: isType, TrueLabel: "", FalseLabel: ""}
 		}
 	case "/":
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
 			
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
@@ -160,29 +136,23 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				isType = interfaces.FLOAT
 				
 			} else {
-				
 				excep := ast.NewException("Semantico","No es posible Dividir.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      temp,
-				IsTemp:     true,
-				Type:       isType,
-				TrueLabel:  "",
-				FalseLabel: "",
-			}
+			return interfaces.Value{Value: temp, IsTemp: true, Type: isType, TrueLabel: "", FalseLabel: ""}
 		}
 	case "<":
-		
 		{
+
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -199,27 +169,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar <.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
-			}
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
 
 		}
 	case ">":
-		
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -236,27 +200,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar >.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
-			}
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
 
 		}
 	case "<=":
-		
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -273,27 +231,21 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar <=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
-			}
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel:  EV, FalseLabel: EF}
 
 		}
 	case ">=":
-		
 		{
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -310,27 +262,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar >=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
-			}
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel:  EV, FalseLabel: EF}
 
 		}
 	case "==":
-		
 		{
+
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -347,27 +294,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar ==.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
-			}
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
 
 		}
 	case "!=":
-		
 		{
+
+			if p.Unario == true {
+				exp_left = p.left.Compilar(env, tree, gen)
+			} else {
+				exp_left = p.left.Compilar(env, tree, gen)
+				exp_right = p.right.Compilar(env, tree, gen)
+			}
+
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -384,22 +326,120 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar !=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
-				return interfaces.Value{
-					Value:      "",
-					IsTemp:     false,
-					Type:       interfaces.EXCEPTION,
-					TrueLabel:  "",
-					FalseLabel: "",
-				}
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{
-				Value:      "",
-				IsTemp:     false,
-				Type:       interfaces.BOOLEAN,
-				TrueLabel:  EV,
-				FalseLabel: EF,
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+
+		}
+	case "&&":
+		{
+
+			exp_left = p.left.Compilar(env, tree, gen)
+
+			if exp_left.Type == interfaces.BOOLEAN {
+				
+
+				newLabel := gen.NewLabel()
+				leftTemp := gen.NewTemp()	
+				gen.Boolean(exp_left.TrueLabel, exp_left.FalseLabel, newLabel, leftTemp)
+
+				exp_right 	:= p.right.Compilar(env, tree, gen)
+
+				if exp_right.Type == interfaces.BOOLEAN {
+
+					newLabel   = gen.NewLabel()
+					rightTemp := gen.NewTemp()	
+					gen.Boolean(exp_right.TrueLabel, exp_right.FalseLabel, newLabel, rightTemp)
+
+
+					EV   := gen.NewLabel()
+					EF 	 := gen.NewLabel()
+					gen.AddIf(leftTemp, rightTemp, "&&", EV)
+					gen.AddGoto(EF)
+
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+				} else {
+					excep := ast.NewException("Semantico","No es posible Comparar &&; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
+					tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+
+				}
+				
+
+			} else {
+				excep := ast.NewException("Semantico","No es posible Comparar &&; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
+				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
+
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
+
+		}
+	case "||":
+		{
+
+			exp_left = p.left.Compilar(env, tree, gen)
+
+			if exp_left.Type == interfaces.BOOLEAN {
+				
+
+				newLabel := gen.NewLabel()
+				leftTemp := gen.NewTemp()	
+				gen.Boolean(exp_left.TrueLabel, exp_left.FalseLabel, newLabel, leftTemp)
+
+				exp_right 	:= p.right.Compilar(env, tree, gen)
+
+				if exp_right.Type == interfaces.BOOLEAN {
+
+					newLabel   = gen.NewLabel()
+					rightTemp := gen.NewTemp()	
+					gen.Boolean(exp_right.TrueLabel, exp_right.FalseLabel, newLabel, rightTemp)
+
+
+					EV   := gen.NewLabel()
+					EF 	 := gen.NewLabel()
+					gen.AddIf(leftTemp, rightTemp, "||", EV)
+					gen.AddGoto(EF)
+
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+				} else {
+					excep := ast.NewException("Semantico","No es posible Comparar ||; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
+					tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+
+				}
+				
+
+			} else {
+				excep := ast.NewException("Semantico","No es posible Comparar ||; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
+				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+			}
+
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
+
+		}
+	case "!":
+		{
+			if p.Unario {
+
+				exp_left = p.left.Compilar(env, tree, gen)
+			}
+
+			if exp_left.Type == interfaces.BOOLEAN {
+
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: exp_left.FalseLabel, FalseLabel: exp_left.TrueLabel}
+			
+				
+
+			} else {
+				excep := ast.NewException("Semantico","No es posible Comparar ||; Tipo de Dato no Booleano.", p.Row, p.Column)
+				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+			}
+
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 
 		}
 
@@ -407,13 +447,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 
 	
 
-	return interfaces.Value{
-		Value:      "",
-		IsTemp:     false,
-		Type:       interfaces.NULL,
-		TrueLabel:  "",
-		FalseLabel: "",
-	}
+	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 
 }
 

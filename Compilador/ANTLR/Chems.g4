@@ -63,6 +63,8 @@ instr_expre returns [interfaces.Expression p]
   : left=instr_expre op=('*'|'/'|'%') right=instr_expre                   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
   | left=instr_expre op=('+'|'-') right=instr_expre                       { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
   | left=instr_expre op=('<'|'<='|'>='|'>'|'!='|'==') right=instr_expre   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+  | left=instr_expre op=('&&'|'||') right=instr_expre                     { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+  | op=('!'|'-') left=instr_expre                                         { $p = expression.NewOperacion($left.p, $op.text, nil,      true,  $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
   
   | primitivo                                                             { $p = $primitivo.p        }
   | TK_PARA expressions TK_PARC                                           { $p = $expressions.p      }
