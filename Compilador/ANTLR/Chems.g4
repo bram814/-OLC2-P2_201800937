@@ -55,8 +55,19 @@ instr_main returns [interfaces.Instruction instr]
 ;
 
 expressions returns [interfaces.Expression p]
-  : primitivo                                   {$p = $primitivo.p}
+  : instr_expre                                  { $p = $instr_expre.p       }
+
 ;
+
+instr_expre returns [interfaces.Expression p]
+  : left=instr_expre op=('*'|'/'|'%') right=instr_expre                   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+  | left=instr_expre op=('+'|'-') right=instr_expre                       { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+  | left=instr_expre op=('<'|'<='|'>='|'>'|'!='|'==') right=instr_expre   { $p = expression.NewOperacion($left.p, $op.text, $right.p, false, $op.line, localctx.(*Instr_expreContext).GetOp().GetColumn()) }
+  
+  | primitivo                                                             { $p = $primitivo.p        }
+  | TK_PARA expressions TK_PARC                                           { $p = $expressions.p      }
+;
+
 
 
 
@@ -67,31 +78,61 @@ primitivo returns[interfaces.Expression p]
                     fmt.Println(err)
                 }
 
-            $p = expression.NewPrimitivo(num, interfaces.INTEGER, $NUMBER.line, localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
+            $p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.NULL, $NUMBER.line, localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
        } 
     |DOUBLE  {  
                 num,err := strconv.ParseFloat($DOUBLE.text, 64)
                 if err!= nil{
                     fmt.Println(err)
                 }
-            $p = expression.NewPrimitivo(num, interfaces.FLOAT, $DOUBLE.line, localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
+            $p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.NULL, $DOUBLE.line, localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
               }
     |STRING { 
               str:= $STRING.text[1:len($STRING.text)-1]
-              $p = expression.NewPrimitivo(str, interfaces.STRING, $STRING.line, localctx.(*PrimitivoContext).Get_STRING().GetColumn())
+              $p = expression.NewPrimitivo(str, interfaces.STRING, interfaces.NULL, $STRING.line, localctx.(*PrimitivoContext).Get_STRING().GetColumn())
             
             }
             
     |BOOLEAN { 
               // str:= $BOOLEAN.text[1:len($BOOLEAN.text)-1]
               exp,_ := strconv.ParseBool($BOOLEAN.text)
-              $p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, $BOOLEAN.line, localctx.(*PrimitivoContext).Get_BOOLEAN().GetColumn())
+              $p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, interfaces.NULL, $BOOLEAN.line, localctx.(*PrimitivoContext).Get_BOOLEAN().GetColumn())
             }
 
     |CHAR {
 
             str:= $CHAR.text[1]
-            $p = expression.NewPrimitivo(string(str), interfaces.CHAR, $CHAR.line, localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
+            $p = expression.NewPrimitivo(string(str), interfaces.CHAR, interfaces.NULL, $CHAR.line, localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
           
           }
+    |NUMBER R_AS R_INT{
+              num,err := strconv.Atoi($NUMBER.text)
+                if err!= nil{
+                    fmt.Println(err)
+                }
+
+            $p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.INTEGER, $NUMBER.line, localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
+       }
+    |NUMBER R_AS R_FLOAT{
+              num,err := strconv.Atoi($NUMBER.text)
+                if err!= nil{
+                    fmt.Println(err)
+                }
+
+            $p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.FLOAT, $NUMBER.line, localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
+       }  
+    |DOUBLE  R_AS R_INT{  
+                num,err := strconv.ParseFloat($DOUBLE.text, 64)
+                if err!= nil{
+                    fmt.Println(err)
+                }
+            $p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.INTEGER, $DOUBLE.line, localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
+              }
+    |DOUBLE  R_AS R_FLOAT{  
+                num,err := strconv.ParseFloat($DOUBLE.text, 64)
+                if err!= nil{
+                    fmt.Println(err)
+                }
+            $p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.FLOAT, $DOUBLE.line, localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
+              }
 ;

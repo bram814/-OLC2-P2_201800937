@@ -160,6 +160,26 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 
 
 
+	var OutException string
+	OutException = ""
+
+	
+	fmt.Println(tablaSimboloP)
+	for _, s := range tree.GetException().ToArray() {
+		OutException += fmt.Sprintf("%v", s)
+		m := make(map[string]string)
+		m["Id"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Tipo)
+		m["Descripcion"] = fmt.Sprintf("%v", s.(ast.Exception).Descripcion)
+		m["Row"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Row)
+		m["Column"]      = fmt.Sprintf("%v", s.(ast.Exception).Column)
+		m["Time"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Time)
+		
+		tablaSimboloP = append(tablaSimboloP, m) 
+	}
+
+	fmt.Println(OutException)
+	fmt.Println("----------")
+
 	CODE_OUT_ = _salida
 
 }

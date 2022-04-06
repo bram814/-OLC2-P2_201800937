@@ -7,8 +7,6 @@ lexer grammar ChemsLexer;
 R_PRINT:        'print!';
 R_PRINTLN:      'println!';
 P_NUMBER:       'number';
-R_AS_DOUBLE:    'as f64';
-R_AS_INTEGER:   'as i64';
 R_LET:          'let';
 R_MUT:          'mut';
 R_IF:           'if';
@@ -25,6 +23,7 @@ R_MAIN:         'main';
 R_FUNCTION:     'fn';
 
 /* TIPOS */
+R_AS:           'as';
 R_INT:          'i64';
 R_FLOAT:        'f64';
 R_STRING:       'String';

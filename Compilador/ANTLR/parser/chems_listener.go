@@ -29,6 +29,9 @@ type ChemsListener interface {
 	// EnterExpressions is called when entering the expressions production.
 	EnterExpressions(c *ExpressionsContext)
 
+	// EnterInstr_expre is called when entering the instr_expre production.
+	EnterInstr_expre(c *Instr_expreContext)
+
 	// EnterPrimitivo is called when entering the primitivo production.
 	EnterPrimitivo(c *PrimitivoContext)
 
@@ -52,6 +55,9 @@ type ChemsListener interface {
 
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
+
+	// ExitInstr_expre is called when exiting the instr_expre production.
+	ExitInstr_expre(c *Instr_expreContext)
 
 	// ExitPrimitivo is called when exiting the primitivo production.
 	ExitPrimitivo(c *PrimitivoContext)

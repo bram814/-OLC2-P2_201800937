@@ -23,6 +23,11 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 
 	result = p.Expression.Compilar(env, tree, gen)
 
+
+	if result.Type == interfaces.EXCEPTION {
+		return result.Value
+	}
+
 	if result.Type == interfaces.BOOLEAN {
 		if !result.IsTemp {
 			newLabel := gen.NewLabel()

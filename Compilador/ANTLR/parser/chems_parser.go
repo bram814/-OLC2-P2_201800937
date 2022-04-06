@@ -21,68 +21,91 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 64, 85, 4,
-	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7, 4,
-	8, 9, 8, 4, 9, 9, 9, 3, 2, 3, 2, 3, 2, 3, 3, 6, 3, 23, 10, 3, 13, 3, 14,
-	3, 24, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 5, 4, 32, 10, 4, 3, 5, 3, 5, 3, 5,
-	3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 41, 10, 5, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6,
-	3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 5, 6,
-	59, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 8,
-	3, 8, 3, 8, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9,
-	5, 9, 83, 10, 9, 3, 9, 2, 2, 10, 2, 4, 6, 8, 10, 12, 14, 16, 2, 2, 2, 84,
-	2, 18, 3, 2, 2, 2, 4, 22, 3, 2, 2, 2, 6, 31, 3, 2, 2, 2, 8, 40, 3, 2, 2,
-	2, 10, 58, 3, 2, 2, 2, 12, 60, 3, 2, 2, 2, 14, 69, 3, 2, 2, 2, 16, 82,
-	3, 2, 2, 2, 18, 19, 5, 4, 3, 2, 19, 20, 8, 2, 1, 2, 20, 3, 3, 2, 2, 2,
-	21, 23, 5, 8, 5, 2, 22, 21, 3, 2, 2, 2, 23, 24, 3, 2, 2, 2, 24, 22, 3,
-	2, 2, 2, 24, 25, 3, 2, 2, 2, 25, 26, 3, 2, 2, 2, 26, 27, 8, 3, 1, 2, 27,
-	5, 3, 2, 2, 2, 28, 29, 7, 35, 2, 2, 29, 32, 8, 4, 1, 2, 30, 32, 8, 4, 1,
-	2, 31, 28, 3, 2, 2, 2, 31, 30, 3, 2, 2, 2, 32, 7, 3, 2, 2, 2, 33, 34, 5,
-	10, 6, 2, 34, 35, 5, 6, 4, 2, 35, 36, 8, 5, 1, 2, 36, 41, 3, 2, 2, 2, 37,
-	38, 5, 12, 7, 2, 38, 39, 8, 5, 1, 2, 39, 41, 3, 2, 2, 2, 40, 33, 3, 2,
-	2, 2, 40, 37, 3, 2, 2, 2, 41, 9, 3, 2, 2, 2, 42, 43, 7, 4, 2, 2, 43, 44,
-	7, 52, 2, 2, 44, 45, 5, 14, 8, 2, 45, 46, 7, 53, 2, 2, 46, 47, 7, 35, 2,
-	2, 47, 48, 8, 6, 1, 2, 48, 59, 3, 2, 2, 2, 49, 50, 7, 4, 2, 2, 50, 51,
-	7, 52, 2, 2, 51, 52, 7, 30, 2, 2, 52, 53, 7, 36, 2, 2, 53, 54, 5, 14, 8,
-	2, 54, 55, 7, 53, 2, 2, 55, 56, 7, 35, 2, 2, 56, 57, 8, 6, 1, 2, 57, 59,
-	3, 2, 2, 2, 58, 42, 3, 2, 2, 2, 58, 49, 3, 2, 2, 2, 59, 11, 3, 2, 2, 2,
-	60, 61, 7, 21, 2, 2, 61, 62, 7, 20, 2, 2, 62, 63, 7, 52, 2, 2, 63, 64,
-	7, 53, 2, 2, 64, 65, 7, 54, 2, 2, 65, 66, 5, 4, 3, 2, 66, 67, 7, 55, 2,
-	2, 67, 68, 8, 7, 1, 2, 68, 13, 3, 2, 2, 2, 69, 70, 5, 16, 9, 2, 70, 71,
-	8, 8, 1, 2, 71, 15, 3, 2, 2, 2, 72, 73, 7, 27, 2, 2, 73, 83, 8, 9, 1, 2,
-	74, 75, 7, 28, 2, 2, 75, 83, 8, 9, 1, 2, 76, 77, 7, 30, 2, 2, 77, 83, 8,
-	9, 1, 2, 78, 79, 7, 31, 2, 2, 79, 83, 8, 9, 1, 2, 80, 81, 7, 29, 2, 2,
-	81, 83, 8, 9, 1, 2, 82, 72, 3, 2, 2, 2, 82, 74, 3, 2, 2, 2, 82, 76, 3,
-	2, 2, 2, 82, 78, 3, 2, 2, 2, 82, 80, 3, 2, 2, 2, 83, 17, 3, 2, 2, 2, 7,
-	24, 31, 40, 58, 82,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 63, 134,
+	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
+	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 3, 2, 3, 2, 3, 2, 3, 3, 6, 3, 25,
+	10, 3, 13, 3, 14, 3, 26, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 5, 4, 34, 10, 4,
+	3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 43, 10, 5, 3, 6, 3, 6,
+	3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6,
+	3, 6, 3, 6, 5, 6, 61, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7, 3, 7,
+	3, 7, 3, 7, 3, 8, 3, 8, 3, 8, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9,
+	3, 9, 3, 9, 5, 9, 84, 10, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9,
+	3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 7, 9, 101, 10, 9, 12, 9,
+	14, 9, 104, 11, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3,
+	10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10,
+	3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 5, 10, 132, 10,
+	10, 3, 10, 2, 3, 16, 11, 2, 4, 6, 8, 10, 12, 14, 16, 18, 2, 5, 3, 2, 46,
+	48, 3, 2, 49, 50, 4, 2, 38, 39, 42, 45, 2, 140, 2, 20, 3, 2, 2, 2, 4, 24,
+	3, 2, 2, 2, 6, 33, 3, 2, 2, 2, 8, 42, 3, 2, 2, 2, 10, 60, 3, 2, 2, 2, 12,
+	62, 3, 2, 2, 2, 14, 71, 3, 2, 2, 2, 16, 83, 3, 2, 2, 2, 18, 131, 3, 2,
+	2, 2, 20, 21, 5, 4, 3, 2, 21, 22, 8, 2, 1, 2, 22, 3, 3, 2, 2, 2, 23, 25,
+	5, 8, 5, 2, 24, 23, 3, 2, 2, 2, 25, 26, 3, 2, 2, 2, 26, 24, 3, 2, 2, 2,
+	26, 27, 3, 2, 2, 2, 27, 28, 3, 2, 2, 2, 28, 29, 8, 3, 1, 2, 29, 5, 3, 2,
+	2, 2, 30, 31, 7, 34, 2, 2, 31, 34, 8, 4, 1, 2, 32, 34, 8, 4, 1, 2, 33,
+	30, 3, 2, 2, 2, 33, 32, 3, 2, 2, 2, 34, 7, 3, 2, 2, 2, 35, 36, 5, 10, 6,
+	2, 36, 37, 5, 6, 4, 2, 37, 38, 8, 5, 1, 2, 38, 43, 3, 2, 2, 2, 39, 40,
+	5, 12, 7, 2, 40, 41, 8, 5, 1, 2, 41, 43, 3, 2, 2, 2, 42, 35, 3, 2, 2, 2,
+	42, 39, 3, 2, 2, 2, 43, 9, 3, 2, 2, 2, 44, 45, 7, 4, 2, 2, 45, 46, 7, 51,
+	2, 2, 46, 47, 5, 14, 8, 2, 47, 48, 7, 52, 2, 2, 48, 49, 7, 34, 2, 2, 49,
+	50, 8, 6, 1, 2, 50, 61, 3, 2, 2, 2, 51, 52, 7, 4, 2, 2, 52, 53, 7, 51,
+	2, 2, 53, 54, 7, 29, 2, 2, 54, 55, 7, 35, 2, 2, 55, 56, 5, 14, 8, 2, 56,
+	57, 7, 52, 2, 2, 57, 58, 7, 34, 2, 2, 58, 59, 8, 6, 1, 2, 59, 61, 3, 2,
+	2, 2, 60, 44, 3, 2, 2, 2, 60, 51, 3, 2, 2, 2, 61, 11, 3, 2, 2, 2, 62, 63,
+	7, 19, 2, 2, 63, 64, 7, 18, 2, 2, 64, 65, 7, 51, 2, 2, 65, 66, 7, 52, 2,
+	2, 66, 67, 7, 53, 2, 2, 67, 68, 5, 4, 3, 2, 68, 69, 7, 54, 2, 2, 69, 70,
+	8, 7, 1, 2, 70, 13, 3, 2, 2, 2, 71, 72, 5, 16, 9, 2, 72, 73, 8, 8, 1, 2,
+	73, 15, 3, 2, 2, 2, 74, 75, 8, 9, 1, 2, 75, 76, 5, 18, 10, 2, 76, 77, 8,
+	9, 1, 2, 77, 84, 3, 2, 2, 2, 78, 79, 7, 51, 2, 2, 79, 80, 5, 14, 8, 2,
+	80, 81, 7, 52, 2, 2, 81, 82, 8, 9, 1, 2, 82, 84, 3, 2, 2, 2, 83, 74, 3,
+	2, 2, 2, 83, 78, 3, 2, 2, 2, 84, 102, 3, 2, 2, 2, 85, 86, 12, 7, 2, 2,
+	86, 87, 9, 2, 2, 2, 87, 88, 5, 16, 9, 8, 88, 89, 8, 9, 1, 2, 89, 101, 3,
+	2, 2, 2, 90, 91, 12, 6, 2, 2, 91, 92, 9, 3, 2, 2, 92, 93, 5, 16, 9, 7,
+	93, 94, 8, 9, 1, 2, 94, 101, 3, 2, 2, 2, 95, 96, 12, 5, 2, 2, 96, 97, 9,
+	4, 2, 2, 97, 98, 5, 16, 9, 6, 98, 99, 8, 9, 1, 2, 99, 101, 3, 2, 2, 2,
+	100, 85, 3, 2, 2, 2, 100, 90, 3, 2, 2, 2, 100, 95, 3, 2, 2, 2, 101, 104,
+	3, 2, 2, 2, 102, 100, 3, 2, 2, 2, 102, 103, 3, 2, 2, 2, 103, 17, 3, 2,
+	2, 2, 104, 102, 3, 2, 2, 2, 105, 106, 7, 26, 2, 2, 106, 132, 8, 10, 1,
+	2, 107, 108, 7, 27, 2, 2, 108, 132, 8, 10, 1, 2, 109, 110, 7, 29, 2, 2,
+	110, 132, 8, 10, 1, 2, 111, 112, 7, 30, 2, 2, 112, 132, 8, 10, 1, 2, 113,
+	114, 7, 28, 2, 2, 114, 132, 8, 10, 1, 2, 115, 116, 7, 26, 2, 2, 116, 117,
+	7, 20, 2, 2, 117, 118, 7, 21, 2, 2, 118, 132, 8, 10, 1, 2, 119, 120, 7,
+	26, 2, 2, 120, 121, 7, 20, 2, 2, 121, 122, 7, 22, 2, 2, 122, 132, 8, 10,
+	1, 2, 123, 124, 7, 27, 2, 2, 124, 125, 7, 20, 2, 2, 125, 126, 7, 21, 2,
+	2, 126, 132, 8, 10, 1, 2, 127, 128, 7, 27, 2, 2, 128, 129, 7, 20, 2, 2,
+	129, 130, 7, 22, 2, 2, 130, 132, 8, 10, 1, 2, 131, 105, 3, 2, 2, 2, 131,
+	107, 3, 2, 2, 2, 131, 109, 3, 2, 2, 2, 131, 111, 3, 2, 2, 2, 131, 113,
+	3, 2, 2, 2, 131, 115, 3, 2, 2, 2, 131, 119, 3, 2, 2, 2, 131, 123, 3, 2,
+	2, 2, 131, 127, 3, 2, 2, 2, 132, 19, 3, 2, 2, 2, 10, 26, 33, 42, 60, 83,
+	100, 102, 131,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
 
 var literalNames = []string{
-	"", "'print!'", "'println!'", "'number'", "'as f64'", "'as i64'", "'let'",
-	"'mut'", "'if'", "'else'", "'match'", "'while'", "'break'", "'continue'",
-	"'return'", "'loop'", "'for'", "'in'", "'main'", "'fn'", "'i64'", "'f64'",
-	"'String'", "'bool'", "'&str'", "", "", "", "", "", "", "'..'", "'.'",
-	"';'", "','", "':'", "'='", "'=='", "'>='", "'=>'", "'->'", "'<='", "'!='",
-	"'>'", "'<'", "'*'", "'/'", "'%'", "'+'", "'-'", "'('", "')'", "'{'", "'}'",
-	"'['", "']'", "'&&'", "'||'", "'|'", "'!'",
+	"", "'print!'", "'println!'", "'number'", "'let'", "'mut'", "'if'", "'else'",
+	"'match'", "'while'", "'break'", "'continue'", "'return'", "'loop'", "'for'",
+	"'in'", "'main'", "'fn'", "'as'", "'i64'", "'f64'", "'String'", "'bool'",
+	"'&str'", "", "", "", "", "", "", "'..'", "'.'", "';'", "','", "':'", "'='",
+	"'=='", "'>='", "'=>'", "'->'", "'<='", "'!='", "'>'", "'<'", "'*'", "'/'",
+	"'%'", "'+'", "'-'", "'('", "')'", "'{'", "'}'", "'['", "']'", "'&&'",
+	"'||'", "'|'", "'!'",
 }
 var symbolicNames = []string{
-	"", "R_PRINT", "R_PRINTLN", "P_NUMBER", "R_AS_DOUBLE", "R_AS_INTEGER",
-	"R_LET", "R_MUT", "R_IF", "R_ELSE", "R_MATCH", "R_WHILE", "R_BREAK", "R_CONTINUE",
-	"R_RETURN", "R_LOOP", "R_FOR", "R_IN", "R_MAIN", "R_FUNCTION", "R_INT",
-	"R_FLOAT", "R_STRING", "R_BOOL", "R_STR", "NUMBER", "DOUBLE", "CHAR", "STRING",
-	"BOOLEAN", "ID", "TK_DOBLEPUNTO", "TK_PUNTO", "TK_PUNTOCOMA", "TK_COMA",
-	"TK_DOSPUNTOS", "TK_IGUAL", "TK_IGUALIGUAL", "TK_MAYORIGUAL", "TK_IGUALMAYOR",
-	"TK_MENOSMAYOR", "TK_MENORIGUAL", "TK_DIFIGUAL", "TK_MAYOR", "TK_MENOR",
-	"TK_MULT", "TK_DIV", "TK_MODULO", "TK_MAS", "TK_MENOS", "TK_PARA", "TK_PARC",
-	"TK_LLAVEA", "TK_LLAVEC", "TK_CORA", "TK_CORC", "TK_AND", "TK_OR", "TK_BARRA",
-	"TK_NOT", "WHITESPACE", "TK_MULTI", "TK_LINE",
+	"", "R_PRINT", "R_PRINTLN", "P_NUMBER", "R_LET", "R_MUT", "R_IF", "R_ELSE",
+	"R_MATCH", "R_WHILE", "R_BREAK", "R_CONTINUE", "R_RETURN", "R_LOOP", "R_FOR",
+	"R_IN", "R_MAIN", "R_FUNCTION", "R_AS", "R_INT", "R_FLOAT", "R_STRING",
+	"R_BOOL", "R_STR", "NUMBER", "DOUBLE", "CHAR", "STRING", "BOOLEAN", "ID",
+	"TK_DOBLEPUNTO", "TK_PUNTO", "TK_PUNTOCOMA", "TK_COMA", "TK_DOSPUNTOS",
+	"TK_IGUAL", "TK_IGUALIGUAL", "TK_MAYORIGUAL", "TK_IGUALMAYOR", "TK_MENOSMAYOR",
+	"TK_MENORIGUAL", "TK_DIFIGUAL", "TK_MAYOR", "TK_MENOR", "TK_MULT", "TK_DIV",
+	"TK_MODULO", "TK_MAS", "TK_MENOS", "TK_PARA", "TK_PARC", "TK_LLAVEA", "TK_LLAVEC",
+	"TK_CORA", "TK_CORC", "TK_AND", "TK_OR", "TK_BARRA", "TK_NOT", "WHITESPACE",
+	"TK_MULTI", "TK_LINE",
 }
 
 var ruleNames = []string{
 	"start", "instrucciones", "end_instr", "instruccion", "instr_println",
-	"instr_main", "expressions", "primitivo",
+	"instr_main", "expressions", "instr_expre", "primitivo",
 }
 var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
 
@@ -116,65 +139,64 @@ const (
 	ChemsR_PRINT       = 1
 	ChemsR_PRINTLN     = 2
 	ChemsP_NUMBER      = 3
-	ChemsR_AS_DOUBLE   = 4
-	ChemsR_AS_INTEGER  = 5
-	ChemsR_LET         = 6
-	ChemsR_MUT         = 7
-	ChemsR_IF          = 8
-	ChemsR_ELSE        = 9
-	ChemsR_MATCH       = 10
-	ChemsR_WHILE       = 11
-	ChemsR_BREAK       = 12
-	ChemsR_CONTINUE    = 13
-	ChemsR_RETURN      = 14
-	ChemsR_LOOP        = 15
-	ChemsR_FOR         = 16
-	ChemsR_IN          = 17
-	ChemsR_MAIN        = 18
-	ChemsR_FUNCTION    = 19
-	ChemsR_INT         = 20
-	ChemsR_FLOAT       = 21
-	ChemsR_STRING      = 22
-	ChemsR_BOOL        = 23
-	ChemsR_STR         = 24
-	ChemsNUMBER        = 25
-	ChemsDOUBLE        = 26
-	ChemsCHAR          = 27
-	ChemsSTRING        = 28
-	ChemsBOOLEAN       = 29
-	ChemsID            = 30
-	ChemsTK_DOBLEPUNTO = 31
-	ChemsTK_PUNTO      = 32
-	ChemsTK_PUNTOCOMA  = 33
-	ChemsTK_COMA       = 34
-	ChemsTK_DOSPUNTOS  = 35
-	ChemsTK_IGUAL      = 36
-	ChemsTK_IGUALIGUAL = 37
-	ChemsTK_MAYORIGUAL = 38
-	ChemsTK_IGUALMAYOR = 39
-	ChemsTK_MENOSMAYOR = 40
-	ChemsTK_MENORIGUAL = 41
-	ChemsTK_DIFIGUAL   = 42
-	ChemsTK_MAYOR      = 43
-	ChemsTK_MENOR      = 44
-	ChemsTK_MULT       = 45
-	ChemsTK_DIV        = 46
-	ChemsTK_MODULO     = 47
-	ChemsTK_MAS        = 48
-	ChemsTK_MENOS      = 49
-	ChemsTK_PARA       = 50
-	ChemsTK_PARC       = 51
-	ChemsTK_LLAVEA     = 52
-	ChemsTK_LLAVEC     = 53
-	ChemsTK_CORA       = 54
-	ChemsTK_CORC       = 55
-	ChemsTK_AND        = 56
-	ChemsTK_OR         = 57
-	ChemsTK_BARRA      = 58
-	ChemsTK_NOT        = 59
-	ChemsWHITESPACE    = 60
-	ChemsTK_MULTI      = 61
-	ChemsTK_LINE       = 62
+	ChemsR_LET         = 4
+	ChemsR_MUT         = 5
+	ChemsR_IF          = 6
+	ChemsR_ELSE        = 7
+	ChemsR_MATCH       = 8
+	ChemsR_WHILE       = 9
+	ChemsR_BREAK       = 10
+	ChemsR_CONTINUE    = 11
+	ChemsR_RETURN      = 12
+	ChemsR_LOOP        = 13
+	ChemsR_FOR         = 14
+	ChemsR_IN          = 15
+	ChemsR_MAIN        = 16
+	ChemsR_FUNCTION    = 17
+	ChemsR_AS          = 18
+	ChemsR_INT         = 19
+	ChemsR_FLOAT       = 20
+	ChemsR_STRING      = 21
+	ChemsR_BOOL        = 22
+	ChemsR_STR         = 23
+	ChemsNUMBER        = 24
+	ChemsDOUBLE        = 25
+	ChemsCHAR          = 26
+	ChemsSTRING        = 27
+	ChemsBOOLEAN       = 28
+	ChemsID            = 29
+	ChemsTK_DOBLEPUNTO = 30
+	ChemsTK_PUNTO      = 31
+	ChemsTK_PUNTOCOMA  = 32
+	ChemsTK_COMA       = 33
+	ChemsTK_DOSPUNTOS  = 34
+	ChemsTK_IGUAL      = 35
+	ChemsTK_IGUALIGUAL = 36
+	ChemsTK_MAYORIGUAL = 37
+	ChemsTK_IGUALMAYOR = 38
+	ChemsTK_MENOSMAYOR = 39
+	ChemsTK_MENORIGUAL = 40
+	ChemsTK_DIFIGUAL   = 41
+	ChemsTK_MAYOR      = 42
+	ChemsTK_MENOR      = 43
+	ChemsTK_MULT       = 44
+	ChemsTK_DIV        = 45
+	ChemsTK_MODULO     = 46
+	ChemsTK_MAS        = 47
+	ChemsTK_MENOS      = 48
+	ChemsTK_PARA       = 49
+	ChemsTK_PARC       = 50
+	ChemsTK_LLAVEA     = 51
+	ChemsTK_LLAVEC     = 52
+	ChemsTK_CORA       = 53
+	ChemsTK_CORC       = 54
+	ChemsTK_AND        = 55
+	ChemsTK_OR         = 56
+	ChemsTK_BARRA      = 57
+	ChemsTK_NOT        = 58
+	ChemsWHITESPACE    = 59
+	ChemsTK_MULTI      = 60
+	ChemsTK_LINE       = 61
 )
 
 // Chems rules.
@@ -186,7 +208,8 @@ const (
 	ChemsRULE_instr_println = 4
 	ChemsRULE_instr_main    = 5
 	ChemsRULE_expressions   = 6
-	ChemsRULE_primitivo     = 7
+	ChemsRULE_instr_expre   = 7
+	ChemsRULE_primitivo     = 8
 )
 
 // IStartContext is an interface to support dynamic dispatch.
@@ -301,7 +324,7 @@ func (p *Chems) Start() (localctx IStartContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(16)
+		p.SetState(18)
 
 		var _x = p.Instrucciones()
 
@@ -451,13 +474,13 @@ func (p *Chems) Instrucciones() (localctx IInstruccionesContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(20)
+	p.SetState(22)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for ok := true; ok; ok = _la == ChemsR_PRINTLN || _la == ChemsR_FUNCTION {
 		{
-			p.SetState(19)
+			p.SetState(21)
 
 			var _x = p.Instruccion()
 
@@ -465,7 +488,7 @@ func (p *Chems) Instrucciones() (localctx IInstruccionesContext) {
 		}
 		localctx.(*InstruccionesContext).list = append(localctx.(*InstruccionesContext).list, localctx.(*InstruccionesContext)._instruccion)
 
-		p.SetState(22)
+		p.SetState(24)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -571,14 +594,14 @@ func (p *Chems) End_instr() (localctx IEnd_instrContext) {
 		}
 	}()
 
-	p.SetState(29)
+	p.SetState(31)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsTK_PUNTOCOMA:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(26)
+			p.SetState(28)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*End_instrContext).v = 1
@@ -735,21 +758,21 @@ func (p *Chems) Instruccion() (localctx IInstruccionContext) {
 		}
 	}()
 
-	p.SetState(38)
+	p.SetState(40)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsR_PRINTLN:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(31)
+			p.SetState(33)
 
 			var _x = p.Instr_println()
 
 			localctx.(*InstruccionContext)._instr_println = _x
 		}
 		{
-			p.SetState(32)
+			p.SetState(34)
 			p.End_instr()
 		}
 		localctx.(*InstruccionContext).instr = localctx.(*InstruccionContext).Get_instr_println().GetInstr()
@@ -757,7 +780,7 @@ func (p *Chems) Instruccion() (localctx IInstruccionContext) {
 	case ChemsR_FUNCTION:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(35)
+			p.SetState(37)
 
 			var _x = p.Instr_main()
 
@@ -917,35 +940,35 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 		}
 	}()
 
-	p.SetState(56)
+	p.SetState(58)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 3, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(40)
+			p.SetState(42)
 
 			var _m = p.Match(ChemsR_PRINTLN)
 
 			localctx.(*Instr_printlnContext)._R_PRINTLN = _m
 		}
 		{
-			p.SetState(41)
+			p.SetState(43)
 			p.Match(ChemsTK_PARA)
 		}
 		{
-			p.SetState(42)
+			p.SetState(44)
 
 			var _x = p.Expressions()
 
 			localctx.(*Instr_printlnContext)._expressions = _x
 		}
 		{
-			p.SetState(43)
+			p.SetState(45)
 			p.Match(ChemsTK_PARC)
 		}
 		{
-			p.SetState(44)
+			p.SetState(46)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_expressions().GetP(), (func() int {
@@ -959,37 +982,37 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(47)
+			p.SetState(49)
 
 			var _m = p.Match(ChemsR_PRINTLN)
 
 			localctx.(*Instr_printlnContext)._R_PRINTLN = _m
 		}
 		{
-			p.SetState(48)
+			p.SetState(50)
 			p.Match(ChemsTK_PARA)
 		}
 		{
-			p.SetState(49)
+			p.SetState(51)
 			p.Match(ChemsSTRING)
 		}
 		{
-			p.SetState(50)
+			p.SetState(52)
 			p.Match(ChemsTK_COMA)
 		}
 		{
-			p.SetState(51)
+			p.SetState(53)
 
 			var _x = p.Expressions()
 
 			localctx.(*Instr_printlnContext)._expressions = _x
 		}
 		{
-			p.SetState(52)
+			p.SetState(54)
 			p.Match(ChemsTK_PARC)
 		}
 		{
-			p.SetState(53)
+			p.SetState(55)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
 		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_expressions().GetP(), (func() int {
@@ -1152,37 +1175,37 @@ func (p *Chems) Instr_main() (localctx IInstr_mainContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(58)
+		p.SetState(60)
 		p.Match(ChemsR_FUNCTION)
 	}
 	{
-		p.SetState(59)
+		p.SetState(61)
 
 		var _m = p.Match(ChemsR_MAIN)
 
 		localctx.(*Instr_mainContext)._R_MAIN = _m
 	}
 	{
-		p.SetState(60)
+		p.SetState(62)
 		p.Match(ChemsTK_PARA)
 	}
 	{
-		p.SetState(61)
+		p.SetState(63)
 		p.Match(ChemsTK_PARC)
 	}
 	{
-		p.SetState(62)
+		p.SetState(64)
 		p.Match(ChemsTK_LLAVEA)
 	}
 	{
-		p.SetState(63)
+		p.SetState(65)
 
 		var _x = p.Instrucciones()
 
 		localctx.(*Instr_mainContext)._instrucciones = _x
 	}
 	{
-		p.SetState(64)
+		p.SetState(66)
 		p.Match(ChemsTK_LLAVEC)
 	}
 	localctx.(*Instr_mainContext).instr = instruction.NewMain(localctx.(*Instr_mainContext).Get_instrucciones().GetL(), (func() int {
@@ -1203,11 +1226,11 @@ type IExpressionsContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// Get_primitivo returns the _primitivo rule contexts.
-	Get_primitivo() IPrimitivoContext
+	// Get_instr_expre returns the _instr_expre rule contexts.
+	Get_instr_expre() IInstr_expreContext
 
-	// Set_primitivo sets the _primitivo rule contexts.
-	Set_primitivo(IPrimitivoContext)
+	// Set_instr_expre sets the _instr_expre rule contexts.
+	Set_instr_expre(IInstr_expreContext)
 
 	// GetP returns the p attribute.
 	GetP() interfaces.Expression
@@ -1221,9 +1244,9 @@ type IExpressionsContext interface {
 
 type ExpressionsContext struct {
 	*antlr.BaseParserRuleContext
-	parser     antlr.Parser
-	p          interfaces.Expression
-	_primitivo IPrimitivoContext
+	parser       antlr.Parser
+	p            interfaces.Expression
+	_instr_expre IInstr_expreContext
 }
 
 func NewEmptyExpressionsContext() *ExpressionsContext {
@@ -1248,22 +1271,22 @@ func NewExpressionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 
 func (s *ExpressionsContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ExpressionsContext) Get_primitivo() IPrimitivoContext { return s._primitivo }
+func (s *ExpressionsContext) Get_instr_expre() IInstr_expreContext { return s._instr_expre }
 
-func (s *ExpressionsContext) Set_primitivo(v IPrimitivoContext) { s._primitivo = v }
+func (s *ExpressionsContext) Set_instr_expre(v IInstr_expreContext) { s._instr_expre = v }
 
 func (s *ExpressionsContext) GetP() interfaces.Expression { return s.p }
 
 func (s *ExpressionsContext) SetP(v interfaces.Expression) { s.p = v }
 
-func (s *ExpressionsContext) Primitivo() IPrimitivoContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPrimitivoContext)(nil)).Elem(), 0)
+func (s *ExpressionsContext) Instr_expre() IInstr_expreContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IPrimitivoContext)
+	return t.(IInstr_expreContext)
 }
 
 func (s *ExpressionsContext) GetRuleContext() antlr.RuleContext {
@@ -1308,13 +1331,469 @@ func (p *Chems) Expressions() (localctx IExpressionsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(67)
+		p.SetState(69)
 
-		var _x = p.Primitivo()
+		var _x = p.instr_expre(0)
 
-		localctx.(*ExpressionsContext)._primitivo = _x
+		localctx.(*ExpressionsContext)._instr_expre = _x
 	}
-	localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_primitivo().GetP()
+	localctx.(*ExpressionsContext).p = localctx.(*ExpressionsContext).Get_instr_expre().GetP()
+
+	return localctx
+}
+
+// IInstr_expreContext is an interface to support dynamic dispatch.
+type IInstr_expreContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetOp returns the op token.
+	GetOp() antlr.Token
+
+	// SetOp sets the op token.
+	SetOp(antlr.Token)
+
+	// GetLeft returns the left rule contexts.
+	GetLeft() IInstr_expreContext
+
+	// Get_primitivo returns the _primitivo rule contexts.
+	Get_primitivo() IPrimitivoContext
+
+	// Get_expressions returns the _expressions rule contexts.
+	Get_expressions() IExpressionsContext
+
+	// GetRight returns the right rule contexts.
+	GetRight() IInstr_expreContext
+
+	// SetLeft sets the left rule contexts.
+	SetLeft(IInstr_expreContext)
+
+	// Set_primitivo sets the _primitivo rule contexts.
+	Set_primitivo(IPrimitivoContext)
+
+	// Set_expressions sets the _expressions rule contexts.
+	Set_expressions(IExpressionsContext)
+
+	// SetRight sets the right rule contexts.
+	SetRight(IInstr_expreContext)
+
+	// GetP returns the p attribute.
+	GetP() interfaces.Expression
+
+	// SetP sets the p attribute.
+	SetP(interfaces.Expression)
+
+	// IsInstr_expreContext differentiates from other interfaces.
+	IsInstr_expreContext()
+}
+
+type Instr_expreContext struct {
+	*antlr.BaseParserRuleContext
+	parser       antlr.Parser
+	p            interfaces.Expression
+	left         IInstr_expreContext
+	_primitivo   IPrimitivoContext
+	_expressions IExpressionsContext
+	op           antlr.Token
+	right        IInstr_expreContext
+}
+
+func NewEmptyInstr_expreContext() *Instr_expreContext {
+	var p = new(Instr_expreContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = ChemsRULE_instr_expre
+	return p
+}
+
+func (*Instr_expreContext) IsInstr_expreContext() {}
+
+func NewInstr_expreContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Instr_expreContext {
+	var p = new(Instr_expreContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = ChemsRULE_instr_expre
+
+	return p
+}
+
+func (s *Instr_expreContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Instr_expreContext) GetOp() antlr.Token { return s.op }
+
+func (s *Instr_expreContext) SetOp(v antlr.Token) { s.op = v }
+
+func (s *Instr_expreContext) GetLeft() IInstr_expreContext { return s.left }
+
+func (s *Instr_expreContext) Get_primitivo() IPrimitivoContext { return s._primitivo }
+
+func (s *Instr_expreContext) Get_expressions() IExpressionsContext { return s._expressions }
+
+func (s *Instr_expreContext) GetRight() IInstr_expreContext { return s.right }
+
+func (s *Instr_expreContext) SetLeft(v IInstr_expreContext) { s.left = v }
+
+func (s *Instr_expreContext) Set_primitivo(v IPrimitivoContext) { s._primitivo = v }
+
+func (s *Instr_expreContext) Set_expressions(v IExpressionsContext) { s._expressions = v }
+
+func (s *Instr_expreContext) SetRight(v IInstr_expreContext) { s.right = v }
+
+func (s *Instr_expreContext) GetP() interfaces.Expression { return s.p }
+
+func (s *Instr_expreContext) SetP(v interfaces.Expression) { s.p = v }
+
+func (s *Instr_expreContext) Primitivo() IPrimitivoContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IPrimitivoContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IPrimitivoContext)
+}
+
+func (s *Instr_expreContext) TK_PARA() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_PARA, 0)
+}
+
+func (s *Instr_expreContext) Expressions() IExpressionsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpressionsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionsContext)
+}
+
+func (s *Instr_expreContext) TK_PARC() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_PARC, 0)
+}
+
+func (s *Instr_expreContext) AllInstr_expre() []IInstr_expreContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem())
+	var tst = make([]IInstr_expreContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IInstr_expreContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *Instr_expreContext) Instr_expre(i int) IInstr_expreContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IInstr_expreContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IInstr_expreContext)
+}
+
+func (s *Instr_expreContext) TK_MULT() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MULT, 0)
+}
+
+func (s *Instr_expreContext) TK_DIV() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_DIV, 0)
+}
+
+func (s *Instr_expreContext) TK_MODULO() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MODULO, 0)
+}
+
+func (s *Instr_expreContext) TK_MAS() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAS, 0)
+}
+
+func (s *Instr_expreContext) TK_MENOS() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENOS, 0)
+}
+
+func (s *Instr_expreContext) TK_MENOR() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENOR, 0)
+}
+
+func (s *Instr_expreContext) TK_MENORIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MENORIGUAL, 0)
+}
+
+func (s *Instr_expreContext) TK_MAYORIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAYORIGUAL, 0)
+}
+
+func (s *Instr_expreContext) TK_MAYOR() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_MAYOR, 0)
+}
+
+func (s *Instr_expreContext) TK_DIFIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_DIFIGUAL, 0)
+}
+
+func (s *Instr_expreContext) TK_IGUALIGUAL() antlr.TerminalNode {
+	return s.GetToken(ChemsTK_IGUALIGUAL, 0)
+}
+
+func (s *Instr_expreContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Instr_expreContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Instr_expreContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.EnterInstr_expre(s)
+	}
+}
+
+func (s *Instr_expreContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(ChemsListener); ok {
+		listenerT.ExitInstr_expre(s)
+	}
+}
+
+func (p *Chems) Instr_expre() (localctx IInstr_expreContext) {
+	return p.instr_expre(0)
+}
+
+func (p *Chems) instr_expre(_p int) (localctx IInstr_expreContext) {
+	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+	_parentState := p.GetState()
+	localctx = NewInstr_expreContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IInstr_expreContext = localctx
+	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
+	_startState := 14
+	p.EnterRecursionRule(localctx, 14, ChemsRULE_instr_expre, _p)
+	var _la int
+
+	defer func() {
+		p.UnrollRecursionContexts(_parentctx)
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	var _alt int
+
+	p.EnterOuterAlt(localctx, 1)
+	p.SetState(81)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN:
+		{
+			p.SetState(73)
+
+			var _x = p.Primitivo()
+
+			localctx.(*Instr_expreContext)._primitivo = _x
+		}
+		localctx.(*Instr_expreContext).p = localctx.(*Instr_expreContext).Get_primitivo().GetP()
+
+	case ChemsTK_PARA:
+		{
+			p.SetState(76)
+			p.Match(ChemsTK_PARA)
+		}
+		{
+			p.SetState(77)
+
+			var _x = p.Expressions()
+
+			localctx.(*Instr_expreContext)._expressions = _x
+		}
+		{
+			p.SetState(78)
+			p.Match(ChemsTK_PARC)
+		}
+		localctx.(*Instr_expreContext).p = localctx.(*Instr_expreContext).Get_expressions().GetP()
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
+	p.SetState(100)
+	p.GetErrorHandler().Sync(p)
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
+
+	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
+		if _alt == 1 {
+			if p.GetParseListeners() != nil {
+				p.TriggerExitRuleEvent()
+			}
+			_prevctx = localctx
+			p.SetState(98)
+			p.GetErrorHandler().Sync(p)
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext()) {
+			case 1:
+				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
+				localctx.(*Instr_expreContext).left = _prevctx
+				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
+				p.SetState(83)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
+				}
+				{
+					p.SetState(84)
+
+					var _lt = p.GetTokenStream().LT(1)
+
+					localctx.(*Instr_expreContext).op = _lt
+
+					_la = p.GetTokenStream().LA(1)
+
+					if !(((_la-44)&-(0x1f+1)) == 0 && ((1<<uint((_la-44)))&((1<<(ChemsTK_MULT-44))|(1<<(ChemsTK_DIV-44))|(1<<(ChemsTK_MODULO-44)))) != 0) {
+						var _ri = p.GetErrorHandler().RecoverInline(p)
+
+						localctx.(*Instr_expreContext).op = _ri
+					} else {
+						p.GetErrorHandler().ReportMatch(p)
+						p.Consume()
+					}
+				}
+				{
+					p.SetState(85)
+
+					var _x = p.instr_expre(6)
+
+					localctx.(*Instr_expreContext).right = _x
+				}
+				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return ""
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetText()
+					}
+				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return 0
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetLine()
+					}
+				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+
+			case 2:
+				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
+				localctx.(*Instr_expreContext).left = _prevctx
+				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
+				p.SetState(88)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
+				}
+				{
+					p.SetState(89)
+
+					var _lt = p.GetTokenStream().LT(1)
+
+					localctx.(*Instr_expreContext).op = _lt
+
+					_la = p.GetTokenStream().LA(1)
+
+					if !(_la == ChemsTK_MAS || _la == ChemsTK_MENOS) {
+						var _ri = p.GetErrorHandler().RecoverInline(p)
+
+						localctx.(*Instr_expreContext).op = _ri
+					} else {
+						p.GetErrorHandler().ReportMatch(p)
+						p.Consume()
+					}
+				}
+				{
+					p.SetState(90)
+
+					var _x = p.instr_expre(5)
+
+					localctx.(*Instr_expreContext).right = _x
+				}
+				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return ""
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetText()
+					}
+				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return 0
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetLine()
+					}
+				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+
+			case 3:
+				localctx = NewInstr_expreContext(p, _parentctx, _parentState)
+				localctx.(*Instr_expreContext).left = _prevctx
+				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_instr_expre)
+				p.SetState(93)
+
+				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
+					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
+				}
+				{
+					p.SetState(94)
+
+					var _lt = p.GetTokenStream().LT(1)
+
+					localctx.(*Instr_expreContext).op = _lt
+
+					_la = p.GetTokenStream().LA(1)
+
+					if !(((_la-36)&-(0x1f+1)) == 0 && ((1<<uint((_la-36)))&((1<<(ChemsTK_IGUALIGUAL-36))|(1<<(ChemsTK_MAYORIGUAL-36))|(1<<(ChemsTK_MENORIGUAL-36))|(1<<(ChemsTK_DIFIGUAL-36))|(1<<(ChemsTK_MAYOR-36))|(1<<(ChemsTK_MENOR-36)))) != 0) {
+						var _ri = p.GetErrorHandler().RecoverInline(p)
+
+						localctx.(*Instr_expreContext).op = _ri
+					} else {
+						p.GetErrorHandler().ReportMatch(p)
+						p.Consume()
+					}
+				}
+				{
+					p.SetState(95)
+
+					var _x = p.instr_expre(4)
+
+					localctx.(*Instr_expreContext).right = _x
+				}
+				localctx.(*Instr_expreContext).p = expression.NewOperacion(localctx.(*Instr_expreContext).GetLeft().GetP(), (func() string {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return ""
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetText()
+					}
+				}()), localctx.(*Instr_expreContext).GetRight().GetP(), false, (func() int {
+					if localctx.(*Instr_expreContext).GetOp() == nil {
+						return 0
+					} else {
+						return localctx.(*Instr_expreContext).GetOp().GetLine()
+					}
+				}()), localctx.(*Instr_expreContext).GetOp().GetColumn())
+
+			}
+
+		}
+		p.SetState(102)
+		p.GetErrorHandler().Sync(p)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
+	}
 
 	return localctx
 }
@@ -1443,6 +1922,18 @@ func (s *PrimitivoContext) CHAR() antlr.TerminalNode {
 	return s.GetToken(ChemsCHAR, 0)
 }
 
+func (s *PrimitivoContext) R_AS() antlr.TerminalNode {
+	return s.GetToken(ChemsR_AS, 0)
+}
+
+func (s *PrimitivoContext) R_INT() antlr.TerminalNode {
+	return s.GetToken(ChemsR_INT, 0)
+}
+
+func (s *PrimitivoContext) R_FLOAT() antlr.TerminalNode {
+	return s.GetToken(ChemsR_FLOAT, 0)
+}
+
 func (s *PrimitivoContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -1465,7 +1956,7 @@ func (s *PrimitivoContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	localctx = NewPrimitivoContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, ChemsRULE_primitivo)
+	p.EnterRule(localctx, 16, ChemsRULE_primitivo)
 
 	defer func() {
 		p.ExitRule()
@@ -1483,14 +1974,13 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 		}
 	}()
 
-	p.SetState(80)
+	p.SetState(129)
 	p.GetErrorHandler().Sync(p)
-
-	switch p.GetTokenStream().LA(1) {
-	case ChemsNUMBER:
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext()) {
+	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(70)
+			p.SetState(103)
 
 			var _m = p.Match(ChemsNUMBER)
 
@@ -1508,7 +1998,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			fmt.Println(err)
 		}
 
-		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.INTEGER, (func() int {
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.NULL, (func() int {
 			if localctx.(*PrimitivoContext).Get_NUMBER() == nil {
 				return 0
 			} else {
@@ -1516,10 +2006,10 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()), localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
 
-	case ChemsDOUBLE:
+	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(72)
+			p.SetState(105)
 
 			var _m = p.Match(ChemsDOUBLE)
 
@@ -1536,7 +2026,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 		if err != nil {
 			fmt.Println(err)
 		}
-		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.FLOAT, (func() int {
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.NULL, (func() int {
 			if localctx.(*PrimitivoContext).Get_DOUBLE() == nil {
 				return 0
 			} else {
@@ -1544,10 +2034,10 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()), localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
 
-	case ChemsSTRING:
+	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(74)
+			p.SetState(107)
 
 			var _m = p.Match(ChemsSTRING)
 
@@ -1567,7 +2057,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_STRING().GetText()
 			}
 		}()))-1]
-		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(str, interfaces.STRING, (func() int {
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(str, interfaces.STRING, interfaces.NULL, (func() int {
 			if localctx.(*PrimitivoContext).Get_STRING() == nil {
 				return 0
 			} else {
@@ -1575,10 +2065,10 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()), localctx.(*PrimitivoContext).Get_STRING().GetColumn())
 
-	case ChemsBOOLEAN:
+	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(76)
+			p.SetState(109)
 
 			var _m = p.Match(ChemsBOOLEAN)
 
@@ -1593,7 +2083,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_BOOLEAN().GetText()
 			}
 		}()))
-		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, (func() int {
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, interfaces.NULL, (func() int {
 			if localctx.(*PrimitivoContext).Get_BOOLEAN() == nil {
 				return 0
 			} else {
@@ -1601,10 +2091,10 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()), localctx.(*PrimitivoContext).Get_BOOLEAN().GetColumn())
 
-	case ChemsCHAR:
+	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(78)
+			p.SetState(111)
 
 			var _m = p.Match(ChemsCHAR)
 
@@ -1618,7 +2108,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 				return localctx.(*PrimitivoContext).Get_CHAR().GetText()
 			}
 		}())[1]
-		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(string(str), interfaces.CHAR, (func() int {
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(string(str), interfaces.CHAR, interfaces.NULL, (func() int {
 			if localctx.(*PrimitivoContext).Get_CHAR() == nil {
 				return 0
 			} else {
@@ -1626,9 +2116,183 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 			}
 		}()), localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
 
-	default:
-		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	case 6:
+		p.EnterOuterAlt(localctx, 6)
+		{
+			p.SetState(113)
+
+			var _m = p.Match(ChemsNUMBER)
+
+			localctx.(*PrimitivoContext)._NUMBER = _m
+		}
+		{
+			p.SetState(114)
+			p.Match(ChemsR_AS)
+		}
+		{
+			p.SetState(115)
+			p.Match(ChemsR_INT)
+		}
+
+		num, err := strconv.Atoi((func() string {
+			if localctx.(*PrimitivoContext).Get_NUMBER() == nil {
+				return ""
+			} else {
+				return localctx.(*PrimitivoContext).Get_NUMBER().GetText()
+			}
+		}()))
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.INTEGER, (func() int {
+			if localctx.(*PrimitivoContext).Get_NUMBER() == nil {
+				return 0
+			} else {
+				return localctx.(*PrimitivoContext).Get_NUMBER().GetLine()
+			}
+		}()), localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
+
+	case 7:
+		p.EnterOuterAlt(localctx, 7)
+		{
+			p.SetState(117)
+
+			var _m = p.Match(ChemsNUMBER)
+
+			localctx.(*PrimitivoContext)._NUMBER = _m
+		}
+		{
+			p.SetState(118)
+			p.Match(ChemsR_AS)
+		}
+		{
+			p.SetState(119)
+			p.Match(ChemsR_FLOAT)
+		}
+
+		num, err := strconv.Atoi((func() string {
+			if localctx.(*PrimitivoContext).Get_NUMBER() == nil {
+				return ""
+			} else {
+				return localctx.(*PrimitivoContext).Get_NUMBER().GetText()
+			}
+		}()))
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.INTEGER, interfaces.FLOAT, (func() int {
+			if localctx.(*PrimitivoContext).Get_NUMBER() == nil {
+				return 0
+			} else {
+				return localctx.(*PrimitivoContext).Get_NUMBER().GetLine()
+			}
+		}()), localctx.(*PrimitivoContext).Get_NUMBER().GetColumn())
+
+	case 8:
+		p.EnterOuterAlt(localctx, 8)
+		{
+			p.SetState(121)
+
+			var _m = p.Match(ChemsDOUBLE)
+
+			localctx.(*PrimitivoContext)._DOUBLE = _m
+		}
+		{
+			p.SetState(122)
+			p.Match(ChemsR_AS)
+		}
+		{
+			p.SetState(123)
+			p.Match(ChemsR_INT)
+		}
+
+		num, err := strconv.ParseFloat((func() string {
+			if localctx.(*PrimitivoContext).Get_DOUBLE() == nil {
+				return ""
+			} else {
+				return localctx.(*PrimitivoContext).Get_DOUBLE().GetText()
+			}
+		}()), 64)
+		if err != nil {
+			fmt.Println(err)
+		}
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.INTEGER, (func() int {
+			if localctx.(*PrimitivoContext).Get_DOUBLE() == nil {
+				return 0
+			} else {
+				return localctx.(*PrimitivoContext).Get_DOUBLE().GetLine()
+			}
+		}()), localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
+
+	case 9:
+		p.EnterOuterAlt(localctx, 9)
+		{
+			p.SetState(125)
+
+			var _m = p.Match(ChemsDOUBLE)
+
+			localctx.(*PrimitivoContext)._DOUBLE = _m
+		}
+		{
+			p.SetState(126)
+			p.Match(ChemsR_AS)
+		}
+		{
+			p.SetState(127)
+			p.Match(ChemsR_FLOAT)
+		}
+
+		num, err := strconv.ParseFloat((func() string {
+			if localctx.(*PrimitivoContext).Get_DOUBLE() == nil {
+				return ""
+			} else {
+				return localctx.(*PrimitivoContext).Get_DOUBLE().GetText()
+			}
+		}()), 64)
+		if err != nil {
+			fmt.Println(err)
+		}
+		localctx.(*PrimitivoContext).p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.FLOAT, (func() int {
+			if localctx.(*PrimitivoContext).Get_DOUBLE() == nil {
+				return 0
+			} else {
+				return localctx.(*PrimitivoContext).Get_DOUBLE().GetLine()
+			}
+		}()), localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
+
 	}
 
 	return localctx
+}
+
+func (p *Chems) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
+	switch ruleIndex {
+	case 7:
+		var t *Instr_expreContext = nil
+		if localctx != nil {
+			t = localctx.(*Instr_expreContext)
+		}
+		return p.Instr_expre_Sempred(t, predIndex)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(ruleIndex))
+	}
+}
+
+func (p *Chems) Instr_expre_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+	switch predIndex {
+	case 0:
+		return p.Precpred(p.GetParserRuleContext(), 5)
+
+	case 1:
+		return p.Precpred(p.GetParserRuleContext(), 4)
+
+	case 2:
+		return p.Precpred(p.GetParserRuleContext(), 3)
+
+	default:
+		panic("No predicate with index: " + fmt.Sprint(predIndex))
+	}
 }

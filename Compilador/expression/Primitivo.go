@@ -11,12 +11,13 @@ import (
 type Primitivo struct {
 	Value 	interface{}
 	Type 	interfaces.TypeExpression
+	Casteo   interfaces.TypeExpression
 	Row 	int
 	Column 	int
 }
 
-func NewPrimitivo(val interface{}, tipo interfaces.TypeExpression, row int, column int) Primitivo {
-	exp := Primitivo{val, tipo, row, column}
+func NewPrimitivo(val interface{}, tipo interfaces.TypeExpression, casteo interfaces.TypeExpression, row int, column int) Primitivo {
+	exp := Primitivo{val, tipo, casteo, row, column}
 	return exp
 }
 
@@ -67,6 +68,30 @@ func (p Primitivo) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator
 			TrueLabel:  EV,
 			FalseLabel: EF,
 		}
+	} else if p.Type == interfaces.INTEGER || p.Type == interfaces.FLOAT {
+
+		if p.Casteo != interfaces.NULL {
+
+			if p.Type == interfaces.INTEGER && p.Casteo == interfaces.FLOAT {
+				return interfaces.Value{
+					Value:      fmt.Sprintf("%v", float64(p.Value.(int))),
+					IsTemp:     false,
+					Type:       p.Casteo,
+					TrueLabel:  "",
+					FalseLabel: "",
+				}
+			} else if p.Type == interfaces.FLOAT && p.Casteo == interfaces.INTEGER {
+				return interfaces.Value{
+					Value:      fmt.Sprintf("%v", int(p.Value.(float64))),
+					IsTemp:     false,
+					Type:       p.Casteo,
+					TrueLabel:  "",
+					FalseLabel: "",
+				}
+			}	
+		}
+
+
 	}
 
 

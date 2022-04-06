@@ -63,6 +63,12 @@ func (s *BaseChemsListener) EnterExpressions(ctx *ExpressionsContext) {}
 // ExitExpressions is called when production expressions is exited.
 func (s *BaseChemsListener) ExitExpressions(ctx *ExpressionsContext) {}
 
+// EnterInstr_expre is called when production instr_expre is entered.
+func (s *BaseChemsListener) EnterInstr_expre(ctx *Instr_expreContext) {}
+
+// ExitInstr_expre is called when production instr_expre is exited.
+func (s *BaseChemsListener) ExitInstr_expre(ctx *Instr_expreContext) {}
+
 // EnterPrimitivo is called when production primitivo is entered.
 func (s *BaseChemsListener) EnterPrimitivo(ctx *PrimitivoContext) {}
 
