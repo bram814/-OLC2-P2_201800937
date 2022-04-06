@@ -51,6 +51,12 @@ func (s *BaseChemsListener) EnterInstr_println(ctx *Instr_printlnContext) {}
 // ExitInstr_println is called when production instr_println is exited.
 func (s *BaseChemsListener) ExitInstr_println(ctx *Instr_printlnContext) {}
 
+// EnterInstr_main is called when production instr_main is entered.
+func (s *BaseChemsListener) EnterInstr_main(ctx *Instr_mainContext) {}
+
+// ExitInstr_main is called when production instr_main is exited.
+func (s *BaseChemsListener) ExitInstr_main(ctx *Instr_mainContext) {}
+
 // EnterExpressions is called when production expressions is entered.
 func (s *BaseChemsListener) EnterExpressions(ctx *ExpressionsContext) {}
 

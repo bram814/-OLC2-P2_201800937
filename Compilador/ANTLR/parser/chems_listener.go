@@ -23,6 +23,9 @@ type ChemsListener interface {
 	// EnterInstr_println is called when entering the instr_println production.
 	EnterInstr_println(c *Instr_printlnContext)
 
+	// EnterInstr_main is called when entering the instr_main production.
+	EnterInstr_main(c *Instr_mainContext)
+
 	// EnterExpressions is called when entering the expressions production.
 	EnterExpressions(c *ExpressionsContext)
 
@@ -43,6 +46,9 @@ type ChemsListener interface {
 
 	// ExitInstr_println is called when exiting the instr_println production.
 	ExitInstr_println(c *Instr_printlnContext)
+
+	// ExitInstr_main is called when exiting the instr_main production.
+	ExitInstr_main(c *Instr_mainContext)
 
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)

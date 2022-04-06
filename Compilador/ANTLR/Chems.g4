@@ -39,6 +39,7 @@ end_instr returns [int v]
 
 instruccion returns [interfaces.Instruction instr]
   : instr_println end_instr       { $instr = $instr_println.instr   }
+  | instr_main                    { $instr = $instr_main.instr      }
 
 ;
 
@@ -49,7 +50,9 @@ instr_println returns [interfaces.Instruction instr]
   | R_PRINTLN TK_PARA STRING TK_COMA expressions TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($expressions.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
 ;  
 
-
+instr_main returns [interfaces.Instruction instr]
+  : R_FUNCTION R_MAIN TK_PARA TK_PARC TK_LLAVEA instrucciones TK_LLAVEC          { $instr = instruction.NewMain($instrucciones.l, $R_MAIN.line, localctx.(*Instr_mainContext).Get_R_MAIN().GetColumn()) }
+;
 
 expressions returns [interfaces.Expression p]
   : primitivo                                   {$p = $primitivo.p}

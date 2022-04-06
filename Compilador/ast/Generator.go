@@ -155,3 +155,21 @@ func (g *Generator) PrintfString() {
 
  }
 
+
+/************************************************* [FUNCIONES] *************************************************/
+func (g *Generator) StachHeap() {
+ 	g.code.Add("P = 0; H = 0;\n")
+
+ }
+ func (g *Generator) AddFunction(tipo string, nombre string) {
+ 	g.code.Add("\r" + tipo + " " + nombre + " {")
+
+ }
+
+func (g *Generator) AddFunctionEnd() {
+ 	g.code.Add("\n\treturn;\r}")
+
+ }
+
+
+

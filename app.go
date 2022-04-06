@@ -150,15 +150,14 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	}
 
 	
-	_salida += "\nvoid main(){\n"
-	_salida += "\tP = 0; H = 0;\n\n"
+	
+	
 
 	for _, s := range gen.GetCode().ToArray() {
 		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"
 	}
 
-	_salida += "\nreturn;\n}\n"
 
 
 	CODE_OUT_ = _salida
