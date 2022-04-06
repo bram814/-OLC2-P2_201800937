@@ -133,3 +133,25 @@ func (g *Generator) AddPrintf(typePrint string, value string) {
 func (g *Generator) PrintfString() {
 	g.code.Add("printfString();")
 }
+
+
+/************************************************* [BOOLEAN] *************************************************/
+ func (g *Generator) AddBoolean(EV string, EF string, newLabel string) {
+
+ 	g.AddLabel(EV)
+ 	g.AddPrintf("c", "(char)116")
+ 	g.AddPrintf("c", "(char)114")
+ 	g.AddPrintf("c", "(char)117")
+ 	g.AddPrintf("c", "(char)101")
+ 	g.AddGoto(newLabel)
+ 	g.AddLabel(EF)
+ 	g.AddPrintf("c", "(char)102")
+ 	g.AddPrintf("c", "(char)97")
+ 	g.AddPrintf("c", "(char)108")
+ 	g.AddPrintf("c", "(char)115")
+ 	g.AddPrintf("c", "(char)101")
+ 	g.AddGoto(newLabel)
+ 	g.AddLabel(newLabel)
+
+ }
+

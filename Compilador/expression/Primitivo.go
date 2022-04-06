@@ -38,16 +38,39 @@ func (p Primitivo) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator
 		gen.AddExpression("H","H","1","+")
 
 		return interfaces.Value{
-		Value:      temp,
-		IsTemp:     true,
-		Type:       p.Type,
-		TrueLabel:  "",
-		FalseLabel: "",
+			Value:      temp,
+			IsTemp:     true,
+			Type:       p.Type,
+			TrueLabel:  "",
+			FalseLabel: "",
+		}
+
+
+
+	} else if p.Type == interfaces.BOOLEAN {
+		EV := gen.NewLabel()
+		EF := gen.NewLabel()
+
+		if p.Value.(bool) {
+			gen.AddGoto(EV)
+			gen.AddGoto(EF)
+				
+		}else {
+			gen.AddGoto(EF)
+			gen.AddGoto(EV)
+			
+		}
+
+		return interfaces.Value{
+			Value:      "",
+			IsTemp:     false,
+			Type:       p.Type,
+			TrueLabel:  EV,
+			FalseLabel: EF,
+		}
 	}
 
 
-
-	}
 	return interfaces.Value{
 		Value:      fmt.Sprintf("%v", p.Value),
 		IsTemp:     false,

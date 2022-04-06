@@ -24,14 +24,12 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 	result = p.Expression.Compilar(env, tree, gen)
 
 	if result.Type == interfaces.BOOLEAN {
+		if !result.IsTemp {
+			newLabel := gen.NewLabel()
+			gen.AddBoolean(result.TrueLabel, result.FalseLabel, newLabel)
+		}
+		
 
-		newLabel := gen.NewLabel()
-		gen.AddLabel(result.TrueLabel)
-		gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", 1))
-		gen.AddGoto(newLabel)
-		gen.AddLabel(result.FalseLabel)
-		gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", 0))
-		gen.AddLabel(newLabel)
 
 	} else if result.Type == interfaces.INTEGER {
 		gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", result.Value))
