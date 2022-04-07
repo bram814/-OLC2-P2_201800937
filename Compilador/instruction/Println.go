@@ -23,12 +23,12 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 
 	result = p.Expression.Compilar(env, tree, gen)
 
-
 	if result.Type == interfaces.EXCEPTION {
 		return result.Value
 	}
 
 	if result.Type == interfaces.BOOLEAN {
+		gen.AddComment("Printf Boolean")
 		if !result.IsTemp {
 			newLabel := gen.NewLabel()
 			gen.AddBoolean(result.TrueLabel, result.FalseLabel, newLabel)
@@ -37,12 +37,15 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 
 
 	} else if result.Type == interfaces.INTEGER {
+		gen.AddComment("Printf Integer")
 		gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", result.Value))
 
 	} else if result.Type == interfaces.FLOAT {
+		gen.AddComment("Printf Float")
 		gen.AddPrintf("f", "(double)"+fmt.Sprintf("%v", result.Value))
 
 	}else if result.Type == interfaces.STRING || result.Type == interfaces.CHAR {
+		gen.AddComment("Printf String")
 		if !tree.IsPrimitive {
 			gen.AddPrintfString()
 			tree.IsPrimitive = true
@@ -63,7 +66,7 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 		gen.AddPrintf("c", "(char)"+fmt.Sprintf("%v", result.Value))
 	}
 
-
+	gen.AddComment("Salto de Linea \\n")
 	gen.AddPrintf("c","10")
 
 	return result.Value

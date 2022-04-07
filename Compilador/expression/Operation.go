@@ -39,7 +39,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
-			
+			gen.AddComment("Aritmetica +")
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
 			/* ************************************************************** INTEGER ************************************************************** */
@@ -51,7 +51,27 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddExpression(temp, exp_left.Value, exp_right.Value, "+")
 				isType = interfaces.FLOAT
 				
-			} else {
+			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
+				if !tree.IsCocant {
+					gen.AddConcatString()
+					tree.IsCocant = true
+				}
+				gen.AddExpression(temp,"P","0","+")
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_left.Value)
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_right.Value)
+				gen.AddExpression("P","P","0","+")
+				gen.ConcatString()
+				temp = gen.NewTemp()
+				gen.AddExpressionStack(temp, "P")
+
+
+				isType = interfaces.STRING
+
+
+
+			}else {
 				excep := ast.NewException("Semantico","No es posible Sumar, Tipos de datos Incorrectos.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
@@ -66,6 +86,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 
 			if p.Unario == true {
 				exp_left = p.left.Compilar(env, tree, gen)
+				gen.AddComment("Aritmetica -")
 				/* ************************************************************** INTEGER ************************************************************** */
 				if exp_left.Type == interfaces.INTEGER && exp_right.Type == interfaces.INTEGER {
 					gen.AddExpression(temp, "0", exp_left.Value, "-")
@@ -86,6 +107,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
+				gen.AddComment("Aritmetica -")
 
 				/* ************************************************************** INTEGER ************************************************************** */
 				if exp_left.Type == interfaces.INTEGER && exp_right.Type == interfaces.INTEGER {
@@ -115,6 +137,8 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
 			
+			gen.AddComment("Aritmetica *")
+			
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
 			/* ************************************************************** INTEGER ************************************************************** */
@@ -142,7 +166,15 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
-			
+			gen.AddComment("Aritmetica /")
+
+			if !exp_right.IsTemp {
+				if exp_right.Value == "0" {
+					excep := ast.NewException("Semantico","No es posible Dividir entre 0.", p.Row, p.Column)
+					tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+				}
+			}
 			temp 	:= gen.NewTemp()
 			isType  := interfaces.NULL
 			/* ************************************************************** INTEGER ************************************************************** */
@@ -171,7 +203,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
-
+			gen.AddComment("Relacional <")
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
 
@@ -202,6 +234,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
+			gen.AddComment("Relacional >")
 
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
@@ -233,6 +266,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
+			gen.AddComment("Relacional <=")
 
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
@@ -264,6 +298,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
+			gen.AddComment("Relacional >=")
 
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
@@ -296,6 +331,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
+			gen.AddComment("Relacional ==")
 
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()
@@ -328,6 +364,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
+			gen.AddComment("Relacional !=")
 
 			EV := gen.NewLabel()
 			EF := gen.NewLabel()

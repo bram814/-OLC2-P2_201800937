@@ -103,6 +103,10 @@ func (g *Generator) AddPrintf(typePrint string, value string) {
 	g.code.Add("printf(\"%" + typePrint + "\"," + value + ");")
 }
 
+/************************************************* [ADD][COMENT] *************************************************/   
+func (g *Generator) AddComment(comment string) {
+	g.code.Add("/************ " + comment +  " ************/")
+}
 
 /************************************************* [NATIVE][STRING] *************************************************/
  func (g *Generator) AddPrintfString() {
@@ -111,7 +115,7 @@ func (g *Generator) AddPrintf(typePrint string, value string) {
  	auxTemp := g.NewTemp()
  	EV := g.NewLabel()
  	EF :=  g.NewLabel()
-
+ 	g.native.Add("\r/************ NATIVE PRINTF STRING ************/")
  	g.native.Add("\rvoid printfString(){")
  	g.native.Add(temp + " = P + 1;")
  	g.native.Add(auxTemp + " = stack[(int) " + temp + "];")
@@ -132,6 +136,57 @@ func (g *Generator) AddPrintf(typePrint string, value string) {
 
 func (g *Generator) PrintfString() {
 	g.code.Add("printfString();")
+}
+
+/************************************************* [NATIVE][STRING][COMPARE] *************************************************/
+ func (g *Generator) AddConcatString() {
+ 		
+ 	conca := ""
+ 	conca1 := ""
+ 	temp 	:= g.NewTemp() 	// t2
+ 	auxTemp := g.NewTemp() 	// t3
+ 	EV := g.NewLabel()		// L0
+ 	EF :=  g.NewLabel()		// L1
+ 	g.native.Add("\r/************ NATIVE CONCAT STRING ************/")
+ 	g.native.Add("\rvoid concatString(){")
+
+ 	g.native.Add(temp + " = H + 0;")			// t2
+ 	g.native.Add(auxTemp + " = P + 1;")			// t3
+ 	conca += "stack[(int)P] = " + temp + ";"	// 26
+
+ 	temp = g.NewTemp()							// t4
+ 	newAuxTemp := g.NewTemp()					// t5
+ 	g.native.Add(newAuxTemp +" = stack[(int) " + auxTemp + "];")
+ 	g.native.Add(temp + " = P + 2;")
+ 	conca1 += newAuxTemp + " = stack[(int)" + temp + "];" // 15
+ 	g.native.Add(EV + ":")					// E0
+ 	temp = g.NewTemp()							// t6
+ 	g.native.Add(temp + " = heap[(int)" + newAuxTemp + "];")
+ 	g.native.Add("if (" + temp +" == -1) goto " + EF + ";")
+ 	g.native.Add("heap[(int)H] = " + temp + ";")
+ 	g.native.Add("H = H + 1;")
+ 	g.native.Add(newAuxTemp + " = " + newAuxTemp + "+ 1;")
+ 	g.native.Add("goto " + EV + ";")
+ 	g.native.Add(EF + ":")
+ 	g.native.Add(conca1)
+ 	newLabel := g.NewLabel()	// L2
+ 	EV = g.NewLabel()			// L3
+ 	g.native.Add(EV + ":")
+ 	g.native.Add(temp + " = heap[(int)" + newAuxTemp + "];")
+ 	g.native.Add("if ("+ temp +" == -1) goto " + newLabel + "; ")
+ 	g.native.Add("heap[(int)H] = "+ temp + ";")
+ 	g.native.Add("H = H + 1;")
+ 	g.native.Add(newAuxTemp + " = " + newAuxTemp + "+ 1;")
+ 	g.native.Add("goto " + EV + ";")
+ 	g.native.Add(newLabel + ":")
+ 	g.native.Add("heap[(int)H] = -1;")
+ 	g.native.Add("H = H + 1;")
+ 	g.native.Add(conca)
+ 	g.native.Add("return;\n}")
+}
+
+func (g *Generator) ConcatString() {
+	g.code.Add("concatString();")
 }
 
 

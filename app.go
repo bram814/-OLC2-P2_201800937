@@ -145,7 +145,6 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 
 	}
 
-	_salida += "/************ NATIVE PRINTF STRING ************/"
 	for _, s := range gen.GetNative().ToArray() {
 		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"

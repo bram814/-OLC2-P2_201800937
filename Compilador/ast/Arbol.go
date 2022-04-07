@@ -12,6 +12,7 @@ type Arbol struct {
 	Code     	 *arrayList.List
 	StackGlobal  int
 	IsPrimitive  bool
+	IsCocant     bool
 	_Exception   *arrayList.List
 	// Tabla_Global environment.Environment
 }
@@ -29,7 +30,8 @@ func NewArbol() *Arbol {
 	tree := Arbol{
 		Code 		: arrayList.New(),
 		StackGlobal : 0,
-		IsPrimitive : false, 
+		IsPrimitive : false,
+		IsCocant	: false,
 		_Exception	: arrayList.New()} 	
 	return &tree
 }

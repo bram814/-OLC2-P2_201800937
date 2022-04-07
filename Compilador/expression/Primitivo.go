@@ -25,7 +25,7 @@ func (p Primitivo) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator
 
 
 	if p.Type == interfaces.STRING || p.Type == interfaces.CHAR {
-
+		gen.AddComment("PRIMITIVO STRING")
 		temp := gen.NewTemp()
 		gen.AddExpression(temp,"H","0","+")
 
