@@ -1,0 +1,2 @@
+rustc entrada.rs
+./entrada

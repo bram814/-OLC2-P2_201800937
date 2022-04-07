@@ -49,8 +49,8 @@ instruccion returns [interfaces.Instruction instr]
 
 /******************************** [PRINTLN!] ********************************/
 instr_println returns [interfaces.Instruction instr]
-  : R_PRINTLN TK_PARA expressions TK_PARC TK_PUNTOCOMA                           { $instr = instruction.NewPrintln($expressions.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
-  | R_PRINTLN TK_PARA STRING TK_COMA expressions TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($expressions.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
+  : R_PRINTLN TK_PARA primitivo TK_PARC TK_PUNTOCOMA                                 { $instr = instruction.NewPrintln(nil, $primitivo.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
+  | R_PRINTLN TK_PARA STRING TK_COMA list_expression TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($list_expression.l, nil, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
 ;  
 
 /******************************** [MAIN] ********************************/
@@ -83,6 +83,26 @@ instr_tipo returns [interfaces.TypeExpression tipo_exp]
   | R_STR       {$tipo_exp = interfaces.STR}
   | R_BOOL      {$tipo_exp = interfaces.BOOLEAN}
 ;
+
+/* List Expression Case */
+list_expression returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_list_expression+  {
+        listInt := localctx.(*List_expressionContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetP())
+        }
+    }
+;
+
+
+block_list_expression returns [interfaces.Expression p]
+  : expressions TK_COMA                    { $p =  instruction.NewListExpre($expressions.p) }
+  | expressions                            { $p =  instruction.NewListExpre($expressions.p) }
+;
+
 
 /******************************** [EXPRESIONES] ********************************/
 expressions returns [interfaces.Expression p]
