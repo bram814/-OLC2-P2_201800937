@@ -18,12 +18,13 @@ func NewEnvironment(anterior interface{}) Environment {
 	return env
 }
 
-func (env Environment) AddSymbol(id string, value interfaces.Symbol, tipo interfaces.TypeExpression, isMut bool) {
+func (env Environment) AddSymbol(id string, value interfaces.Value, tipo interfaces.TypeExpression, isMut bool, pos int) {
 	if variable, ok := env.variable[id]; ok {
 		fmt.Println("La variable " + variable.Id + " ya existe")
 		return
 	}
-	env.variable[id] = interfaces.Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut}
+
+	env.variable[id] = interfaces.Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut, Posicion: pos}
 }
 
 func (env Environment) GetSymbol(id string) interfaces.Symbol {
@@ -47,14 +48,14 @@ func (env Environment) GetSymbol(id string) interfaces.Symbol {
 	return interfaces.Symbol{Id: "", Type: interfaces.NULL, Value: interfaces.Symbol{Id: "", Type: interfaces.NULL, Value: 0}}
 }
 
-func (env Environment) SetSymbol(id string, value interfaces.Symbol, mut bool) interfaces.Symbol {
+func (env Environment) SetSymbol(id string, value interfaces.Value, mut bool, pos int) interfaces.Symbol {
 
 	var tmpEnv Environment
 	tmpEnv = env
 
 	for {
 		if variable, ok := tmpEnv.variable[id]; ok {
-			tmpEnv.variable[id] = interfaces.Symbol{Id: id, Type: variable.Type, Value: value, IsMut:mut}
+			tmpEnv.variable[id] = interfaces.Symbol{Id: id, Type: variable.Type, Value: value, IsMut:mut, Posicion: pos}
 			return variable
 		}
 

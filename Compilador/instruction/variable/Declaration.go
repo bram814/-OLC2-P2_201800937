@@ -4,60 +4,61 @@ package variable
 
 import (
 
-	"OLC2/Interprete/interfaces"
-	"OLC2/Interprete/environment"
-	"OLC2/Interprete/ast"
+	"OLC2/Compilador/interfaces"
+	"OLC2/Compilador/environment"
+	"OLC2/Compilador/ast"
 	"fmt"
 )
 
 type Declaration struct {
 	Id 			string
-	Tipo 		interfaces.TipoExpresion
-	Expresion 	interfaces.Expresion
+	Type 		interfaces.TypeExpression
+	Expresion 	interfaces.Expression
 	IsMut		bool
 	Row			int
 	Column		int
 }
 
-func NewDeclaration(id string, tipo interfaces.TipoExpresion, val interfaces.Expresion, isMut bool, row int, column int) Declaration {
+func NewDeclaration(id string, tipo interfaces.TypeExpression, val interfaces.Expression, isMut bool, row int, column int) Declaration {
 	instr := Declaration{id, tipo, val, isMut, row, column}
 	return instr
 }
 
 
-func (p Declaration) Interpretar(env interface{}, tree *ast.Arbol, gen *ast.Generator)  interface{} {
+func (p Declaration) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator)  interface{} {
 
-
-	var value string = ""
 
 	/* Buscar si el id ya existe */
 	symbol := env.(environment.Environment).GetSymbol(p.Id)
 
-	if symbol.Tipo != interfaces.NULL {
-		excep := ast.NewException("Semantico","Ya Existe ese Id "+p.Id, p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo:"Semantico", Descripcion: "Ya Existe ese Id "+ p.Id, Row: p.Row, Column: p.Column})
-		// return interfaces.Symbol{Id: "", Tipo: interfaces.EXCEPTION, Valor: excep}
-		return nil
+	if symbol.Type != interfaces.NULL {
+		excep := ast.NewException("Semantico","Ya Existe ese Id " + p.Id, p.Row, p.Column)
+		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
 	var result interfaces.Value
 
 	if p.Expresion != nil {
 		result = p.Expresion.Compilar(env, tree, gen)
-		p.Tipo = result.Tipo
+		p.Type = result.Type
 	}else{
-		fmt.Println("oye es declaracion vacia")
-		result.Tipo = p.Tipo
+		
+		result.Type = p.Type
 	}
 
 	
-	if (result.Tipo == p.Tipo || p.Tipo == interfaces.NULL) {
-		env.(environment.Environment).AddSymbol(p.Id, result, result.Tipo, p.IsMut)
+	if (result.Type == p.Type || p.Type == interfaces.NULL) {
+		gen.AddComment("Declaracion")
+		env.(environment.Environment).AddSymbol(p.Id, result, result.Type, p.IsMut, tree.GetPos())
+		gen.AddStack(fmt.Sprintf("%v", tree.GetPos()),result.Value)
+		tree.NewPos()
 	
 
 	}else {
-		excep := ast.NewException("Semantico","Tipo incorrecto en Declaracion.", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo:"Semantico", Descripcion: "Tipo incorrecto en Declaracion.", Row: p.Row, Column: p.Column})
+		excep := ast.NewException("Semantico","Tipo Incorrecto en Declaracion.", p.Row, p.Column)
+		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
 

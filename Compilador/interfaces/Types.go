@@ -11,4 +11,5 @@ const (
 	ARRAY							// 5
 	NULL							// 6
 	EXCEPTION 						// 7
+	STR 							// 8
 )

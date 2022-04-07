@@ -1,70 +1,53 @@
-// package variable
+package variable
 
-// import (
-// 	"OLC2/Compilador/interfaces"
-// 	"OLC2/Compilador/environment"
-// 	"OLC2/Compilador/ast"
-// 	"fmt"
-// )
+import (
+	"OLC2/Compilador/interfaces"
+	"OLC2/Compilador/environment"
+	"OLC2/Compilador/ast"
+	"fmt"
+)
 
-
-// type Assignment struct {
-// 	Id 			string
-// 	Expresion	interfaces.Expresion
-// 	Row			int
-// 	Column		int
-// }
-
-
-// func NewAssignment(id string, val interfaces.Expresion, row int, column int) Assignment {
-// 	instr := Assignment{id, val, row, column}
-// 	return instr
-// }
+type Assignment struct {
+	Id 			string
+	Expresion	interfaces.Expression
+	Row			int
+	Column		int
+}
 
 
-// func (p Assignment) Compilar(env interface{}, tree *ast.Arbol) interface{} {
+func NewAssignment(id string, val interfaces.Expression, row int, column int) Assignment {
+	instr := Assignment{id, val, row, column}
+	return instr
+}
 
-	// var value string = ""
 
-	// /* Buscar si el id ya existe */
-	// symbol := env.(environment.Environment).GetSymbol(p.Id)
+func (p Assignment) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) interface{} {
 
-	// if symbol.Tipo == interfaces.NULL {
-	// 	excep := ast.NewException("Semantico", "No Existe ese Id " + p.Id , p.Row, p.Column)
-	// 	tree.AddException(ast.Exception{Tipo:"Semantico", Descripcion: "No Existe ese Id "+ p.Id, Row: p.Row, Column: p.Column})
+	/* Buscar si el id ya existe */
+	symbol := env.(environment.Environment).GetSymbol(p.Id)
 
-	// 	eTipo := excep.Tipo
-	// 	eDesc := excep.Descripcion
-		
-	// 	value += fmt.Sprintf("%v", eTipo)
-	// 	value += " - "
-	// 	value += fmt.Sprintf("%v", eDesc)
-	// 	value += "\n"
-	// 	tree.AddCode(value)
-	// 	return interfaces.Symbol{Id: "", Tipo: interfaces.EXCEPTION, Valor: excep}
-
-	// }
+	if symbol.Type == interfaces.NULL {
+		excep := ast.NewException("Semantico","No Existe ese Id " + p.Id, p.Row, p.Column)
+		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	}
 	
-	// var result interfaces.Symbol
-	// result = p.Expresion.Interpretar(env, tree)
+	var result interfaces.Value
+	result = p.Expresion.Compilar(env, tree, gen)
 
-	// if symbol.IsMut  || result.IsMut{
-	// 	result.IsMut = true
-	// 	env.(environment.Environment).SetSymbol(p.Id, result, true)
-	// }else {
-	// 	excep := ast.NewException("Semantico","No se puede asignar a " + p.Id + ", no es mutable.", p.Row, p.Column)
-	// 	tree.AddException(ast.Exception{Tipo:"Semantico", Descripcion: "No se puede asignar a " + p.Id + ", no es mutable.", Row: p.Row, Column: p.Column})
-	// 	eTipo := excep.Tipo
-	// 	eDesc := excep.Descripcion
-	// 	value += fmt.Sprintf("%v", eTipo)
-	// 	value += " - "
-	// 	value += fmt.Sprintf("%v", eDesc)
-	// 	value += "\n"
-	// 	tree.AddCode(value)
-	// 	return interfaces.Symbol{Id: "", Tipo: interfaces.EXCEPTION, Valor: excep}
-	// }
+	if symbol.IsMut {
+		gen.AddComment("Asignacion")
+		symbol.IsMut = true
+		env.(environment.Environment).SetSymbol(p.Id, result, true, symbol.Posicion)
+		gen.AddStack(fmt.Sprintf("%v", symbol.Posicion),result.Value)
+
+	}else {
+		excep := ast.NewException("Semantico","No se puede asignar a " + p.Id + ", no es mutable.", p.Row, p.Column)
+		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	}
 	
 	
-	// return result.Valor
+	return result.Value
 
-// }
+}

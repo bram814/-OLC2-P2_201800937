@@ -11,6 +11,7 @@ options {
     import "OLC2/Compilador/interfaces"
     import "OLC2/Compilador/expression"
     import "OLC2/Compilador/instruction"
+    import "OLC2/Compilador/instruction/variable"
     import arrayList "github.com/colegno/arraylist"
 }
 
@@ -38,8 +39,10 @@ end_instr returns [int v]
 
 
 instruccion returns [interfaces.Instruction instr]
-  : instr_println end_instr       { $instr = $instr_println.instr   }
-  | instr_main                    { $instr = $instr_main.instr      }
+  : instr_println end_instr       { $instr = $instr_println.instr }
+  | instr_main                    { $instr = $instr_main.instr }
+  | instr_declaracion             { $instr = $instr_declaracion.instr }
+  | instr_asignacion              { $instr = $instr_asignacion.instr }
 
 ;
 
@@ -50,10 +53,38 @@ instr_println returns [interfaces.Instruction instr]
   | R_PRINTLN TK_PARA STRING TK_COMA expressions TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($expressions.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
 ;  
 
+/******************************** [MAIN] ********************************/
 instr_main returns [interfaces.Instruction instr]
   : R_FUNCTION R_MAIN TK_PARA TK_PARC TK_LLAVEA instrucciones TK_LLAVEC          { $instr = instruction.NewMain($instrucciones.l, $R_MAIN.line, localctx.(*Instr_mainContext).Get_R_MAIN().GetColumn()) }
 ;
 
+
+/******************************** [DECLARACION][VARIABLE] ********************************/
+instr_declaracion returns [interfaces.Instruction instr]
+  : R_LET R_MUT ID TK_IGUAL expressions TK_PUNTOCOMA                           { $instr = variable.NewDeclaration($ID.text, interfaces.NULL,      $expressions.p, true,  $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  | R_LET R_MUT ID TK_DOSPUNTOS instr_tipo TK_PUNTOCOMA                        { $instr = variable.NewDeclaration($ID.text, $instr_tipo.tipo_exp,  nil,           true,  $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  | R_LET R_MUT ID TK_DOSPUNTOS instr_tipo TK_IGUAL expressions TK_PUNTOCOMA   { $instr = variable.NewDeclaration($ID.text, $instr_tipo.tipo_exp, $expressions.p, true,  $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  | R_LET ID TK_IGUAL expressions TK_PUNTOCOMA                                 { $instr = variable.NewDeclaration($ID.text, interfaces.NULL,      $expressions.p, false, $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  | R_LET ID TK_DOSPUNTOS instr_tipo TK_PUNTOCOMA                              { $instr = variable.NewDeclaration($ID.text, $instr_tipo.tipo_exp, nil,            false, $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  | R_LET ID TK_DOSPUNTOS instr_tipo TK_IGUAL expressions TK_PUNTOCOMA         { $instr = variable.NewDeclaration($ID.text, $instr_tipo.tipo_exp, $expressions.p, false, $R_LET.line, localctx.(*Instr_declaracionContext).Get_R_LET().GetColumn()) }
+  
+;
+
+/******************************** [ASIGNACION][VARIABLE] ********************************/
+instr_asignacion returns [interfaces.Instruction instr]
+  : ID TK_IGUAL expressions TK_PUNTOCOMA                                       { $instr = variable.NewAssignment($ID.text, $expressions.p, $ID.line, localctx.(*Instr_asignacionContext).Get_ID().GetColumn()) }
+;
+
+/******************************** [TIPO] ********************************/
+instr_tipo returns [interfaces.TypeExpression tipo_exp]
+  : R_INT       {$tipo_exp = interfaces.INTEGER}
+  | R_FLOAT     {$tipo_exp = interfaces.FLOAT}
+  | R_STRING    {$tipo_exp = interfaces.STRING}
+  | R_STR       {$tipo_exp = interfaces.STR}
+  | R_BOOL      {$tipo_exp = interfaces.BOOLEAN}
+;
+
+/******************************** [EXPRESIONES] ********************************/
 expressions returns [interfaces.Expression p]
   : expre_log                                   { $p = $expre_log.p }
   | expre_rel                                   { $p = $expre_rel.p } 
@@ -150,4 +181,5 @@ primitivo returns[interfaces.Expression p]
                 }
             $p = expression.NewPrimitivo(num, interfaces.FLOAT, interfaces.FLOAT, $DOUBLE.line, localctx.(*PrimitivoContext).Get_DOUBLE().GetColumn())
               }
+    |ID       { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 ;

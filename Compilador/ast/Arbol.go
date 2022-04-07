@@ -75,7 +75,7 @@ func (a Arbol) GetException() *arrayList.List {
 
 
 /* POS GLOBAL */
-func (a *Arbol) GetPos() int {
+func (a Arbol) GetPos() int {
 	return a.StackGlobal
 }
 
