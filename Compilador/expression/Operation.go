@@ -250,13 +250,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddIf(exp_left.Value, exp_right.Value, "<", EV)
 				gen.AddGoto(EF)
 
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, "<", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar <.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case ">":
@@ -282,13 +291,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddIf(exp_left.Value, exp_right.Value, ">", EV)
 				gen.AddGoto(EF)
 
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, ">", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar >.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case "<=":
@@ -314,13 +332,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddIf(exp_left.Value, exp_right.Value, "<=", EV)
 				gen.AddGoto(EF)
 
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, "<=", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar <=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel:  EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case ">=":
@@ -346,13 +373,22 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddIf(exp_left.Value, exp_right.Value, ">=", EV)
 				gen.AddGoto(EF)
 
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, ">=", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar >=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel:  EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case "==":
@@ -385,7 +421,11 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case "!=":
@@ -418,36 +458,55 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
-			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
+
+			return interfaces.Value{Value: newTemp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 		}
 	case "&&":
 		{
 
 			exp_left = p.left.Compilar(env, tree, gen)
-
+			exp_right 	:= p.right.Compilar(env, tree, gen)
+			gen.AddComment("Logico &&")
 			if exp_left.Type == interfaces.BOOLEAN {
-				
-
-				newLabel := gen.NewLabel()
-				leftTemp := gen.NewTemp()	
-				gen.Boolean(exp_left.TrueLabel, exp_left.FalseLabel, newLabel, leftTemp)
-
-				exp_right 	:= p.right.Compilar(env, tree, gen)
 
 				if exp_right.Type == interfaces.BOOLEAN {
+					temp 	 := gen.NewTemp()
+					EV1   	 := gen.NewLabel() // L0
+					EF1   	 := gen.NewLabel() // L1
+					EV2   	 := gen.NewLabel() // L2
+					EF2   	 := gen.NewLabel() // L3
+					newLabel := gen.NewLabel() // L4
 
-					newLabel   = gen.NewLabel()
-					rightTemp := gen.NewTemp()	
-					gen.Boolean(exp_right.TrueLabel, exp_right.FalseLabel, newLabel, rightTemp)
+					gen.AddIf(exp_left.Value, "1", "==", EV1) // L0
+					gen.AddGoto(EF1)    // L1
+
+					gen.AddLabel(EV1)   // L0
+
+					gen.AddIf(exp_right.Value, "1", "==", EV2) // L2
+					gen.AddGoto(EF2)  // L3
+
+					gen.AddLabel(EV2)  // L1
+					gen.AddExpression(temp, "1", "0", "+")
+					gen.AddGoto(newLabel)
+
+					gen.AddLabel(EF1)  // L1
+					gen.AddExpression(temp, "0", "0", "+")
+					gen.AddGoto(newLabel)
+
+					gen.AddLabel(EF2)  // L3 
+					gen.AddExpression(temp, "0", "0", "+")
+					gen.AddGoto(newLabel)
 
 
-					EV   := gen.NewLabel()
-					EF 	 := gen.NewLabel()
-					gen.AddIf(leftTemp, rightTemp, "&&", EV)
-					gen.AddGoto(EF)
+					gen.AddLabel(newLabel)  // L3 
 
-					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+
+					return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
+
 				} else {
 					excep := ast.NewException("Semantico","No es posible Comparar &&; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
 					tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
@@ -469,29 +528,45 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 		{
 
 			exp_left = p.left.Compilar(env, tree, gen)
-
+			exp_right 	:= p.right.Compilar(env, tree, gen)
+			gen.AddComment("Logico ||")
 			if exp_left.Type == interfaces.BOOLEAN {
-				
-
-				newLabel := gen.NewLabel()
-				leftTemp := gen.NewTemp()	
-				gen.Boolean(exp_left.TrueLabel, exp_left.FalseLabel, newLabel, leftTemp)
-
-				exp_right 	:= p.right.Compilar(env, tree, gen)
 
 				if exp_right.Type == interfaces.BOOLEAN {
 
-					newLabel   = gen.NewLabel()
-					rightTemp := gen.NewTemp()	
-					gen.Boolean(exp_right.TrueLabel, exp_right.FalseLabel, newLabel, rightTemp)
+					temp 	 := gen.NewTemp()
+					EV1   	 := gen.NewLabel() // L0
+					EF1   	 := gen.NewLabel() // L1
+					EV2   	 := gen.NewLabel() // L2
+					EF2   	 := gen.NewLabel() // L3
+					newLabel := gen.NewLabel() // L4
+
+					gen.AddIf(exp_left.Value, "1", "==", EV1) // L0
+					gen.AddGoto(EF1)    // L1
+
+					gen.AddLabel(EF1)   // L1
+
+					gen.AddIf(exp_right.Value, "1", "==", EV2) // L2
+					gen.AddGoto(EF2)  // L3
+
+					gen.AddLabel(EV1)  // L0
+					gen.AddExpression(temp, "1", "0", "+")
+					gen.AddGoto(newLabel)
+
+					gen.AddLabel(EV2)  // L2
+					gen.AddExpression(temp, "1", "0", "+")
+					gen.AddGoto(newLabel)
+
+					gen.AddLabel(EF2)  // L3 
+					gen.AddExpression(temp, "0", "0", "+")
+					gen.AddGoto(newLabel)
 
 
-					EV   := gen.NewLabel()
-					EF 	 := gen.NewLabel()
-					gen.AddIf(leftTemp, rightTemp, "||", EV)
-					gen.AddGoto(EF)
+					gen.AddLabel(newLabel)  // L3 
 
-					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: EV, FalseLabel: EF}
+
+					return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
+
 				} else {
 					excep := ast.NewException("Semantico","No es posible Comparar ||; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
 					tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
@@ -512,15 +587,32 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 	case "!":
 		{
 			if p.Unario {
-
 				exp_left = p.left.Compilar(env, tree, gen)
 			}
 
 			if exp_left.Type == interfaces.BOOLEAN {
 
-				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.BOOLEAN, TrueLabel: exp_left.FalseLabel, FalseLabel: exp_left.TrueLabel}
-			
-				
+
+				temp 	 := gen.NewTemp()
+				EV   	 := gen.NewLabel() // L0
+				EF   	 := gen.NewLabel() // L1
+				newLabel := gen.NewLabel() // L2
+
+				gen.AddIf(exp_left.Value, "1", "==", EV) // L0
+				gen.AddGoto(EF)    // L1
+
+				gen.AddLabel(EV)   // L0
+				gen.AddExpression(temp, "0", "0", "+")
+				gen.AddGoto(newLabel)
+
+				gen.AddLabel(EF)   // L1
+				gen.AddExpression(temp, "1", "0", "+")
+				gen.AddGoto(newLabel)
+
+
+				gen.AddLabel(newLabel)  // L32
+
+				return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar ||; Tipo de Dato no Booleano.", p.Row, p.Column)
