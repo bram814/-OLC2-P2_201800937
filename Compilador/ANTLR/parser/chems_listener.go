@@ -59,6 +59,9 @@ type ChemsListener interface {
 	// EnterPrimitivo is called when entering the primitivo production.
 	EnterPrimitivo(c *PrimitivoContext)
 
+	// EnterPrimitivo_casteo is called when entering the primitivo_casteo production.
+	EnterPrimitivo_casteo(c *Primitivo_casteoContext)
+
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
 
@@ -109,4 +112,7 @@ type ChemsListener interface {
 
 	// ExitPrimitivo is called when exiting the primitivo production.
 	ExitPrimitivo(c *PrimitivoContext)
+
+	// ExitPrimitivo_casteo is called when exiting the primitivo_casteo production.
+	ExitPrimitivo_casteo(c *Primitivo_casteoContext)
 }
