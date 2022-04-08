@@ -4,61 +4,76 @@ double heap[23111998];
 double stack[23111998];
 double P;
 double H;
-double t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36;
+double t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34;
 
 	
 /************ NATIVE PRINTF STRING ************/
 	
 void printfString(){
-	t1 = P + 1;
-	t2 = stack[(int) t1];
-	L1:
-	t3 = heap[(int)t2];
-	if(t3 == -1) goto L0;
-	printf("%c", (int)t3);
-	t2 = t2 + 1;
-	goto L1;
-	L0:
+	t4 = P + 1;
+	t5 = stack[(int) t4];
+	L8:
+	t6 = heap[(int)t5];
+	if(t6 == -1) goto L7;
+	printf("%c", (int)t6);
+	t5 = t5 + 1;
+	goto L8;
+	L7:
 	return;
 }
 	
 void main() {
 	P = 0; H = 0;
 
+	/************ PRIMITIVO BOOLEAN ************/
+	goto L1;
+	goto L0;
+	L0:
+	t1 = 1 + 0;
+	goto L3;
+	L1:
+	t1 = 0 + 0;
+	goto L3;
+	L3:
 	/************ Declaracion ************/
-	stack[(int)0] = 12222;
+	stack[(int)0] = t0;
 	/************ PRINTF ************/
+	/************ Identificador ************/
+	t2 = stack[(int)0];
+	/************ Printf Boolean ************/
+	if(t2 == 1) goto L4;
+	goto L5;
+	L4:
+	printf("%c",(char)116);
+	printf("%c",(char)114);
+	printf("%c",(char)117);
+	printf("%c",(char)101);
+	goto L6;
+	L5:
+	printf("%c",(char)102);
+	printf("%c",(char)97);
+	printf("%c",(char)108);
+	printf("%c",(char)115);
+	printf("%c",(char)101);
+	goto L6;
+	L6:
 	/************ concat format {} ************/
-	t0 = H + 0;
-	heap[(int)H] = 74;
-	H = H + 1;
-	heap[(int)H] = -1;
-	H = H + 1;
-	/************ Printf {} ************/
-	t4 = P + 1;
-	t4 = t4 + 1;
-	stack[(int)t4] = t0;
-	P = P + 1;
-	printfString();
-	t5 = stack[(int)P];
-	P = P - 1;
-	/************ concat format {} ************/
-	t6 = H + 0;
-	heap[(int)H] = 79;
+	t3 = H + 0;
+	heap[(int)H] = 32;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
 	/************ Printf {} ************/
 	t7 = P + 1;
 	t7 = t7 + 1;
-	stack[(int)t7] = t6;
+	stack[(int)t7] = t3;
 	P = P + 1;
 	printfString();
 	t8 = stack[(int)P];
 	P = P - 1;
 	/************ concat format {} ************/
 	t9 = H + 0;
-	heap[(int)H] = 83;
+	heap[(int)H] = 45;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
@@ -70,50 +85,102 @@ void main() {
 	printfString();
 	t11 = stack[(int)P];
 	P = P - 1;
+	/************ PRIMITIVO BOOLEAN ************/
+	goto L9;
+	goto L10;
+	L9:
+	t12 = 1 + 0;
+	goto L11;
+	L10:
+	t12 = 0 + 0;
+	goto L11;
+	L11:
+	/************ Printf Boolean ************/
+	if(t12 == 1) goto L12;
+	goto L13;
+	L12:
+	printf("%c",(char)116);
+	printf("%c",(char)114);
+	printf("%c",(char)117);
+	printf("%c",(char)101);
+	goto L14;
+	L13:
+	printf("%c",(char)102);
+	printf("%c",(char)97);
+	printf("%c",(char)108);
+	printf("%c",(char)115);
+	printf("%c",(char)101);
+	goto L14;
+	L14:
 	/************ concat format {} ************/
-	t12 = H + 0;
-	heap[(int)H] = 69;
+	t13 = H + 0;
+	heap[(int)H] = 32;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
 	/************ Printf {} ************/
-	t13 = P + 1;
-	t13 = t13 + 1;
-	stack[(int)t13] = t12;
+	t14 = P + 1;
+	t14 = t14 + 1;
+	stack[(int)t14] = t13;
 	P = P + 1;
 	printfString();
-	t14 = stack[(int)P];
-	P = P - 1;
-	/************ PRIMITIVO STRING ************/
-	t15 = H + 0;
-	heap[(int)H] = 97;
-	H = H + 1;
-	heap[(int)H] = -1;
-	H = H + 1;
-	/************ Printf String ************/
-	t16 = P + 1;
-	t16 = t16 + 1;
-	stack[(int)t16] = t15;
-	P = P + 1;
-	printfString();
-	t17 = stack[(int)P];
+	t15 = stack[(int)P];
 	P = P - 1;
 	/************ concat format {} ************/
-	t18 = H + 0;
+	t16 = H + 0;
 	heap[(int)H] = 45;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
 	/************ Printf {} ************/
-	t19 = P + 1;
-	t19 = t19 + 1;
-	stack[(int)t19] = t18;
+	t17 = P + 1;
+	t17 = t17 + 1;
+	stack[(int)t17] = t16;
 	P = P + 1;
 	printfString();
-	t20 = stack[(int)P];
+	t18 = stack[(int)P];
 	P = P - 1;
-	/************ Printf Integer ************/
-	printf("%d",(int)1);
+	/************ Identificador ************/
+	t19 = stack[(int)0];
+	/************ Printf Boolean ************/
+	if(t19 == 1) goto L15;
+	goto L16;
+	L15:
+	printf("%c",(char)116);
+	printf("%c",(char)114);
+	printf("%c",(char)117);
+	printf("%c",(char)101);
+	goto L17;
+	L16:
+	printf("%c",(char)102);
+	printf("%c",(char)97);
+	printf("%c",(char)108);
+	printf("%c",(char)115);
+	printf("%c",(char)101);
+	goto L17;
+	L17:
+	/************ Salto de Linea \n ************/
+	printf("%c",10);
+	/************ PRINTF ************/
+	/************ Identificador ************/
+	t20 = stack[(int)0];
+	/************ Printf Boolean ************/
+	if(t20 == 1) goto L18;
+	goto L19;
+	L18:
+	printf("%c",(char)116);
+	printf("%c",(char)114);
+	printf("%c",(char)117);
+	printf("%c",(char)101);
+	goto L20;
+	L19:
+	printf("%c",(char)102);
+	printf("%c",(char)97);
+	printf("%c",(char)108);
+	printf("%c",(char)115);
+	printf("%c",(char)101);
+	goto L20;
+	L20:
 	/************ concat format {} ************/
 	t21 = H + 0;
 	heap[(int)H] = 32;
@@ -142,70 +209,80 @@ void main() {
 	printfString();
 	t26 = stack[(int)P];
 	P = P - 1;
-	/************ concat format {} ************/
-	t27 = H + 0;
-	heap[(int)H] = 32;
-	H = H + 1;
-	heap[(int)H] = -1;
-	H = H + 1;
-	/************ Printf {} ************/
-	t28 = P + 1;
-	t28 = t28 + 1;
-	stack[(int)t28] = t27;
-	P = P + 1;
-	printfString();
-	t29 = stack[(int)P];
-	P = P - 1;
-	/************ Relacional == ************/
-	if(11 == 1) goto L2;
-	goto L3;
+	/************ PRIMITIVO BOOLEAN ************/
+	goto L21;
+	goto L22;
+	L21:
+	t27 = 1 + 0;
+	goto L23;
+	L22:
+	t27 = 0 + 0;
+	goto L23;
+	L23:
 	/************ Printf Boolean ************/
-	L2:
+	if(t27 == 1) goto L24;
+	goto L25;
+	L24:
 	printf("%c",(char)116);
 	printf("%c",(char)114);
 	printf("%c",(char)117);
 	printf("%c",(char)101);
-	goto L4;
-	L3:
+	goto L26;
+	L25:
 	printf("%c",(char)102);
 	printf("%c",(char)97);
 	printf("%c",(char)108);
 	printf("%c",(char)115);
 	printf("%c",(char)101);
-	goto L4;
-	L4:
+	goto L26;
+	L26:
 	/************ concat format {} ************/
-	t30 = H + 0;
-	heap[(int)H] = 37;
+	t28 = H + 0;
+	heap[(int)H] = 32;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
 	/************ Printf {} ************/
-	t31 = P + 1;
-	t31 = t31 + 1;
-	stack[(int)t31] = t30;
+	t29 = P + 1;
+	t29 = t29 + 1;
+	stack[(int)t29] = t28;
 	P = P + 1;
 	printfString();
-	t32 = stack[(int)P];
+	t30 = stack[(int)P];
 	P = P - 1;
 	/************ concat format {} ************/
-	t33 = H + 0;
-	heap[(int)H] = 37;
+	t31 = H + 0;
+	heap[(int)H] = 45;
 	H = H + 1;
 	heap[(int)H] = -1;
 	H = H + 1;
 	/************ Printf {} ************/
-	t34 = P + 1;
-	t34 = t34 + 1;
-	stack[(int)t34] = t33;
+	t32 = P + 1;
+	t32 = t32 + 1;
+	stack[(int)t32] = t31;
 	P = P + 1;
 	printfString();
-	t35 = stack[(int)P];
+	t33 = stack[(int)P];
 	P = P - 1;
 	/************ Identificador ************/
-	t36 = stack[(int)0];
-	/************ Printf Integer ************/
-	printf("%d",(int)t36);
+	t34 = stack[(int)0];
+	/************ Printf Boolean ************/
+	if(t34 == 1) goto L27;
+	goto L28;
+	L27:
+	printf("%c",(char)116);
+	printf("%c",(char)114);
+	printf("%c",(char)117);
+	printf("%c",(char)101);
+	goto L29;
+	L28:
+	printf("%c",(char)102);
+	printf("%c",(char)97);
+	printf("%c",(char)108);
+	printf("%c",(char)115);
+	printf("%c",(char)101);
+	goto L29;
+	L29:
 	/************ Salto de Linea \n ************/
 	printf("%c",10);
 	

@@ -48,25 +48,33 @@ func (p Primitivo) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator
 
 
 	} else if p.Type == interfaces.BOOLEAN {
+		gen.AddComment("PRIMITIVO BOOLEAN")
 		EV := gen.NewLabel()
 		EF := gen.NewLabel()
+		newLabel := gen.NewLabel()
+		newTemp := gen.NewTemp()
 
 		if p.Value.(bool) {
 			gen.AddGoto(EV)
 			gen.AddGoto(EF)
+			
+			gen.Boolean(EV, EF, newLabel, newTemp)
 				
 		}else {
 			gen.AddGoto(EF)
 			gen.AddGoto(EV)
+			newLabel := gen.NewLabel()
+			newTemp := gen.NewTemp()
+			gen.Boolean(EV, EF, newLabel, newTemp)
 			
 		}
 
 		return interfaces.Value{
-			Value:      "",
-			IsTemp:     false,
+			Value:      newTemp,
+			IsTemp:     true,
 			Type:       p.Type,
-			TrueLabel:  EV,
-			FalseLabel: EF,
+			TrueLabel:  "",
+			FalseLabel: "",
 		}
 	} else if p.Type == interfaces.INTEGER || p.Type == interfaces.FLOAT {
 

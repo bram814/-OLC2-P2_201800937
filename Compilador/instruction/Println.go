@@ -62,10 +62,18 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 								
 								if result.Type == interfaces.BOOLEAN {
 									gen.AddComment("Printf Boolean")
-									if !result.IsTemp {
+									if result.IsTemp {
+
+										newLabelEV := gen.NewLabel()
+										newLabelEF := gen.NewLabel()
+
+										gen.AddIf(result.Value,"1","==",newLabelEV)
+										gen.AddGoto(newLabelEF)
 										newLabel := gen.NewLabel()
-										gen.AddBoolean(result.TrueLabel, result.FalseLabel, newLabel)
+										gen.AddBoolean(newLabelEV, newLabelEF, newLabel)
 									}
+									
+									
 
 
 								} else if result.Type == interfaces.INTEGER {
