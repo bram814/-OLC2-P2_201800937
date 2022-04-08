@@ -415,6 +415,30 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddIf(exp_left.Value, exp_right.Value, "==", EV)
 				gen.AddGoto(EF)
 
+			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
+
+				if !tree.IsCompareStr {
+					gen.AddCompareString()
+					tree.IsCompareStr = true
+				}
+
+				temp := gen.NewTemp()
+				gen.AddExpression(temp,"P",fmt.Sprintf("%v", tree.GetPos()),"+")
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_left.Value)
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_right.Value)
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"+")
+				gen.CompareString()
+				temp = gen.NewTemp()
+				gen.AddExpressionStack(temp,"P")
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"-")
+
+
+				gen.AddIf(temp, "1", "==", EV)
+				gen.AddGoto(EF)
+
+
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar ==.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
@@ -451,6 +475,30 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 
 				gen.AddIf(exp_left.Value, exp_right.Value, "!=", EV)
 				gen.AddGoto(EF)
+
+			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
+
+				if !tree.IsCompareStr {
+					gen.AddCompareString()
+					tree.IsCompareStr = true
+				}
+
+				temp := gen.NewTemp()
+				gen.AddExpression(temp,"P",fmt.Sprintf("%v", tree.GetPos()),"+")
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_left.Value)
+				gen.AddExpression(temp,temp,"1","+")
+				gen.AddStack(temp,exp_right.Value)
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"+")
+				gen.CompareString()
+				temp = gen.NewTemp()
+				gen.AddExpressionStack(temp,"P")
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"-")
+
+
+				gen.AddIf(temp, "0", "==", EV)
+				gen.AddGoto(EF)
+
 
 			} else {
 				excep := ast.NewException("Semantico","No es posible Comparar !=.", p.Row, p.Column)

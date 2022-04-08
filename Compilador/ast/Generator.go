@@ -189,6 +189,49 @@ func (g *Generator) ConcatString() {
 	g.code.Add("concatString();")
 }
 
+/************************************************* [NATIVE][STRING][COMPARE] *************************************************/
+ func (g *Generator) AddCompareString() {
+ 		
+ 	conca := ""
+ 	// conca1 := "" // conca1
+ 	temp 	:= g.NewTemp() 	// t2
+ 	auxTemp := g.NewTemp() 	// t3
+ 	newTemp := g.NewTemp()  // t4
+ 	newLabel0 := g.NewLabel()		// L0
+ 	newLabel1 :=  g.NewLabel()		// L1
+ 	newLabel2 :=  g.NewLabel()		// L2
+ 	newLabel3 :=  g.NewLabel()		// L3
+ 	g.native.Add("\r/************ NATIVE COMPARE STRING ************/")
+ 	g.native.Add("\rvoid compareString(){")
+
+	g.native.Add(temp + " = P + 1;")
+	g.native.Add(auxTemp + " = stack[(int)"+ temp+ "];")
+	g.native.Add(temp + " = " + temp + " + 1;")
+	g.native.Add(newTemp + " = stack[(int)" + temp + "];")
+	g.native.Add(newLabel1 + ":")
+	temp = g.NewTemp() // t5
+	g.native.Add(temp + " = heap[(int)" + auxTemp + "];")
+	conca += auxTemp + " = " + auxTemp + " + 1;"
+	auxTemp = g.NewTemp() // t6
+	g.native.Add(auxTemp + " = heap[(int)" + newTemp + "];")
+	g.native.Add("if (" + temp + " != " + auxTemp + ") goto " + newLabel3 + ";")
+	g.native.Add("if (" + temp + " == -1) goto " + newLabel2 + ";")
+	g.native.Add(conca)
+	g.native.Add(newTemp + " = " + newTemp + " + 1;")
+	g.native.Add("goto " + newLabel1 + ";")
+	g.native.Add(newLabel2 + ":")
+	g.native.Add("stack[(int)P] = 1;")
+	g.native.Add("goto " + newLabel0 + ";")
+	g.native.Add(newLabel3 + ":")
+	g.native.Add("stack[(int)P] = 0;")
+	g.native.Add(newLabel0 + ":")
+ 	g.native.Add("return;\n}")
+}
+
+func (g *Generator) CompareString() {
+	g.code.Add("compareString();")
+}
+
 
 /************************************************* [BOOLEAN] *************************************************/
  func (g *Generator) AddBoolean(EV string, EF string, newLabel string) {

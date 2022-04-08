@@ -1,5 +1,5 @@
 fn main() {
 	
-  	println!("<:{} - >:{} - <={} - >=:{} ",true < true, true > true, true <= true,true >= true);
+  	println!("{}","a"=="a");
   	
 }

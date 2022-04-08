@@ -10,9 +10,10 @@ import (
 
 type Arbol struct {
 	Code     	 *arrayList.List
-	StackGlobal  int
-	IsPrimitive  bool
-	IsCocant     bool
+	StackGlobal   int
+	IsPrimitive   bool
+	IsCocant      bool
+	IsCompareStr  bool
 	_Exception   *arrayList.List
 	// Tabla_Global environment.Environment
 }
@@ -28,11 +29,12 @@ type Exception struct {
 
 func NewArbol() *Arbol {
 	tree := Arbol{
-		Code 		: arrayList.New(),
-		StackGlobal : 0,
-		IsPrimitive : false,
-		IsCocant	: false,
-		_Exception	: arrayList.New()} 	
+		Code 		 : arrayList.New(),
+		StackGlobal  : 0,
+		IsPrimitive  : false,
+		IsCocant	 : false,
+		IsCompareStr : false,
+		_Exception	 : arrayList.New()} 	
 	return &tree
 }
 
