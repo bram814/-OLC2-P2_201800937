@@ -590,6 +590,7 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				exp_left = p.left.Compilar(env, tree, gen)
 			}
 
+			gen.AddComment("Logico !")
 			if exp_left.Type == interfaces.BOOLEAN {
 
 

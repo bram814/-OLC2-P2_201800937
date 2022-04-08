@@ -29,14 +29,10 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 		newPos := -1;
 		contExpre := 0;
 
-		gen.AddComment("PRINTF")
-
-
 		for i := 0; i < len(p.Formato); i++ {
 			
 			if p.Formato[i] == 123 { //  Caracter ASCII {
-				
-				
+
 				newPos = devolverPos(p.Formato, i)
 				if newPos == -2 {
 					excep := ast.NewException("Semantico","Formato incorrecto {}, hace falta }.", p.Row, p.Column)
@@ -119,7 +115,7 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 			
 			if !condBool && p.Formato[i] != 125 { // ASCII }
 				
-				gen.AddComment("concat format {}")
+				gen.AddComment("Printf format {}")
 				auxTemp := gen.NewTemp()
 				gen.AddExpression(auxTemp,"H","0","+")
 
