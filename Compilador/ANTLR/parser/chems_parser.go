@@ -22,7 +22,7 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 63, 302,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 64, 304,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
@@ -37,121 +37,122 @@ var parserATN = []uint16{
 	8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3,
 	8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 145, 10, 8, 3, 9, 3, 9, 3, 9, 3,
 	9, 3, 9, 3, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10,
-	3, 10, 3, 10, 5, 10, 163, 10, 10, 3, 11, 6, 11, 166, 10, 11, 13, 11, 14,
-	11, 167, 3, 11, 3, 11, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12,
-	5, 12, 179, 10, 12, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3,
-	13, 3, 13, 5, 13, 190, 10, 13, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14,
-	3, 14, 3, 14, 5, 14, 200, 10, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 7,
-	14, 207, 10, 14, 12, 14, 14, 14, 210, 11, 14, 3, 15, 3, 15, 3, 15, 3, 15,
-	3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 7, 15, 221, 10, 15, 12, 15, 14, 15,
-	224, 11, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3,
-	16, 3, 16, 3, 16, 3, 16, 3, 16, 5, 16, 239, 10, 16, 3, 16, 3, 16, 3, 16,
-	3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 7, 16, 251, 10, 16, 12,
-	16, 14, 16, 254, 11, 16, 3, 17, 3, 17, 3, 17, 3, 18, 3, 18, 3, 18, 3, 18,
+	3, 10, 3, 10, 3, 10, 3, 10, 5, 10, 165, 10, 10, 3, 11, 6, 11, 168, 10,
+	11, 13, 11, 14, 11, 169, 3, 11, 3, 11, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12,
+	3, 12, 3, 12, 5, 12, 181, 10, 12, 3, 13, 3, 13, 3, 13, 3, 13, 3, 13, 3,
+	13, 3, 13, 3, 13, 3, 13, 5, 13, 192, 10, 13, 3, 14, 3, 14, 3, 14, 3, 14,
+	3, 14, 3, 14, 3, 14, 3, 14, 5, 14, 202, 10, 14, 3, 14, 3, 14, 3, 14, 3,
+	14, 3, 14, 7, 14, 209, 10, 14, 12, 14, 14, 14, 212, 11, 14, 3, 15, 3, 15,
+	3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 7, 15, 223, 10, 15, 12,
+	15, 14, 15, 226, 11, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16,
+	3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 5, 16, 241, 10, 16, 3, 16, 3,
+	16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 7, 16, 253,
+	10, 16, 12, 16, 14, 16, 256, 11, 16, 3, 17, 3, 17, 3, 17, 3, 18, 3, 18,
 	3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3,
-	18, 5, 18, 274, 10, 18, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19,
+	18, 3, 18, 3, 18, 5, 18, 276, 10, 18, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19,
 	3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3,
-	19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 5, 19, 300, 10, 19, 3, 19,
-	2, 5, 26, 28, 30, 20, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
-	30, 32, 34, 36, 2, 6, 3, 2, 57, 58, 4, 2, 38, 39, 42, 45, 3, 2, 46, 48,
-	3, 2, 49, 50, 2, 320, 2, 38, 3, 2, 2, 2, 4, 42, 3, 2, 2, 2, 6, 51, 3, 2,
-	2, 2, 8, 66, 3, 2, 2, 2, 10, 84, 3, 2, 2, 2, 12, 86, 3, 2, 2, 2, 14, 144,
-	3, 2, 2, 2, 16, 146, 3, 2, 2, 2, 18, 162, 3, 2, 2, 2, 20, 165, 3, 2, 2,
-	2, 22, 178, 3, 2, 2, 2, 24, 189, 3, 2, 2, 2, 26, 199, 3, 2, 2, 2, 28, 211,
-	3, 2, 2, 2, 30, 238, 3, 2, 2, 2, 32, 255, 3, 2, 2, 2, 34, 273, 3, 2, 2,
-	2, 36, 299, 3, 2, 2, 2, 38, 39, 5, 4, 3, 2, 39, 40, 8, 2, 1, 2, 40, 3,
-	3, 2, 2, 2, 41, 43, 5, 8, 5, 2, 42, 41, 3, 2, 2, 2, 43, 44, 3, 2, 2, 2,
-	44, 42, 3, 2, 2, 2, 44, 45, 3, 2, 2, 2, 45, 46, 3, 2, 2, 2, 46, 47, 8,
-	3, 1, 2, 47, 5, 3, 2, 2, 2, 48, 49, 7, 34, 2, 2, 49, 52, 8, 4, 1, 2, 50,
-	52, 8, 4, 1, 2, 51, 48, 3, 2, 2, 2, 51, 50, 3, 2, 2, 2, 52, 7, 3, 2, 2,
-	2, 53, 54, 5, 10, 6, 2, 54, 55, 5, 6, 4, 2, 55, 56, 8, 5, 1, 2, 56, 67,
-	3, 2, 2, 2, 57, 58, 5, 12, 7, 2, 58, 59, 8, 5, 1, 2, 59, 67, 3, 2, 2, 2,
-	60, 61, 5, 14, 8, 2, 61, 62, 8, 5, 1, 2, 62, 67, 3, 2, 2, 2, 63, 64, 5,
-	16, 9, 2, 64, 65, 8, 5, 1, 2, 65, 67, 3, 2, 2, 2, 66, 53, 3, 2, 2, 2, 66,
-	57, 3, 2, 2, 2, 66, 60, 3, 2, 2, 2, 66, 63, 3, 2, 2, 2, 67, 9, 3, 2, 2,
-	2, 68, 69, 7, 4, 2, 2, 69, 70, 7, 51, 2, 2, 70, 71, 5, 34, 18, 2, 71, 72,
-	7, 52, 2, 2, 72, 73, 7, 34, 2, 2, 73, 74, 8, 6, 1, 2, 74, 85, 3, 2, 2,
-	2, 75, 76, 7, 4, 2, 2, 76, 77, 7, 51, 2, 2, 77, 78, 7, 29, 2, 2, 78, 79,
-	7, 35, 2, 2, 79, 80, 5, 20, 11, 2, 80, 81, 7, 52, 2, 2, 81, 82, 7, 34,
-	2, 2, 82, 83, 8, 6, 1, 2, 83, 85, 3, 2, 2, 2, 84, 68, 3, 2, 2, 2, 84, 75,
-	3, 2, 2, 2, 85, 11, 3, 2, 2, 2, 86, 87, 7, 19, 2, 2, 87, 88, 7, 18, 2,
-	2, 88, 89, 7, 51, 2, 2, 89, 90, 7, 52, 2, 2, 90, 91, 7, 53, 2, 2, 91, 92,
-	5, 4, 3, 2, 92, 93, 7, 54, 2, 2, 93, 94, 8, 7, 1, 2, 94, 13, 3, 2, 2, 2,
-	95, 96, 7, 6, 2, 2, 96, 97, 7, 7, 2, 2, 97, 98, 7, 31, 2, 2, 98, 99, 7,
-	37, 2, 2, 99, 100, 5, 24, 13, 2, 100, 101, 7, 34, 2, 2, 101, 102, 8, 8,
-	1, 2, 102, 145, 3, 2, 2, 2, 103, 104, 7, 6, 2, 2, 104, 105, 7, 7, 2, 2,
-	105, 106, 7, 31, 2, 2, 106, 107, 7, 36, 2, 2, 107, 108, 5, 18, 10, 2, 108,
-	109, 7, 34, 2, 2, 109, 110, 8, 8, 1, 2, 110, 145, 3, 2, 2, 2, 111, 112,
-	7, 6, 2, 2, 112, 113, 7, 7, 2, 2, 113, 114, 7, 31, 2, 2, 114, 115, 7, 36,
-	2, 2, 115, 116, 5, 18, 10, 2, 116, 117, 7, 37, 2, 2, 117, 118, 5, 24, 13,
-	2, 118, 119, 7, 34, 2, 2, 119, 120, 8, 8, 1, 2, 120, 145, 3, 2, 2, 2, 121,
-	122, 7, 6, 2, 2, 122, 123, 7, 31, 2, 2, 123, 124, 7, 37, 2, 2, 124, 125,
-	5, 24, 13, 2, 125, 126, 7, 34, 2, 2, 126, 127, 8, 8, 1, 2, 127, 145, 3,
-	2, 2, 2, 128, 129, 7, 6, 2, 2, 129, 130, 7, 31, 2, 2, 130, 131, 7, 36,
-	2, 2, 131, 132, 5, 18, 10, 2, 132, 133, 7, 34, 2, 2, 133, 134, 8, 8, 1,
-	2, 134, 145, 3, 2, 2, 2, 135, 136, 7, 6, 2, 2, 136, 137, 7, 31, 2, 2, 137,
-	138, 7, 36, 2, 2, 138, 139, 5, 18, 10, 2, 139, 140, 7, 37, 2, 2, 140, 141,
-	5, 24, 13, 2, 141, 142, 7, 34, 2, 2, 142, 143, 8, 8, 1, 2, 143, 145, 3,
-	2, 2, 2, 144, 95, 3, 2, 2, 2, 144, 103, 3, 2, 2, 2, 144, 111, 3, 2, 2,
-	2, 144, 121, 3, 2, 2, 2, 144, 128, 3, 2, 2, 2, 144, 135, 3, 2, 2, 2, 145,
-	15, 3, 2, 2, 2, 146, 147, 7, 31, 2, 2, 147, 148, 7, 37, 2, 2, 148, 149,
-	5, 24, 13, 2, 149, 150, 7, 34, 2, 2, 150, 151, 8, 9, 1, 2, 151, 17, 3,
-	2, 2, 2, 152, 153, 7, 21, 2, 2, 153, 163, 8, 10, 1, 2, 154, 155, 7, 22,
-	2, 2, 155, 163, 8, 10, 1, 2, 156, 157, 7, 23, 2, 2, 157, 163, 8, 10, 1,
-	2, 158, 159, 7, 25, 2, 2, 159, 163, 8, 10, 1, 2, 160, 161, 7, 24, 2, 2,
-	161, 163, 8, 10, 1, 2, 162, 152, 3, 2, 2, 2, 162, 154, 3, 2, 2, 2, 162,
-	156, 3, 2, 2, 2, 162, 158, 3, 2, 2, 2, 162, 160, 3, 2, 2, 2, 163, 19, 3,
-	2, 2, 2, 164, 166, 5, 22, 12, 2, 165, 164, 3, 2, 2, 2, 166, 167, 3, 2,
-	2, 2, 167, 165, 3, 2, 2, 2, 167, 168, 3, 2, 2, 2, 168, 169, 3, 2, 2, 2,
-	169, 170, 8, 11, 1, 2, 170, 21, 3, 2, 2, 2, 171, 172, 5, 24, 13, 2, 172,
-	173, 7, 35, 2, 2, 173, 174, 8, 12, 1, 2, 174, 179, 3, 2, 2, 2, 175, 176,
-	5, 24, 13, 2, 176, 177, 8, 12, 1, 2, 177, 179, 3, 2, 2, 2, 178, 171, 3,
-	2, 2, 2, 178, 175, 3, 2, 2, 2, 179, 23, 3, 2, 2, 2, 180, 181, 5, 26, 14,
-	2, 181, 182, 8, 13, 1, 2, 182, 190, 3, 2, 2, 2, 183, 184, 5, 28, 15, 2,
-	184, 185, 8, 13, 1, 2, 185, 190, 3, 2, 2, 2, 186, 187, 5, 30, 16, 2, 187,
-	188, 8, 13, 1, 2, 188, 190, 3, 2, 2, 2, 189, 180, 3, 2, 2, 2, 189, 183,
-	3, 2, 2, 2, 189, 186, 3, 2, 2, 2, 190, 25, 3, 2, 2, 2, 191, 192, 8, 14,
-	1, 2, 192, 193, 7, 60, 2, 2, 193, 194, 5, 26, 14, 5, 194, 195, 8, 14, 1,
-	2, 195, 200, 3, 2, 2, 2, 196, 197, 5, 28, 15, 2, 197, 198, 8, 14, 1, 2,
-	198, 200, 3, 2, 2, 2, 199, 191, 3, 2, 2, 2, 199, 196, 3, 2, 2, 2, 200,
-	208, 3, 2, 2, 2, 201, 202, 12, 4, 2, 2, 202, 203, 9, 2, 2, 2, 203, 204,
-	5, 26, 14, 5, 204, 205, 8, 14, 1, 2, 205, 207, 3, 2, 2, 2, 206, 201, 3,
-	2, 2, 2, 207, 210, 3, 2, 2, 2, 208, 206, 3, 2, 2, 2, 208, 209, 3, 2, 2,
-	2, 209, 27, 3, 2, 2, 2, 210, 208, 3, 2, 2, 2, 211, 212, 8, 15, 1, 2, 212,
-	213, 5, 30, 16, 2, 213, 214, 8, 15, 1, 2, 214, 222, 3, 2, 2, 2, 215, 216,
-	12, 4, 2, 2, 216, 217, 9, 3, 2, 2, 217, 218, 5, 28, 15, 5, 218, 219, 8,
-	15, 1, 2, 219, 221, 3, 2, 2, 2, 220, 215, 3, 2, 2, 2, 221, 224, 3, 2, 2,
-	2, 222, 220, 3, 2, 2, 2, 222, 223, 3, 2, 2, 2, 223, 29, 3, 2, 2, 2, 224,
-	222, 3, 2, 2, 2, 225, 226, 8, 16, 1, 2, 226, 227, 7, 50, 2, 2, 227, 228,
-	5, 30, 16, 7, 228, 229, 8, 16, 1, 2, 229, 239, 3, 2, 2, 2, 230, 231, 5,
-	32, 17, 2, 231, 232, 8, 16, 1, 2, 232, 239, 3, 2, 2, 2, 233, 234, 7, 51,
-	2, 2, 234, 235, 5, 24, 13, 2, 235, 236, 7, 52, 2, 2, 236, 237, 8, 16, 1,
-	2, 237, 239, 3, 2, 2, 2, 238, 225, 3, 2, 2, 2, 238, 230, 3, 2, 2, 2, 238,
-	233, 3, 2, 2, 2, 239, 252, 3, 2, 2, 2, 240, 241, 12, 6, 2, 2, 241, 242,
-	9, 4, 2, 2, 242, 243, 5, 30, 16, 7, 243, 244, 8, 16, 1, 2, 244, 251, 3,
-	2, 2, 2, 245, 246, 12, 5, 2, 2, 246, 247, 9, 5, 2, 2, 247, 248, 5, 30,
-	16, 6, 248, 249, 8, 16, 1, 2, 249, 251, 3, 2, 2, 2, 250, 240, 3, 2, 2,
-	2, 250, 245, 3, 2, 2, 2, 251, 254, 3, 2, 2, 2, 252, 250, 3, 2, 2, 2, 252,
-	253, 3, 2, 2, 2, 253, 31, 3, 2, 2, 2, 254, 252, 3, 2, 2, 2, 255, 256, 5,
-	34, 18, 2, 256, 257, 8, 17, 1, 2, 257, 33, 3, 2, 2, 2, 258, 259, 7, 26,
-	2, 2, 259, 274, 8, 18, 1, 2, 260, 261, 7, 27, 2, 2, 261, 274, 8, 18, 1,
-	2, 262, 263, 7, 29, 2, 2, 263, 274, 8, 18, 1, 2, 264, 265, 7, 30, 2, 2,
-	265, 274, 8, 18, 1, 2, 266, 267, 7, 28, 2, 2, 267, 274, 8, 18, 1, 2, 268,
-	269, 7, 31, 2, 2, 269, 274, 8, 18, 1, 2, 270, 271, 5, 36, 19, 2, 271, 272,
-	8, 18, 1, 2, 272, 274, 3, 2, 2, 2, 273, 258, 3, 2, 2, 2, 273, 260, 3, 2,
-	2, 2, 273, 262, 3, 2, 2, 2, 273, 264, 3, 2, 2, 2, 273, 266, 3, 2, 2, 2,
-	273, 268, 3, 2, 2, 2, 273, 270, 3, 2, 2, 2, 274, 35, 3, 2, 2, 2, 275, 276,
-	7, 26, 2, 2, 276, 277, 7, 20, 2, 2, 277, 278, 7, 21, 2, 2, 278, 300, 8,
-	19, 1, 2, 279, 280, 7, 26, 2, 2, 280, 281, 7, 20, 2, 2, 281, 282, 7, 22,
-	2, 2, 282, 300, 8, 19, 1, 2, 283, 284, 7, 27, 2, 2, 284, 285, 7, 20, 2,
-	2, 285, 286, 7, 21, 2, 2, 286, 300, 8, 19, 1, 2, 287, 288, 7, 27, 2, 2,
-	288, 289, 7, 20, 2, 2, 289, 290, 7, 22, 2, 2, 290, 300, 8, 19, 1, 2, 291,
-	292, 7, 30, 2, 2, 292, 293, 7, 20, 2, 2, 293, 294, 7, 21, 2, 2, 294, 300,
-	8, 19, 1, 2, 295, 296, 7, 30, 2, 2, 296, 297, 7, 20, 2, 2, 297, 298, 7,
-	22, 2, 2, 298, 300, 8, 19, 1, 2, 299, 275, 3, 2, 2, 2, 299, 279, 3, 2,
-	2, 2, 299, 283, 3, 2, 2, 2, 299, 287, 3, 2, 2, 2, 299, 291, 3, 2, 2, 2,
-	299, 295, 3, 2, 2, 2, 300, 37, 3, 2, 2, 2, 19, 44, 51, 66, 84, 144, 162,
-	167, 178, 189, 199, 208, 222, 238, 250, 252, 273, 299,
+	19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 5, 19, 302,
+	10, 19, 3, 19, 2, 5, 26, 28, 30, 20, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20,
+	22, 24, 26, 28, 30, 32, 34, 36, 2, 6, 3, 2, 58, 59, 4, 2, 39, 40, 43, 46,
+	3, 2, 47, 49, 3, 2, 50, 51, 2, 323, 2, 38, 3, 2, 2, 2, 4, 42, 3, 2, 2,
+	2, 6, 51, 3, 2, 2, 2, 8, 66, 3, 2, 2, 2, 10, 84, 3, 2, 2, 2, 12, 86, 3,
+	2, 2, 2, 14, 144, 3, 2, 2, 2, 16, 146, 3, 2, 2, 2, 18, 164, 3, 2, 2, 2,
+	20, 167, 3, 2, 2, 2, 22, 180, 3, 2, 2, 2, 24, 191, 3, 2, 2, 2, 26, 201,
+	3, 2, 2, 2, 28, 213, 3, 2, 2, 2, 30, 240, 3, 2, 2, 2, 32, 257, 3, 2, 2,
+	2, 34, 275, 3, 2, 2, 2, 36, 301, 3, 2, 2, 2, 38, 39, 5, 4, 3, 2, 39, 40,
+	8, 2, 1, 2, 40, 3, 3, 2, 2, 2, 41, 43, 5, 8, 5, 2, 42, 41, 3, 2, 2, 2,
+	43, 44, 3, 2, 2, 2, 44, 42, 3, 2, 2, 2, 44, 45, 3, 2, 2, 2, 45, 46, 3,
+	2, 2, 2, 46, 47, 8, 3, 1, 2, 47, 5, 3, 2, 2, 2, 48, 49, 7, 35, 2, 2, 49,
+	52, 8, 4, 1, 2, 50, 52, 8, 4, 1, 2, 51, 48, 3, 2, 2, 2, 51, 50, 3, 2, 2,
+	2, 52, 7, 3, 2, 2, 2, 53, 54, 5, 10, 6, 2, 54, 55, 5, 6, 4, 2, 55, 56,
+	8, 5, 1, 2, 56, 67, 3, 2, 2, 2, 57, 58, 5, 12, 7, 2, 58, 59, 8, 5, 1, 2,
+	59, 67, 3, 2, 2, 2, 60, 61, 5, 14, 8, 2, 61, 62, 8, 5, 1, 2, 62, 67, 3,
+	2, 2, 2, 63, 64, 5, 16, 9, 2, 64, 65, 8, 5, 1, 2, 65, 67, 3, 2, 2, 2, 66,
+	53, 3, 2, 2, 2, 66, 57, 3, 2, 2, 2, 66, 60, 3, 2, 2, 2, 66, 63, 3, 2, 2,
+	2, 67, 9, 3, 2, 2, 2, 68, 69, 7, 4, 2, 2, 69, 70, 7, 52, 2, 2, 70, 71,
+	5, 34, 18, 2, 71, 72, 7, 53, 2, 2, 72, 73, 7, 35, 2, 2, 73, 74, 8, 6, 1,
+	2, 74, 85, 3, 2, 2, 2, 75, 76, 7, 4, 2, 2, 76, 77, 7, 52, 2, 2, 77, 78,
+	7, 30, 2, 2, 78, 79, 7, 36, 2, 2, 79, 80, 5, 20, 11, 2, 80, 81, 7, 53,
+	2, 2, 81, 82, 7, 35, 2, 2, 82, 83, 8, 6, 1, 2, 83, 85, 3, 2, 2, 2, 84,
+	68, 3, 2, 2, 2, 84, 75, 3, 2, 2, 2, 85, 11, 3, 2, 2, 2, 86, 87, 7, 19,
+	2, 2, 87, 88, 7, 18, 2, 2, 88, 89, 7, 52, 2, 2, 89, 90, 7, 53, 2, 2, 90,
+	91, 7, 54, 2, 2, 91, 92, 5, 4, 3, 2, 92, 93, 7, 55, 2, 2, 93, 94, 8, 7,
+	1, 2, 94, 13, 3, 2, 2, 2, 95, 96, 7, 6, 2, 2, 96, 97, 7, 7, 2, 2, 97, 98,
+	7, 32, 2, 2, 98, 99, 7, 38, 2, 2, 99, 100, 5, 24, 13, 2, 100, 101, 7, 35,
+	2, 2, 101, 102, 8, 8, 1, 2, 102, 145, 3, 2, 2, 2, 103, 104, 7, 6, 2, 2,
+	104, 105, 7, 7, 2, 2, 105, 106, 7, 32, 2, 2, 106, 107, 7, 37, 2, 2, 107,
+	108, 5, 18, 10, 2, 108, 109, 7, 35, 2, 2, 109, 110, 8, 8, 1, 2, 110, 145,
+	3, 2, 2, 2, 111, 112, 7, 6, 2, 2, 112, 113, 7, 7, 2, 2, 113, 114, 7, 32,
+	2, 2, 114, 115, 7, 37, 2, 2, 115, 116, 5, 18, 10, 2, 116, 117, 7, 38, 2,
+	2, 117, 118, 5, 24, 13, 2, 118, 119, 7, 35, 2, 2, 119, 120, 8, 8, 1, 2,
+	120, 145, 3, 2, 2, 2, 121, 122, 7, 6, 2, 2, 122, 123, 7, 32, 2, 2, 123,
+	124, 7, 38, 2, 2, 124, 125, 5, 24, 13, 2, 125, 126, 7, 35, 2, 2, 126, 127,
+	8, 8, 1, 2, 127, 145, 3, 2, 2, 2, 128, 129, 7, 6, 2, 2, 129, 130, 7, 32,
+	2, 2, 130, 131, 7, 37, 2, 2, 131, 132, 5, 18, 10, 2, 132, 133, 7, 35, 2,
+	2, 133, 134, 8, 8, 1, 2, 134, 145, 3, 2, 2, 2, 135, 136, 7, 6, 2, 2, 136,
+	137, 7, 32, 2, 2, 137, 138, 7, 37, 2, 2, 138, 139, 5, 18, 10, 2, 139, 140,
+	7, 38, 2, 2, 140, 141, 5, 24, 13, 2, 141, 142, 7, 35, 2, 2, 142, 143, 8,
+	8, 1, 2, 143, 145, 3, 2, 2, 2, 144, 95, 3, 2, 2, 2, 144, 103, 3, 2, 2,
+	2, 144, 111, 3, 2, 2, 2, 144, 121, 3, 2, 2, 2, 144, 128, 3, 2, 2, 2, 144,
+	135, 3, 2, 2, 2, 145, 15, 3, 2, 2, 2, 146, 147, 7, 32, 2, 2, 147, 148,
+	7, 38, 2, 2, 148, 149, 5, 24, 13, 2, 149, 150, 7, 35, 2, 2, 150, 151, 8,
+	9, 1, 2, 151, 17, 3, 2, 2, 2, 152, 153, 7, 21, 2, 2, 153, 165, 8, 10, 1,
+	2, 154, 155, 7, 22, 2, 2, 155, 165, 8, 10, 1, 2, 156, 157, 7, 23, 2, 2,
+	157, 165, 8, 10, 1, 2, 158, 159, 7, 26, 2, 2, 159, 165, 8, 10, 1, 2, 160,
+	161, 7, 24, 2, 2, 161, 165, 8, 10, 1, 2, 162, 163, 7, 25, 2, 2, 163, 165,
+	8, 10, 1, 2, 164, 152, 3, 2, 2, 2, 164, 154, 3, 2, 2, 2, 164, 156, 3, 2,
+	2, 2, 164, 158, 3, 2, 2, 2, 164, 160, 3, 2, 2, 2, 164, 162, 3, 2, 2, 2,
+	165, 19, 3, 2, 2, 2, 166, 168, 5, 22, 12, 2, 167, 166, 3, 2, 2, 2, 168,
+	169, 3, 2, 2, 2, 169, 167, 3, 2, 2, 2, 169, 170, 3, 2, 2, 2, 170, 171,
+	3, 2, 2, 2, 171, 172, 8, 11, 1, 2, 172, 21, 3, 2, 2, 2, 173, 174, 5, 24,
+	13, 2, 174, 175, 7, 36, 2, 2, 175, 176, 8, 12, 1, 2, 176, 181, 3, 2, 2,
+	2, 177, 178, 5, 24, 13, 2, 178, 179, 8, 12, 1, 2, 179, 181, 3, 2, 2, 2,
+	180, 173, 3, 2, 2, 2, 180, 177, 3, 2, 2, 2, 181, 23, 3, 2, 2, 2, 182, 183,
+	5, 26, 14, 2, 183, 184, 8, 13, 1, 2, 184, 192, 3, 2, 2, 2, 185, 186, 5,
+	28, 15, 2, 186, 187, 8, 13, 1, 2, 187, 192, 3, 2, 2, 2, 188, 189, 5, 30,
+	16, 2, 189, 190, 8, 13, 1, 2, 190, 192, 3, 2, 2, 2, 191, 182, 3, 2, 2,
+	2, 191, 185, 3, 2, 2, 2, 191, 188, 3, 2, 2, 2, 192, 25, 3, 2, 2, 2, 193,
+	194, 8, 14, 1, 2, 194, 195, 7, 61, 2, 2, 195, 196, 5, 26, 14, 5, 196, 197,
+	8, 14, 1, 2, 197, 202, 3, 2, 2, 2, 198, 199, 5, 28, 15, 2, 199, 200, 8,
+	14, 1, 2, 200, 202, 3, 2, 2, 2, 201, 193, 3, 2, 2, 2, 201, 198, 3, 2, 2,
+	2, 202, 210, 3, 2, 2, 2, 203, 204, 12, 4, 2, 2, 204, 205, 9, 2, 2, 2, 205,
+	206, 5, 26, 14, 5, 206, 207, 8, 14, 1, 2, 207, 209, 3, 2, 2, 2, 208, 203,
+	3, 2, 2, 2, 209, 212, 3, 2, 2, 2, 210, 208, 3, 2, 2, 2, 210, 211, 3, 2,
+	2, 2, 211, 27, 3, 2, 2, 2, 212, 210, 3, 2, 2, 2, 213, 214, 8, 15, 1, 2,
+	214, 215, 5, 30, 16, 2, 215, 216, 8, 15, 1, 2, 216, 224, 3, 2, 2, 2, 217,
+	218, 12, 4, 2, 2, 218, 219, 9, 3, 2, 2, 219, 220, 5, 28, 15, 5, 220, 221,
+	8, 15, 1, 2, 221, 223, 3, 2, 2, 2, 222, 217, 3, 2, 2, 2, 223, 226, 3, 2,
+	2, 2, 224, 222, 3, 2, 2, 2, 224, 225, 3, 2, 2, 2, 225, 29, 3, 2, 2, 2,
+	226, 224, 3, 2, 2, 2, 227, 228, 8, 16, 1, 2, 228, 229, 7, 51, 2, 2, 229,
+	230, 5, 30, 16, 7, 230, 231, 8, 16, 1, 2, 231, 241, 3, 2, 2, 2, 232, 233,
+	5, 32, 17, 2, 233, 234, 8, 16, 1, 2, 234, 241, 3, 2, 2, 2, 235, 236, 7,
+	52, 2, 2, 236, 237, 5, 24, 13, 2, 237, 238, 7, 53, 2, 2, 238, 239, 8, 16,
+	1, 2, 239, 241, 3, 2, 2, 2, 240, 227, 3, 2, 2, 2, 240, 232, 3, 2, 2, 2,
+	240, 235, 3, 2, 2, 2, 241, 254, 3, 2, 2, 2, 242, 243, 12, 6, 2, 2, 243,
+	244, 9, 4, 2, 2, 244, 245, 5, 30, 16, 7, 245, 246, 8, 16, 1, 2, 246, 253,
+	3, 2, 2, 2, 247, 248, 12, 5, 2, 2, 248, 249, 9, 5, 2, 2, 249, 250, 5, 30,
+	16, 6, 250, 251, 8, 16, 1, 2, 251, 253, 3, 2, 2, 2, 252, 242, 3, 2, 2,
+	2, 252, 247, 3, 2, 2, 2, 253, 256, 3, 2, 2, 2, 254, 252, 3, 2, 2, 2, 254,
+	255, 3, 2, 2, 2, 255, 31, 3, 2, 2, 2, 256, 254, 3, 2, 2, 2, 257, 258, 5,
+	34, 18, 2, 258, 259, 8, 17, 1, 2, 259, 33, 3, 2, 2, 2, 260, 261, 7, 27,
+	2, 2, 261, 276, 8, 18, 1, 2, 262, 263, 7, 28, 2, 2, 263, 276, 8, 18, 1,
+	2, 264, 265, 7, 30, 2, 2, 265, 276, 8, 18, 1, 2, 266, 267, 7, 31, 2, 2,
+	267, 276, 8, 18, 1, 2, 268, 269, 7, 29, 2, 2, 269, 276, 8, 18, 1, 2, 270,
+	271, 7, 32, 2, 2, 271, 276, 8, 18, 1, 2, 272, 273, 5, 36, 19, 2, 273, 274,
+	8, 18, 1, 2, 274, 276, 3, 2, 2, 2, 275, 260, 3, 2, 2, 2, 275, 262, 3, 2,
+	2, 2, 275, 264, 3, 2, 2, 2, 275, 266, 3, 2, 2, 2, 275, 268, 3, 2, 2, 2,
+	275, 270, 3, 2, 2, 2, 275, 272, 3, 2, 2, 2, 276, 35, 3, 2, 2, 2, 277, 278,
+	7, 27, 2, 2, 278, 279, 7, 20, 2, 2, 279, 280, 7, 21, 2, 2, 280, 302, 8,
+	19, 1, 2, 281, 282, 7, 27, 2, 2, 282, 283, 7, 20, 2, 2, 283, 284, 7, 22,
+	2, 2, 284, 302, 8, 19, 1, 2, 285, 286, 7, 28, 2, 2, 286, 287, 7, 20, 2,
+	2, 287, 288, 7, 21, 2, 2, 288, 302, 8, 19, 1, 2, 289, 290, 7, 28, 2, 2,
+	290, 291, 7, 20, 2, 2, 291, 292, 7, 22, 2, 2, 292, 302, 8, 19, 1, 2, 293,
+	294, 7, 31, 2, 2, 294, 295, 7, 20, 2, 2, 295, 296, 7, 21, 2, 2, 296, 302,
+	8, 19, 1, 2, 297, 298, 7, 31, 2, 2, 298, 299, 7, 20, 2, 2, 299, 300, 7,
+	22, 2, 2, 300, 302, 8, 19, 1, 2, 301, 277, 3, 2, 2, 2, 301, 281, 3, 2,
+	2, 2, 301, 285, 3, 2, 2, 2, 301, 289, 3, 2, 2, 2, 301, 293, 3, 2, 2, 2,
+	301, 297, 3, 2, 2, 2, 302, 37, 3, 2, 2, 2, 19, 44, 51, 66, 84, 144, 164,
+	169, 180, 191, 201, 210, 224, 240, 252, 254, 275, 301,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
@@ -160,17 +161,17 @@ var literalNames = []string{
 	"", "'print!'", "'println!'", "'number'", "'let'", "'mut'", "'if'", "'else'",
 	"'match'", "'while'", "'break'", "'continue'", "'return'", "'loop'", "'for'",
 	"'in'", "'main'", "'fn'", "'as'", "'i64'", "'f64'", "'String'", "'bool'",
-	"'&str'", "", "", "", "", "", "", "'..'", "'.'", "';'", "','", "':'", "'='",
-	"'=='", "'>='", "'=>'", "'->'", "'<='", "'!='", "'>'", "'<'", "'*'", "'/'",
-	"'%'", "'+'", "'-'", "'('", "')'", "'{'", "'}'", "'['", "']'", "'&&'",
-	"'||'", "'|'", "'!'",
+	"'char'", "'&str'", "", "", "", "", "", "", "'..'", "'.'", "';'", "','",
+	"':'", "'='", "'=='", "'>='", "'=>'", "'->'", "'<='", "'!='", "'>'", "'<'",
+	"'*'", "'/'", "'%'", "'+'", "'-'", "'('", "')'", "'{'", "'}'", "'['", "']'",
+	"'&&'", "'||'", "'|'", "'!'",
 }
 var symbolicNames = []string{
 	"", "R_PRINT", "R_PRINTLN", "P_NUMBER", "R_LET", "R_MUT", "R_IF", "R_ELSE",
 	"R_MATCH", "R_WHILE", "R_BREAK", "R_CONTINUE", "R_RETURN", "R_LOOP", "R_FOR",
 	"R_IN", "R_MAIN", "R_FUNCTION", "R_AS", "R_INT", "R_FLOAT", "R_STRING",
-	"R_BOOL", "R_STR", "NUMBER", "DOUBLE", "CHAR", "STRING", "BOOLEAN", "ID",
-	"TK_DOBLEPUNTO", "TK_PUNTO", "TK_PUNTOCOMA", "TK_COMA", "TK_DOSPUNTOS",
+	"R_BOOL", "R_CHAR", "R_STR", "NUMBER", "DOUBLE", "CHAR", "STRING", "BOOLEAN",
+	"ID", "TK_DOBLEPUNTO", "TK_PUNTO", "TK_PUNTOCOMA", "TK_COMA", "TK_DOSPUNTOS",
 	"TK_IGUAL", "TK_IGUALIGUAL", "TK_MAYORIGUAL", "TK_IGUALMAYOR", "TK_MENOSMAYOR",
 	"TK_MENORIGUAL", "TK_DIFIGUAL", "TK_MAYOR", "TK_MENOR", "TK_MULT", "TK_DIV",
 	"TK_MODULO", "TK_MAS", "TK_MENOS", "TK_PARA", "TK_PARC", "TK_LLAVEA", "TK_LLAVEC",
@@ -235,45 +236,46 @@ const (
 	ChemsR_FLOAT       = 20
 	ChemsR_STRING      = 21
 	ChemsR_BOOL        = 22
-	ChemsR_STR         = 23
-	ChemsNUMBER        = 24
-	ChemsDOUBLE        = 25
-	ChemsCHAR          = 26
-	ChemsSTRING        = 27
-	ChemsBOOLEAN       = 28
-	ChemsID            = 29
-	ChemsTK_DOBLEPUNTO = 30
-	ChemsTK_PUNTO      = 31
-	ChemsTK_PUNTOCOMA  = 32
-	ChemsTK_COMA       = 33
-	ChemsTK_DOSPUNTOS  = 34
-	ChemsTK_IGUAL      = 35
-	ChemsTK_IGUALIGUAL = 36
-	ChemsTK_MAYORIGUAL = 37
-	ChemsTK_IGUALMAYOR = 38
-	ChemsTK_MENOSMAYOR = 39
-	ChemsTK_MENORIGUAL = 40
-	ChemsTK_DIFIGUAL   = 41
-	ChemsTK_MAYOR      = 42
-	ChemsTK_MENOR      = 43
-	ChemsTK_MULT       = 44
-	ChemsTK_DIV        = 45
-	ChemsTK_MODULO     = 46
-	ChemsTK_MAS        = 47
-	ChemsTK_MENOS      = 48
-	ChemsTK_PARA       = 49
-	ChemsTK_PARC       = 50
-	ChemsTK_LLAVEA     = 51
-	ChemsTK_LLAVEC     = 52
-	ChemsTK_CORA       = 53
-	ChemsTK_CORC       = 54
-	ChemsTK_AND        = 55
-	ChemsTK_OR         = 56
-	ChemsTK_BARRA      = 57
-	ChemsTK_NOT        = 58
-	ChemsWHITESPACE    = 59
-	ChemsTK_MULTI      = 60
-	ChemsTK_LINE       = 61
+	ChemsR_CHAR        = 23
+	ChemsR_STR         = 24
+	ChemsNUMBER        = 25
+	ChemsDOUBLE        = 26
+	ChemsCHAR          = 27
+	ChemsSTRING        = 28
+	ChemsBOOLEAN       = 29
+	ChemsID            = 30
+	ChemsTK_DOBLEPUNTO = 31
+	ChemsTK_PUNTO      = 32
+	ChemsTK_PUNTOCOMA  = 33
+	ChemsTK_COMA       = 34
+	ChemsTK_DOSPUNTOS  = 35
+	ChemsTK_IGUAL      = 36
+	ChemsTK_IGUALIGUAL = 37
+	ChemsTK_MAYORIGUAL = 38
+	ChemsTK_IGUALMAYOR = 39
+	ChemsTK_MENOSMAYOR = 40
+	ChemsTK_MENORIGUAL = 41
+	ChemsTK_DIFIGUAL   = 42
+	ChemsTK_MAYOR      = 43
+	ChemsTK_MENOR      = 44
+	ChemsTK_MULT       = 45
+	ChemsTK_DIV        = 46
+	ChemsTK_MODULO     = 47
+	ChemsTK_MAS        = 48
+	ChemsTK_MENOS      = 49
+	ChemsTK_PARA       = 50
+	ChemsTK_PARC       = 51
+	ChemsTK_LLAVEA     = 52
+	ChemsTK_LLAVEC     = 53
+	ChemsTK_CORA       = 54
+	ChemsTK_CORC       = 55
+	ChemsTK_AND        = 56
+	ChemsTK_OR         = 57
+	ChemsTK_BARRA      = 58
+	ChemsTK_NOT        = 59
+	ChemsWHITESPACE    = 60
+	ChemsTK_MULTI      = 61
+	ChemsTK_LINE       = 62
 )
 
 // Chems rules.
@@ -2155,6 +2157,10 @@ func (s *Instr_tipoContext) R_BOOL() antlr.TerminalNode {
 	return s.GetToken(ChemsR_BOOL, 0)
 }
 
+func (s *Instr_tipoContext) R_CHAR() antlr.TerminalNode {
+	return s.GetToken(ChemsR_CHAR, 0)
+}
+
 func (s *Instr_tipoContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -2195,7 +2201,7 @@ func (p *Chems) Instr_tipo() (localctx IInstr_tipoContext) {
 		}
 	}()
 
-	p.SetState(160)
+	p.SetState(162)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
@@ -2238,6 +2244,14 @@ func (p *Chems) Instr_tipo() (localctx IInstr_tipoContext) {
 			p.Match(ChemsR_BOOL)
 		}
 		localctx.(*Instr_tipoContext).tipo_exp = interfaces.BOOLEAN
+
+	case ChemsR_CHAR:
+		p.EnterOuterAlt(localctx, 6)
+		{
+			p.SetState(160)
+			p.Match(ChemsR_CHAR)
+		}
+		localctx.(*Instr_tipoContext).tipo_exp = interfaces.CHAR
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
@@ -2389,13 +2403,13 @@ func (p *Chems) List_expression() (localctx IList_expressionContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(163)
+	p.SetState(165)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<ChemsNUMBER)|(1<<ChemsDOUBLE)|(1<<ChemsCHAR)|(1<<ChemsSTRING)|(1<<ChemsBOOLEAN)|(1<<ChemsID))) != 0) || (((_la-48)&-(0x1f+1)) == 0 && ((1<<uint((_la-48)))&((1<<(ChemsTK_MENOS-48))|(1<<(ChemsTK_PARA-48))|(1<<(ChemsTK_NOT-48)))) != 0) {
+	for ok := true; ok; ok = (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<ChemsNUMBER)|(1<<ChemsDOUBLE)|(1<<ChemsCHAR)|(1<<ChemsSTRING)|(1<<ChemsBOOLEAN)|(1<<ChemsID))) != 0) || (((_la-49)&-(0x1f+1)) == 0 && ((1<<uint((_la-49)))&((1<<(ChemsTK_MENOS-49))|(1<<(ChemsTK_PARA-49))|(1<<(ChemsTK_NOT-49)))) != 0) {
 		{
-			p.SetState(162)
+			p.SetState(164)
 
 			var _x = p.Block_list_expression()
 
@@ -2403,7 +2417,7 @@ func (p *Chems) List_expression() (localctx IList_expressionContext) {
 		}
 		localctx.(*List_expressionContext).e = append(localctx.(*List_expressionContext).e, localctx.(*List_expressionContext)._block_list_expression)
 
-		p.SetState(165)
+		p.SetState(167)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -2530,20 +2544,20 @@ func (p *Chems) Block_list_expression() (localctx IBlock_list_expressionContext)
 		}
 	}()
 
-	p.SetState(176)
+	p.SetState(178)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(169)
+			p.SetState(171)
 
 			var _x = p.Expressions()
 
 			localctx.(*Block_list_expressionContext)._expressions = _x
 		}
 		{
-			p.SetState(170)
+			p.SetState(172)
 			p.Match(ChemsTK_COMA)
 		}
 		localctx.(*Block_list_expressionContext).p = instruction.NewListExpre(localctx.(*Block_list_expressionContext).Get_expressions().GetP())
@@ -2551,7 +2565,7 @@ func (p *Chems) Block_list_expression() (localctx IBlock_list_expressionContext)
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(173)
+			p.SetState(175)
 
 			var _x = p.Expressions()
 
@@ -2716,13 +2730,13 @@ func (p *Chems) Expressions() (localctx IExpressionsContext) {
 		}
 	}()
 
-	p.SetState(187)
+	p.SetState(189)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(178)
+			p.SetState(180)
 
 			var _x = p.expre_log(0)
 
@@ -2733,7 +2747,7 @@ func (p *Chems) Expressions() (localctx IExpressionsContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(181)
+			p.SetState(183)
 
 			var _x = p.expre_rel(0)
 
@@ -2744,7 +2758,7 @@ func (p *Chems) Expressions() (localctx IExpressionsContext) {
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(184)
+			p.SetState(186)
 
 			var _x = p.expre_arit(0)
 
@@ -2948,20 +2962,20 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(197)
+	p.SetState(199)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsTK_NOT:
 		{
-			p.SetState(190)
+			p.SetState(192)
 
 			var _m = p.Match(ChemsTK_NOT)
 
 			localctx.(*Expre_logContext).op = _m
 		}
 		{
-			p.SetState(191)
+			p.SetState(193)
 
 			var _x = p.expre_log(3)
 
@@ -2983,7 +2997,7 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 
 	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN, ChemsID, ChemsTK_MENOS, ChemsTK_PARA:
 		{
-			p.SetState(194)
+			p.SetState(196)
 
 			var _x = p.expre_rel(0)
 
@@ -2995,7 +3009,7 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(206)
+	p.SetState(208)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
 
@@ -3008,13 +3022,13 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 			localctx = NewExpre_logContext(p, _parentctx, _parentState)
 			localctx.(*Expre_logContext).left = _prevctx
 			p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_log)
-			p.SetState(199)
+			p.SetState(201)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 			}
 			{
-				p.SetState(200)
+				p.SetState(202)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -3032,7 +3046,7 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 				}
 			}
 			{
-				p.SetState(201)
+				p.SetState(203)
 
 				var _x = p.expre_log(3)
 
@@ -3053,7 +3067,7 @@ func (p *Chems) expre_log(_p int) (localctx IExpre_logContext) {
 			}()), localctx.(*Expre_logContext).GetOp().GetColumn())
 
 		}
-		p.SetState(208)
+		p.SetState(210)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext())
 	}
@@ -3265,7 +3279,7 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(210)
+		p.SetState(212)
 
 		var _x = p.expre_arit(0)
 
@@ -3274,7 +3288,7 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 	localctx.(*Expre_relContext).p = localctx.(*Expre_relContext).Get_expre_arit().GetP()
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(220)
+	p.SetState(222)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
 
@@ -3287,13 +3301,13 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 			localctx = NewExpre_relContext(p, _parentctx, _parentState)
 			localctx.(*Expre_relContext).left = _prevctx
 			p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_rel)
-			p.SetState(213)
+			p.SetState(215)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 			}
 			{
-				p.SetState(214)
+				p.SetState(216)
 
 				var _lt = p.GetTokenStream().LT(1)
 
@@ -3301,7 +3315,7 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 
 				_la = p.GetTokenStream().LA(1)
 
-				if !(((_la-36)&-(0x1f+1)) == 0 && ((1<<uint((_la-36)))&((1<<(ChemsTK_IGUALIGUAL-36))|(1<<(ChemsTK_MAYORIGUAL-36))|(1<<(ChemsTK_MENORIGUAL-36))|(1<<(ChemsTK_DIFIGUAL-36))|(1<<(ChemsTK_MAYOR-36))|(1<<(ChemsTK_MENOR-36)))) != 0) {
+				if !(((_la-37)&-(0x1f+1)) == 0 && ((1<<uint((_la-37)))&((1<<(ChemsTK_IGUALIGUAL-37))|(1<<(ChemsTK_MAYORIGUAL-37))|(1<<(ChemsTK_MENORIGUAL-37))|(1<<(ChemsTK_DIFIGUAL-37))|(1<<(ChemsTK_MAYOR-37))|(1<<(ChemsTK_MENOR-37)))) != 0) {
 					var _ri = p.GetErrorHandler().RecoverInline(p)
 
 					localctx.(*Expre_relContext).op = _ri
@@ -3311,7 +3325,7 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 				}
 			}
 			{
-				p.SetState(215)
+				p.SetState(217)
 
 				var _x = p.expre_rel(3)
 
@@ -3332,7 +3346,7 @@ func (p *Chems) expre_rel(_p int) (localctx IExpre_relContext) {
 			}()), localctx.(*Expre_relContext).GetOp().GetColumn())
 
 		}
-		p.SetState(222)
+		p.SetState(224)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
 	}
@@ -3568,20 +3582,20 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(236)
+	p.SetState(238)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case ChemsTK_MENOS:
 		{
-			p.SetState(224)
+			p.SetState(226)
 
 			var _m = p.Match(ChemsTK_MENOS)
 
 			localctx.(*Expre_aritContext).op = _m
 		}
 		{
-			p.SetState(225)
+			p.SetState(227)
 
 			var _x = p.expre_arit(5)
 
@@ -3603,7 +3617,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 
 	case ChemsNUMBER, ChemsDOUBLE, ChemsCHAR, ChemsSTRING, ChemsBOOLEAN, ChemsID:
 		{
-			p.SetState(228)
+			p.SetState(230)
 
 			var _x = p.Expre_valor()
 
@@ -3613,18 +3627,18 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 
 	case ChemsTK_PARA:
 		{
-			p.SetState(231)
+			p.SetState(233)
 			p.Match(ChemsTK_PARA)
 		}
 		{
-			p.SetState(232)
+			p.SetState(234)
 
 			var _x = p.Expressions()
 
 			localctx.(*Expre_aritContext)._expressions = _x
 		}
 		{
-			p.SetState(233)
+			p.SetState(235)
 			p.Match(ChemsTK_PARC)
 		}
 		localctx.(*Expre_aritContext).p = localctx.(*Expre_aritContext).Get_expressions().GetP()
@@ -3633,7 +3647,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(250)
+	p.SetState(252)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 14, p.GetParserRuleContext())
 
@@ -3643,20 +3657,20 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(248)
+			p.SetState(250)
 			p.GetErrorHandler().Sync(p)
 			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 13, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewExpre_aritContext(p, _parentctx, _parentState)
 				localctx.(*Expre_aritContext).left = _prevctx
 				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_arit)
-				p.SetState(238)
+				p.SetState(240)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 				}
 				{
-					p.SetState(239)
+					p.SetState(241)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -3664,7 +3678,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 
 					_la = p.GetTokenStream().LA(1)
 
-					if !(((_la-44)&-(0x1f+1)) == 0 && ((1<<uint((_la-44)))&((1<<(ChemsTK_MULT-44))|(1<<(ChemsTK_DIV-44))|(1<<(ChemsTK_MODULO-44)))) != 0) {
+					if !(((_la-45)&-(0x1f+1)) == 0 && ((1<<uint((_la-45)))&((1<<(ChemsTK_MULT-45))|(1<<(ChemsTK_DIV-45))|(1<<(ChemsTK_MODULO-45)))) != 0) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
 						localctx.(*Expre_aritContext).op = _ri
@@ -3674,7 +3688,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 					}
 				}
 				{
-					p.SetState(240)
+					p.SetState(242)
 
 					var _x = p.expre_arit(5)
 
@@ -3698,13 +3712,13 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 				localctx = NewExpre_aritContext(p, _parentctx, _parentState)
 				localctx.(*Expre_aritContext).left = _prevctx
 				p.PushNewRecursionContext(localctx, _startState, ChemsRULE_expre_arit)
-				p.SetState(243)
+				p.SetState(245)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
-					p.SetState(244)
+					p.SetState(246)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -3722,7 +3736,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 					}
 				}
 				{
-					p.SetState(245)
+					p.SetState(247)
 
 					var _x = p.expre_arit(4)
 
@@ -3745,7 +3759,7 @@ func (p *Chems) expre_arit(_p int) (localctx IExpre_aritContext) {
 			}
 
 		}
-		p.SetState(252)
+		p.SetState(254)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 14, p.GetParserRuleContext())
 	}
@@ -3865,7 +3879,7 @@ func (p *Chems) Expre_valor() (localctx IExpre_valorContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(253)
+		p.SetState(255)
 
 		var _x = p.Primitivo()
 
@@ -4076,13 +4090,13 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 		}
 	}()
 
-	p.SetState(271)
+	p.SetState(273)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(256)
+			p.SetState(258)
 
 			var _m = p.Match(ChemsNUMBER)
 
@@ -4111,7 +4125,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(258)
+			p.SetState(260)
 
 			var _m = p.Match(ChemsDOUBLE)
 
@@ -4139,7 +4153,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(260)
+			p.SetState(262)
 
 			var _m = p.Match(ChemsSTRING)
 
@@ -4170,7 +4184,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(262)
+			p.SetState(264)
 
 			var _m = p.Match(ChemsBOOLEAN)
 
@@ -4196,7 +4210,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(264)
+			p.SetState(266)
 
 			var _m = p.Match(ChemsCHAR)
 
@@ -4221,7 +4235,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 6:
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(266)
+			p.SetState(268)
 
 			var _m = p.Match(ChemsID)
 
@@ -4244,7 +4258,7 @@ func (p *Chems) Primitivo() (localctx IPrimitivoContext) {
 	case 7:
 		p.EnterOuterAlt(localctx, 7)
 		{
-			p.SetState(268)
+			p.SetState(270)
 
 			var _x = p.Primitivo_casteo()
 
@@ -4403,24 +4417,24 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 		}
 	}()
 
-	p.SetState(297)
+	p.SetState(299)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 16, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(273)
+			p.SetState(275)
 
 			var _m = p.Match(ChemsNUMBER)
 
 			localctx.(*Primitivo_casteoContext)._NUMBER = _m
 		}
 		{
-			p.SetState(274)
+			p.SetState(276)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(275)
+			p.SetState(277)
 			p.Match(ChemsR_INT)
 		}
 
@@ -4446,18 +4460,18 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(277)
+			p.SetState(279)
 
 			var _m = p.Match(ChemsNUMBER)
 
 			localctx.(*Primitivo_casteoContext)._NUMBER = _m
 		}
 		{
-			p.SetState(278)
+			p.SetState(280)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(279)
+			p.SetState(281)
 			p.Match(ChemsR_FLOAT)
 		}
 
@@ -4483,18 +4497,18 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 	case 3:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(281)
+			p.SetState(283)
 
 			var _m = p.Match(ChemsDOUBLE)
 
 			localctx.(*Primitivo_casteoContext)._DOUBLE = _m
 		}
 		{
-			p.SetState(282)
+			p.SetState(284)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(283)
+			p.SetState(285)
 			p.Match(ChemsR_INT)
 		}
 
@@ -4519,18 +4533,18 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 	case 4:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(285)
+			p.SetState(287)
 
 			var _m = p.Match(ChemsDOUBLE)
 
 			localctx.(*Primitivo_casteoContext)._DOUBLE = _m
 		}
 		{
-			p.SetState(286)
+			p.SetState(288)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(287)
+			p.SetState(289)
 			p.Match(ChemsR_FLOAT)
 		}
 
@@ -4555,18 +4569,18 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 	case 5:
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(289)
+			p.SetState(291)
 
 			var _m = p.Match(ChemsBOOLEAN)
 
 			localctx.(*Primitivo_casteoContext)._BOOLEAN = _m
 		}
 		{
-			p.SetState(290)
+			p.SetState(292)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(291)
+			p.SetState(293)
 			p.Match(ChemsR_INT)
 		}
 
@@ -4589,18 +4603,18 @@ func (p *Chems) Primitivo_casteo() (localctx IPrimitivo_casteoContext) {
 	case 6:
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(293)
+			p.SetState(295)
 
 			var _m = p.Match(ChemsBOOLEAN)
 
 			localctx.(*Primitivo_casteoContext)._BOOLEAN = _m
 		}
 		{
-			p.SetState(294)
+			p.SetState(296)
 			p.Match(ChemsR_AS)
 		}
 		{
-			p.SetState(295)
+			p.SetState(297)
 			p.Match(ChemsR_FLOAT)
 		}
 

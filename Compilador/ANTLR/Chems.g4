@@ -82,6 +82,7 @@ instr_tipo returns [interfaces.TypeExpression tipo_exp]
   | R_STRING    {$tipo_exp = interfaces.STRING}
   | R_STR       {$tipo_exp = interfaces.STR}
   | R_BOOL      {$tipo_exp = interfaces.BOOLEAN}
+  | R_CHAR      {$tipo_exp = interfaces.CHAR}
 ;
 
 /* List Expression Case */

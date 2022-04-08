@@ -28,6 +28,7 @@ R_INT:          'i64';
 R_FLOAT:        'f64';
 R_STRING:       'String';
 R_BOOL:         'bool';
+R_CHAR:         'char';
 R_STR:          '&str';
 
 
