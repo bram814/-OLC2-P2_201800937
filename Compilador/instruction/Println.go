@@ -111,9 +111,6 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 			
 			if !condBool && p.Formato[i] != 125 { // ASCII }
 				
-					// gen.AddHeap("H",fmt.Sprintf("%v", p.Formato[i]))
-					// gen.AddExpression("H","H","1","+")
-				fmt.Println(string(p.Formato[i]))
 				gen.AddComment("concat format {}")
 				auxTemp := gen.NewTemp()
 				gen.AddExpression(auxTemp,"H","0","+")
@@ -143,17 +140,11 @@ func (p Println) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) 
 				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
 
 
-				
 			}
 
 		
 			
 		}
-
-		fmt.Println("------")
-		fmt.Println(p.Expression.Len())
-		fmt.Println(contExpre)
-		fmt.Println("------")
 
 		if p.Expression.Len() != contExpre {
 			excep := ast.NewException("Semantico","Formato incorrecto {}, cantidad incorrecta de expreciones, hace falta.", p.Row, p.Column)
