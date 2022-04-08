@@ -49,8 +49,8 @@ instruccion returns [interfaces.Instruction instr]
 
 /******************************** [PRINTLN!] ********************************/
 instr_println returns [interfaces.Instruction instr]
-  : R_PRINTLN TK_PARA primitivo TK_PARC TK_PUNTOCOMA                                 { $instr = instruction.NewPrintln(nil, $primitivo.p, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
-  | R_PRINTLN TK_PARA STRING TK_COMA list_expression TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($list_expression.l, nil, $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
+  : R_PRINTLN TK_PARA primitivo TK_PARC TK_PUNTOCOMA                                 { $instr = instruction.NewPrintln(nil, $primitivo.p,       "-1",         $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
+  | R_PRINTLN TK_PARA STRING TK_COMA list_expression TK_PARC TK_PUNTOCOMA            { $instr = instruction.NewPrintln($list_expression.l, nil, $STRING.text[1:len($STRING.text)-1], $R_PRINTLN.line, localctx.(*Instr_printlnContext).Get_R_PRINTLN().GetColumn()) }
 ;  
 
 /******************************** [MAIN] ********************************/

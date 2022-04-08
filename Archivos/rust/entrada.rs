@@ -7,5 +7,5 @@ fn main() {
 	d = 2.0
 	e = 1.0
 	f = a - b + c / d * e*/
-   println!(1.2);
+   println!("aa -{  }-",1.2);
 }

@@ -56,15 +56,16 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 					gen.AddConcatString()
 					tree.IsCocant = true
 				}
-				gen.AddExpression(temp,"P","0","+")
+				gen.AddExpression(temp,"P",fmt.Sprintf("%v", tree.GetPos()),"+")
 				gen.AddExpression(temp,temp,"1","+")
 				gen.AddStack(temp,exp_left.Value)
 				gen.AddExpression(temp,temp,"1","+")
 				gen.AddStack(temp,exp_right.Value)
-				gen.AddExpression("P","P","0","+")
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"+")
 				gen.ConcatString()
 				temp = gen.NewTemp()
 				gen.AddExpressionStack(temp, "P")
+				gen.AddExpression("P","P",fmt.Sprintf("%v", tree.GetPos()),"-")
 
 
 				isType = interfaces.STRING

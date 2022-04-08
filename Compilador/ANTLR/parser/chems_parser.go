@@ -954,8 +954,14 @@ type IInstr_printlnContext interface {
 	// Get_R_PRINTLN returns the _R_PRINTLN token.
 	Get_R_PRINTLN() antlr.Token
 
+	// Get_STRING returns the _STRING token.
+	Get_STRING() antlr.Token
+
 	// Set_R_PRINTLN sets the _R_PRINTLN token.
 	Set_R_PRINTLN(antlr.Token)
+
+	// Set_STRING sets the _STRING token.
+	Set_STRING(antlr.Token)
 
 	// Get_primitivo returns the _primitivo rule contexts.
 	Get_primitivo() IPrimitivoContext
@@ -985,6 +991,7 @@ type Instr_printlnContext struct {
 	instr            interfaces.Instruction
 	_R_PRINTLN       antlr.Token
 	_primitivo       IPrimitivoContext
+	_STRING          antlr.Token
 	_list_expression IList_expressionContext
 }
 
@@ -1012,7 +1019,11 @@ func (s *Instr_printlnContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *Instr_printlnContext) Get_R_PRINTLN() antlr.Token { return s._R_PRINTLN }
 
+func (s *Instr_printlnContext) Get_STRING() antlr.Token { return s._STRING }
+
 func (s *Instr_printlnContext) Set_R_PRINTLN(v antlr.Token) { s._R_PRINTLN = v }
+
+func (s *Instr_printlnContext) Set_STRING(v antlr.Token) { s._STRING = v }
 
 func (s *Instr_printlnContext) Get_primitivo() IPrimitivoContext { return s._primitivo }
 
@@ -1143,7 +1154,7 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 			p.SetState(68)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
-		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(nil, localctx.(*Instr_printlnContext).Get_primitivo().GetP(), (func() int {
+		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(nil, localctx.(*Instr_printlnContext).Get_primitivo().GetP(), "-1", (func() int {
 			if localctx.(*Instr_printlnContext).Get_R_PRINTLN() == nil {
 				return 0
 			} else {
@@ -1166,7 +1177,10 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 		}
 		{
 			p.SetState(73)
-			p.Match(ChemsSTRING)
+
+			var _m = p.Match(ChemsSTRING)
+
+			localctx.(*Instr_printlnContext)._STRING = _m
 		}
 		{
 			p.SetState(74)
@@ -1187,7 +1201,19 @@ func (p *Chems) Instr_println() (localctx IInstr_printlnContext) {
 			p.SetState(77)
 			p.Match(ChemsTK_PUNTOCOMA)
 		}
-		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_list_expression().GetL(), nil, (func() int {
+		localctx.(*Instr_printlnContext).instr = instruction.NewPrintln(localctx.(*Instr_printlnContext).Get_list_expression().GetL(), nil, (func() string {
+			if localctx.(*Instr_printlnContext).Get_STRING() == nil {
+				return ""
+			} else {
+				return localctx.(*Instr_printlnContext).Get_STRING().GetText()
+			}
+		}())[1:len((func() string {
+			if localctx.(*Instr_printlnContext).Get_STRING() == nil {
+				return ""
+			} else {
+				return localctx.(*Instr_printlnContext).Get_STRING().GetText()
+			}
+		}()))-1], (func() int {
 			if localctx.(*Instr_printlnContext).Get_R_PRINTLN() == nil {
 				return 0
 			} else {
