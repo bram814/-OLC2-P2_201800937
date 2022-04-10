@@ -12,6 +12,7 @@ options {
     import "OLC2/Compilador/expression"
     import "OLC2/Compilador/instruction"
     import "OLC2/Compilador/instruction/variable"
+    import "OLC2/Compilador/instruction/control"
     import arrayList "github.com/colegno/arraylist"
 }
 
@@ -43,6 +44,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_main                    { $instr = $instr_main.instr }
   | instr_declaracion             { $instr = $instr_declaracion.instr }
   | instr_asignacion              { $instr = $instr_asignacion.instr }
+  | instr_if                      { $instr = $instr_if.instr } 
 
 ;
 
@@ -74,6 +76,26 @@ instr_declaracion returns [interfaces.Instruction instr]
 instr_asignacion returns [interfaces.Instruction instr]
   : ID TK_IGUAL expressions TK_PUNTOCOMA                                       { $instr = variable.NewAssignment($ID.text, $expressions.p, $ID.line, localctx.(*Instr_asignacionContext).Get_ID().GetColumn()) }
 ;
+
+/******************************** [CONTROL][IF] ********************************/
+instr_if returns [interfaces.Instruction instr]
+  : R_IF expressions TK_LLAVEA left_instr=instrucciones TK_LLAVEC                                                       { $instr = control.NewIf($expressions.p, $left_instr.l, nil, nil,               $R_IF.line, localctx.(*Instr_ifContext).Get_R_IF().GetColumn()) }
+  | R_IF expressions TK_LLAVEA left_instr=instrucciones TK_LLAVEC R_ELSE TK_LLAVEA right_intr=instrucciones TK_LLAVEC   { $instr = control.NewIf($expressions.p, $left_instr.l, $right_intr.l, nil,     $R_IF.line, localctx.(*Instr_ifContext).Get_R_IF().GetColumn()) }
+  | R_IF expressions TK_LLAVEA left_instr=instrucciones TK_LLAVEC R_ELSE instr_else_if                                  { $instr = control.NewIf($expressions.p, $left_instr.l, nil, $instr_else_if.l,  $R_IF.line, localctx.(*Instr_ifContext).Get_R_IF().GetColumn()) }
+;
+
+instr_else_if returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e +=instr_if*  {
+        listInt := localctx.(*Instr_else_ifContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
 
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]

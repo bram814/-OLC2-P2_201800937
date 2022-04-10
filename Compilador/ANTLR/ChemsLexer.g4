@@ -6,19 +6,23 @@ lexer grammar ChemsLexer;
 /* RESERVADAS */
 R_PRINT:        'print!';
 R_PRINTLN:      'println!';
-P_NUMBER:       'number';
+/* Declaracion */
 R_LET:          'let';
 R_MUT:          'mut';
+/* Control */
 R_IF:           'if';
 R_ELSE:         'else';
 R_MATCH:        'match';
+/* Loop */
 R_WHILE:        'while';
-R_BREAK:        'break';
-R_CONTINUE:     'continue';
-R_RETURN:       'return';
 R_LOOP:         'loop';
 R_FOR:          'for';
 R_IN:           'in';
+/* Transferencia de Control */
+R_BREAK:        'break';
+R_CONTINUE:     'continue';
+R_RETURN:       'return';
+/* Main */
 R_MAIN:         'main';
 R_FUNCTION:     'fn';
 
