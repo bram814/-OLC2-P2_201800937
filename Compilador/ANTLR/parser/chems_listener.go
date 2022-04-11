@@ -38,6 +38,30 @@ type ChemsListener interface {
 	// EnterInstr_else_if is called when entering the instr_else_if production.
 	EnterInstr_else_if(c *Instr_else_ifContext)
 
+	// EnterInstr_match is called when entering the instr_match production.
+	EnterInstr_match(c *Instr_matchContext)
+
+	// EnterList_case is called when entering the list_case production.
+	EnterList_case(c *List_caseContext)
+
+	// EnterInstr_case is called when entering the instr_case production.
+	EnterInstr_case(c *Instr_caseContext)
+
+	// EnterList_expre_case is called when entering the list_expre_case production.
+	EnterList_expre_case(c *List_expre_caseContext)
+
+	// EnterBlock_case is called when entering the block_case production.
+	EnterBlock_case(c *Block_caseContext)
+
+	// EnterBlock_instr_match is called when entering the block_instr_match production.
+	EnterBlock_instr_match(c *Block_instr_matchContext)
+
+	// EnterInstr_default is called when entering the instr_default production.
+	EnterInstr_default(c *Instr_defaultContext)
+
+	// EnterBlock_default is called when entering the block_default production.
+	EnterBlock_default(c *Block_defaultContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -97,6 +121,30 @@ type ChemsListener interface {
 
 	// ExitInstr_else_if is called when exiting the instr_else_if production.
 	ExitInstr_else_if(c *Instr_else_ifContext)
+
+	// ExitInstr_match is called when exiting the instr_match production.
+	ExitInstr_match(c *Instr_matchContext)
+
+	// ExitList_case is called when exiting the list_case production.
+	ExitList_case(c *List_caseContext)
+
+	// ExitInstr_case is called when exiting the instr_case production.
+	ExitInstr_case(c *Instr_caseContext)
+
+	// ExitList_expre_case is called when exiting the list_expre_case production.
+	ExitList_expre_case(c *List_expre_caseContext)
+
+	// ExitBlock_case is called when exiting the block_case production.
+	ExitBlock_case(c *Block_caseContext)
+
+	// ExitBlock_instr_match is called when exiting the block_instr_match production.
+	ExitBlock_instr_match(c *Block_instr_matchContext)
+
+	// ExitInstr_default is called when exiting the instr_default production.
+	ExitInstr_default(c *Instr_defaultContext)
+
+	// ExitBlock_default is called when exiting the block_default production.
+	ExitBlock_default(c *Block_defaultContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

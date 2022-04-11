@@ -83,6 +83,11 @@ func (g *Generator) AddExpression(target string, left string, right string, oper
 func (g *Generator) AddStack(temp string, result string) {
 	g.code.Add("stack[(int)" + temp + "] = "+ result +";")
 }
+/************************************************* [ADD][HEAP] *************************************************/   
+func (g *Generator) SaveTemp(pos string, temp string) {
+	g.code.Add("stack[(int)" + pos + "] = "+ temp +";")
+}
+
 /************************************************* [ADD][EXPRESSION][STACK] *************************************************/   
 func (g *Generator) AddExpressionStack(target string, pos string) {
 	g.code.Add(target + " = stack[(int)" + pos + "];")
@@ -101,6 +106,14 @@ func (g *Generator) AddExpressionHeap(target string, right string) {
 /************************************************* [ADD][PRINTF] *************************************************/   
 func (g *Generator) AddPrintf(typePrint string, value string) {
 	g.code.Add("printf(\"%" + typePrint + "\"," + value + ");")
+}
+
+func (g *Generator) AddConcaPrintf(conca string) {
+	g.code.Add(conca)
+}
+
+func (g *Generator) AddConca(conca string) {
+	g.code.Add(conca)
 }
 
 /************************************************* [ADD][COMENT] *************************************************/   

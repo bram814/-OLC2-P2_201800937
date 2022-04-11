@@ -44,7 +44,8 @@ instruccion returns [interfaces.Instruction instr]
   | instr_main                    { $instr = $instr_main.instr }
   | instr_declaracion             { $instr = $instr_declaracion.instr }
   | instr_asignacion              { $instr = $instr_asignacion.instr }
-  | instr_if                      { $instr = $instr_if.instr } 
+  | instr_if                      { $instr = $instr_if.instr }
+  | instr_match                   { $instr = $instr_match.instr}
 
 ;
 
@@ -96,6 +97,77 @@ instr_else_if returns [*arrayList.List l]
     }
 ;
 
+/******************************** [CONTROL][MATCH] ********************************/
+instr_match returns [interfaces.Instruction instr]
+  : R_MATCH expressions TK_LLAVEA list_case block_default TK_LLAVEC        { $instr = control.NewMatch($expressions.p, $list_case.l, $block_default.l, $R_MATCH.line, localctx.(*Instr_matchContext).Get_R_MATCH().GetColumn()) }
+  | R_MATCH expressions TK_LLAVEA block_default TK_LLAVEC                  { $instr = control.NewMatch($expressions.p, nil, $block_default.l,          $R_MATCH.line, localctx.(*Instr_matchContext).Get_R_MATCH().GetColumn()) }
+;
+
+list_case returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += instr_case+  {
+        listInt := localctx.(*List_caseContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+/*  CASE  */
+instr_case returns [interfaces.Expression instr]
+  : list_expre_case TK_IGUALMAYOR TK_LLAVEA instrucciones TK_LLAVEC     { $instr = control.NewCase(nil, $list_expre_case.l, $instrucciones.l) }
+  | list_expre_case TK_IGUALMAYOR block_instr_match TK_COMA             { $instr = control.NewCase(nil, $list_expre_case.l, $block_instr_match.l) }
+;
+
+/* List Expression Case */
+list_expre_case returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_case+  {
+        listInt := localctx.(*List_expre_caseContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_case returns [interfaces.Expression instr]
+  : expressions TK_BARRA                                                         { $instr =  control.NewCase($expressions.p, nil, nil)}
+  | expressions                                                                  { $instr =  control.NewCase($expressions.p, nil, nil)}
+;
+
+block_instr_match returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : list += instruccion   {
+        listInt := localctx.(*Block_instr_matchContext).GetList()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+/*  DEFAULT  */
+instr_default returns [interfaces.Instruction instr]
+  : ID TK_IGUALMAYOR TK_LLAVEA instrucciones TK_LLAVEC           { $instr = control.NewDefault($instrucciones.l) }
+  | ID TK_IGUALMAYOR block_instr_match TK_COMA                   { $instr = control.NewDefault($block_instr_match.l) }
+;
+
+block_default returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += instr_default+  {
+        listInt := localctx.(*Block_defaultContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
 
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]
