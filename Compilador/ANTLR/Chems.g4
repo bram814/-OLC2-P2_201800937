@@ -14,6 +14,7 @@ options {
     import "OLC2/Compilador/instruction/variable"
     import "OLC2/Compilador/instruction/control"
     import "OLC2/Compilador/instruction/ternario"
+    import "OLC2/Compilador/instruction/loops"
     import arrayList "github.com/colegno/arraylist"
 }
 
@@ -46,8 +47,8 @@ instruccion returns [interfaces.Instruction instr]
   | instr_declaracion             { $instr = $instr_declaracion.instr }
   | instr_asignacion              { $instr = $instr_asignacion.instr }
   | instr_if                      { $instr = $instr_if.instr }
-  | instr_match                   { $instr = $instr_match.instr}
-
+  | instr_match                   { $instr = $instr_match.instr }
+  | instr_while                   { $instr = $instr_while.instr }
 ;
 
 
@@ -187,6 +188,11 @@ block_default returns [*arrayList.List l]
             $l.Add(e.GetInstr())
         }
     }
+;
+
+/******************************** [LOOP][WHILE] ********************************/
+instr_while returns [interfaces.Instruction instr]
+  : R_WHILE expressions TK_LLAVEA instrucciones TK_LLAVEC                           { $instr = loops.NewWhile($expressions.p, $instrucciones.l, $R_WHILE.line, localctx.(*Instr_whileContext).Get_R_WHILE().GetColumn()) }
 ;
 
 /******************************** [TIPO] ********************************/

@@ -68,6 +68,9 @@ type ChemsListener interface {
 	// EnterBlock_default is called when entering the block_default production.
 	EnterBlock_default(c *Block_defaultContext)
 
+	// EnterInstr_while is called when entering the instr_while production.
+	EnterInstr_while(c *Instr_whileContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -157,6 +160,9 @@ type ChemsListener interface {
 
 	// ExitBlock_default is called when exiting the block_default production.
 	ExitBlock_default(c *Block_defaultContext)
+
+	// ExitInstr_while is called when exiting the instr_while production.
+	ExitInstr_while(c *Instr_whileContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

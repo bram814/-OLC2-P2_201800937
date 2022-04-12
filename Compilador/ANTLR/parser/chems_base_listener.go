@@ -141,6 +141,12 @@ func (s *BaseChemsListener) EnterBlock_default(ctx *Block_defaultContext) {}
 // ExitBlock_default is called when production block_default is exited.
 func (s *BaseChemsListener) ExitBlock_default(ctx *Block_defaultContext) {}
 
+// EnterInstr_while is called when production instr_while is entered.
+func (s *BaseChemsListener) EnterInstr_while(ctx *Instr_whileContext) {}
+
+// ExitInstr_while is called when production instr_while is exited.
+func (s *BaseChemsListener) ExitInstr_while(ctx *Instr_whileContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 
