@@ -38,6 +38,12 @@ type ChemsListener interface {
 	// EnterInstr_else_if is called when entering the instr_else_if production.
 	EnterInstr_else_if(c *Instr_else_ifContext)
 
+	// EnterInstr_ternario is called when entering the instr_ternario production.
+	EnterInstr_ternario(c *Instr_ternarioContext)
+
+	// EnterInstr_else_if_ternario is called when entering the instr_else_if_ternario production.
+	EnterInstr_else_if_ternario(c *Instr_else_if_ternarioContext)
+
 	// EnterInstr_match is called when entering the instr_match production.
 	EnterInstr_match(c *Instr_matchContext)
 
@@ -121,6 +127,12 @@ type ChemsListener interface {
 
 	// ExitInstr_else_if is called when exiting the instr_else_if production.
 	ExitInstr_else_if(c *Instr_else_ifContext)
+
+	// ExitInstr_ternario is called when exiting the instr_ternario production.
+	ExitInstr_ternario(c *Instr_ternarioContext)
+
+	// ExitInstr_else_if_ternario is called when exiting the instr_else_if_ternario production.
+	ExitInstr_else_if_ternario(c *Instr_else_if_ternarioContext)
 
 	// ExitInstr_match is called when exiting the instr_match production.
 	ExitInstr_match(c *Instr_matchContext)

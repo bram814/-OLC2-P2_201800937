@@ -13,6 +13,7 @@ options {
     import "OLC2/Compilador/instruction"
     import "OLC2/Compilador/instruction/variable"
     import "OLC2/Compilador/instruction/control"
+    import "OLC2/Compilador/instruction/ternario"
     import arrayList "github.com/colegno/arraylist"
 }
 
@@ -93,6 +94,25 @@ instr_else_if returns [*arrayList.List l]
         listInt := localctx.(*Instr_else_ifContext).GetE()
         for _, e := range listInt {
             $l.Add(e.GetInstr())
+        }
+    }
+;
+
+/******************************** [TERNARIO][IF] ********************************/
+instr_ternario returns [interfaces.Expression p]
+  : R_IF cond=expressions TK_LLAVEA left_instr=expressions TK_LLAVEC                                                      { $p = ternario.NewIf($cond.p, $left_instr.p, nil, nil,                       $R_IF.line, localctx.(*Instr_ternarioContext).Get_R_IF().GetColumn()) }
+  | R_IF cond=expressions TK_LLAVEA left_instr=expressions TK_LLAVEC R_ELSE TK_LLAVEA right_intr=expressions TK_LLAVEC    { $p = ternario.NewIf($cond.p, $left_instr.p, $right_intr.p, nil,             $R_IF.line, localctx.(*Instr_ternarioContext).Get_R_IF().GetColumn()) }
+  | R_IF cond=expressions TK_LLAVEA left_instr=expressions TK_LLAVEC R_ELSE instr_else_if_ternario                        { $p = ternario.NewIf($cond.p, $left_instr.p, nil, $instr_else_if_ternario.l, $R_IF.line, localctx.(*Instr_ternarioContext).Get_R_IF().GetColumn()) }
+;
+
+instr_else_if_ternario returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e +=instr_ternario*  {
+        listInt := localctx.(*Instr_else_if_ternarioContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetP())
         }
     }
 ;
@@ -269,6 +289,7 @@ primitivo returns[interfaces.Expression p]
     |ID       { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 
     | primitivo_casteo          { $p = $primitivo_casteo.p }
+    | instr_ternario            { $p = $instr_ternario.p }
 ;
 
 

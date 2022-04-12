@@ -439,7 +439,12 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddGoto(EF)
 
 
-			} else {
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, "==", EV)
+				gen.AddGoto(EF)
+
+			}  else {
 				excep := ast.NewException("Semantico","No es posible Comparar ==.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
@@ -500,7 +505,12 @@ func (p Aritmetica) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generato
 				gen.AddGoto(EF)
 
 
-			} else {
+			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
+
+				gen.AddIf(exp_left.Value, exp_right.Value, "!=", EV)
+				gen.AddGoto(EF)
+
+			}  else {
 				excep := ast.NewException("Semantico","No es posible Comparar !=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo:excep.Tipo, Descripcion:excep.Descripcion, Row:excep.Row, Column:excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}

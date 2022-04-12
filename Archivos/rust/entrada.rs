@@ -1,16 +1,5 @@
 fn main() {
-   let numero = 2;
-    
-    match numero {
-      "1"   => 
-          println!("{}",1),
-      
-      //esto se conoce como brazo
-      6 | 7 => { 
-          println!("{}",2);
-      }
-      _ => { 
-        println!("Resto de casos");
-      }
-    }
+   let x: i64 = 56;
+   let y = if x == 55 { "hol" } else if x == 56{"a"} else if x == 57{"b"} else if x == 58{"c"} else { "hola" };
+   println!("{}", y);
 }

@@ -81,6 +81,18 @@ func (s *BaseChemsListener) EnterInstr_else_if(ctx *Instr_else_ifContext) {}
 // ExitInstr_else_if is called when production instr_else_if is exited.
 func (s *BaseChemsListener) ExitInstr_else_if(ctx *Instr_else_ifContext) {}
 
+// EnterInstr_ternario is called when production instr_ternario is entered.
+func (s *BaseChemsListener) EnterInstr_ternario(ctx *Instr_ternarioContext) {}
+
+// ExitInstr_ternario is called when production instr_ternario is exited.
+func (s *BaseChemsListener) ExitInstr_ternario(ctx *Instr_ternarioContext) {}
+
+// EnterInstr_else_if_ternario is called when production instr_else_if_ternario is entered.
+func (s *BaseChemsListener) EnterInstr_else_if_ternario(ctx *Instr_else_if_ternarioContext) {}
+
+// ExitInstr_else_if_ternario is called when production instr_else_if_ternario is exited.
+func (s *BaseChemsListener) ExitInstr_else_if_ternario(ctx *Instr_else_if_ternarioContext) {}
+
 // EnterInstr_match is called when production instr_match is entered.
 func (s *BaseChemsListener) EnterInstr_match(ctx *Instr_matchContext) {}
 

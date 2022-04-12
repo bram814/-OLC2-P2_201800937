@@ -86,7 +86,11 @@ func (p If) Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) inter
 		gen.AddLabel(newLabel)
 
 
-	}	
+	} else {
+		excep := ast.NewException("Semantico","Error en If. Tipo de Dato no Booleano.", p.Row, p.Column)
+		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	}
 
 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 }	
