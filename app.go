@@ -1,6 +1,7 @@
 package main
 
 import (
+	"OLC2/Compilador/interfaces"
 	"fmt"
 	// "reflect"
 	"github.com/gofiber/fiber/v2"
@@ -8,21 +9,16 @@ import (
 	"github.com/gofiber/template/html"
 
 	/* COMPILADOR */
-	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"OLC2/Compilador/ANTLR/parser"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
 
-	"OLC2/Compilador/interfaces"
-	"OLC2/Compilador/environment"
 	"OLC2/Compilador/ast"
-
 )
 
 var CODE_OUT_ string = ""
 var tablaSimboloP []interface{}
 
 func main() {
-
-	
 
 	// Initialize standard Go html template engine
 	engine := html.New("./views", ".html")
@@ -34,9 +30,9 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		// Render index template
 		return c.Render("index", fiber.Map{
-			"CODE_INPUT": "",
-			"CODE_OUT": "",
-			"Tabla_Error" : nil,
+			"CODE_INPUT":  "",
+			"CODE_OUT":    "",
+			"Tabla_Error": nil,
 		})
 	})
 
@@ -66,25 +62,20 @@ func Execute(c *fiber.Ctx) error {
 	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
 
 	// Create the Parser
-	p := parser.NewChems(stream) 
+	p := parser.NewChems(stream)
 
 	p.BuildParseTrees = true
 	tree := p.Start()
-	
+
 	result := NewTreeShapeListener()
 	antlr.ParseTreeWalkerDefault.Walk(result, tree)
 
-
-
-
 	return c.Render("index", fiber.Map{
-		"CODE_INPUT"  : data.Input,
-		"CODE_OUT"	  : CODE_OUT_,
-		"Tabla_Error" : tablaSimboloP,
+		"CODE_INPUT":  data.Input,
+		"CODE_OUT":    CODE_OUT_,
+		"Tabla_Error": tablaSimboloP,
 	})
 }
-
-
 
 /* ANTLR*/
 
@@ -102,24 +93,23 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	/* SALIDA */
 	var _salida string
 	_salida = ""
-	CODE_OUT_ ="";
+	CODE_OUT_ = ""
 	/* TREE */
 	var tree *ast.Arbol
 	tree = ast.NewArbol()
 	/* ENVIRONMENT */
-	var globalEnv environment.Environment
-	globalEnv = environment.NewEnvironment(nil)
+	var globalEnv interfaces.Environment
+	globalEnv = interfaces.NewEnvironment(nil)
 
 	/* GENERATOR */
 	var gen *ast.Generator
 	gen = ast.NewGenerator()
 
-	
 	// var contMain int = 0
-	gen.AddFunction("void","main()")
+	gen.AddFunction("void", "main()")
 	gen.StachHeap()
 	for _, s := range result.ToArray() {
-		s.(interfaces.Instruction).Compilar(globalEnv, tree, gen)
+		s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
 	}
 	gen.AddFunctionEnd()
 
@@ -150,32 +140,25 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 		_salida += "\n"
 	}
 
-	
-	
-	
-
 	for _, s := range gen.GetCode().ToArray() {
 		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"
 	}
 
-
-
 	var OutException string
 	OutException = ""
 
-	
 	fmt.Println(tablaSimboloP)
 	for _, s := range tree.GetException().ToArray() {
 		OutException += fmt.Sprintf("%v", s)
 		m := make(map[string]string)
-		m["Id"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Tipo)
+		m["Id"] = fmt.Sprintf("%v", s.(ast.Exception).Tipo)
 		m["Descripcion"] = fmt.Sprintf("%v", s.(ast.Exception).Descripcion)
-		m["Row"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Row)
-		m["Column"]      = fmt.Sprintf("%v", s.(ast.Exception).Column)
-		m["Time"] 		 = fmt.Sprintf("%v", s.(ast.Exception).Time)
-		
-		tablaSimboloP = append(tablaSimboloP, m) 
+		m["Row"] = fmt.Sprintf("%v", s.(ast.Exception).Row)
+		m["Column"] = fmt.Sprintf("%v", s.(ast.Exception).Column)
+		m["Time"] = fmt.Sprintf("%v", s.(ast.Exception).Time)
+
+		tablaSimboloP = append(tablaSimboloP, m)
 	}
 
 	fmt.Println(OutException)
@@ -184,4 +167,3 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	CODE_OUT_ = _salida
 
 }
-

@@ -42,13 +42,14 @@ end_instr returns [int v]
 
 
 instruccion returns [interfaces.Instruction instr]
-  : instr_println end_instr       { $instr = $instr_println.instr }
-  | instr_main                    { $instr = $instr_main.instr }
+  : instr_println end_instr       { $instr = $instr_println.instr     }
+  | instr_main                    { $instr = $instr_main.instr        }
   | instr_declaracion             { $instr = $instr_declaracion.instr }
-  | instr_asignacion              { $instr = $instr_asignacion.instr }
-  | instr_if                      { $instr = $instr_if.instr }
-  | instr_match                   { $instr = $instr_match.instr }
-  | instr_while                   { $instr = $instr_while.instr }
+  | instr_asignacion              { $instr = $instr_asignacion.instr  }
+  | instr_if                      { $instr = $instr_if.instr          }
+  | instr_match                   { $instr = $instr_match.instr       }
+  | instr_while                   { $instr = $instr_while.instr       }
+  | instr_for_in                  { $instr = $instr_for_in.instr      }
 ;
 
 
@@ -193,6 +194,12 @@ block_default returns [*arrayList.List l]
 /******************************** [LOOP][WHILE] ********************************/
 instr_while returns [interfaces.Instruction instr]
   : R_WHILE expressions TK_LLAVEA instrucciones TK_LLAVEC                           { $instr = loops.NewWhile($expressions.p, $instrucciones.l, $R_WHILE.line, localctx.(*Instr_whileContext).Get_R_WHILE().GetColumn()) }
+;
+
+instr_for_in returns [interfaces.Instruction instr]
+  : R_FOR ID R_IN left=expressions TK_DOBLEPUNTO right=expressions TK_LLAVEA instrucciones TK_LLAVEC     { $instr = loops.NewFor($ID.text, interfaces.INTEGER, $left.p, $right.p, $instrucciones.l, $R_FOR.line, localctx.(*Instr_for_inContext).Get_R_FOR().GetColumn()) }
+  | R_FOR ID R_IN left=expressions TK_LLAVEA instrucciones TK_LLAVEC                                     { $instr = loops.NewFor($ID.text, interfaces.STRING,  $left.p, nil, $instrucciones.l,      $R_FOR.line, localctx.(*Instr_for_inContext).Get_R_FOR().GetColumn()) }
+
 ;
 
 /******************************** [TIPO] ********************************/

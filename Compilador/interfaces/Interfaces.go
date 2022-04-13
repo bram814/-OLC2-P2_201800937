@@ -6,19 +6,19 @@ import (
 )
 
 type Symbol struct {
-	Id    string
-	Type  TypeExpression
-	Value interface{}
-	IsMut bool
+	Id       string
+	Type     TypeExpression
+	Value    interface{}
+	IsMut    bool
 	Posicion int
 }
 
 type SymbolFunction struct {
-	Id    			string
-	Type  			TypeExpression
-	Instrucciones	*arrayList.List
-	Parametro		*arrayList.List
-	IsMut	 		bool
+	Id            string
+	Type          TypeExpression
+	Instrucciones *arrayList.List
+	Parametro     *arrayList.List
+	IsMut         bool
 }
 
 type Value struct {
@@ -30,9 +30,9 @@ type Value struct {
 }
 
 type Expression interface {
-	Compilar(env interface{}, tree *ast.Arbol, gen *ast.Generator) Value
+	Compilar(env *Environment, tree *ast.Arbol, gen *ast.Generator) Value
 }
 
 type Instruction interface {
-	Compilar(env interface{},  tree *ast.Arbol, gen *ast.Generator) interface{}
+	Compilar(env *Environment, tree *ast.Arbol, gen *ast.Generator) interface{}
 }
