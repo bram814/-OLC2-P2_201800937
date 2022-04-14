@@ -26,11 +26,13 @@ func main() {
 		Views: engine,
 	})
 	app.Use(logger.New())
-
+	text := ""
+	text += "fn main() {\n"
+    text +=	"\tprintln!(\"hello World!\");\n}"
 	app.Get("/", func(c *fiber.Ctx) error {
 		// Render index template
 		return c.Render("index", fiber.Map{
-			"CODE_INPUT":  "",
+			"CODE_INPUT":  text,
 			"CODE_OUT":    "",
 			"Tabla_Error": nil,
 		})

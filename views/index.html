@@ -81,11 +81,8 @@
                                 </font>   
                             </h1>
                         </center>
-                        {{ if (eq .CODE_INPUT "") }}
-                            <textarea name="editor" id="editor">
-fn main() {
-    println!("hello World!");
-}</textarea>
+                        {{ if (eq .CODE_INPUT "") }}                             
+                            <textarea name="editor" id="editor"></textarea>
                         {{ else }}
                             <textarea name="editor" id="editor">{{ .CODE_INPUT }}</textarea>
                         {{ end }}
@@ -219,8 +216,8 @@ fn main() {
             })
             
             /* SIZE */
-            CM_ENTRADA.setSize("900", "500")
-            CM_SALIDA.setSize("900", "500")
+            CM_ENTRADA.setSize("650", "400")
+            CM_SALIDA.setSize("650", "400")
 
         </script>
 
