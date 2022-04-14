@@ -23,7 +23,7 @@ func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
-	newTable.Posicion = tree.GetPos()
+	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 	var block2 string = "\n"
 	var cond, newCond interfaces.Value

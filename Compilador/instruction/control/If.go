@@ -5,7 +5,7 @@ import (
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 	// "reflect"
-	// "fmt"
+	"fmt"
 )
 
 type If struct {
@@ -34,9 +34,11 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 	gen.AddComment("Control - If")
 
 	if cond.Type == interfaces.BOOLEAN {
+		fmt.Println("if")
+		fmt.Println(env.Posicion)
 		var newTable interfaces.Environment
 		newTable = interfaces.NewEnvironment(env)
-		newTable.Posicion = tree.GetPos()
+		newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 		EV := gen.NewLabel()
 		EF := gen.NewLabel()
@@ -56,7 +58,7 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 		if p.InstrElse != nil {
 			gen.AddComment("Control - If (else)")
 			newTable = interfaces.NewEnvironment(env)
-			newTable.Posicion = tree.GetPos()
+			newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 			
 			for _, s := range p.InstrElse.ToArray() {
 

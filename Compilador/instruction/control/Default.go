@@ -18,8 +18,8 @@ func NewDefault(instrucciones *arrayList.List) Default {
 func (p Default) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
 
 	var newTable interfaces.Environment
-	newTable = interfaces.NewEnvironment(env)
-	newTable.Posicion = tree.GetPos()
+	newTable = interfaces.NewEnvironment(env)	
+	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 	for _, i := range p.Instrucciones.ToArray() {
 		i.(interfaces.Instruction).Compilar(&newTable, tree, gen)

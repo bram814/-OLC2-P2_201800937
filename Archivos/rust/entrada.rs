@@ -1,12 +1,21 @@
 fn main() {
-  let mut a = 1;
-  if 1==1 {
-    let mut b = 2;
-    println!("{}", b);
-     let mut d = 44;
-    b = 4;   
-    println!("{}", d);
+  if 10 > 0 {
+    let mut a = 3;
+    println!("{}",a);
+   
+  if true {
+      let mut a = 5;
+      println!("{}",a);
+        a = 6;
+        println!("{}",a);
+        
+    }
+    a = 7;
+    println!("{}",a);
+    
+  } else {
+    let mut a = 4;
+    println!("{}",a);
   }
-
-
+  
 }

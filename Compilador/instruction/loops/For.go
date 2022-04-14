@@ -26,7 +26,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
-	newTable.Posicion = tree.GetPos()
+	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 	if p.Type == interfaces.INTEGER {
 		gen.AddComment("For - Integer")

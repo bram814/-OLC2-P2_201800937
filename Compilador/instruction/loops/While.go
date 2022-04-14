@@ -38,7 +38,7 @@ func (p While) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 
 		var newTable interfaces.Environment
 		newTable = interfaces.NewEnvironment(env)
-		newTable.Posicion = tree.GetPos()
+		newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 		gen.AddIf(cond.Value, "1", "==", EV)
 		gen.AddGoto(EF)

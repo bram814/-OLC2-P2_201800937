@@ -23,7 +23,7 @@ func (p Main) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Ge
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
-	newTable.Posicion = tree.GetPos()
+	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 	if p.Instrucciones != nil {
 		// gen.AddFunction("void","main()")

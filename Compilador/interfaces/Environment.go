@@ -35,25 +35,49 @@ func (env *Environment) IsAmbit() bool {
 		}
 	}
 
-	if 1 < cont {
-		return true
-	}
-	return false
+	return 1 < cont
 }
 
 func (env *Environment) NewPos() {
 	env.Posicion = env.Posicion + 1
 }
 
-func (env Environment) AddSymbol(id string, value Value, tipo TypeExpression, isMut bool, pos int) {
-	if variable, ok := env.variable[id]; ok {
-		fmt.Println("La variable " + variable.Id + " ya existe")
-		return
+func (env *Environment) UpdatePos(treePos int, envPos int, isBool bool ,newTable *Environment) {
+
+	if isBool {
+		newTable.Posicion = envPos
+		
+	} else {
+		newTable.Posicion = treePos
+
 	}
 
+}
+
+func (env *Environment) AddSymbol(id string, value Value, tipo TypeExpression, isMut bool, pos int) {
+
+	if variable, ok := env.variable[id]; ok {
+		fmt.Println("[ADD SYMBOL] La variable " + variable.Id + " ya existe")
+		return
+	}
 	env.variable[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut, Posicion: pos}
-	fmt.Println("++++")
-	fmt.Println(env.Posicion)
+}
+
+func (env *Environment) SearchSymbol(id string) Symbol {
+	var tmpEnv *Environment
+	tmpEnv = env
+
+	for {
+		if tmpEnv.anterior == nil {
+			break
+		} else {
+			tmpEnv = tmpEnv.anterior
+		}
+	}
+	if variable, ok := tmpEnv.variable[id]; ok {
+		return variable
+	}
+	return Symbol{Id: "", Type: NULL, Value: Symbol{Id: "", Type: NULL, Value: 0}}
 }
 
 func (env *Environment) GetSymbol(id string) Symbol {

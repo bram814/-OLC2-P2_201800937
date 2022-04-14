@@ -24,13 +24,22 @@ func NewDeclaration(id string, tipo interfaces.TypeExpression, val interfaces.Ex
 func (p Declaration) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
 
 	/* Buscar si el id ya existe */
-	symbol := env.GetSymbol(p.Id)
+	symbol := env.SearchSymbol(p.Id)
 
 	if symbol.Type != interfaces.NULL {
+		fmt.Println("No puede agregar")
 		excep := ast.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
 		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
+
+	// symbol = env.GetSymbol(p.Id)
+
+	// if symbol.Type != interfaces.NULL {
+	// 	excep := ast.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
+	// 	tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+	// 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	// }
 
 	var result interfaces.Value
 
@@ -46,16 +55,15 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen 
 		gen.AddComment("Declaracion")
 
 		if env.IsAmbit() {
-			fmt.Println("Local")
+			// fmt.Println("Local")
 			temp := gen.NewTemp()
 			gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 			gen.AddStack(temp, result.Value)
 			env.AddSymbol(p.Id, result, result.Type, p.IsMut, env.Posicion)
-			fmt.Println("fmt")
 			env.NewPos()
 
 		} else {
-			fmt.Println("Global")
+			// fmt.Println("Global")
 			env.AddSymbol(p.Id, result, result.Type, p.IsMut, tree.GetPos())
 			gen.AddStack(fmt.Sprintf("%v", tree.GetPos()), result.Value)
 			tree.NewPos()
