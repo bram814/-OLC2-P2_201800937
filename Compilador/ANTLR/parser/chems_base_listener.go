@@ -141,6 +141,42 @@ func (s *BaseChemsListener) EnterBlock_default(ctx *Block_defaultContext) {}
 // ExitBlock_default is called when production block_default is exited.
 func (s *BaseChemsListener) ExitBlock_default(ctx *Block_defaultContext) {}
 
+// EnterInstr_match_ter is called when production instr_match_ter is entered.
+func (s *BaseChemsListener) EnterInstr_match_ter(ctx *Instr_match_terContext) {}
+
+// ExitInstr_match_ter is called when production instr_match_ter is exited.
+func (s *BaseChemsListener) ExitInstr_match_ter(ctx *Instr_match_terContext) {}
+
+// EnterList_case_ternario is called when production list_case_ternario is entered.
+func (s *BaseChemsListener) EnterList_case_ternario(ctx *List_case_ternarioContext) {}
+
+// ExitList_case_ternario is called when production list_case_ternario is exited.
+func (s *BaseChemsListener) ExitList_case_ternario(ctx *List_case_ternarioContext) {}
+
+// EnterInstr_case_ter is called when production instr_case_ter is entered.
+func (s *BaseChemsListener) EnterInstr_case_ter(ctx *Instr_case_terContext) {}
+
+// ExitInstr_case_ter is called when production instr_case_ter is exited.
+func (s *BaseChemsListener) ExitInstr_case_ter(ctx *Instr_case_terContext) {}
+
+// EnterList_expre_case_ter is called when production list_expre_case_ter is entered.
+func (s *BaseChemsListener) EnterList_expre_case_ter(ctx *List_expre_case_terContext) {}
+
+// ExitList_expre_case_ter is called when production list_expre_case_ter is exited.
+func (s *BaseChemsListener) ExitList_expre_case_ter(ctx *List_expre_case_terContext) {}
+
+// EnterBlock_case_ter is called when production block_case_ter is entered.
+func (s *BaseChemsListener) EnterBlock_case_ter(ctx *Block_case_terContext) {}
+
+// ExitBlock_case_ter is called when production block_case_ter is exited.
+func (s *BaseChemsListener) ExitBlock_case_ter(ctx *Block_case_terContext) {}
+
+// EnterInstr_default_ter is called when production instr_default_ter is entered.
+func (s *BaseChemsListener) EnterInstr_default_ter(ctx *Instr_default_terContext) {}
+
+// ExitInstr_default_ter is called when production instr_default_ter is exited.
+func (s *BaseChemsListener) ExitInstr_default_ter(ctx *Instr_default_terContext) {}
+
 // EnterInstr_while is called when production instr_while is entered.
 func (s *BaseChemsListener) EnterInstr_while(ctx *Instr_whileContext) {}
 

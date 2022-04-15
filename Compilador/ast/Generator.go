@@ -295,7 +295,7 @@ func (g *Generator) StachHeap() {
  }
 
 func (g *Generator) AddFunctionEnd() {
- 	g.code.Add("\n\treturn;\r}")
+ 	g.code.Add("\n\treturn 0;\r}")
 
  }
 

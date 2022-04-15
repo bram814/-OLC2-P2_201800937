@@ -68,6 +68,24 @@ type ChemsListener interface {
 	// EnterBlock_default is called when entering the block_default production.
 	EnterBlock_default(c *Block_defaultContext)
 
+	// EnterInstr_match_ter is called when entering the instr_match_ter production.
+	EnterInstr_match_ter(c *Instr_match_terContext)
+
+	// EnterList_case_ternario is called when entering the list_case_ternario production.
+	EnterList_case_ternario(c *List_case_ternarioContext)
+
+	// EnterInstr_case_ter is called when entering the instr_case_ter production.
+	EnterInstr_case_ter(c *Instr_case_terContext)
+
+	// EnterList_expre_case_ter is called when entering the list_expre_case_ter production.
+	EnterList_expre_case_ter(c *List_expre_case_terContext)
+
+	// EnterBlock_case_ter is called when entering the block_case_ter production.
+	EnterBlock_case_ter(c *Block_case_terContext)
+
+	// EnterInstr_default_ter is called when entering the instr_default_ter production.
+	EnterInstr_default_ter(c *Instr_default_terContext)
+
 	// EnterInstr_while is called when entering the instr_while production.
 	EnterInstr_while(c *Instr_whileContext)
 
@@ -163,6 +181,24 @@ type ChemsListener interface {
 
 	// ExitBlock_default is called when exiting the block_default production.
 	ExitBlock_default(c *Block_defaultContext)
+
+	// ExitInstr_match_ter is called when exiting the instr_match_ter production.
+	ExitInstr_match_ter(c *Instr_match_terContext)
+
+	// ExitList_case_ternario is called when exiting the list_case_ternario production.
+	ExitList_case_ternario(c *List_case_ternarioContext)
+
+	// ExitInstr_case_ter is called when exiting the instr_case_ter production.
+	ExitInstr_case_ter(c *Instr_case_terContext)
+
+	// ExitList_expre_case_ter is called when exiting the list_expre_case_ter production.
+	ExitList_expre_case_ter(c *List_expre_case_terContext)
+
+	// ExitBlock_case_ter is called when exiting the block_case_ter production.
+	ExitBlock_case_ter(c *Block_case_terContext)
+
+	// ExitInstr_default_ter is called when exiting the instr_default_ter production.
+	ExitInstr_default_ter(c *Instr_default_terContext)
 
 	// ExitInstr_while is called when exiting the instr_while production.
 	ExitInstr_while(c *Instr_whileContext)

@@ -191,6 +191,57 @@ block_default returns [*arrayList.List l]
     }
 ;
 
+/******************************** [CONTROL][MATCH][TERNARIO] ********************************/
+instr_match_ter returns [interfaces.Expression p]
+  : R_MATCH expressions TK_LLAVEA list_case_ternario instr_default_ter TK_LLAVEC    { $p = ternario.NewMatch($expressions.p, $list_case_ternario.l, $instr_default_ter.p, $R_MATCH.line, localctx.(*Instr_match_terContext).Get_R_MATCH().GetColumn()) }
+  | R_MATCH expressions TK_LLAVEA instr_default_ter TK_LLAVEC                       { $p = ternario.NewMatch($expressions.p, nil, $instr_default_ter.p,                   $R_MATCH.line, localctx.(*Instr_match_terContext).Get_R_MATCH().GetColumn()) }
+;
+
+list_case_ternario returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += instr_case_ter+  {
+        listInt := localctx.(*List_case_ternarioContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetP())
+        }
+    }
+;
+
+/*  CASE  */
+instr_case_ter returns [interfaces.Expression p]
+  : list_expre_case_ter TK_IGUALMAYOR expressions TK_COMA                     { $p = ternario.NewCase(nil, $list_expre_case_ter.l, $expressions.p) }
+  | list_expre_case_ter TK_IGUALMAYOR TK_LLAVEA expressions TK_LLAVEC         { $p = ternario.NewCase(nil, $list_expre_case_ter.l, $expressions.p) }
+;
+
+
+/* List Expression Case */
+list_expre_case_ter returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_case_ter+  {
+        listInt := localctx.(*List_expre_case_terContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetP())
+        }
+    }
+;
+
+block_case_ter returns [interfaces.Expression p]
+  : expressions TK_BARRA                                                         { $p =  ternario.NewCase($expressions.p, nil, nil)}
+  | expressions                                                                  { $p =  ternario.NewCase($expressions.p, nil, nil)}
+;
+
+
+/*  DEFAULT  */
+instr_default_ter returns [interfaces.Expression p]
+  : ID TK_IGUALMAYOR expressions TK_COMA                   { $p = ternario.NewDefault($expressions.p) }
+  | ID TK_IGUALMAYOR TK_LLAVEA expressions TK_LLAVEC       { $p = ternario.NewDefault($expressions.p) }
+;
+
+
 /******************************** [LOOP][WHILE] ********************************/
 instr_while returns [interfaces.Instruction instr]
   : R_WHILE expressions TK_LLAVEA instrucciones TK_LLAVEC                           { $instr = loops.NewWhile($expressions.p, $instrucciones.l, $R_WHILE.line, localctx.(*Instr_whileContext).Get_R_WHILE().GetColumn()) }
@@ -303,6 +354,7 @@ primitivo returns[interfaces.Expression p]
 
     | primitivo_casteo          { $p = $primitivo_casteo.p }
     | instr_ternario            { $p = $instr_ternario.p }
+    | instr_match_ter           { $p = $instr_match_ter.p }
 ;
 
 
