@@ -79,6 +79,11 @@ func (g *Generator) AddExpression(target string, left string, right string, oper
 	g.code.Add(target + " = " + left + " " + operator + " " + right + ";")
 }
 
+/************************************************* [ADD][EXPRESSION][TEMP] *************************************************/   
+func (g *Generator) AddExpression1(target string, result string) {
+	g.code.Add(target + " = " + result + ";")
+}
+
 /************************************************* [ADD][HEAP] *************************************************/   
 func (g *Generator) AddStack(temp string, result string) {
 	g.code.Add("stack[(int)" + temp + "] = "+ result +";")

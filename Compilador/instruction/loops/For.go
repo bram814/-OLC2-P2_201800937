@@ -29,6 +29,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
 
 	if p.Type == interfaces.INTEGER {
+
 		gen.AddComment("For - Integer")
 		left := p.Left.Compilar(&newTable, tree, gen)
 		if left.Type == interfaces.EXCEPTION {
@@ -51,7 +52,6 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		}
 
 		Linicio := gen.NewLabel()
-		Lfinal := gen.NewLabel()
 		gen.AddLabel(Linicio)
 		symbol = newTable.GetSymbol(p.Id)
 		gen.AddComment("Identificador")
@@ -59,6 +59,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		gen.AddExpressionStack(temp, fmt.Sprintf("%v", symbol.Posicion))
 
 		EV := gen.NewLabel()
+		Lfinal := gen.NewLabel()
 		gen.AddComment("Relacional <")
 		gen.AddIf(temp, right.Value, "<", EV)
 		gen.AddGoto(Lfinal)
@@ -84,6 +85,58 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		// gen.AddIf()
 
 		gen.AddLabel(Lfinal)
+
+	} else if p.Type == interfaces.STRING {
+		
+		gen.AddComment("For - String")
+
+		left := p.Left.Compilar(&newTable, tree, gen)
+		if left.Type == interfaces.EXCEPTION {
+			return left
+		}
+
+
+		symbol := newTable.GetSymbol(p.Id)
+		temp 		:= gen.NewTemp()
+		secondTemp  := gen.NewTemp()
+
+		if symbol.Type == interfaces.NULL {			
+			
+			
+			gen.AddComment("Identificador")
+			gen.AddExpression(temp, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
+			gen.AddStack(temp, left.Value)
+			left.Type = interfaces.CHAR
+			newTable.AddSymbol(p.Id, left, interfaces.CHAR, true, newTable.Posicion)
+			newTable.NewPos()
+
+			
+			gen.AddExpressionStack(secondTemp,temp)
+		}
+
+		Linicio := gen.NewLabel()
+		gen.AddLabel(Linicio)
+		
+		thirdTemp := gen.NewTemp()
+
+		gen.AddExpressionHeap(thirdTemp, secondTemp)
+		gen.AddStack(temp, secondTemp)
+		gen.AddExpression(secondTemp, secondTemp, "1", "+")
+
+
+		gen.AddComment("Add If")
+
+		EV := gen.NewLabel()
+		gen.AddIf(thirdTemp, "-1", "==", EV)
+		
+		for _, s := range p.Instrucciones.ToArray() {
+			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
+
+		}
+
+
+		gen.AddGoto(Linicio)
+		gen.AddLabel(EV)
 
 	}
 
