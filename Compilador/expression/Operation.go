@@ -249,6 +249,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddIf(exp_left.Value, exp_right.Value, "<", EV)
 				gen.AddGoto(EF)
 
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, "<", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico", "No es posible Comparar <.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
@@ -288,6 +296,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
 
 				gen.AddIf(exp_left.Value, exp_right.Value, ">", EV)
+				gen.AddGoto(EF)
+
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, ">", EV)
 				gen.AddGoto(EF)
 
 			} else {
@@ -331,6 +347,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddIf(exp_left.Value, exp_right.Value, "<=", EV)
 				gen.AddGoto(EF)
 
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, "<=", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico", "No es posible Comparar <=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
@@ -372,6 +396,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddIf(exp_left.Value, exp_right.Value, ">=", EV)
 				gen.AddGoto(EF)
 
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, ">=", EV)
+				gen.AddGoto(EF)
+
 			} else {
 				excep := ast.NewException("Semantico", "No es posible Comparar >=.", p.Row, p.Column)
 				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
@@ -409,7 +441,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddIf(exp_left.Value, exp_right.Value, "==", EV)
 				gen.AddGoto(EF)
 
-			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) {
 
 				if !tree.IsCompareStr {
 					gen.AddCompareString()
@@ -429,6 +461,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
 
 				gen.AddIf(temp, "1", "==", EV)
+				gen.AddGoto(EF)
+
+			} else if exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, "==", EV)
 				gen.AddGoto(EF)
 
 			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
@@ -493,6 +533,14 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
 
 				gen.AddIf(temp, "0", "==", EV)
+				gen.AddGoto(EF)
+
+			} else if exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR {
+				_left  := gen.NewTemp()
+				_right := gen.NewTemp()
+				gen.AddExpressionHeap(_left, exp_left.Value)
+				gen.AddExpressionHeap(_right, exp_right.Value)
+				gen.AddIf(_left, _right, "!=", EV)
 				gen.AddGoto(EF)
 
 			} else if exp_left.Type == interfaces.BOOLEAN && exp_right.Type == interfaces.BOOLEAN {
