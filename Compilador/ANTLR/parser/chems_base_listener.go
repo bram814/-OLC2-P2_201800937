@@ -189,6 +189,12 @@ func (s *BaseChemsListener) EnterInstr_for_in(ctx *Instr_for_inContext) {}
 // ExitInstr_for_in is called when production instr_for_in is exited.
 func (s *BaseChemsListener) ExitInstr_for_in(ctx *Instr_for_inContext) {}
 
+// EnterInstr_loop is called when production instr_loop is entered.
+func (s *BaseChemsListener) EnterInstr_loop(ctx *Instr_loopContext) {}
+
+// ExitInstr_loop is called when production instr_loop is exited.
+func (s *BaseChemsListener) ExitInstr_loop(ctx *Instr_loopContext) {}
+
 // EnterInstr_break is called when production instr_break is entered.
 func (s *BaseChemsListener) EnterInstr_break(ctx *Instr_breakContext) {}
 
