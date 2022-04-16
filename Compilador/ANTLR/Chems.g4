@@ -52,6 +52,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_while                   { $instr = $instr_while.instr       }
   | instr_for_in                  { $instr = $instr_for_in.instr      }
   | instr_break end_instr         { $instr = $instr_break.instr       }
+  | instr_continue end_instr      { $instr = $instr_continue.instr    }
 ;
 
 
@@ -260,6 +261,11 @@ instr_for_in returns [interfaces.Instruction instr]
 instr_break returns [interfaces.Instruction instr]
   : R_BREAK                                { $instr = transferencia.NewBreak(nil,           $R_BREAK.line, localctx.(*Instr_breakContext).Get_R_BREAK().GetColumn()) }
   | R_BREAK expressions                    { $instr = transferencia.NewBreak($expressions.p, $R_BREAK.line, localctx.(*Instr_breakContext).Get_R_BREAK().GetColumn()) }
+;
+
+/******************************** [TRANSFERENCIA][CONTINUE]  ********************************/
+instr_continue returns [interfaces.Instruction instr]
+  : R_CONTINUE                             { $instr = transferencia.NewContinue($R_CONTINUE.line, localctx.(*Instr_continueContext).Get_R_CONTINUE().GetColumn()) }
 ;
 
 /******************************** [TIPO] ********************************/

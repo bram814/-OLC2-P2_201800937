@@ -61,17 +61,18 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 
 		EV := gen.NewLabel()
 		Lfinal := gen.NewLabel()
-		tree.AddDisplay(Linicio, Lfinal, "-1", false) // Display
+		Lincre := gen.NewLabel()
+		tree.AddDisplay(Lincre, Lfinal, "-1", false) // Display
 		gen.AddComment("Relacional <")
 		gen.AddIf(temp, right.Value, "<", EV)
 		gen.AddGoto(Lfinal)
 
 		gen.AddLabel(EV)
 		for _, s := range p.Instrucciones.ToArray() {
-			
 			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
 		}
-
+		gen.AddComment("Incremento For")
+		gen.AddLabel(Lincre)
 		symbol = newTable.GetSymbol(p.Id)
 		gen.AddComment("Identificador")
 		temp = gen.NewTemp()
@@ -83,6 +84,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		left.Value = temp
 		newTable.SetSymbol(p.Id, left, true, symbol.Posicion)
 		gen.AddStack(fmt.Sprintf("%v", symbol.Posicion), temp)
+
 		gen.AddGoto(Linicio)
 		// gen.AddIf()
 

@@ -23,6 +23,7 @@ func (p Break) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 	
 	gen.AddComment("Break")
 	var result interfaces.Value 
+	
 	pos := fmt.Sprintf("%v", tree.PosDisplay-1)
 	display := tree.GetDisplay(pos)
 
