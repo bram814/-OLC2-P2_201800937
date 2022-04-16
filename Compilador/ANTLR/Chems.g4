@@ -15,6 +15,7 @@ options {
     import "OLC2/Compilador/instruction/control"
     import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/loops"
+    import "OLC2/Compilador/instruction/transferencia"
     import arrayList "github.com/colegno/arraylist"
 }
 
@@ -50,6 +51,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_match                   { $instr = $instr_match.instr       }
   | instr_while                   { $instr = $instr_while.instr       }
   | instr_for_in                  { $instr = $instr_for_in.instr      }
+  | instr_break end_instr         { $instr = $instr_break.instr       }
 ;
 
 
@@ -247,10 +249,17 @@ instr_while returns [interfaces.Instruction instr]
   : R_WHILE expressions TK_LLAVEA instrucciones TK_LLAVEC                           { $instr = loops.NewWhile($expressions.p, $instrucciones.l, $R_WHILE.line, localctx.(*Instr_whileContext).Get_R_WHILE().GetColumn()) }
 ;
 
+/******************************** [LOOP][FOR] ********************************/
 instr_for_in returns [interfaces.Instruction instr]
   : R_FOR ID R_IN left=expressions TK_DOBLEPUNTO right=expressions TK_LLAVEA instrucciones TK_LLAVEC     { $instr = loops.NewFor($ID.text, interfaces.INTEGER, $left.p, $right.p, $instrucciones.l, $R_FOR.line, localctx.(*Instr_for_inContext).Get_R_FOR().GetColumn()) }
   | R_FOR ID R_IN left=expressions TK_LLAVEA instrucciones TK_LLAVEC                                     { $instr = loops.NewFor($ID.text, interfaces.STRING,  $left.p, nil, $instrucciones.l,      $R_FOR.line, localctx.(*Instr_for_inContext).Get_R_FOR().GetColumn()) }
 
+;
+
+/******************************** [TRANSFERENCIA][BREAK]    ********************************/
+instr_break returns [interfaces.Instruction instr]
+  : R_BREAK                                { $instr = transferencia.NewBreak(nil,           $R_BREAK.line, localctx.(*Instr_breakContext).Get_R_BREAK().GetColumn()) }
+  | R_BREAK expressions                    { $instr = transferencia.NewBreak($expressions.p, $R_BREAK.line, localctx.(*Instr_breakContext).Get_R_BREAK().GetColumn()) }
 ;
 
 /******************************** [TIPO] ********************************/

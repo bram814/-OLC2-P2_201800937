@@ -4,6 +4,7 @@ import (
 	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
+	// "reflect"
 	arrayList "github.com/colegno/arraylist"
 )
 
@@ -60,14 +61,15 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 
 		EV := gen.NewLabel()
 		Lfinal := gen.NewLabel()
+		tree.AddDisplay(Linicio, Lfinal, "-1", false) // Display
 		gen.AddComment("Relacional <")
 		gen.AddIf(temp, right.Value, "<", EV)
 		gen.AddGoto(Lfinal)
 
 		gen.AddLabel(EV)
 		for _, s := range p.Instrucciones.ToArray() {
+			
 			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
-
 		}
 
 		symbol = newTable.GetSymbol(p.Id)
@@ -85,6 +87,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		// gen.AddIf()
 
 		gen.AddLabel(Lfinal)
+		tree.RestPosDisplay()
 
 	} else if p.Type == interfaces.STRING {
 		
@@ -127,6 +130,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		gen.AddComment("Add If")
 
 		EV := gen.NewLabel()
+		tree.AddDisplay(Linicio, EV, "-1", false)
 		gen.AddIf(thirdTemp, "-1", "==", EV)
 		
 		for _, s := range p.Instrucciones.ToArray() {
@@ -137,6 +141,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 
 		gen.AddGoto(Linicio)
 		gen.AddLabel(EV)
+		tree.RestPosDisplay()
 
 	}
 

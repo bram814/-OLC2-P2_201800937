@@ -24,7 +24,7 @@ func (p While) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 	Linicio := gen.NewLabel()
 	EV := gen.NewLabel()
 	EF := gen.NewLabel()
-
+	tree.AddDisplay(Linicio, EF, "-1", false) // Display
 	gen.AddComment("While")
 	gen.AddLabel(Linicio)
 
@@ -50,6 +50,7 @@ func (p While) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 		}
 		gen.AddGoto(Linicio)
 		gen.AddLabel(EF)
+		tree.RestPosDisplay()
 
 	} else {
 		excep := ast.NewException("Semantico", "Tipo de Dato no Booleano en While.", p.Row, p.Column)

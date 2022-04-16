@@ -14,8 +14,9 @@ type Arbol struct {
 	IsPrimitive   bool
 	IsCocant      bool
 	IsCompareStr  bool
-	_Exception   *arrayList.List
-	// Tabla_Global environment.Environment
+	_Exception    *arrayList.List
+	Display  	  map[string]Display
+	PosDisplay    int
 }
 
 type Exception struct {
@@ -26,6 +27,12 @@ type Exception struct {
 	Time 		string
 }
 
+type Display struct {
+	Temp		string
+	IsTemp		bool
+	LInicio string
+	LFinal  string
+}
 
 func NewArbol() *Arbol {
 	tree := Arbol{
@@ -34,7 +41,9 @@ func NewArbol() *Arbol {
 		IsPrimitive  : false,
 		IsCocant	 : false,
 		IsCompareStr : false,
-		_Exception	 : arrayList.New()} 	
+		_Exception	 : arrayList.New(),
+		Display  	 : make(map[string]Display),
+		PosDisplay   : 0} 	
 	return &tree
 }
 
@@ -84,3 +93,32 @@ func (a Arbol) GetPos() int {
 func (a *Arbol) NewPos() {
 	a.StackGlobal = a.StackGlobal + 1
 }
+
+
+/* *************************  DISPLAY ************************* */
+
+func (a *Arbol) AddDisplay(labelInicio string, labelFinal string, temp string, isTemp bool) {
+
+	pos := fmt.Sprintf("%v", a.PosDisplay)
+	a.Display[pos] = Display{Temp: temp, IsTemp: isTemp, LInicio: labelInicio, LFinal: labelFinal}
+	a.PosDisplay = a.PosDisplay + 1
+}
+
+
+func (a *Arbol) GetDisplay(pos string) Display {
+
+	
+	if display, ok := a.Display[pos]; ok {
+		
+		return display
+	}
+
+	return Display{Temp: "-1", IsTemp: false, LInicio: "-1", LFinal: "-1"}
+	
+}
+
+
+func (a *Arbol) RestPosDisplay() {
+	a.PosDisplay = a.PosDisplay - 1
+}
+

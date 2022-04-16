@@ -5,11 +5,12 @@ import (
 )
 
 type Environment struct {
-	anterior *Environment
-	variable map[string]Symbol
-	Function map[string]Symbol
+	anterior 	*Environment
+	variable 	map[string]Symbol
+	Function 	map[string]Symbol
 	// structs  map[string]interfaces.Symbol
-	Posicion int
+	Posicion 	int
+
 }
 
 func NewEnvironment(anterior *Environment) Environment {
