@@ -1,7 +1,6 @@
 package loops
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 	// "reflect"
@@ -23,7 +22,7 @@ func NewFor(id string, tipo interfaces.TypeExpression, left interfaces.Expressio
 	return instr
 }
 
-func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
@@ -71,6 +70,14 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		for _, s := range p.Instrucciones.ToArray() {
 			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
 		}
+
+		pos := fmt.Sprintf("%v", tree.PosDisplay-1)
+		display := tree.GetDisplay(pos)
+		if display.IsTemp {
+			excep := interfaces.NewException("Semantico", "Error en For, Sentencia de Control incorrecta Break.", p.Row, p.Column)
+			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		}
+
 		gen.AddComment("Incremento For")
 		gen.AddLabel(Lincre)
 		symbol = newTable.GetSymbol(p.Id)
@@ -92,7 +99,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 		tree.RestPosDisplay()
 
 	} else if p.Type == interfaces.STRING {
-		
+
 		gen.AddComment("For - String")
 
 		left := p.Left.Compilar(&newTable, tree, gen)
@@ -100,14 +107,12 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 			return left
 		}
 
-
 		symbol := newTable.GetSymbol(p.Id)
-		temp 		:= gen.NewTemp()
-		secondTemp  := gen.NewTemp()
+		temp := gen.NewTemp()
+		secondTemp := gen.NewTemp()
 
-		if symbol.Type == interfaces.NULL {			
-			
-			
+		if symbol.Type == interfaces.NULL {
+
 			gen.AddComment("Identificador")
 			gen.AddExpression(temp, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
 			gen.AddStack(temp, left.Value)
@@ -115,29 +120,34 @@ func (p For) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gen
 			newTable.AddSymbol(p.Id, left, interfaces.CHAR, true, newTable.Posicion)
 			newTable.NewPos()
 
-			
-			gen.AddExpressionStack(secondTemp,temp)
+			gen.AddExpressionStack(secondTemp, temp)
 		}
 
 		Linicio := gen.NewLabel()
 		gen.AddLabel(Linicio)
-		
+
 		thirdTemp := gen.NewTemp()
 
 		gen.AddExpressionHeap(thirdTemp, secondTemp)
 		gen.AddStack(temp, secondTemp)
 		gen.AddExpression(secondTemp, secondTemp, "1", "+")
 
-
 		gen.AddComment("Add If")
 
 		EV := gen.NewLabel()
 		tree.AddDisplay(Linicio, EV, "-1", false)
 		gen.AddIf(thirdTemp, "-1", "==", EV)
-		
+
 		for _, s := range p.Instrucciones.ToArray() {
 			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
 
+		}
+		pos := fmt.Sprintf("%v", tree.PosDisplay-1)
+		display := tree.GetDisplay(pos)
+		
+		if display.IsTemp {
+			excep := interfaces.NewException("Semantico", "Error en For, Sentencia de Control incorrecta Break.", p.Row, p.Column)
+			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		}
 
 

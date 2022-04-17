@@ -1,7 +1,6 @@
 package ternario
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 )
@@ -17,7 +16,7 @@ func NewCase(cond interfaces.Expression, listaExpresion *arrayList.List, instruc
 	return instr
 }
 
-func (p Case) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p Case) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	var result interfaces.Value
 	if p.Condition != nil {

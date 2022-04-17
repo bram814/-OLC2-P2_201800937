@@ -1,7 +1,6 @@
 package control
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 )
@@ -19,7 +18,7 @@ func NewMatch(cond interfaces.Expression, instrCase *arrayList.List, instrDefaul
 	return instr
 }
 
-func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)

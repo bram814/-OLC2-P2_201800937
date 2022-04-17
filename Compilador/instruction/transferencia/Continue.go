@@ -1,14 +1,13 @@
 package transferencia
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 )
 
 type Continue struct {
-	Row 	int
-	Column 	int
+	Row    int
+	Column int
 }
 
 func NewContinue(row int, column int) Continue {
@@ -16,8 +15,7 @@ func NewContinue(row int, column int) Continue {
 	return instr
 }
 
-
-func (p Continue) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p Continue) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	gen.AddComment("Continue")
 

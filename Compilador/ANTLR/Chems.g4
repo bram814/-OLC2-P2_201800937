@@ -263,6 +263,12 @@ instr_loop returns [interfaces.Instruction instr]
   : R_LOOP TK_LLAVEA instrucciones TK_LLAVEC                           { $instr = loops.NewLoop($instrucciones.l, $R_LOOP.line, localctx.(*Instr_loopContext).Get_R_LOOP().GetColumn()) }
 ;
 
+/******************************** [LOOP][LOOP][TERNARIO] ********************************/
+instr_loop_ternario returns [interfaces.Expression p]
+  : R_LOOP TK_LLAVEA instrucciones TK_LLAVEC                           { $p = ternario.NewLoop($instrucciones.l, $R_LOOP.line, localctx.(*Instr_loop_ternarioContext).Get_R_LOOP().GetColumn()) }
+;
+
+
 /******************************** [TRANSFERENCIA][BREAK]    ********************************/
 instr_break returns [interfaces.Instruction instr]
   : R_BREAK                                { $instr = transferencia.NewBreak(nil,           $R_BREAK.line, localctx.(*Instr_breakContext).Get_R_BREAK().GetColumn()) }
@@ -376,6 +382,7 @@ primitivo returns[interfaces.Expression p]
     | primitivo_casteo          { $p = $primitivo_casteo.p }
     | instr_ternario            { $p = $instr_ternario.p }
     | instr_match_ter           { $p = $instr_match_ter.p }
+    | instr_loop_ternario       { $p = $instr_loop_ternario.p }
 ;
 
 

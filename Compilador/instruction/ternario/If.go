@@ -1,7 +1,6 @@
 package ternario
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 )
@@ -20,7 +19,7 @@ func NewIf(condicion interfaces.Expression, instrIf interfaces.Expression, instr
 	return instr
 }
 
-func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p If) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	gen.AddComment("Ternario - If")
 	var cond, result interfaces.Value
@@ -60,8 +59,8 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 			gen.AddExpression(temp, result.Value, "", "")
 
 			if isType != result.Type {
-				excep := ast.NewException("Semantico", "Tipos de Datos incorrectos en If (ternario).", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "Tipos de Datos incorrectos en If (ternario).", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 		}
@@ -71,8 +70,8 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 				gen.AddComment("Ternario - If (else if)")
 				newInstr := s.(If).Compilar(env, tree, gen)
 				if newInstr.Type != result.Type {
-					excep := ast.NewException("Semantico", "Tipos Diferentes en If (ternario).", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "Tipos Diferentes en If (ternario).", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 				}
 				gen.AddComment("Ternario - Retorno de Temp")
@@ -95,8 +94,8 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 		return interfaces.Value{Value: temp, IsTemp: false, Type: result.Type, TrueLabel: "", FalseLabel: ""}
 
 	} else {
-		excep := ast.NewException("Semantico", "Tipo de Dato no Booleano en If (ternario).", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "Tipo de Dato no Booleano en If (ternario).", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 

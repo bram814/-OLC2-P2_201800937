@@ -1,7 +1,6 @@
 package ternario
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 )
 
@@ -14,7 +13,7 @@ func NewDefault(instrucciones interfaces.Expression) Default {
 	return instr
 }
 
-func (p Default) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p Default) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	result := p.Instrucciones.Compilar(env, tree, gen)
 

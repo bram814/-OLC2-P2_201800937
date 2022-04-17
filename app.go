@@ -12,7 +12,6 @@ import (
 	"OLC2/Compilador/ANTLR/parser"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
-	"OLC2/Compilador/ast"
 )
 
 var CODE_OUT_ string = ""
@@ -97,15 +96,15 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	_salida = ""
 	CODE_OUT_ = ""
 	/* TREE */
-	var tree *ast.Arbol
-	tree = ast.NewArbol()
+	var tree *interfaces.Arbol
+	tree = interfaces.NewArbol()
 	/* ENVIRONMENT */
 	var globalEnv interfaces.Environment
 	globalEnv = interfaces.NewEnvironment(nil)
 
 	/* GENERATOR */
-	var gen *ast.Generator
-	gen = ast.NewGenerator()
+	var gen *interfaces.Generator
+	gen = interfaces.NewGenerator()
 
 	// var contMain int = 0
 	gen.AddFunction("int", "main()")
@@ -154,11 +153,11 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	for _, s := range tree.GetException().ToArray() {
 		OutException += fmt.Sprintf("%v", s)
 		m := make(map[string]string)
-		m["Id"] = fmt.Sprintf("%v", s.(ast.Exception).Tipo)
-		m["Descripcion"] = fmt.Sprintf("%v", s.(ast.Exception).Descripcion)
-		m["Row"] = fmt.Sprintf("%v", s.(ast.Exception).Row)
-		m["Column"] = fmt.Sprintf("%v", s.(ast.Exception).Column)
-		m["Time"] = fmt.Sprintf("%v", s.(ast.Exception).Time)
+		m["Id"] = fmt.Sprintf("%v", s.(interfaces.Exception).Tipo)
+		m["Descripcion"] = fmt.Sprintf("%v", s.(interfaces.Exception).Descripcion)
+		m["Row"] = fmt.Sprintf("%v", s.(interfaces.Exception).Row)
+		m["Column"] = fmt.Sprintf("%v", s.(interfaces.Exception).Column)
+		m["Time"] = fmt.Sprintf("%v", s.(interfaces.Exception).Time)
 
 		tablaSimboloP = append(tablaSimboloP, m)
 	}

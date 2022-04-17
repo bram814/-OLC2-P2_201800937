@@ -1,9 +1,9 @@
 package loops
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
+	"fmt"
 )
 
 type While struct {
@@ -18,7 +18,7 @@ func NewWhile(cond interfaces.Expression, instruccion *arrayList.List, row int, 
 	return instr
 }
 
-func (p While) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p While) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	var cond interfaces.Value
 	Linicio := gen.NewLabel()
@@ -48,13 +48,20 @@ func (p While) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
 
 		}
+
+		pos := fmt.Sprintf("%v", tree.PosDisplay-1)
+		display := tree.GetDisplay(pos)
+		if display.IsTemp {
+			excep := interfaces.NewException("Semantico", "Error en For, Sentencia de Control incorrecta Break.", p.Row, p.Column)
+			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		}
 		gen.AddGoto(Linicio)
 		gen.AddLabel(EF)
 		tree.RestPosDisplay()
 
 	} else {
-		excep := ast.NewException("Semantico", "Tipo de Dato no Booleano en While.", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "Tipo de Dato no Booleano en While.", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 

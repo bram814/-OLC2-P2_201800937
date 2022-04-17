@@ -1,7 +1,6 @@
 package expression
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 	// "math"
@@ -23,7 +22,7 @@ func NewOperacion(left interfaces.Expression, Operator string, right interfaces.
 	return exp
 }
 
-func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	var exp_left interfaces.Value
 	var exp_right interfaces.Value
@@ -68,8 +67,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				isType = interfaces.STRING
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Sumar, Tipos de datos Incorrectos.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Sumar, Tipos de datos Incorrectos.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -93,8 +92,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 					isType = interfaces.FLOAT
 
 				} else {
-					excep := ast.NewException("Semantico", "No es posible Restar, Tipos de datos Incorrectos.", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "No es posible Restar, Tipos de datos Incorrectos.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 				}
 
@@ -114,8 +113,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 					isType = interfaces.FLOAT
 
 				} else {
-					excep := ast.NewException("Semantico", "No es posible Restar, Tipos de datos Incorrectos.", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "No es posible Restar, Tipos de datos Incorrectos.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 				}
 
@@ -146,8 +145,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				isType = interfaces.FLOAT
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Multiplicar, Tipos de datos Incorrectos.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Multiplicar, Tipos de datos Incorrectos.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -178,8 +177,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				isType = interfaces.FLOAT
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Multiplicar, Tipos de datos Incorrectos.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Multiplicar, Tipos de datos Incorrectos.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -197,8 +196,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 
 			if !exp_right.IsTemp {
 				if exp_right.Value == "0" {
-					excep := ast.NewException("Semantico", "No es posible Dividir entre 0.", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "No es posible Dividir entre 0.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 				}
 			}
@@ -214,8 +213,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				isType = interfaces.FLOAT
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Dividir.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Dividir.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -250,7 +249,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -258,8 +257,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar <.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar <.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -299,7 +298,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -307,8 +306,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar >.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar >.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -348,7 +347,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -356,8 +355,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar <=.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar <=.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -397,7 +396,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR) {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -405,8 +404,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar >=.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar >=.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -441,7 +440,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddIf(exp_left.Value, exp_right.Value, "==", EV)
 				gen.AddGoto(EF)
 
-			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) {
+			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
 
 				if !tree.IsCompareStr {
 					gen.AddCompareString()
@@ -464,7 +463,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -477,8 +476,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar ==.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar ==.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -536,7 +535,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else if exp_left.Type == interfaces.CHAR && exp_right.Type == interfaces.CHAR {
-				_left  := gen.NewTemp()
+				_left := gen.NewTemp()
 				_right := gen.NewTemp()
 				gen.AddExpressionHeap(_left, exp_left.Value)
 				gen.AddExpressionHeap(_right, exp_right.Value)
@@ -549,8 +548,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				gen.AddGoto(EF)
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar !=.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar !=.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -602,15 +601,15 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 					return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 				} else {
-					excep := ast.NewException("Semantico", "No es posible Comparar &&; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "No es posible Comparar &&; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 
 				}
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar &&; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar &&; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -659,15 +658,15 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 					return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 				} else {
-					excep := ast.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
-					tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					excep := interfaces.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano en expresion Der.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 
 				}
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano en expresion Izq.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 
@@ -704,8 +703,8 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 				return interfaces.Value{Value: temp, IsTemp: true, Type: interfaces.BOOLEAN, TrueLabel: "", FalseLabel: ""}
 
 			} else {
-				excep := ast.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano.", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				excep := interfaces.NewException("Semantico", "No es posible Comparar ||; Tipo de Dato no Booleano.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 

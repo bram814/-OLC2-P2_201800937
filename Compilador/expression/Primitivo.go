@@ -1,7 +1,6 @@
 package expression
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 	// "reflect"
@@ -20,7 +19,7 @@ func NewPrimitivo(val interface{}, tipo interfaces.TypeExpression, casteo interf
 	return exp
 }
 
-func (p Primitivo) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p Primitivo) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	if p.Type == interfaces.STRING || p.Type == interfaces.CHAR {
 		gen.AddComment("PRIMITIVO STRING")

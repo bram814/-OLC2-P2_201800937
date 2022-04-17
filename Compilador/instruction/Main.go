@@ -1,7 +1,6 @@
 package instruction
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 	// "reflect"
@@ -19,7 +18,7 @@ func NewMain(instrucciones *arrayList.List, row int, column int) Main {
 	return instr
 }
 
-func (p Main) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p Main) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)

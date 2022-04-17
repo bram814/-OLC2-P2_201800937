@@ -1,23 +1,18 @@
 package ternario
 
 import (
-
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 	// "reflect"
 	// "fmt"
 )
 
-
 type Match struct {
-
-	Condition	 interfaces.Expression
-	InstrCase	 *arrayList.List
+	Condition    interfaces.Expression
+	InstrCase    *arrayList.List
 	InstrDefault interfaces.Expression
-	Row 		 int
-	Column  	 int
-
+	Row          int
+	Column       int
 }
 
 func NewMatch(cond interfaces.Expression, instrCase *arrayList.List, instrDefault interfaces.Expression, row int, column int) Match {
@@ -25,9 +20,7 @@ func NewMatch(cond interfaces.Expression, instrCase *arrayList.List, instrDefaul
 	return instr
 }
 
-
-func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
-
+func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	var block2 string = "\n"
 	var cond, newCond interfaces.Value
@@ -37,7 +30,7 @@ func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 
 	Linicial := gen.NewLabel()
 	newLabel := gen.NewLabel()
-	Lfinal 	 := gen.NewLabel()
+	Lfinal := gen.NewLabel()
 	gen.AddComment("Ternario - Match")
 	temp := gen.NewTemp()
 	gen.AddGoto(Linicial)
@@ -57,23 +50,23 @@ func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 			} else {
 				for _, i := range s.(Case).ListaExpresion.ToArray() {
 					newCond = i.(Case).Condition.Compilar(env, tree, gen)
-					
+
 					EV := gen.NewLabel()
 					block2 += "\t" + "if(" + cond.Value + " " + "==" + " " + newCond.Value + ") goto " + EV + ";\n"
 
 					gen.AddLabel(EV)
 					newInstr := s.(Case).Instrucciones.Compilar(env, tree, gen)
 
-					if isType != interfaces.NULL  && isType != newInstr.Type {
-						excep := ast.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
-						tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					if isType != interfaces.NULL && isType != newInstr.Type {
+						excep := interfaces.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
+						tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 						return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 					} else {
 						isType = newInstr.Type
 					}
-					
+
 					gen.AddGoto(newLabel)
-					gen.AddExpression1(temp,newInstr.Value)
+					gen.AddExpression1(temp, newInstr.Value)
 
 				}
 			}
@@ -84,17 +77,17 @@ func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 			block2 += "\t" + "if(" + cond.Value + " " + "==" + " " + cond.Value + ") goto " + Lfinal + ";\n"
 			gen.AddLabel(Lfinal)
 			newInstr := p.InstrDefault.(Default).Compilar(env, tree, gen)
-			
-			if isType != interfaces.NULL  && isType != newInstr.Type {
-				excep := ast.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+
+			if isType != interfaces.NULL && isType != newInstr.Type {
+				excep := interfaces.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			} else {
 				isType = newInstr.Type
 			}
-			
+
 			gen.AddGoto(newLabel)
-			gen.AddExpression1(temp,newInstr.Value)
+			gen.AddExpression1(temp, newInstr.Value)
 
 		}
 
@@ -106,17 +99,17 @@ func (p Match) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.G
 			block2 += "\t" + "if(" + cond.Value + " " + "==" + " " + cond.Value + ") goto " + Lfinal + ";\n"
 			gen.AddLabel(Lfinal)
 			newInstr := p.InstrDefault.(Default).Compilar(env, tree, gen)
-			
-			if isType != interfaces.NULL  && isType != newInstr.Type {
-				excep := ast.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
-				tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+
+			if isType != interfaces.NULL && isType != newInstr.Type {
+				excep := interfaces.NewException("Semantico", "Tipos de Datos incorrectos en Match (ternario).", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			} else {
 				isType = newInstr.Type
 			}
-			
+
 			gen.AddGoto(newLabel)
-			gen.AddExpression1(temp,newInstr.Value)
+			gen.AddExpression1(temp, newInstr.Value)
 		}
 	}
 

@@ -1,7 +1,6 @@
 package variable
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 )
@@ -17,8 +16,7 @@ func NewIdentifier(id string, row int, column int) Identifier {
 	return instr
 }
 
-func (p Identifier) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
-
+func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	/* Buscar si el id ya existe */
 	symbol := env.SearchSymbol(p.Id)
@@ -27,13 +25,12 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 		symbol = env.GetSymbol(p.Id)
 
 		if symbol.Type == interfaces.NULL {
-			excep := ast.NewException("Semantico", "No Existe ese Id "+p.Id, p.Row, p.Column)
-			tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+			excep := interfaces.NewException("Semantico", "No Existe ese Id "+p.Id, p.Row, p.Column)
+			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 
 		}
 	}
-	
 
 	gen.AddComment("Identificador")
 	temp := gen.NewTemp()

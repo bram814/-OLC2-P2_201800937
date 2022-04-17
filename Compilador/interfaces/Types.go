@@ -12,4 +12,7 @@ const (
 	NULL                            // 6
 	EXCEPTION                       // 7
 	STR                             // 8
+	BREAK  							// 9
+	CONTINUE  						// 10
+	RETURN  						// 11 
 )

@@ -1,7 +1,6 @@
 package interfaces
 
 import (
-	"OLC2/Compilador/ast"
 	arrayList "github.com/colegno/arraylist"
 )
 
@@ -30,9 +29,9 @@ type Value struct {
 }
 
 type Expression interface {
-	Compilar(env *Environment, tree *ast.Arbol, gen *ast.Generator) Value
+	Compilar(env *Environment, tree *Arbol, gen *Generator) Value
 }
 
 type Instruction interface {
-	Compilar(env *Environment, tree *ast.Arbol, gen *ast.Generator) interface{}
+	Compilar(env *Environment, tree *Arbol, gen *Generator) interface{}
 }

@@ -1,7 +1,6 @@
 package loops
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 )
@@ -17,8 +16,7 @@ func NewLoop(instruccion *arrayList.List, row int, column int) Loop {
 	return instr
 }
 
-func (p Loop) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
-
+func (p Loop) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	Linicio := gen.NewLabel()
 	Lfinal := gen.NewLabel()
@@ -38,8 +36,6 @@ func (p Loop) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Ge
 	gen.AddGoto(Linicio)
 	gen.AddLabel(Lfinal)
 	tree.RestPosDisplay()
-
-	
 
 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 }

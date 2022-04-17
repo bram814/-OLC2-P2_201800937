@@ -1,7 +1,6 @@
 package instruction
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 )
 
@@ -14,7 +13,7 @@ func NewListExpre(val interfaces.Expression) ListExpre {
 	return exp
 }
 
-func (p ListExpre) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interfaces.Value {
+func (p ListExpre) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
 	var newInstr interfaces.Value
 	newInstr = p.Expresion.Compilar(env, tree, gen)

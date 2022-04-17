@@ -1,7 +1,6 @@
 package variable
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 )
@@ -18,14 +17,14 @@ func NewAssignment(id string, val interfaces.Expression, row int, column int) As
 	return instr
 }
 
-func (p Assignment) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p Assignment) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	/* Buscar si el id ya existe */
 	symbol := env.GetSymbol(p.Id)
 
 	if symbol.Type == interfaces.NULL {
-		excep := ast.NewException("Semantico", "No Existe ese Id "+p.Id, p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "No Existe ese Id "+p.Id, p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
@@ -39,8 +38,8 @@ func (p Assignment) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *
 		gen.AddStack(fmt.Sprintf("%v", symbol.Posicion), result.Value)
 
 	} else {
-		excep := ast.NewException("Semantico", "No se puede asignar a "+p.Id+", no es mutable.", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "No se puede asignar a "+p.Id+", no es mutable.", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 

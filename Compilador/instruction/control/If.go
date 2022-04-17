@@ -1,7 +1,6 @@
 package control
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 	// "reflect"
@@ -22,7 +21,7 @@ func NewIf(condicion interfaces.Expression, instrIf *arrayList.List, instrElse *
 	return instr
 }
 
-func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p If) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	var cond interfaces.Value
 	cond = p.Condicion.Compilar(env, tree, gen)
@@ -58,7 +57,7 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 			gen.AddComment("Control - If (else)")
 			newTable = interfaces.NewEnvironment(env)
 			newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
-			
+
 			for _, s := range p.InstrElse.ToArray() {
 
 				s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
@@ -79,8 +78,8 @@ func (p If) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Gene
 		gen.AddLabel(newLabel)
 
 	} else {
-		excep := ast.NewException("Semantico", "Error en If. Tipo de Dato no Booleano.", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "Error en If. Tipo de Dato no Booleano.", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 

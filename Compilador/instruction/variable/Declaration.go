@@ -1,7 +1,6 @@
 package variable
 
 import (
-	"OLC2/Compilador/ast"
 	"OLC2/Compilador/interfaces"
 	"fmt"
 	// "reflect"
@@ -21,15 +20,15 @@ func NewDeclaration(id string, tipo interfaces.TypeExpression, val interfaces.Ex
 	return instr
 }
 
-func (p Declaration) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen *ast.Generator) interface{} {
+func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
 	/* Buscar si el id ya existe */
 	symbol := env.SearchSymbol(p.Id)
 
 	if symbol.Type != interfaces.NULL {
 		fmt.Println("No puede agregar")
-		excep := ast.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
@@ -70,8 +69,8 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *ast.Arbol, gen 
 		}
 
 	} else {
-		excep := ast.NewException("Semantico", "Tipo Incorrecto en Declaracion.", p.Row, p.Column)
-		tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		excep := interfaces.NewException("Semantico", "Tipo Incorrecto en Declaracion.", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
