@@ -51,7 +51,7 @@ func (p Loop) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen 
 
 		excep := interfaces.NewException("Semantico", "Error en Loop, Break no trea una Expresion.", p.Row, p.Column)
 		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
-		return 
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 	tree.RestPosDisplay()
 

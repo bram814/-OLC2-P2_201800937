@@ -85,18 +85,18 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 							}
 
 							temp := gen.NewTemp()
-							gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+							gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 							gen.AddExpression(temp, temp, "1", "+")
 
 							if result.IsTemp {
 								gen.AddStack(temp, result.Value)
-								gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+								gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 								gen.PrintfString()
 							}
 
 							temp = gen.NewTemp()
 							gen.AddExpressionStack(temp, "P")
-							gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+							gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
 						} else if result.Type == interfaces.CHAR {
 							gen.AddComment("Printf Char")
@@ -129,16 +129,16 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 					tree.IsPrimitive = true
 				}
 				temp := gen.NewTemp()
-				gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.AddExpression(temp, temp, "1", "+")
 
 				gen.AddStack(temp, auxTemp)
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.PrintfString()
 
 				temp = gen.NewTemp()
 				gen.AddExpressionStack(temp, "P")
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
 			}
 		}
@@ -159,42 +159,27 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 
 		if result.Type == interfaces.STRING {
 			gen.AddComment("Printf String")
+
 			if !tree.IsPrimitive {
 				gen.AddPrintfString()
 				tree.IsPrimitive = true
 			}
+
 			temp := gen.NewTemp()
-			gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+			gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 			gen.AddExpression(temp, temp, "1", "+")
 
 			if result.IsTemp {
 				gen.AddStack(temp, result.Value)
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.PrintfString()
 			}
+
 			temp = gen.NewTemp()
 			gen.AddExpressionStack(temp, "P")
-			gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+			gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
-			// } else if result.Type == interfaces.BOOLEAN {
-			// 	gen.AddComment("Printf Boolean")
-			// 	if !result.IsTemp {
-			// 		newLabel := gen.NewLabel()
-			// 		gen.AddBoolean(result.TrueLabel, result.FalseLabel, newLabel)
-			// 	}
 
-			// } else if result.Type == interfaces.INTEGER {
-			// 	gen.AddComment("Printf Integer")
-			// 	gen.AddPrintf("d", "(int)"+fmt.Sprintf("%v", result.Value))
-
-			// } else if result.Type == interfaces.FLOAT {
-			// 	gen.AddComment("Printf Float")
-			// 	gen.AddPrintf("f", "(double)"+fmt.Sprintf("%v", result.Value))
-
-			// } else if result.Type == interfaces.CHAR  {
-			// 	gen.AddComment("Printf Char")
-			// 	temp := gen.NewTemp()
-			// 	gen.AddExpressionHeap(temp,result.Value)
-			// 	gen.AddPrintf("c", "(char)"+temp)
 
 		} else {
 			excep := interfaces.NewException("Semantico", "Formato incorrecto {}, Tipo de Dato Incorrecto.", p.Row, p.Column)

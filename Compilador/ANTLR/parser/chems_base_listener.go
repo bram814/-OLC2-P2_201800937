@@ -213,6 +213,30 @@ func (s *BaseChemsListener) EnterInstr_continue(ctx *Instr_continueContext) {}
 // ExitInstr_continue is called when production instr_continue is exited.
 func (s *BaseChemsListener) ExitInstr_continue(ctx *Instr_continueContext) {}
 
+// EnterInstr_func is called when production instr_func is entered.
+func (s *BaseChemsListener) EnterInstr_func(ctx *Instr_funcContext) {}
+
+// ExitInstr_func is called when production instr_func is exited.
+func (s *BaseChemsListener) ExitInstr_func(ctx *Instr_funcContext) {}
+
+// EnterList_function_parameters is called when production list_function_parameters is entered.
+func (s *BaseChemsListener) EnterList_function_parameters(ctx *List_function_parametersContext) {}
+
+// ExitList_function_parameters is called when production list_function_parameters is exited.
+func (s *BaseChemsListener) ExitList_function_parameters(ctx *List_function_parametersContext) {}
+
+// EnterBlock_parameters_fn is called when production block_parameters_fn is entered.
+func (s *BaseChemsListener) EnterBlock_parameters_fn(ctx *Block_parameters_fnContext) {}
+
+// ExitBlock_parameters_fn is called when production block_parameters_fn is exited.
+func (s *BaseChemsListener) ExitBlock_parameters_fn(ctx *Block_parameters_fnContext) {}
+
+// EnterInstr_llamada is called when production instr_llamada is entered.
+func (s *BaseChemsListener) EnterInstr_llamada(ctx *Instr_llamadaContext) {}
+
+// ExitInstr_llamada is called when production instr_llamada is exited.
+func (s *BaseChemsListener) ExitInstr_llamada(ctx *Instr_llamadaContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 

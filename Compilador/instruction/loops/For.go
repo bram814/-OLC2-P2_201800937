@@ -45,9 +45,13 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 
 		if symbol.Type == interfaces.NULL {
 
-			newTable.AddSymbol(p.Id, left, left.Type, true, tree.GetPos())
-			gen.AddStack(fmt.Sprintf("%v", tree.GetPos()), left.Value)
-			tree.NewPos()
+			gen.AddComment("Declaracion")
+
+			temp := gen.NewTemp()
+			gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
+			gen.AddStack(temp, left.Value)
+			newTable.AddSymbol(p.Id, left, left.Type, true, env.Posicion, &newTable)
+			env.NewPos()
 
 		}
 
@@ -55,6 +59,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 		gen.AddLabel(Linicio)
 		symbol = newTable.GetSymbol(p.Id)
 		gen.AddComment("Identificador")
+
 		temp := gen.NewTemp()
 		gen.AddExpressionStack(temp, fmt.Sprintf("%v", symbol.Posicion))
 
@@ -117,7 +122,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 			gen.AddExpression(temp, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
 			gen.AddStack(temp, left.Value)
 			left.Type = interfaces.CHAR
-			newTable.AddSymbol(p.Id, left, interfaces.CHAR, true, newTable.Posicion)
+			newTable.AddSymbol(p.Id, left, interfaces.CHAR, true, newTable.Posicion, &newTable)
 			newTable.NewPos()
 
 			gen.AddExpressionStack(secondTemp, temp)

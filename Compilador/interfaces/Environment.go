@@ -2,6 +2,7 @@ package interfaces
 
 import (
 	"fmt"
+	// "reflect"
 )
 
 type Environment struct {
@@ -36,32 +37,29 @@ func (env *Environment) IsAmbit() bool {
 		}
 	}
 
-	return 1 < cont
+	return 0 < cont
 }
 
 func (env *Environment) NewPos() {
 	env.Posicion = env.Posicion + 1
 }
 
-func (env *Environment) UpdatePos(treePos int, envPos int, isBool bool ,newTable *Environment) {
+func (env *Environment) UpdatePos(treePos int, envPos int, isBool bool , newTable *Environment) {
 
-	if isBool {
-		newTable.Posicion = envPos
+	
+	newTable.Posicion = envPos
 		
-	} else {
-		newTable.Posicion = treePos
-
-	}
+	
 
 }
 
-func (env *Environment) AddSymbol(id string, value Value, tipo TypeExpression, isMut bool, pos int) {
+func (env *Environment) AddSymbol(id string, value Value, tipo TypeExpression, isMut bool, pos int, newTable *Environment) {
 
-	if variable, ok := env.variable[id]; ok {
+	if variable, ok := newTable.variable[id]; ok {
 		fmt.Println("[ADD SYMBOL] La variable " + variable.Id + " ya existe")
 		return
 	}
-	env.variable[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut, Posicion: pos}
+	newTable.variable[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut, Posicion: pos}
 }
 
 func (env *Environment) SearchSymbol(id string) Symbol {
@@ -69,6 +67,7 @@ func (env *Environment) SearchSymbol(id string) Symbol {
 	tmpEnv = env
 
 	for {
+
 		if tmpEnv.anterior == nil {
 			break
 		} else {
@@ -98,7 +97,7 @@ func (env *Environment) GetSymbol(id string) Symbol {
 		}
 	}
 
-	fmt.Println("La variable no existe")
+
 	return Symbol{Id: "", Type: NULL, Value: Symbol{Id: "", Type: NULL, Value: 0}}
 }
 
@@ -120,24 +119,16 @@ func (env *Environment) SetSymbol(id string, value Value, mut bool, pos int) Sym
 		}
 	}
 
-	fmt.Println("La variable no existe")
 	return Symbol{Id: "", Type: NULL, Value: Symbol{Id: "", Type: NULL, Value: 0}}
 }
 
 func (env *Environment) AddFunction(id string, value Symbol, tipo TypeExpression) {
-	var tmpEnv *Environment
-	tmpEnv = env
-	for {
-		if tmpEnv.anterior == nil {
-			tmpEnv.Function[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: true}
-			fmt.Println("--- func ")
-			fmt.Println(env.Function[id])
-			fmt.Println("--- *** ---- ")
-			break
-		} else {
-			tmpEnv = tmpEnv.anterior
-		}
+	
+	if variable, ok := env.Function[id]; ok {
+		fmt.Println("[ADD SYMBOL] La variable " + variable.Id + " ya existe")
+		return
 	}
+	env.Function[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: true, Posicion: 0}
 
 }
 
@@ -145,9 +136,14 @@ func (env *Environment) GetFunction(id string) Symbol {
 
 	var tmpEnv *Environment
 	tmpEnv = env
-	fmt.Println(env.Function)
 
 	for {
+
+		if variable, ok := tmpEnv.Function[id]; ok {
+			return variable
+		} 
+		
+
 		if tmpEnv.anterior == nil {
 			break
 
@@ -156,14 +152,7 @@ func (env *Environment) GetFunction(id string) Symbol {
 		}
 	}
 
-	if function, ok := tmpEnv.Function[id]; ok {
-		return function
-	} else {
-		tmpEnv = tmpEnv.anterior
-	}
-
-	fmt.Println("La function no existe")
-	fmt.Println("---- fin func --")
+	
 	return Symbol{Id: "", Type: NULL, Value: Symbol{Id: "", Type: NULL, Value: 0}}
 
 }

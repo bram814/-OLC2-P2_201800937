@@ -32,14 +32,6 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
-	// symbol = env.GetSymbol(p.Id)
-
-	// if symbol.Type != interfaces.NULL {
-	// 	excep := ast.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
-	// 	tree.AddException(ast.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
-	// 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
-	// }
-
 	var result interfaces.Value
 
 	if p.Expresion != nil {
@@ -53,20 +45,15 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 	if result.Type == p.Type || p.Type == interfaces.NULL {
 		gen.AddComment("Declaracion")
 
-		if env.IsAmbit() {
-			// fmt.Println("Local")
-			temp := gen.NewTemp()
-			gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
-			gen.AddStack(temp, result.Value)
-			env.AddSymbol(p.Id, result, result.Type, p.IsMut, env.Posicion)
-			env.NewPos()
+		
+		// fmt.Println("Local")
+		temp := gen.NewTemp()
+		gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
+		gen.AddStack(temp, result.Value)
+		env.AddSymbol(p.Id, result, result.Type, p.IsMut, env.Posicion, env)
+		env.NewPos()
 
-		} else {
-			// fmt.Println("Global")
-			env.AddSymbol(p.Id, result, result.Type, p.IsMut, tree.GetPos())
-			gen.AddStack(fmt.Sprintf("%v", tree.GetPos()), result.Value)
-			tree.NewPos()
-		}
+		
 
 	} else {
 		excep := interfaces.NewException("Semantico", "Tipo Incorrecto en Declaracion.", p.Row, p.Column)

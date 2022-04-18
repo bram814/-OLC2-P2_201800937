@@ -287,12 +287,23 @@ func (g *Generator) StachHeap() {
 	g.code.Add("P = 0; H = 0;\n")
 
 }
+
+func (g *Generator) PrintFunction(name string) {
+	g.code.Add(name + "();")
+}
+
 func (g *Generator) AddFunction(tipo string, nombre string) {
 	g.code.Add("\r" + tipo + " " + nombre + " {")
 
 }
 
-func (g *Generator) AddFunctionEnd() {
-	g.code.Add("\n\treturn 0;\r}")
+func (g *Generator) AddFunctionEnd(flag bool) {
+
+	if flag {
+		g.code.Add("\n\treturn 0;\r}")
+
+	} else {
+		g.code.Add("\n\treturn;\r}")
+	}
 
 }

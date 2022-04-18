@@ -11,10 +11,11 @@ options {
     import "OLC2/Compilador/interfaces"
     import "OLC2/Compilador/expression"
     import "OLC2/Compilador/instruction"
-    import "OLC2/Compilador/instruction/variable"
-    import "OLC2/Compilador/instruction/control"
-    import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/loops"
+    import "OLC2/Compilador/instruction/control"
+    import "OLC2/Compilador/instruction/variable"
+    import "OLC2/Compilador/instruction/ternario"
+    import "OLC2/Compilador/instruction/function"
     import "OLC2/Compilador/instruction/transferencia"
     import arrayList "github.com/colegno/arraylist"
 }
@@ -54,6 +55,8 @@ instruccion returns [interfaces.Instruction instr]
   | instr_loop                    { $instr = $instr_loop.instr        }
   | instr_break end_instr         { $instr = $instr_break.instr       }
   | instr_continue end_instr      { $instr = $instr_continue.instr    }
+  | instr_func                    { $instr = $instr_func.instr        }
+  | instr_llamada end_instr       { $instr = $instr_llamada.instr     }
 ;
 
 
@@ -279,6 +282,43 @@ instr_break returns [interfaces.Instruction instr]
 instr_continue returns [interfaces.Instruction instr]
   : R_CONTINUE                             { $instr = transferencia.NewContinue($R_CONTINUE.line, localctx.(*Instr_continueContext).Get_R_CONTINUE().GetColumn()) }
 ;
+
+/******************************** [FUNCTION]  ********************************/
+instr_func returns [interfaces.Instruction instr]
+  : R_FUNCTION ID TK_PARA  TK_PARC TK_LLAVEA instrucciones TK_LLAVEC                                                      { $instr = function.NewFunction($ID.text, nil, $instrucciones.l, interfaces.NULL,      $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
+  | R_FUNCTION ID TK_PARA list_function_parameters TK_PARC TK_LLAVEA instrucciones TK_LLAVEC                              { $instr = function.NewFunction($ID.text, $list_function_parameters.l, $instrucciones.l, interfaces.NULL,      $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
+  | R_FUNCTION ID TK_PARA list_function_parameters TK_PARC TK_MENOSMAYOR instr_tipo TK_LLAVEA instrucciones TK_LLAVEC     { $instr = function.NewFunction($ID.text, $list_function_parameters.l, $instrucciones.l, $instr_tipo.tipo_exp, $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
+;
+
+list_function_parameters returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_parameters_fn*  {
+        listInt := localctx.(*List_function_parametersContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+
+block_parameters_fn returns [interfaces.Instruction instr]
+  : ID TK_DOSPUNTOS instr_tipo TK_COMA                    { $instr = function.NewListExpre($ID.text, $instr_tipo.tipo_exp, $ID.line, localctx.(*Block_parameters_fnContext).Get_ID().GetColumn()) }
+  | ID TK_DOSPUNTOS instr_tipo                            { $instr = function.NewListExpre($ID.text, $instr_tipo.tipo_exp, $ID.line, localctx.(*Block_parameters_fnContext).Get_ID().GetColumn()) }
+;
+
+
+/******************************** [FUNCTION]  ********************************/
+instr_llamada returns [interfaces.Instruction instr]
+  : ID TK_PARA TK_PARC                            { $instr = function.NewLlamada($ID.text, nil,                $ID.line, localctx.(*Instr_llamadaContext).Get_ID().GetColumn()) }
+  | ID TK_PARA list_expression TK_PARC            { $instr = function.NewLlamada($ID.text, $list_expression.l, $ID.line, localctx.(*Instr_llamadaContext).Get_ID().GetColumn()) }
+
+;
+
+//instr_llamada_expre returns [interfaces.Expression instr]
+  //: ID TK_PARA list_expression TK_PARC           { $instr = function.NewLlamadaExpre($ID.text, $list_expression.l, $ID.line, localctx.(*Instr_llamada_expreContext).Get_ID().GetColumn()) }
+//;
 
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]

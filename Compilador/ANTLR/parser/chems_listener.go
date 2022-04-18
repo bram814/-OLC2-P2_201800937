@@ -104,6 +104,18 @@ type ChemsListener interface {
 	// EnterInstr_continue is called when entering the instr_continue production.
 	EnterInstr_continue(c *Instr_continueContext)
 
+	// EnterInstr_func is called when entering the instr_func production.
+	EnterInstr_func(c *Instr_funcContext)
+
+	// EnterList_function_parameters is called when entering the list_function_parameters production.
+	EnterList_function_parameters(c *List_function_parametersContext)
+
+	// EnterBlock_parameters_fn is called when entering the block_parameters_fn production.
+	EnterBlock_parameters_fn(c *Block_parameters_fnContext)
+
+	// EnterInstr_llamada is called when entering the instr_llamada production.
+	EnterInstr_llamada(c *Instr_llamadaContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -229,6 +241,18 @@ type ChemsListener interface {
 
 	// ExitInstr_continue is called when exiting the instr_continue production.
 	ExitInstr_continue(c *Instr_continueContext)
+
+	// ExitInstr_func is called when exiting the instr_func production.
+	ExitInstr_func(c *Instr_funcContext)
+
+	// ExitList_function_parameters is called when exiting the list_function_parameters production.
+	ExitList_function_parameters(c *List_function_parametersContext)
+
+	// ExitBlock_parameters_fn is called when exiting the block_parameters_fn production.
+	ExitBlock_parameters_fn(c *Block_parameters_fnContext)
+
+	// ExitInstr_llamada is called when exiting the instr_llamada production.
+	ExitInstr_llamada(c *Instr_llamadaContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

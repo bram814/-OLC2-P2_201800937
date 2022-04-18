@@ -1,2 +1,2 @@
-gcc -o entrada entrada.c 
-./entrada
+ gcc entrada.c -lm -o entrada
+ ./entrada

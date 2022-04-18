@@ -1,21 +1,26 @@
 package main
 
 import (
-	"OLC2/Compilador/interfaces"
+
 	"fmt"
-	// "reflect"
+	"reflect"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html"
 
 	/* COMPILADOR */
+	"OLC2/Compilador/interfaces"
+	"OLC2/Compilador/instruction"
+	"OLC2/Compilador/instruction/function"
+
+	/* ANTLR */
 	"OLC2/Compilador/ANTLR/parser"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
 )
 
 var CODE_OUT_ string = ""
-var tablaSimboloP []interface{}
+var TSGlobalError []interface{}
 
 func main() {
 
@@ -74,7 +79,7 @@ func Execute(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"CODE_INPUT":  data.Input,
 		"CODE_OUT":    CODE_OUT_,
-		"Tabla_Error": tablaSimboloP,
+		"Tabla_Error": TSGlobalError,
 	})
 }
 
@@ -91,6 +96,7 @@ func NewTreeShapeListener() *TreeShapeListener {
 func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	result := ctx.GetLista()
 
+	TSGlobalError = nil
 	/* SALIDA */
 	var _salida string
 	_salida = ""
@@ -106,13 +112,82 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	var gen *interfaces.Generator
 	gen = interfaces.NewGenerator()
 
-	// var contMain int = 0
+	var contMain int = 0
+	gen.AddComment("Fucniones")
+	for _ , s := range result.ToArray() {
+		newInstr := s.(interfaces.Instruction)
+		if reflect.TypeOf(newInstr).String() != "instruction.Main" && reflect.TypeOf(newInstr).String() != "function.Function" { 
+			excep := interfaces.NewException("Semantico","Solo puede ir Main, Func, Array y Mod.", -1, -1)
+			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
+			break
+		}
+
+		if reflect.TypeOf(newInstr).String() == "function.Function" {
+			gen.AddFunction("void", newInstr.(function.Function).Id + "()")
+			value := interfaces.Symbol {
+				Id     : newInstr.(function.Function).Id,
+				Type   : newInstr.(function.Function).Type,
+				Value  : interfaces.SymbolFunction {
+					
+					Id			    : newInstr.(function.Function).Id,
+					Type			: newInstr.(function.Function).Type,
+					Instrucciones	: newInstr.(function.Function).Instrucciones,
+					Parametro		: newInstr.(function.Function).Parametro,
+					IsMut			: true,
+				},
+				IsMut  : true,
+				Posicion		: 0,
+			}
+			
+
+			globalEnv.AddFunction(newInstr.(function.Function).Id, value, newInstr.(function.Function).Type)
+			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
+			gen.AddFunctionEnd(false)
+			globalEnv.UpdatePos(0, 0, true, &globalEnv)
+
+		}
+	}
+
+
+	globalEnv.UpdatePos(0, 0, true, &globalEnv)
+	gen.AddComment("Main")
 	gen.AddFunction("int", "main()")
 	gen.StachHeap()
 	for _, s := range result.ToArray() {
-		s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
+		newInstr := s.(interfaces.Instruction)
+
+		if reflect.TypeOf(newInstr).String() == "instruction.Main" {
+			if contMain > 0 {
+				excep := interfaces.NewException("Semantico","Existen dos funciones Main.", newInstr.(instruction.Main).Row, newInstr.(instruction.Main).Column)
+				tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
+				break
+			}
+
+			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
+		}
+		
+		if reflect.TypeOf(s).String() == "transferencia.Break" 	 { 
+			excep := interfaces.NewException("Semantico","Sentencia Break fuera de Ciclo.", -1, -1)
+			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
+			break
+		}
+		if reflect.TypeOf(s).String() == "transferencia.Continue" { 
+			excep := interfaces.NewException("Semantico","Sentencia Continue fuera de Ciclo.", -1, -1)
+			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
+			break
+		}
+		if reflect.TypeOf(s).String() == "transferencia.Return"   { 
+			excep := interfaces.NewException("Semantico","Sentencia Return fuera de Ciclo.", -1, -1)
+			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
+			break
+		}
+
+		contMain++
+
+
 	}
-	gen.AddFunctionEnd()
+
+	gen.AddFunctionEnd(true)
 
 	_salida += "#include <stdio.h>\n"
 	_salida += "#include <math.h>\n"
@@ -149,7 +224,6 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	var OutException string
 	OutException = ""
 
-	fmt.Println(tablaSimboloP)
 	for _, s := range tree.GetException().ToArray() {
 		OutException += fmt.Sprintf("%v", s)
 		m := make(map[string]string)
@@ -159,7 +233,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 		m["Column"] = fmt.Sprintf("%v", s.(interfaces.Exception).Column)
 		m["Time"] = fmt.Sprintf("%v", s.(interfaces.Exception).Time)
 
-		tablaSimboloP = append(tablaSimboloP, m)
+		TSGlobalError = append(TSGlobalError, m)
 	}
 
 	fmt.Println(OutException)
