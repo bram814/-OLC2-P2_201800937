@@ -33,9 +33,19 @@ func (p Assignment) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 
 	if symbol.IsMut {
 		gen.AddComment("Asignacion")
-		symbol.IsMut = true
-		env.SetSymbol(p.Id, result, true, symbol.Posicion)
-		gen.AddStack(fmt.Sprintf("%v", symbol.Posicion), result.Value)
+		fmt.Println(symbol.Type)
+		fmt.Println(symbol.Value.(interfaces.Value).Type )
+		if symbol.Type == result.Type || symbol.Type == interfaces.NULL{
+			symbol.IsMut = true
+			env.SetSymbol(p.Id, result, true, symbol.Posicion)
+			gen.AddStack(fmt.Sprintf("%v", symbol.Posicion), result.Value)
+
+		} else {
+			excep := interfaces.NewException("Semantico", "No se puede asignar, tipo de datos diferentes.", p.Row, p.Column)
+			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	
+		}
 
 	} else {
 		excep := interfaces.NewException("Semantico", "No se puede asignar a "+p.Id+", no es mutable.", p.Row, p.Column)

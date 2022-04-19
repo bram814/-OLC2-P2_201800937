@@ -296,3 +296,15 @@ func (s *BaseChemsListener) EnterPrimitivo_casteo(ctx *Primitivo_casteoContext) 
 
 // ExitPrimitivo_casteo is called when production primitivo_casteo is exited.
 func (s *BaseChemsListener) ExitPrimitivo_casteo(ctx *Primitivo_casteoContext) {}
+
+// EnterExpre_casteo is called when production expre_casteo is entered.
+func (s *BaseChemsListener) EnterExpre_casteo(ctx *Expre_casteoContext) {}
+
+// ExitExpre_casteo is called when production expre_casteo is exited.
+func (s *BaseChemsListener) ExitExpre_casteo(ctx *Expre_casteoContext) {}
+
+// EnterType_casteo is called when production type_casteo is entered.
+func (s *BaseChemsListener) EnterType_casteo(ctx *Type_casteoContext) {}
+
+// ExitType_casteo is called when production type_casteo is exited.
+func (s *BaseChemsListener) ExitType_casteo(ctx *Type_casteoContext) {}

@@ -146,6 +146,12 @@ type ChemsListener interface {
 	// EnterPrimitivo_casteo is called when entering the primitivo_casteo production.
 	EnterPrimitivo_casteo(c *Primitivo_casteoContext)
 
+	// EnterExpre_casteo is called when entering the expre_casteo production.
+	EnterExpre_casteo(c *Expre_casteoContext)
+
+	// EnterType_casteo is called when entering the type_casteo production.
+	EnterType_casteo(c *Type_casteoContext)
+
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
 
@@ -283,4 +289,10 @@ type ChemsListener interface {
 
 	// ExitPrimitivo_casteo is called when exiting the primitivo_casteo production.
 	ExitPrimitivo_casteo(c *Primitivo_casteoContext)
+
+	// ExitExpre_casteo is called when exiting the expre_casteo production.
+	ExitExpre_casteo(c *Expre_casteoContext)
+
+	// ExitType_casteo is called when exiting the type_casteo production.
+	ExitType_casteo(c *Type_casteoContext)
 }

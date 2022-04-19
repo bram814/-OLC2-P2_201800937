@@ -36,10 +36,21 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 
 	if p.Expresion != nil {
 		result = p.Expresion.Compilar(env, tree, gen)
-		p.Type = result.Type
+
+		if p.Type != interfaces.NULL{
+			if p.Type != result.Type{
+				excep := interfaces.NewException("Semantico", "No se puede declarar, tipo de datos diferentes.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+			}
+		}
+			
+		
 	} else {
 
 		result.Type = p.Type
+		result.IsTemp = false
+		result.Value = "0"
 	}
 
 	if result.Type == p.Type || p.Type == interfaces.NULL {

@@ -16,6 +16,7 @@ options {
     import "OLC2/Compilador/instruction/variable"
     import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/function"
+    import "OLC2/Compilador/instruction/casteo"
     import "OLC2/Compilador/instruction/transferencia"
     import arrayList "github.com/colegno/arraylist"
 }
@@ -355,6 +356,7 @@ expressions returns [interfaces.Expression p]
   : expre_log                                   { $p = $expre_log.p }
   | expre_rel                                   { $p = $expre_rel.p } 
   | expre_arit                                  { $p = $expre_arit.p }
+  | expre_casteo                                { $p = $expre_casteo.p }
 
 ;
 
@@ -469,4 +471,13 @@ primitivo_casteo returns[interfaces.Expression p]
               exp,_ := strconv.ParseBool($BOOLEAN.text)
               $p = expression.NewPrimitivo(exp, interfaces.BOOLEAN, interfaces.FLOAT, $BOOLEAN.line, localctx.(*Primitivo_casteoContext).Get_BOOLEAN().GetColumn())
             }
+;
+
+expre_casteo returns[interfaces.Expression p]
+  : expre_arit R_AS type_casteo                              { $p = casteo.NewCasteo($expre_arit.p, $type_casteo.tipo_exp, $R_AS.line, localctx.(*Expre_casteoContext).Get_R_AS().GetColumn()) }
+;
+
+type_casteo returns[interfaces.TypeExpression tipo_exp]
+  :  R_INT                                              { $tipo_exp = interfaces.INTEGER }
+  |  R_FLOAT                                            { $tipo_exp = interfaces.FLOAT }
 ;

@@ -103,6 +103,31 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 							temp := gen.NewTemp()
 							gen.AddExpressionHeap(temp, result.Value)
 							gen.AddPrintf("c", "(char)"+temp)
+						} else if result.Type == interfaces.NULL {
+
+							temp := gen.NewTemp()
+							// t2 = H + 0;
+							gen.AddExpression(temp,"H","0","+")
+							// heap[(int)H] = 78;
+							gen.AddHeap("H","78")
+							// H = H + 1;
+							gen.AddExpression("H","H","1","+")
+							// heap[(int)H] = 85;
+							gen.AddHeap("H","85")
+							// H = H + 1;
+							gen.AddExpression("H","H","1","+")
+							// heap[(int)H] = 76;
+							gen.AddHeap("H","76")
+							// H = H + 1;
+							gen.AddExpression("H","H","1","+")
+							// heap[(int)H] = 79;
+							gen.AddHeap("H","79")
+							// H = H + 1;
+							gen.AddExpression("H","H","1","+")
+							// heap[(int)H] = -1;
+							gen.AddHeap("H","-1")
+							// H = H + 1;
+							gen.AddExpression("H","H","1","+")
 						}
 
 						contExpre++
