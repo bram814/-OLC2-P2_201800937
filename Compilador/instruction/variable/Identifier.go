@@ -34,13 +34,12 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 
 	gen.AddComment("Identificador")
 	temp0 := gen.NewTemp()
-	// temp1 := gen.NewTemp()
-	// gen.AddExpression(temp0, "P", fmt.Sprintf("%v", symbol.Posicion), "+")
-	// gen.AddExpressionStack(temp1, temp0)
-	gen.AddExpressionStack(temp0, fmt.Sprintf("%v", symbol.Posicion))
+	temp1 := gen.NewTemp()
+	gen.AddExpression(temp0, "P", fmt.Sprintf("%v", symbol.Posicion), "+")
+	gen.AddExpressionStack(temp1, temp0)
 
 	return interfaces.Value{
-		Value:      temp0,
+		Value:      temp1,
 		IsTemp:     true,
 		Type:       symbol.Value.(interfaces.Value).Type,
 		TrueLabel:  "",
