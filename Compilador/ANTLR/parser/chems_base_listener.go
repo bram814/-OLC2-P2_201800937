@@ -213,6 +213,12 @@ func (s *BaseChemsListener) EnterInstr_continue(ctx *Instr_continueContext) {}
 // ExitInstr_continue is called when production instr_continue is exited.
 func (s *BaseChemsListener) ExitInstr_continue(ctx *Instr_continueContext) {}
 
+// EnterInstr_return is called when production instr_return is entered.
+func (s *BaseChemsListener) EnterInstr_return(ctx *Instr_returnContext) {}
+
+// ExitInstr_return is called when production instr_return is exited.
+func (s *BaseChemsListener) ExitInstr_return(ctx *Instr_returnContext) {}
+
 // EnterInstr_func is called when production instr_func is entered.
 func (s *BaseChemsListener) EnterInstr_func(ctx *Instr_funcContext) {}
 

@@ -58,6 +58,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_continue end_instr      { $instr = $instr_continue.instr    }
   | instr_func                    { $instr = $instr_func.instr        }
   | instr_llamada end_instr       { $instr = $instr_llamada.instr     }
+  | instr_return end_instr        { $instr = $instr_return.instr      }
 ;
 
 
@@ -283,6 +284,11 @@ instr_break returns [interfaces.Instruction instr]
 instr_continue returns [interfaces.Instruction instr]
   : R_CONTINUE                             { $instr = transferencia.NewContinue($R_CONTINUE.line, localctx.(*Instr_continueContext).Get_R_CONTINUE().GetColumn()) }
 ;
+
+/******************************** [TRANSFERENCIA][RETURN]  ********************************/
+instr_return returns [interfaces.Instruction instr]
+  : R_RETURN expressions                                { $instr = transferencia.NewReturn($expressions.p, $R_RETURN.line, localctx.(*Instr_returnContext).Get_R_RETURN().GetColumn()) }
+; 
 
 /******************************** [FUNCTION]  ********************************/
 instr_func returns [interfaces.Instruction instr]
