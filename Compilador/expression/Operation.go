@@ -5,7 +5,7 @@ import (
 	"fmt"
 	// "math"
 	// "strconv"
-	// "reflect"
+	"reflect"
 )
 
 type Aritmetica struct {
@@ -33,8 +33,25 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 			if p.Unario == true {
 				exp_left = p.left.Compilar(env, tree, gen)
 			} else {
-				exp_left = p.left.Compilar(env, tree, gen)
-				exp_right = p.right.Compilar(env, tree, gen)
+				if (reflect.TypeOf(p.right).String() == "function.LlamadaExpresion") {
+					exp_left = p.left.Compilar(env, tree, gen)
+					temp := gen.NewTemp()
+					gen.AddComment("Guardando Temporal")
+					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
+					aux := env.Posicion
+					gen.AddStack(temp, exp_left.Value)
+					env.NewPos()
+					
+					exp_right = p.right.Compilar(env, tree, gen)
+
+					temp = gen.NewTemp()
+					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
+					gen.AddExpressionStack(exp_left.Value,temp)
+
+				} else {
+					exp_left = p.left.Compilar(env, tree, gen)
+					exp_right = p.right.Compilar(env, tree, gen)
+				}
 			}
 			gen.AddComment("Aritmetica +")
 			temp := gen.NewTemp()
@@ -53,16 +70,16 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 					gen.AddConcatString()
 					tree.IsCocant = true
 				}
-				gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_left.Value)
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_right.Value)
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.ConcatString()
 				temp = gen.NewTemp()
 				gen.AddExpressionStack(temp, "P")
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
 				isType = interfaces.STRING
 
@@ -99,8 +116,26 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 
 			} else {
 
-				exp_left = p.left.Compilar(env, tree, gen)
-				exp_right = p.right.Compilar(env, tree, gen)
+				if (reflect.TypeOf(p.right).String() == "function.LlamadaExpresion") {
+					exp_left = p.left.Compilar(env, tree, gen)
+					temp := gen.NewTemp()
+					gen.AddComment("Guardando Temporal")
+					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
+					aux := env.Posicion
+					gen.AddStack(temp, exp_left.Value)
+					env.NewPos()
+					
+					exp_right = p.right.Compilar(env, tree, gen)
+
+					temp = gen.NewTemp()
+					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
+					gen.AddExpressionStack(exp_left.Value,temp)
+
+				} else {
+					exp_left = p.left.Compilar(env, tree, gen)
+					exp_right = p.right.Compilar(env, tree, gen)
+				}
+
 				gen.AddComment("Aritmetica -")
 
 				/* ************************************************************** INTEGER ************************************************************** */
@@ -127,8 +162,28 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 			if p.Unario == true {
 				exp_left = p.left.Compilar(env, tree, gen)
 			} else {
-				exp_left = p.left.Compilar(env, tree, gen)
-				exp_right = p.right.Compilar(env, tree, gen)
+
+				if (reflect.TypeOf(p.right).String() == "function.LlamadaExpresion") {
+
+					exp_left = p.left.Compilar(env, tree, gen)
+					gen.AddComment("Guardando Temporal")
+					temp := gen.NewTemp()
+					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
+					aux := env.Posicion
+					gen.AddStack(temp, exp_left.Value)
+					env.NewPos()
+					
+					exp_right = p.right.Compilar(env, tree, gen)
+
+					temp = gen.NewTemp()
+					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
+					gen.AddExpressionStack(exp_left.Value,temp)
+
+				} else {
+					exp_left = p.left.Compilar(env, tree, gen)
+					exp_right = p.right.Compilar(env, tree, gen)
+				}
+				
 			}
 
 			gen.AddComment("Aritmetica *")
@@ -448,16 +503,16 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				}
 
 				temp := gen.NewTemp()
-				gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_left.Value)
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_right.Value)
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.CompareString()
 				temp = gen.NewTemp()
 				gen.AddExpressionStack(temp, "P")
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
 				gen.AddIf(temp, "1", "==", EV)
 				gen.AddGoto(EF)
@@ -520,16 +575,16 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				}
 
 				temp := gen.NewTemp()
-				gen.AddExpression(temp, "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_left.Value)
 				gen.AddExpression(temp, temp, "1", "+")
 				gen.AddStack(temp, exp_right.Value)
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "+")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "+")
 				gen.CompareString()
 				temp = gen.NewTemp()
 				gen.AddExpressionStack(temp, "P")
-				gen.AddExpression("P", "P", fmt.Sprintf("%v", tree.GetPos()), "-")
+				gen.AddExpression("P", "P", fmt.Sprintf("%v", env.Posicion), "-")
 
 				gen.AddIf(temp, "0", "==", EV)
 				gen.AddGoto(EF)

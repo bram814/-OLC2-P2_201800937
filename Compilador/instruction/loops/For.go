@@ -41,17 +41,17 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 			return right
 		}
 
-		symbol := env.GetSymbol(p.Id)
+		symbol := newTable.GetSymbol(p.Id)
 
 		if symbol.Type == interfaces.NULL {
 
 			gen.AddComment("Declaracion")
 
 			temp := gen.NewTemp()
-			gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion), "+")
+			gen.AddExpression(temp, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
 			gen.AddStack(temp, left.Value)
-			newTable.AddSymbol(p.Id, left, left.Type, true, env.Posicion, &newTable)
-			env.NewPos()
+			newTable.AddSymbol(p.Id, left, left.Type, true, newTable.Posicion, &newTable)
+			newTable.NewPos()
 
 		}
 
@@ -72,8 +72,17 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 		gen.AddGoto(Lfinal)
 
 		gen.AddLabel(EV)
+		
+		// var newTable interfaces.Environment
+		// newTable = interfaces.NewEnvironment(env)
+		
+		
+		var SecondTable interfaces.Environment
+		SecondTable = interfaces.NewEnvironment(&newTable)
+		SecondTable.UpdatePos(tree.GetPos(), newTable.Posicion, newTable.Posicion != 0, &SecondTable)
+
 		for _, s := range p.Instrucciones.ToArray() {
-			s.(interfaces.Instruction).Compilar(&newTable, tree, gen)
+			s.(interfaces.Instruction).Compilar(&SecondTable, tree, gen)
 		}
 
 		pos := fmt.Sprintf("%v", tree.PosDisplay-1)

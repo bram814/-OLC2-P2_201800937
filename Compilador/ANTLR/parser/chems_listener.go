@@ -119,6 +119,9 @@ type ChemsListener interface {
 	// EnterInstr_llamada is called when entering the instr_llamada production.
 	EnterInstr_llamada(c *Instr_llamadaContext)
 
+	// EnterInstr_llamada_expre is called when entering the instr_llamada_expre production.
+	EnterInstr_llamada_expre(c *Instr_llamada_expreContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -265,6 +268,9 @@ type ChemsListener interface {
 
 	// ExitInstr_llamada is called when exiting the instr_llamada production.
 	ExitInstr_llamada(c *Instr_llamadaContext)
+
+	// ExitInstr_llamada_expre is called when exiting the instr_llamada_expre production.
+	ExitInstr_llamada_expre(c *Instr_llamada_expreContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

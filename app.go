@@ -123,6 +123,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 		}
 
 		if reflect.TypeOf(newInstr).String() == "function.Function" {
+
 			gen.AddFunction("void", newInstr.(function.Function).Id + "()")
 			value := interfaces.Symbol {
 				Id     : newInstr.(function.Function).Id,
@@ -138,7 +139,6 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 				IsMut  : true,
 				Posicion		: 0,
 			}
-			
 
 			globalEnv.AddFunction(newInstr.(function.Function).Id, value, newInstr.(function.Function).Type)
 			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
@@ -164,6 +164,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 			}
 
 			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
+			contMain++
 		}
 		
 		if reflect.TypeOf(s).String() == "transferencia.Break" 	 { 
@@ -182,7 +183,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 			break
 		}
 
-		contMain++
+		
 
 
 	}

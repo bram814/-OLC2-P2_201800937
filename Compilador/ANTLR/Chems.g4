@@ -292,7 +292,8 @@ instr_return returns [interfaces.Instruction instr]
 
 /******************************** [FUNCTION]  ********************************/
 instr_func returns [interfaces.Instruction instr]
-  : R_FUNCTION ID TK_PARA  TK_PARC TK_LLAVEA instrucciones TK_LLAVEC                                                      { $instr = function.NewFunction($ID.text, nil, $instrucciones.l, interfaces.NULL,      $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
+  : R_FUNCTION ID TK_PARA TK_PARC TK_LLAVEA instrucciones TK_LLAVEC                                                       { $instr = function.NewFunction($ID.text, nil, $instrucciones.l, interfaces.NULL,      $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
+  | R_FUNCTION ID TK_PARA TK_PARC TK_MENOSMAYOR instr_tipo TK_LLAVEA instrucciones TK_LLAVEC                              { $instr = function.NewFunction($ID.text, nil, $instrucciones.l, $instr_tipo.tipo_exp, $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
   | R_FUNCTION ID TK_PARA list_function_parameters TK_PARC TK_LLAVEA instrucciones TK_LLAVEC                              { $instr = function.NewFunction($ID.text, $list_function_parameters.l, $instrucciones.l, interfaces.NULL,      $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
   | R_FUNCTION ID TK_PARA list_function_parameters TK_PARC TK_MENOSMAYOR instr_tipo TK_LLAVEA instrucciones TK_LLAVEC     { $instr = function.NewFunction($ID.text, $list_function_parameters.l, $instrucciones.l, $instr_tipo.tipo_exp, $R_FUNCTION.line, localctx.(*Instr_funcContext).Get_R_FUNCTION().GetColumn()) }
 ;
@@ -301,7 +302,7 @@ list_function_parameters returns [*arrayList.List l]
   @init{
     $l =  arrayList.New()
   }
-  : e += block_parameters_fn*  {
+  : e += block_parameters_fn+  {
         listInt := localctx.(*List_function_parametersContext).GetE()
         for _, e := range listInt {
             $l.Add(e.GetInstr())
@@ -323,10 +324,12 @@ instr_llamada returns [interfaces.Instruction instr]
 
 ;
 
-//instr_llamada_expre returns [interfaces.Expression instr]
-  //: ID TK_PARA list_expression TK_PARC           { $instr = function.NewLlamadaExpre($ID.text, $list_expression.l, $ID.line, localctx.(*Instr_llamada_expreContext).Get_ID().GetColumn()) }
-//;
+/******************************** [FUNCTION]  ********************************/
+instr_llamada_expre returns [interfaces.Expression p]
+  : ID TK_PARA TK_PARC                            { $p = function.NewLlamadaExpresion($ID.text, nil,                $ID.line, localctx.(*Instr_llamada_expreContext).Get_ID().GetColumn()) }
+  | ID TK_PARA list_expression TK_PARC            { $p = function.NewLlamadaExpresion($ID.text, $list_expression.l, $ID.line, localctx.(*Instr_llamada_expreContext).Get_ID().GetColumn()) }
 
+;
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]
   : R_INT       {$tipo_exp = interfaces.INTEGER}
@@ -425,6 +428,7 @@ primitivo returns[interfaces.Expression p]
             $p = expression.NewPrimitivo(string(str), interfaces.CHAR, interfaces.NULL, $CHAR.line, localctx.(*PrimitivoContext).Get_CHAR().GetColumn())
           
           }
+    | instr_llamada_expre       { $p = $instr_llamada_expre.p }
     |ID       { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 
     | primitivo_casteo          { $p = $primitivo_casteo.p }

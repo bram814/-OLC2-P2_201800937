@@ -32,7 +32,6 @@ func (p Break) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen
 
 		tree.SetDisplayTemp(pos, temp, true, result.Type)
 		display = tree.GetDisplay(pos)
-		fmt.Println(display)
 
 	}else {
 		tree.SetDisplayTemp(pos, "-1", false, interfaces.BREAK)

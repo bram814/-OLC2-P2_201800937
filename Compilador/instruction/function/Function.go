@@ -25,10 +25,20 @@ func NewFunction(Id string, Parametro *arrayList.List, Instrucciones *arrayList.
 
 func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
 
+	env.NewPos()
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
 	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
-	env.NewPos()
+	
+	Lfinal := gen.NewLabel()
+	if p.Type != interfaces.NULL {
+		tree.IsReturn = true
+		tree.PosReturn = tree.PosDisplay
+		tree.AddDisplay("-1", Lfinal, "-1", false) // Display
+		pos := fmt.Sprintf("%v", tree.PosDisplay-1)
+		tree.SetDisplayTemp(pos, "-1", false, p.Type)
+	}
+	
 
 	if p.Parametro != nil {
 
@@ -38,7 +48,7 @@ func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 
 			if symbol.Type != interfaces.NULL {
 
-				excep := interfaces.NewException("Semantico", "Ya Existe ese Id "+s.(ListExpre).Id, p.Row, p.Column)
+				excep := interfaces.NewException("Semantico", "Ya Existe ese Id "+s.(ListExpre).Id + " (function).", p.Row, p.Column)
 				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
@@ -46,13 +56,13 @@ func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 			gen.AddComment("Identificador")
 			temp0 := gen.NewTemp()
 			temp1 := gen.NewTemp()
-			gen.AddExpression(temp0, "P", fmt.Sprintf("%v", env.Posicion), "+")
+			gen.AddExpression(temp0, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
 			gen.AddExpressionStack(temp1, temp0)
 			
 			result := interfaces.Value{Value: temp1, IsTemp: true, Type: s.(ListExpre).Type, TrueLabel: "", FalseLabel: ""}
 			
-			env.AddSymbol(s.(ListExpre).Id, result, s.(ListExpre).Type, true, env.Posicion, &newTable)
-			env.NewPos()
+			newTable.AddSymbol(s.(ListExpre).Id, result, s.(ListExpre).Type, true, newTable.Posicion, &newTable)
+			newTable.NewPos()
 
 
 		}
@@ -79,6 +89,13 @@ func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 			
 
 		}
+	}
+
+	gen.AddLabel(Lfinal)
+	if p.Type != interfaces.NULL {
+		tree.RestPosDisplay()
+		tree.IsReturn = false
+		tree.PosReturn = -1
 	}
 
 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}

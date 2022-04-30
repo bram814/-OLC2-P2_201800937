@@ -33,8 +33,8 @@ func (p Assignment) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 
 	if symbol.IsMut {
 		gen.AddComment("Asignacion")
-		fmt.Println(symbol.Type)
-		fmt.Println(symbol.Value.(interfaces.Value).Type )
+		// fmt.Println(symbol.Type)
+		// fmt.Println(symbol.Value.(interfaces.Value).Type )
 		if symbol.Type == result.Type || symbol.Type == interfaces.NULL{
 			symbol.IsMut = true
 			env.SetSymbol(p.Id, result, true, symbol.Posicion)

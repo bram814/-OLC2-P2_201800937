@@ -15,6 +15,8 @@ type Arbol struct {
 	_Exception   *arrayList.List
 	Display      map[string]Display
 	PosDisplay   int
+	IsReturn  	 bool
+	PosReturn    int
 }
 
 type Exception struct {
@@ -42,7 +44,10 @@ func NewArbol() *Arbol {
 		IsCompareStr: false,
 		_Exception:   arrayList.New(),
 		Display:      make(map[string]Display),
-		PosDisplay:   0}
+		PosDisplay:   0,
+		IsReturn:  	  false,
+		PosReturn:	  -1,
+	}
 	return &tree
 }
 

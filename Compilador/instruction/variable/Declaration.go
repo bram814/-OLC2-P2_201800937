@@ -26,7 +26,7 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 	symbol := env.SearchSymbol(p.Id)
 
 	if symbol.Type != interfaces.NULL {
-		fmt.Println("No puede agregar")
+		// fmt.Println("No puede agregar")
 		excep := interfaces.NewException("Semantico", "Ya Existe ese Id "+p.Id, p.Row, p.Column)
 		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
@@ -36,7 +36,7 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 
 	if p.Expresion != nil {
 		result = p.Expresion.Compilar(env, tree, gen)
-
+		// fmt.Println("entro")
 		if p.Type != interfaces.NULL{
 			if p.Type != result.Type{
 				excep := interfaces.NewException("Semantico", "No se puede declarar, tipo de datos diferentes.", p.Row, p.Column)

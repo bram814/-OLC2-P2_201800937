@@ -243,6 +243,12 @@ func (s *BaseChemsListener) EnterInstr_llamada(ctx *Instr_llamadaContext) {}
 // ExitInstr_llamada is called when production instr_llamada is exited.
 func (s *BaseChemsListener) ExitInstr_llamada(ctx *Instr_llamadaContext) {}
 
+// EnterInstr_llamada_expre is called when production instr_llamada_expre is entered.
+func (s *BaseChemsListener) EnterInstr_llamada_expre(ctx *Instr_llamada_expreContext) {}
+
+// ExitInstr_llamada_expre is called when production instr_llamada_expre is exited.
+func (s *BaseChemsListener) ExitInstr_llamada_expre(ctx *Instr_llamada_expreContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 

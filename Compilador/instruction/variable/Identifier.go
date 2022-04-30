@@ -25,7 +25,7 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 		symbol = env.GetSymbol(p.Id)
 
 		if symbol.Type == interfaces.NULL {
-			excep := interfaces.NewException("Semantico", "No Existe ese Id "+p.Id, p.Row, p.Column)
+			excep := interfaces.NewException("Semantico", "No Existe ese Id "+p.Id + "(identificador).", p.Row, p.Column)
 			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 
