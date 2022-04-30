@@ -2,7 +2,7 @@ package function
 
 import (
 	"fmt"
-	// "reflect"
+	"reflect"
 	"OLC2/Compilador/interfaces"
 	"OLC2/Compilador/instruction"
 	arrayList "github.com/colegno/arraylist"
@@ -40,32 +40,88 @@ func (p LlamadaExpresion) Compilar(env *interfaces.Environment, tree *interfaces
 
 	if function.Parametro != nil && p.Parametro != nil {
 
+
+
 		if function.Parametro.Len() == p.Parametro.Len() {
-
-			// flag := false
-
 			
+			flag := false
 
 			for s := 0; s < p.Parametro.Len(); s++ {
-				// fmt.Println("LLAMADA")
-				// fmt.Println(p.Parametro.GetValue(s).(instruction.ListExpre).Expresion)
+				if reflect.TypeOf(p.Parametro.GetValue(s).(instruction.ListExpre).Expresion).String() == "function.LlamadaExpresion" {
+					flag = true
+					break
+				}
+			}
 
-				instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
-				instrFunc := function.Parametro.GetValue(s).(ListExpre)
+			if !flag {
+				for s := 0; s < p.Parametro.Len(); s++ {
 
-				if instrCall.Type == instrFunc.Type {
+					instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
+					instrFunc := function.Parametro.GetValue(s).(ListExpre)
+
+					if instrCall.Type == instrFunc.Type {
+						if s == 0 {
+							gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion+1), "+")
+							gen.AddStack(temp, instrCall.Value)
+
+						} else {
+							gen.AddExpression(temp, temp, "1", "+")
+							gen.AddStack(temp, instrCall.Value)
+
+						}
+						
+					}
+					
+
+				}
+			} else {
+
+
+				var saveTemps []interface{}
+
+				for s := 0; s < p.Parametro.Len(); s++ {
+
+					instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
+					instrFunc := function.Parametro.GetValue(s).(ListExpre)
+
+					if instrCall.Type == instrFunc.Type {
+						auxTemp := gen.NewTemp()
+						gen.AddComment("Guardando Temporal")
+						gen.AddExpression(auxTemp,"P", fmt.Sprintf("%v", env.Posicion), "+")
+						gen.AddStack(auxTemp, instrCall.Value)
+						
+						saveTemps = append(saveTemps, env.Posicion)
+						env.NewPos()
+						
+					}
+					
+
+				}
+				
+				for s := 0; s < p.Parametro.Len(); s++ {
+					gen.AddComment("Llamado de Temporales")
+					
 					if s == 0 {
 						gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion+1), "+")
-						gen.AddStack(temp, instrCall.Value)
+						tempNew   := gen.NewTemp()
+						tempStack := gen.NewTemp()
+						gen.AddExpression(tempNew, "P", fmt.Sprintf("%v", saveTemps[s]), "+")
+						gen.AddExpressionStack(tempStack, tempNew)
+						gen.AddStack(temp, tempStack)
 
 					} else {
 						gen.AddExpression(temp, temp, "1", "+")
-						gen.AddStack(temp, instrCall.Value)
+						tempNew   := gen.NewTemp()
+						tempStack := gen.NewTemp()
+						gen.AddExpression(tempNew, "P", fmt.Sprintf("%v", saveTemps[s]), "+")
+						gen.AddExpressionStack(tempStack, tempNew)
+						gen.AddStack(temp, tempStack)
 
 					}
+						
 					
+
 				}
-				
 
 			}
 			
