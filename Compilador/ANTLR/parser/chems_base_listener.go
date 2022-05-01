@@ -320,3 +320,9 @@ func (s *BaseChemsListener) EnterType_casteo(ctx *Type_casteoContext) {}
 
 // ExitType_casteo is called when production type_casteo is exited.
 func (s *BaseChemsListener) ExitType_casteo(ctx *Type_casteoContext) {}
+
+// EnterNativa_expre is called when production nativa_expre is entered.
+func (s *BaseChemsListener) EnterNativa_expre(ctx *Nativa_expreContext) {}
+
+// ExitNativa_expre is called when production nativa_expre is exited.
+func (s *BaseChemsListener) ExitNativa_expre(ctx *Nativa_expreContext) {}

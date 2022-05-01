@@ -26,6 +26,11 @@ R_RETURN:       'return';
 R_MAIN:         'main';
 R_FUNCTION:     'fn';
 
+/* NATIVAS */
+R_POW:          'pow';
+R_POWF:         'powf';
+R_ABS:          'abs';
+
 /* TIPOS */
 R_AS:           'as';
 R_INT:          'i64';

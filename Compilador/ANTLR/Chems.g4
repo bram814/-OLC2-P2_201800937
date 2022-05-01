@@ -17,6 +17,7 @@ options {
     import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/function"
     import "OLC2/Compilador/instruction/casteo"
+    import "OLC2/Compilador/instruction/nativa"
     import "OLC2/Compilador/instruction/transferencia"
     import arrayList "github.com/colegno/arraylist"
 }
@@ -390,7 +391,7 @@ expre_arit returns [interfaces.Expression p]
 
 
 expre_valor returns [interfaces.Expression p]
-  : primitivo                                                             { $p = $primitivo.p }
+  : primitivo                                                           { $p = $primitivo.p }
   
 ;
 
@@ -429,8 +430,10 @@ primitivo returns[interfaces.Expression p]
           
           }
     | instr_llamada_expre       { $p = $instr_llamada_expre.p }
-    |ID       { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
+    
+    |ID                         { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 
+    | nativa_expre              { $p = $nativa_expre.p }
     | primitivo_casteo          { $p = $primitivo_casteo.p }
     | instr_ternario            { $p = $instr_ternario.p }
     | instr_match_ter           { $p = $instr_match_ter.p }
@@ -490,4 +493,11 @@ expre_casteo returns[interfaces.Expression p]
 type_casteo returns[interfaces.TypeExpression tipo_exp]
   :  R_INT                                              { $tipo_exp = interfaces.INTEGER }
   |  R_FLOAT                                            { $tipo_exp = interfaces.FLOAT }
+;
+
+
+nativa_expre returns[interfaces.Expression p]
+  : R_INT TK_DOSPUNTOS TK_DOSPUNTOS R_POW TK_PARA b=expressions TK_COMA e=expressions TK_PARC    { $p = nativa.NewPotencia($b.p, $e.p, interfaces.INTEGER, $R_POW.line,  localctx.(*Nativa_expreContext).Get_R_POW().GetColumn()) }
+  | R_FLOAT TK_DOSPUNTOS TK_DOSPUNTOS R_POWF TK_PARA b=expressions TK_COMA e=expressions TK_PARC { $p = nativa.NewPotencia($b.p, $e.p, interfaces.FLOAT,   $R_POWF.line, localctx.(*Nativa_expreContext).Get_R_POWF().GetColumn()) }
+  | ID TK_PUNTO R_ABS TK_PARA TK_PARC                                                            { $p = nativa.NewAbs($ID.text,                            $ID.line,     localctx.(*Nativa_expreContext).Get_ID().GetColumn()) }
 ;

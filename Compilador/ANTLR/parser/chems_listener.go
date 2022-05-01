@@ -158,6 +158,9 @@ type ChemsListener interface {
 	// EnterType_casteo is called when entering the type_casteo production.
 	EnterType_casteo(c *Type_casteoContext)
 
+	// EnterNativa_expre is called when entering the nativa_expre production.
+	EnterNativa_expre(c *Nativa_expreContext)
+
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
 
@@ -307,4 +310,7 @@ type ChemsListener interface {
 
 	// ExitType_casteo is called when exiting the type_casteo production.
 	ExitType_casteo(c *Type_casteoContext)
+
+	// ExitNativa_expre is called when exiting the nativa_expre production.
+	ExitNativa_expre(c *Nativa_expreContext)
 }
