@@ -55,6 +55,7 @@ func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen
 					block2 += "\t" + "if(" + cond.Value + " " + "==" + " " + newCond.Value + ") goto " + EV + ";\n"
 
 					gen.AddLabel(EV)
+
 					newInstr := s.(Case).Instrucciones.Compilar(env, tree, gen)
 
 					if isType != interfaces.NULL && isType != newInstr.Type {
@@ -65,8 +66,8 @@ func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen
 						isType = newInstr.Type
 					}
 
-					gen.AddGoto(newLabel)
 					gen.AddExpression1(temp, newInstr.Value)
+					gen.AddGoto(newLabel)
 
 				}
 			}
@@ -86,8 +87,8 @@ func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen
 				isType = newInstr.Type
 			}
 
-			gen.AddGoto(newLabel)
 			gen.AddExpression1(temp, newInstr.Value)
+			gen.AddGoto(newLabel)
 
 		}
 
@@ -108,8 +109,8 @@ func (p Match) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen
 				isType = newInstr.Type
 			}
 
-			gen.AddGoto(newLabel)
 			gen.AddExpression1(temp, newInstr.Value)
+			gen.AddGoto(newLabel)
 		}
 	}
 
