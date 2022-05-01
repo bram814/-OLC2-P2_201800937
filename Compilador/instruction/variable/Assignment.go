@@ -38,7 +38,9 @@ func (p Assignment) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 		if symbol.Type == result.Type || symbol.Type == interfaces.NULL{
 			symbol.IsMut = true
 			env.SetSymbol(p.Id, result, true, symbol.Posicion)
-			gen.AddStack(fmt.Sprintf("%v", symbol.Posicion), result.Value)
+			temp := gen.NewTemp()
+			gen.AddExpression(temp, "P", fmt.Sprintf("%v", symbol.Posicion), "+")
+			gen.AddStack(temp, result.Value)
 
 		} else {
 			excep := interfaces.NewException("Semantico", "No se puede asignar, tipo de datos diferentes.", p.Row, p.Column)
