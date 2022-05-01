@@ -333,12 +333,12 @@ instr_llamada_expre returns [interfaces.Expression p]
 ;
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]
-  : R_INT       {$tipo_exp = interfaces.INTEGER}
-  | R_FLOAT     {$tipo_exp = interfaces.FLOAT}
-  | R_STRING    {$tipo_exp = interfaces.STRING}
-  | R_STR       {$tipo_exp = interfaces.STR}
-  | R_BOOL      {$tipo_exp = interfaces.BOOLEAN}
-  | R_CHAR      {$tipo_exp = interfaces.CHAR}
+  : R_INT               {$tipo_exp = interfaces.INTEGER}
+  | R_FLOAT             {$tipo_exp = interfaces.FLOAT}
+  | R_STRING            {$tipo_exp = interfaces.STRING}
+  | TK_AMPERSAND R_STR  {$tipo_exp = interfaces.STR}
+  | R_BOOL              {$tipo_exp = interfaces.BOOLEAN}
+  | R_CHAR              {$tipo_exp = interfaces.CHAR}
 ;
 
 /* List Expression Case */
@@ -413,7 +413,7 @@ primitivo returns[interfaces.Expression p]
               }
     |STRING { 
               str:= $STRING.text[1:len($STRING.text)-1]
-              $p = expression.NewPrimitivo(str, interfaces.STRING, interfaces.NULL, $STRING.line, localctx.(*PrimitivoContext).Get_STRING().GetColumn())
+              $p = expression.NewPrimitivo(str, interfaces.STR, interfaces.NULL, $STRING.line, localctx.(*PrimitivoContext).Get_STRING().GetColumn())
             
             }
             
@@ -497,14 +497,20 @@ type_casteo returns[interfaces.TypeExpression tipo_exp]
 
 
 nativa_expre returns[interfaces.Expression p]
-  : R_INT TK_DOSPUNTOS TK_DOSPUNTOS R_POW TK_PARA b=expressions TK_COMA e=expressions TK_PARC    { $p = nativa.NewPotencia($b.p, $e.p, interfaces.INTEGER, $R_POW.line,  localctx.(*Nativa_expreContext).Get_R_POW().GetColumn()) }
-  | R_FLOAT TK_DOSPUNTOS TK_DOSPUNTOS R_POWF TK_PARA b=expressions TK_COMA e=expressions TK_PARC { $p = nativa.NewPotencia($b.p, $e.p, interfaces.FLOAT,   $R_POWF.line, localctx.(*Nativa_expreContext).Get_R_POWF().GetColumn()) }
-  | native_block_abs TK_PUNTO R_ABS TK_PARA TK_PARC                                              { $p = nativa.NewAbs($native_block_abs.p,                 $R_ABS.line,  localctx.(*Nativa_expreContext).Get_R_ABS().GetColumn()) }
+  : R_INT TK_DOSPUNTOS TK_DOSPUNTOS R_POW TK_PARA b=expressions TK_COMA e=expressions TK_PARC    { $p = nativa.NewPotencia($b.p, $e.p, interfaces.INTEGER, $R_POW.line,      localctx.(*Nativa_expreContext).Get_R_POW().GetColumn()) }
+  | R_FLOAT TK_DOSPUNTOS TK_DOSPUNTOS R_POWF TK_PARA b=expressions TK_COMA e=expressions TK_PARC { $p = nativa.NewPotencia($b.p, $e.p, interfaces.FLOAT,   $R_POWF.line,     localctx.(*Nativa_expreContext).Get_R_POWF().GetColumn()) }
+  | native_block_abs TK_PUNTO R_ABS TK_PARA TK_PARC                                              { $p = nativa.NewAbs($native_block_abs.p,                 $R_ABS.line,      localctx.(*Nativa_expreContext).Get_R_ABS().GetColumn()) }
+  | native_block_abs TK_PUNTO R_TOSTRING TK_PARA TK_PARC                                         { $p = nativa.NewToString($native_block_abs.p,            $R_TOSTRING.line, localctx.(*Nativa_expreContext).Get_R_TOSTRING().GetColumn()) }
+  | TK_AMPERSAND native_block_abs TK_PUNTO R_TOSTRING TK_PARA TK_PARC                            { $p = nativa.NewToString($native_block_abs.p,            $R_TOSTRING.line, localctx.(*Nativa_expreContext).Get_R_TOSTRING().GetColumn()) }
 ;
 
 
 native_block_abs returns[interfaces.Expression p]
   : instr_llamada_expre       { $p = $instr_llamada_expre.p }
-  | ID                         { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*Native_block_absContext).Get_ID().GetColumn()) }
-
+  | ID                        { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*Native_block_absContext).Get_ID().GetColumn()) }
+  |STRING { 
+              str:= $STRING.text[1:len($STRING.text)-1]
+              $p = expression.NewPrimitivo(str, interfaces.STRING, interfaces.NULL, $STRING.line, localctx.(*Native_block_absContext).Get_STRING().GetColumn())
+            
+            }
 ;

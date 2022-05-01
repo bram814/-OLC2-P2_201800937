@@ -30,6 +30,7 @@ R_FUNCTION:     'fn';
 R_POW:          'pow';
 R_POWF:         'powf';
 R_ABS:          'abs';
+R_TOSTRING:     ('to_string'|'to_owned');
 
 /* TIPOS */
 R_AS:           'as';
@@ -38,7 +39,7 @@ R_FLOAT:        'f64';
 R_STRING:       'String';
 R_BOOL:         'bool';
 R_CHAR:         'char';
-R_STR:          '&str';
+R_STR:          'str';
 
 
 NUMBER: [0-9]+;
@@ -75,6 +76,7 @@ TK_LLAVEC:       '}';
 TK_CORA:         '[';
 TK_CORC:         ']';
 TK_AND:          '&&';
+TK_AMPERSAND:    '&';
 TK_OR:           '||';
 TK_BARRA:        '|';
 TK_NOT:          '!';
