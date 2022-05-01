@@ -3,6 +3,7 @@ package instruction
 import (
 	"OLC2/Compilador/interfaces"
 	"fmt"
+	"reflect"
 	arrayList "github.com/colegno/arraylist"
 )
 
@@ -182,7 +183,7 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 			return result.Value
 		}
 
-		if result.Type == interfaces.STRING || result.Type == interfaces.STR{
+		if result.Type == interfaces.STRING || (result.Type == interfaces.STR && reflect.TypeOf(p.Condicion).String() == "expression.Primitivo") {
 			gen.AddComment("Printf String")
 
 			if !tree.IsPrimitive {
