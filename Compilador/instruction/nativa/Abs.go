@@ -22,7 +22,12 @@ func (p Abs) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 	gen.AddComment("Abs")
 
 	result := p.Expression.Compilar(env, tree, gen)
-
+	if result.Type != interfaces.INTEGER && result.Type != interfaces.FLOAT {
+		excep := interfaces.NewException("Semantico", "Error en Abs, tipos de datos Incorrectos.", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+		
+	}
 	EV := gen.NewLabel()
 	EF := gen.NewLabel()
 

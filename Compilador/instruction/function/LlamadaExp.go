@@ -70,8 +70,11 @@ func (p LlamadaExpresion) Compilar(env *interfaces.Environment, tree *interfaces
 
 						}
 						
+					} else {
+						excep := interfaces.NewException("Semantico", "Error en Llamada, parametro diferente al solicitado.", p.Row, p.Column)
+						tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+						return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 					}
-					
 
 				}
 			} else {
