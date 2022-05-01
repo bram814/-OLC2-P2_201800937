@@ -2,6 +2,7 @@ package function
 
 import (
 	"fmt"
+	"reflect"
 	"OLC2/Compilador/interfaces"
 	"OLC2/Compilador/instruction"
 	arrayList "github.com/colegno/arraylist"
@@ -26,7 +27,9 @@ func (p Llamada) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 	gen.AddComment("Llamada de Funcion")
 	temp := gen.NewTemp()
 	symbol := env.GetFunction(p.Id)
+
 	function := symbol.Value.(interfaces.Symbol).Value.(interfaces.SymbolFunction)
+
 
 	if  p.Id != function.Id {
 		excep := interfaces.NewException("Semantico", "Error en Llamada, No Existe esa Funcion "+ p.Id, p.Row, p.Column)
@@ -34,32 +37,94 @@ func (p Llamada) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 	}
 
+
 	if function.Parametro != nil && p.Parametro != nil {
-			
+
+
 
 		if function.Parametro.Len() == p.Parametro.Len() {
-
+			
+			flag := false
 
 			for s := 0; s < p.Parametro.Len(); s++ {
-				instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
-				instrFunc := function.Parametro.GetValue(s).(ListExpre)
+				if reflect.TypeOf(p.Parametro.GetValue(s).(instruction.ListExpre).Expresion).String() == "function.LlamadaExpresion" {
+					flag = true
+					break
+				}
+			}
 
-				if instrCall.Type == instrFunc.Type {
+			if !flag {
+				for s := 0; s < p.Parametro.Len(); s++ {
+
+					instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
+					instrFunc := function.Parametro.GetValue(s).(ListExpre)
+
+					if instrCall.Type == instrFunc.Type {
+						if s == 0 {
+							gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion+1), "+")
+							gen.AddStack(temp, instrCall.Value)
+
+						} else {
+							gen.AddExpression(temp, temp, "1", "+")
+							gen.AddStack(temp, instrCall.Value)
+
+						}
+						
+					}
+					
+
+				}
+			} else {
+
+
+				var saveTemps []interface{}
+
+				for s := 0; s < p.Parametro.Len(); s++ {
+
+					instrCall := p.Parametro.GetValue(s).(instruction.ListExpre).Compilar(env, tree, gen)
+					instrFunc := function.Parametro.GetValue(s).(ListExpre)
+
+					if instrCall.Type == instrFunc.Type {
+						auxTemp := gen.NewTemp()
+						gen.AddComment("Guardando Temporal")
+						gen.AddExpression(auxTemp,"P", fmt.Sprintf("%v", env.Posicion), "+")
+						gen.AddStack(auxTemp, instrCall.Value)
+						
+						saveTemps = append(saveTemps, env.Posicion)
+						env.NewPos()
+						
+					}
+					
+
+				}
+				
+				for s := 0; s < p.Parametro.Len(); s++ {
+					gen.AddComment("Llamado de Temporales")
+					
 					if s == 0 {
 						gen.AddExpression(temp, "P", fmt.Sprintf("%v", env.Posicion+1), "+")
-						gen.AddStack(temp, instrCall.Value)
+						tempNew   := gen.NewTemp()
+						tempStack := gen.NewTemp()
+						gen.AddExpression(tempNew, "P", fmt.Sprintf("%v", saveTemps[s]), "+")
+						gen.AddExpressionStack(tempStack, tempNew)
+						gen.AddStack(temp, tempStack)
 
 					} else {
 						gen.AddExpression(temp, temp, "1", "+")
-						gen.AddStack(temp, instrCall.Value)
+						tempNew   := gen.NewTemp()
+						tempStack := gen.NewTemp()
+						gen.AddExpression(tempNew, "P", fmt.Sprintf("%v", saveTemps[s]), "+")
+						gen.AddExpressionStack(tempStack, tempNew)
+						gen.AddStack(temp, tempStack)
 
 					}
+						
 					
+
 				}
-				
 
 			}
-
+			
 			gen.AddExpression("P","P", fmt.Sprintf("%v", env.Posicion), "+")
 			gen.PrintFunction(p.Id)
 			gen.AddExpressionStack(temp,"P")
