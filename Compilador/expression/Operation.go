@@ -100,11 +100,11 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				exp_left = p.left.Compilar(env, tree, gen)
 				gen.AddComment("Aritmetica -")
 				/* ************************************************************** INTEGER ************************************************************** */
-				if exp_left.Type == interfaces.INTEGER && exp_right.Type == interfaces.INTEGER {
+				if exp_left.Type == interfaces.INTEGER {
 					gen.AddExpression(temp, "0", exp_left.Value, "-")
 					isType = interfaces.INTEGER
 					/* ************************************************************** FLOAT ************************************************************** */
-				} else if exp_left.Type == interfaces.FLOAT && exp_right.Type == interfaces.FLOAT {
+				} else if exp_left.Type == interfaces.FLOAT{
 					gen.AddExpression(temp, "0", exp_left.Value, "-")
 					isType = interfaces.FLOAT
 
