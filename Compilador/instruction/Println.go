@@ -75,7 +75,7 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 							gen.AddComment("Printf Float")
 							gen.AddPrintf("f", "(double)"+fmt.Sprintf("%v", result.Value))
 
-						} else if result.Type == interfaces.STRING {
+						} else if result.Type == interfaces.STRING || result.Type == interfaces.STR  {
 
 							gen.AddComment("Printf String")
 
@@ -182,7 +182,7 @@ func (p Println) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 			return result.Value
 		}
 
-		if result.Type == interfaces.STRING {
+		if result.Type == interfaces.STRING || result.Type == interfaces.STR{
 			gen.AddComment("Printf String")
 
 			if !tree.IsPrimitive {

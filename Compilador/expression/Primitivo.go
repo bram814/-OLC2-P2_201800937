@@ -21,7 +21,7 @@ func NewPrimitivo(val interface{}, tipo interfaces.TypeExpression, casteo interf
 
 func (p Primitivo) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interfaces.Value {
 
-	if p.Type == interfaces.STRING || p.Type == interfaces.CHAR {
+	if p.Type == interfaces.STRING || p.Type == interfaces.CHAR || p.Type == interfaces.STR {
 		gen.AddComment("PRIMITIVO STRING")
 		temp := gen.NewTemp()
 		gen.AddExpression(temp, "H", "0", "+")
