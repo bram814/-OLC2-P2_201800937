@@ -326,3 +326,9 @@ func (s *BaseChemsListener) EnterNativa_expre(ctx *Nativa_expreContext) {}
 
 // ExitNativa_expre is called when production nativa_expre is exited.
 func (s *BaseChemsListener) ExitNativa_expre(ctx *Nativa_expreContext) {}
+
+// EnterNative_block_abs is called when production native_block_abs is entered.
+func (s *BaseChemsListener) EnterNative_block_abs(ctx *Native_block_absContext) {}
+
+// ExitNative_block_abs is called when production native_block_abs is exited.
+func (s *BaseChemsListener) ExitNative_block_abs(ctx *Native_block_absContext) {}

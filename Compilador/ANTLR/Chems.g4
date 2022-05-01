@@ -499,5 +499,12 @@ type_casteo returns[interfaces.TypeExpression tipo_exp]
 nativa_expre returns[interfaces.Expression p]
   : R_INT TK_DOSPUNTOS TK_DOSPUNTOS R_POW TK_PARA b=expressions TK_COMA e=expressions TK_PARC    { $p = nativa.NewPotencia($b.p, $e.p, interfaces.INTEGER, $R_POW.line,  localctx.(*Nativa_expreContext).Get_R_POW().GetColumn()) }
   | R_FLOAT TK_DOSPUNTOS TK_DOSPUNTOS R_POWF TK_PARA b=expressions TK_COMA e=expressions TK_PARC { $p = nativa.NewPotencia($b.p, $e.p, interfaces.FLOAT,   $R_POWF.line, localctx.(*Nativa_expreContext).Get_R_POWF().GetColumn()) }
-  | ID TK_PUNTO R_ABS TK_PARA TK_PARC                                                            { $p = nativa.NewAbs($ID.text,                            $ID.line,     localctx.(*Nativa_expreContext).Get_ID().GetColumn()) }
+  | native_block_abs TK_PUNTO R_ABS TK_PARA TK_PARC                                              { $p = nativa.NewAbs($native_block_abs.p,                 $R_ABS.line,  localctx.(*Nativa_expreContext).Get_R_ABS().GetColumn()) }
+;
+
+
+native_block_abs returns[interfaces.Expression p]
+  : instr_llamada_expre       { $p = $instr_llamada_expre.p }
+  | ID                         { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*Native_block_absContext).Get_ID().GetColumn()) }
+
 ;

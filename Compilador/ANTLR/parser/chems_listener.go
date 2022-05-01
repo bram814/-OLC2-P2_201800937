@@ -161,6 +161,9 @@ type ChemsListener interface {
 	// EnterNativa_expre is called when entering the nativa_expre production.
 	EnterNativa_expre(c *Nativa_expreContext)
 
+	// EnterNative_block_abs is called when entering the native_block_abs production.
+	EnterNative_block_abs(c *Native_block_absContext)
+
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
 
@@ -313,4 +316,7 @@ type ChemsListener interface {
 
 	// ExitNativa_expre is called when exiting the nativa_expre production.
 	ExitNativa_expre(c *Nativa_expreContext)
+
+	// ExitNative_block_abs is called when exiting the native_block_abs production.
+	ExitNative_block_abs(c *Native_block_absContext)
 }
