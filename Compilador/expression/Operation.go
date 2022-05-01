@@ -65,7 +65,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				gen.AddExpression(temp, exp_left.Value, exp_right.Value, "+")
 				isType = interfaces.FLOAT
 
-			} else if exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING {
+			} else if (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STRING) || (exp_left.Type == interfaces.STRING && exp_right.Type == interfaces.STR) || (exp_left.Type == interfaces.STR && exp_right.Type == interfaces.STRING){
 				if !tree.IsCocant {
 					gen.AddConcatString()
 					tree.IsCocant = true

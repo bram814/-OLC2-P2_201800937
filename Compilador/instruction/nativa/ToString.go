@@ -24,7 +24,7 @@ func (p ToString) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 
 	result := p.Expression.Compilar(env, tree, gen)
 
-	if result.Type != interfaces.STRING {
+	if result.Type != interfaces.STRING && result.Type != interfaces.STR {
 		excep := interfaces.NewException("Semantico", "Error en ToString, tipo incorrecto, no es un String.", p.Row, p.Column)
 		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
