@@ -122,6 +122,33 @@ type ChemsListener interface {
 	// EnterInstr_llamada_expre is called when entering the instr_llamada_expre production.
 	EnterInstr_llamada_expre(c *Instr_llamada_expreContext)
 
+	// EnterInstr_structs_decla is called when entering the instr_structs_decla production.
+	EnterInstr_structs_decla(c *Instr_structs_declaContext)
+
+	// EnterList_struct_parameters is called when entering the list_struct_parameters production.
+	EnterList_struct_parameters(c *List_struct_parametersContext)
+
+	// EnterBlock_structs_parameters is called when entering the block_structs_parameters production.
+	EnterBlock_structs_parameters(c *Block_structs_parametersContext)
+
+	// EnterInstr_structs_declaration is called when entering the instr_structs_declaration production.
+	EnterInstr_structs_declaration(c *Instr_structs_declarationContext)
+
+	// EnterList_struct_parameters_decla is called when entering the list_struct_parameters_decla production.
+	EnterList_struct_parameters_decla(c *List_struct_parameters_declaContext)
+
+	// EnterBlock_structs_parameters_decla is called when entering the block_structs_parameters_decla production.
+	EnterBlock_structs_parameters_decla(c *Block_structs_parameters_declaContext)
+
+	// EnterInstr_structs_identifier is called when entering the instr_structs_identifier production.
+	EnterInstr_structs_identifier(c *Instr_structs_identifierContext)
+
+	// EnterList_struct_parameters_id is called when entering the list_struct_parameters_id production.
+	EnterList_struct_parameters_id(c *List_struct_parameters_idContext)
+
+	// EnterBlock_structs_identifier is called when entering the block_structs_identifier production.
+	EnterBlock_structs_identifier(c *Block_structs_identifierContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -277,6 +304,33 @@ type ChemsListener interface {
 
 	// ExitInstr_llamada_expre is called when exiting the instr_llamada_expre production.
 	ExitInstr_llamada_expre(c *Instr_llamada_expreContext)
+
+	// ExitInstr_structs_decla is called when exiting the instr_structs_decla production.
+	ExitInstr_structs_decla(c *Instr_structs_declaContext)
+
+	// ExitList_struct_parameters is called when exiting the list_struct_parameters production.
+	ExitList_struct_parameters(c *List_struct_parametersContext)
+
+	// ExitBlock_structs_parameters is called when exiting the block_structs_parameters production.
+	ExitBlock_structs_parameters(c *Block_structs_parametersContext)
+
+	// ExitInstr_structs_declaration is called when exiting the instr_structs_declaration production.
+	ExitInstr_structs_declaration(c *Instr_structs_declarationContext)
+
+	// ExitList_struct_parameters_decla is called when exiting the list_struct_parameters_decla production.
+	ExitList_struct_parameters_decla(c *List_struct_parameters_declaContext)
+
+	// ExitBlock_structs_parameters_decla is called when exiting the block_structs_parameters_decla production.
+	ExitBlock_structs_parameters_decla(c *Block_structs_parameters_declaContext)
+
+	// ExitInstr_structs_identifier is called when exiting the instr_structs_identifier production.
+	ExitInstr_structs_identifier(c *Instr_structs_identifierContext)
+
+	// ExitList_struct_parameters_id is called when exiting the list_struct_parameters_id production.
+	ExitList_struct_parameters_id(c *List_struct_parameters_idContext)
+
+	// ExitBlock_structs_identifier is called when exiting the block_structs_identifier production.
+	ExitBlock_structs_identifier(c *Block_structs_identifierContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

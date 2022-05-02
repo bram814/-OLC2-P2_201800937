@@ -249,6 +249,64 @@ func (s *BaseChemsListener) EnterInstr_llamada_expre(ctx *Instr_llamada_expreCon
 // ExitInstr_llamada_expre is called when production instr_llamada_expre is exited.
 func (s *BaseChemsListener) ExitInstr_llamada_expre(ctx *Instr_llamada_expreContext) {}
 
+// EnterInstr_structs_decla is called when production instr_structs_decla is entered.
+func (s *BaseChemsListener) EnterInstr_structs_decla(ctx *Instr_structs_declaContext) {}
+
+// ExitInstr_structs_decla is called when production instr_structs_decla is exited.
+func (s *BaseChemsListener) ExitInstr_structs_decla(ctx *Instr_structs_declaContext) {}
+
+// EnterList_struct_parameters is called when production list_struct_parameters is entered.
+func (s *BaseChemsListener) EnterList_struct_parameters(ctx *List_struct_parametersContext) {}
+
+// ExitList_struct_parameters is called when production list_struct_parameters is exited.
+func (s *BaseChemsListener) ExitList_struct_parameters(ctx *List_struct_parametersContext) {}
+
+// EnterBlock_structs_parameters is called when production block_structs_parameters is entered.
+func (s *BaseChemsListener) EnterBlock_structs_parameters(ctx *Block_structs_parametersContext) {}
+
+// ExitBlock_structs_parameters is called when production block_structs_parameters is exited.
+func (s *BaseChemsListener) ExitBlock_structs_parameters(ctx *Block_structs_parametersContext) {}
+
+// EnterInstr_structs_declaration is called when production instr_structs_declaration is entered.
+func (s *BaseChemsListener) EnterInstr_structs_declaration(ctx *Instr_structs_declarationContext) {}
+
+// ExitInstr_structs_declaration is called when production instr_structs_declaration is exited.
+func (s *BaseChemsListener) ExitInstr_structs_declaration(ctx *Instr_structs_declarationContext) {}
+
+// EnterList_struct_parameters_decla is called when production list_struct_parameters_decla is entered.
+func (s *BaseChemsListener) EnterList_struct_parameters_decla(ctx *List_struct_parameters_declaContext) {
+}
+
+// ExitList_struct_parameters_decla is called when production list_struct_parameters_decla is exited.
+func (s *BaseChemsListener) ExitList_struct_parameters_decla(ctx *List_struct_parameters_declaContext) {
+}
+
+// EnterBlock_structs_parameters_decla is called when production block_structs_parameters_decla is entered.
+func (s *BaseChemsListener) EnterBlock_structs_parameters_decla(ctx *Block_structs_parameters_declaContext) {
+}
+
+// ExitBlock_structs_parameters_decla is called when production block_structs_parameters_decla is exited.
+func (s *BaseChemsListener) ExitBlock_structs_parameters_decla(ctx *Block_structs_parameters_declaContext) {
+}
+
+// EnterInstr_structs_identifier is called when production instr_structs_identifier is entered.
+func (s *BaseChemsListener) EnterInstr_structs_identifier(ctx *Instr_structs_identifierContext) {}
+
+// ExitInstr_structs_identifier is called when production instr_structs_identifier is exited.
+func (s *BaseChemsListener) ExitInstr_structs_identifier(ctx *Instr_structs_identifierContext) {}
+
+// EnterList_struct_parameters_id is called when production list_struct_parameters_id is entered.
+func (s *BaseChemsListener) EnterList_struct_parameters_id(ctx *List_struct_parameters_idContext) {}
+
+// ExitList_struct_parameters_id is called when production list_struct_parameters_id is exited.
+func (s *BaseChemsListener) ExitList_struct_parameters_id(ctx *List_struct_parameters_idContext) {}
+
+// EnterBlock_structs_identifier is called when production block_structs_identifier is entered.
+func (s *BaseChemsListener) EnterBlock_structs_identifier(ctx *Block_structs_identifierContext) {}
+
+// ExitBlock_structs_identifier is called when production block_structs_identifier is exited.
+func (s *BaseChemsListener) ExitBlock_structs_identifier(ctx *Block_structs_identifierContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 

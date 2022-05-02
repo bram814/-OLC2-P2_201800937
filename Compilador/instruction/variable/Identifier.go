@@ -32,18 +32,23 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 		}
 	}
 
-	gen.AddComment("Identificador")
-	temp0 := gen.NewTemp()
-	temp1 := gen.NewTemp()
-	gen.AddExpression(temp0, "P", fmt.Sprintf("%v", symbol.Posicion), "+")
-	gen.AddExpressionStack(temp1, temp0)
+	if symbol.Type == interfaces.STRUCT {
+		excep := interfaces.NewException("Semantico", "Falta Atributo para Struct (identificador).", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 
-	return interfaces.Value{
-		Value:      temp1,
-		IsTemp:     true,
-		Type:       symbol.Value.(interfaces.Value).Type,
-		TrueLabel:  "",
-		FalseLabel: "",
+	} else {
+
+		gen.AddComment("Identificador")
+		temp0 := gen.NewTemp()
+		temp1 := gen.NewTemp()
+		gen.AddExpression(temp0, "P", fmt.Sprintf("%v", symbol.Posicion), "+")
+		gen.AddExpressionStack(temp1, temp0)
+
+		return interfaces.Value{Value: temp1, IsTemp: true, Type: symbol.Value.(interfaces.Value).Type, TrueLabel:  "", FalseLabel: ""}
+
 	}
-
+	
+	
+	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 }

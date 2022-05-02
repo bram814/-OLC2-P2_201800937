@@ -12,12 +12,13 @@ options {
     import "OLC2/Compilador/expression"
     import "OLC2/Compilador/instruction"
     import "OLC2/Compilador/instruction/loops"
+    import "OLC2/Compilador/instruction/casteo"
+    import "OLC2/Compilador/instruction/nativa"
     import "OLC2/Compilador/instruction/control"
+    import "OLC2/Compilador/instruction/structs"
     import "OLC2/Compilador/instruction/variable"
     import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/function"
-    import "OLC2/Compilador/instruction/casteo"
-    import "OLC2/Compilador/instruction/nativa"
     import "OLC2/Compilador/instruction/transferencia"
     import arrayList "github.com/colegno/arraylist"
 }
@@ -46,20 +47,22 @@ end_instr returns [int v]
 
 
 instruccion returns [interfaces.Instruction instr]
-  : instr_println end_instr       { $instr = $instr_println.instr     }
-  | instr_main                    { $instr = $instr_main.instr        }
-  | instr_declaracion             { $instr = $instr_declaracion.instr }
-  | instr_asignacion              { $instr = $instr_asignacion.instr  }
-  | instr_if                      { $instr = $instr_if.instr          }
-  | instr_match                   { $instr = $instr_match.instr       }
-  | instr_while                   { $instr = $instr_while.instr       }
-  | instr_for_in                  { $instr = $instr_for_in.instr      }
-  | instr_loop                    { $instr = $instr_loop.instr        }
-  | instr_break end_instr         { $instr = $instr_break.instr       }
-  | instr_continue end_instr      { $instr = $instr_continue.instr    }
-  | instr_func                    { $instr = $instr_func.instr        }
-  | instr_llamada end_instr       { $instr = $instr_llamada.instr     }
-  | instr_return end_instr        { $instr = $instr_return.instr      }
+  : instr_println end_instr                 { $instr = $instr_println.instr               }
+  | instr_main                              { $instr = $instr_main.instr                  }
+  | instr_structs_declaration end_instr     { $instr = $instr_structs_declaration.instr   }
+  | instr_declaracion                       { $instr = $instr_declaracion.instr           }
+  | instr_asignacion                        { $instr = $instr_asignacion.instr            }
+  | instr_if                                { $instr = $instr_if.instr                    }
+  | instr_match                             { $instr = $instr_match.instr                 }
+  | instr_while                             { $instr = $instr_while.instr                 }
+  | instr_for_in                            { $instr = $instr_for_in.instr                }
+  | instr_loop                              { $instr = $instr_loop.instr                  }
+  | instr_break end_instr                   { $instr = $instr_break.instr                 }
+  | instr_continue end_instr                { $instr = $instr_continue.instr              }
+  | instr_func                              { $instr = $instr_func.instr                  }
+  | instr_llamada end_instr                 { $instr = $instr_llamada.instr               }
+  | instr_return end_instr                  { $instr = $instr_return.instr                }
+  | instr_structs_decla                     { $instr = $instr_structs_decla.instr         }
 ;
 
 
@@ -331,6 +334,77 @@ instr_llamada_expre returns [interfaces.Expression p]
   | ID TK_PARA list_expression TK_PARC            { $p = function.NewLlamadaExpresion($ID.text, $list_expression.l, $ID.line, localctx.(*Instr_llamada_expreContext).Get_ID().GetColumn()) }
 
 ;
+
+/******************************** [STRUCT][DECLARATION]  ********************************/
+instr_structs_decla returns [interfaces.Instruction instr]
+  : R_STRUCT ID TK_LLAVEA list_struct_parameters TK_LLAVEC    { $instr = structs.NewDefinition($ID.text, interfaces.STRUCT, $list_struct_parameters.l, $R_STRUCT.line, localctx.(*Instr_structs_declaContext).Get_R_STRUCT().GetColumn()) }
+;
+
+list_struct_parameters returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_structs_parameters+  {
+        listInt := localctx.(*List_struct_parametersContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_structs_parameters returns [interfaces.Instruction instr]
+  : ID TK_DOSPUNTOS instr_tipo TK_COMA                    { $instr = structs.NewListExpre($ID.text, $instr_tipo.tipo_exp, $ID.line, localctx.(*Block_structs_parametersContext).Get_ID().GetColumn()) }
+  | ID TK_DOSPUNTOS instr_tipo                            { $instr = structs.NewListExpre($ID.text, $instr_tipo.tipo_exp, $ID.line, localctx.(*Block_structs_parametersContext).Get_ID().GetColumn()) }
+;
+
+
+/******************************** [STRUCT][DECLARACION] ********************************/
+instr_structs_declaration returns [interfaces.Instruction instr]
+  : R_LET R_MUT left=ID TK_IGUAL right=ID TK_LLAVEA list_struct_parameters_decla TK_LLAVEC     { $instr = structs.NewDeclaration($left.text, $list_struct_parameters_decla.l, true,  $right.text, $R_LET.line, localctx.(*Instr_structs_declarationContext).Get_R_LET().GetColumn()) }
+  | R_LET       left=ID TK_IGUAL right=ID TK_LLAVEA list_struct_parameters_decla TK_LLAVEC     { $instr = structs.NewDeclaration($left.text, $list_struct_parameters_decla.l, false, $right.text, $R_LET.line, localctx.(*Instr_structs_declarationContext).Get_R_LET().GetColumn()) } 
+;
+
+list_struct_parameters_decla returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_structs_parameters_decla+  {
+        listInt := localctx.(*List_struct_parameters_declaContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_structs_parameters_decla returns [interfaces.Instruction instr]
+  : ID TK_DOSPUNTOS expressions TK_COMA                    { $instr = structs.NewListExpreDecla($ID.text, $expressions.p, $ID.line, localctx.(*Block_structs_parameters_declaContext).Get_ID().GetColumn()) }
+  | ID TK_DOSPUNTOS expressions                            { $instr = structs.NewListExpreDecla($ID.text, $expressions.p, $ID.line, localctx.(*Block_structs_parameters_declaContext).Get_ID().GetColumn()) }
+;
+
+
+
+/******************************** [STRUCT][DECLARACION] ********************************/
+instr_structs_identifier returns [interfaces.Expression p]
+  : ID list_struct_parameters_id               { $p = structs.NewIdentifier($ID.text, $list_struct_parameters_id.l, $ID.line, localctx.(*Instr_structs_identifierContext).Get_ID().GetColumn()) }
+;
+
+list_struct_parameters_id returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_structs_identifier+  {
+        listInt := localctx.(*List_struct_parameters_idContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_structs_identifier returns [interfaces.Instruction instr]
+  : TK_PUNTO ID                   { $instr = structs.NewListIdentifier($ID.text)}
+;
+
+
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]
   : R_INT               {$tipo_exp = interfaces.INTEGER}
@@ -430,8 +504,8 @@ primitivo returns[interfaces.Expression p]
           
           }
     | instr_llamada_expre       { $p = $instr_llamada_expre.p }
-    
-    |ID                         { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
+    | instr_structs_identifier  { $p = $instr_structs_identifier.p }
+    | ID                        { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 
     | nativa_expre              { $p = $nativa_expre.p }
     | primitivo_casteo          { $p = $primitivo_casteo.p }

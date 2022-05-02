@@ -116,7 +116,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	gen.AddComment("Fucniones")
 	for _ , s := range result.ToArray() {
 		newInstr := s.(interfaces.Instruction)
-		if reflect.TypeOf(newInstr).String() != "instruction.Main" && reflect.TypeOf(newInstr).String() != "function.Function" { 
+		if reflect.TypeOf(newInstr).String() != "instruction.Main" && reflect.TypeOf(newInstr).String() != "function.Function" && reflect.TypeOf(newInstr).String() != "structs.Definition" { 
 			excep := interfaces.NewException("Semantico","Solo puede ir Main, Func, Array y Mod.", -1, -1)
 			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
 			break
@@ -145,6 +145,8 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 			gen.AddFunctionEnd(false)
 			globalEnv.UpdatePos(0, 0, true, &globalEnv)
 
+		} else if reflect.TypeOf(newInstr).String() == "structs.Definition" {
+			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
 		}
 	}
 

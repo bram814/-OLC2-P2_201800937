@@ -26,6 +26,9 @@ R_RETURN:       'return';
 R_MAIN:         'main';
 R_FUNCTION:     'fn';
 
+/* STRUCT */
+R_STRUCT:       'struct';
+
 /* NATIVAS */
 R_POW:          'pow';
 R_POWF:         'powf';

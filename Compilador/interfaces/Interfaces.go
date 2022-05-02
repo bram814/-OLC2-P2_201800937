@@ -20,6 +20,20 @@ type SymbolFunction struct {
 	IsMut         bool
 }
 
+type SymbolStructs struct {
+	Id  		string
+	Type        TypeExpression
+	Parameters  *arrayList.List
+	Value       *arrayList.List
+	Size		int
+}
+
+type ValueStructs struct {
+	Id  		string
+	Type 		TypeExpression
+	Posicion 	int
+}
+
 type Value struct {
 	Value      string
 	IsTemp     bool
