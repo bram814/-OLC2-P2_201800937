@@ -52,6 +52,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_structs_declaration end_instr     { $instr = $instr_structs_declaration.instr   }
   | instr_declaracion                       { $instr = $instr_declaracion.instr           }
   | instr_asignacion                        { $instr = $instr_asignacion.instr            }
+  | instr_structs_assignment end_instr      { $instr = $instr_structs_assignment.instr    }
   | instr_if                                { $instr = $instr_if.instr                    }
   | instr_match                             { $instr = $instr_match.instr                 }
   | instr_while                             { $instr = $instr_while.instr                 }
@@ -404,6 +405,10 @@ block_structs_identifier returns [interfaces.Instruction instr]
   : TK_PUNTO ID                   { $instr = structs.NewListIdentifier($ID.text)}
 ;
 
+/******************************** [STRUCT][ASIGNACION] ********************************/
+instr_structs_assignment returns [interfaces.Instruction instr]
+  : ID list_struct_parameters_id TK_IGUAL expressions        { $instr = structs.NewAssignment($ID.text, $list_struct_parameters_id.l, $expressions.p ,$ID.line, localctx.(*Instr_structs_assignmentContext).Get_ID().GetColumn()) }            
+;
 
 /******************************** [TIPO] ********************************/
 instr_tipo returns [interfaces.TypeExpression tipo_exp]

@@ -38,7 +38,7 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 
 	if syStruct.Type == interfaces.NULL {
 
-		excep := interfaces.NewException("Semantico", "Ya Existe ese Struct -"+p.Id + ".", p.Row, p.Column)
+		excep := interfaces.NewException("Semantico", "No Existe ese Struct - "+p.Id + " (Struct- Declaration).", p.Row, p.Column)
 		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 

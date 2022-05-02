@@ -149,6 +149,9 @@ type ChemsListener interface {
 	// EnterBlock_structs_identifier is called when entering the block_structs_identifier production.
 	EnterBlock_structs_identifier(c *Block_structs_identifierContext)
 
+	// EnterInstr_structs_assignment is called when entering the instr_structs_assignment production.
+	EnterInstr_structs_assignment(c *Instr_structs_assignmentContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -331,6 +334,9 @@ type ChemsListener interface {
 
 	// ExitBlock_structs_identifier is called when exiting the block_structs_identifier production.
 	ExitBlock_structs_identifier(c *Block_structs_identifierContext)
+
+	// ExitInstr_structs_assignment is called when exiting the instr_structs_assignment production.
+	ExitInstr_structs_assignment(c *Instr_structs_assignmentContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

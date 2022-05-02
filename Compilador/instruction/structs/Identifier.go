@@ -2,7 +2,6 @@ package structs
 
 import (
 	"fmt"
-	// "reflect"
 	"OLC2/Compilador/interfaces"
 	arrayList "github.com/colegno/arraylist"
 )
@@ -45,7 +44,7 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 	} 
 
 	gen.AddComment("Identificador - Struct")
-	// fmt.Println(symbol)
+
 	temp0 := gen.NewTemp()
 	temp1 := gen.NewTemp()
 	tempf := gen.NewTemp()
@@ -71,9 +70,7 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 			result.Value = tempf
 
 		}
-		
 	}
-	
 	
 	return interfaces.Value{Value: result.Value, IsTemp: true, Type: result.Type, TrueLabel: "", FalseLabel: ""}
 }

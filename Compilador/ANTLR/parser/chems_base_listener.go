@@ -307,6 +307,12 @@ func (s *BaseChemsListener) EnterBlock_structs_identifier(ctx *Block_structs_ide
 // ExitBlock_structs_identifier is called when production block_structs_identifier is exited.
 func (s *BaseChemsListener) ExitBlock_structs_identifier(ctx *Block_structs_identifierContext) {}
 
+// EnterInstr_structs_assignment is called when production instr_structs_assignment is entered.
+func (s *BaseChemsListener) EnterInstr_structs_assignment(ctx *Instr_structs_assignmentContext) {}
+
+// ExitInstr_structs_assignment is called when production instr_structs_assignment is exited.
+func (s *BaseChemsListener) ExitInstr_structs_assignment(ctx *Instr_structs_assignmentContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 
