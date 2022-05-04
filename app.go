@@ -33,6 +33,7 @@ func main() {
 	text := ""
 	text += "fn main() {\n"
     text +=	"\tprintln!(\"hello World!\");\n}"
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		// Render index template
 		return c.Render("index", fiber.Map{
@@ -42,7 +43,17 @@ func main() {
 		})
 	})
 
+	app.Get("/optimizar", func(c *fiber.Ctx) error {
+		// Render index template
+		return c.Render("Optimizar", fiber.Map{
+			"CODE_INPUT":  "",
+			"CODE_OUT":    "",
+		})
+	})
+
 	app.Post("/compilar", Execute)
+	app.Post("/ExecuteOptimizar", Optimizar)
+
 
 	/*
 		Se ejecuta el servidor y en caso de fallar, muetra log.Fatal con el error.
@@ -81,6 +92,24 @@ func Execute(c *fiber.Ctx) error {
 		"CODE_OUT":    CODE_OUT_,
 		"Tabla_Error": TSGlobalError,
 	})
+}
+
+
+func Optimizar(c *fiber.Ctx) error {
+	data := new(getInput)
+	fmt.Println(data)
+
+	if err := c.BodyParser(data); err != nil {
+		return err
+	}
+
+	return c.Render("Optimizar", fiber.Map{
+		"CODE_INPUT":  data.Input,
+		"CODE_OUT":    data.Input,
+		})
+	
+
+
 }
 
 /* ANTLR*/
