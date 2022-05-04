@@ -10,6 +10,7 @@ type Environment struct {
 	variable 	map[string]Symbol
 	Function 	map[string]Symbol
 	Structs  	map[string]Symbol
+	// Arrays  	map[string]Symbol
 	Posicion 	int
 
 }
@@ -205,4 +206,14 @@ func (env *Environment) GetStructs(id string) Symbol {
 	
 	return Symbol{Id: "", Type: NULL, Value: Symbol{Id: "", Type: NULL, Value: 0}}
 
+}
+
+/* ADD SYMBOL ARRAY*/
+func (env *Environment) AddSymbolArrays(id string, value Symbol, tipo TypeExpression, isMut bool, pos int, newTable *Environment) {
+
+	if variable, ok := newTable.variable[id]; ok {
+		fmt.Println("[ADD SYMBOL] La variable " + variable.Id + " ya existe")
+		return
+	}
+	newTable.variable[id] = Symbol{Id: id, Type: tipo, Value: value, IsMut: isMut, Posicion: pos}
 }

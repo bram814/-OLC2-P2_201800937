@@ -28,6 +28,13 @@ type SymbolStructs struct {
 	Size		int
 }
 
+type SymbolArrays struct {
+	Id  		string
+	Type  		TypeExpression
+	Tam  		*arrayList.List
+	Size        int
+}
+
 type ValueStructs struct {
 	Id  		string
 	Type 		TypeExpression

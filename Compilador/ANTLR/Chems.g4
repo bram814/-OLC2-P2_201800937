@@ -16,6 +16,7 @@ options {
     import "OLC2/Compilador/instruction/nativa"
     import "OLC2/Compilador/instruction/control"
     import "OLC2/Compilador/instruction/structs"
+    import "OLC2/Compilador/instruction/arrays"
     import "OLC2/Compilador/instruction/variable"
     import "OLC2/Compilador/instruction/ternario"
     import "OLC2/Compilador/instruction/function"
@@ -64,6 +65,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_llamada end_instr                 { $instr = $instr_llamada.instr               }
   | instr_return end_instr                  { $instr = $instr_return.instr                }
   | instr_structs_decla                     { $instr = $instr_structs_decla.instr         }
+  | instr_arrays end_instr                  { $instr = $instr_arrays.instr                }
 ;
 
 
@@ -358,6 +360,96 @@ block_structs_parameters returns [interfaces.Instruction instr]
   | ID TK_DOSPUNTOS instr_tipo                            { $instr = structs.NewListExpre($ID.text, $instr_tipo.tipo_exp, $ID.line, localctx.(*Block_structs_parametersContext).Get_ID().GetColumn()) }
 ;
 
+/******************************** [STRUCT][DECLARATION]  ********************************/
+instr_arrays returns [interfaces.Instruction instr]
+  : R_LET R_MUT ID TK_DOSPUNTOS list_arrays_definition TK_IGUAL list_arrays_datos   { $instr = arrays.NewDefinition($ID.text, true,  $list_arrays_definition.l, $list_arrays_datos.l, $R_LET.line, localctx.(*Instr_arraysContext).Get_R_LET().GetColumn()) }
+  | R_LET       ID TK_DOSPUNTOS list_arrays_definition TK_IGUAL list_arrays_datos   { $instr = arrays.NewDefinition($ID.text, false, $list_arrays_definition.l, $list_arrays_datos.l, $R_LET.line, localctx.(*Instr_arraysContext).Get_R_LET().GetColumn()) }
+
+;
+
+
+list_arrays_datos returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_dimensiones_datos  {
+        listInt := localctx.(*List_arrays_datosContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_dimensiones_datos returns [interfaces.Instruction instr]
+  : block_array_dimensionUno_datos        { $instr = $block_array_dimensionUno_datos.instr }     
+;
+
+
+block_array_dimensionUno_datos returns [interfaces.Instruction instr]
+  : TK_CORA list_array_dimUno TK_CORC   { $instr = arrays.NewDimUnoDatos($list_array_dimUno.l) }
+;
+
+list_array_dimUno returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_array_dimUno_datos+  {
+        listInt := localctx.(*List_array_dimUnoContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_array_dimUno_datos returns [interfaces.Instruction instr]
+  : expressions TK_COMA   { $instr = arrays.NewListDimUno($expressions.p)}
+  | expressions           { $instr = arrays.NewListDimUno($expressions.p)}
+;
+
+
+
+list_arrays_definition returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_dimensiones+  {
+        listInt := localctx.(*List_arrays_definitionContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+
+block_dimensiones returns [interfaces.Instruction instr]
+  : block_array_dimensionUno              { $instr = $block_array_dimensionUno.instr }
+;
+
+
+block_array_dimensionUno returns [interfaces.Instruction instr]
+  : TK_CORA instr_tipo TK_PUNTOCOMA expressions TK_CORC   { $instr = arrays.NewDimUno($instr_tipo.tipo_exp, $expressions.p)}
+;
+
+/******************************** [STRUCT][DECLARACION] ********************************/
+instr_arrays_identifier returns [interfaces.Expression p]
+  : ID list_arrays_parameters_id                            { $p = arrays.NewIdentifier($ID.text, $list_arrays_parameters_id.l, $ID.line, localctx.(*Instr_arrays_identifierContext).Get_ID().GetColumn()) }
+;
+
+list_arrays_parameters_id returns [*arrayList.List l]
+  @init{
+    $l =  arrayList.New()
+  }
+  : e += block_arrays_identifier+  {
+        listInt := localctx.(*List_arrays_parameters_idContext).GetE()
+        for _, e := range listInt {
+            $l.Add(e.GetInstr())
+        }
+    }
+;
+
+block_arrays_identifier returns [interfaces.Instruction instr]
+  : TK_CORA expressions TK_CORC                            { $instr = arrays.NewListIdentifier($expressions.p)}
+;
 
 /******************************** [STRUCT][DECLARACION] ********************************/
 instr_structs_declaration returns [interfaces.Instruction instr]
@@ -510,6 +602,7 @@ primitivo returns[interfaces.Expression p]
           }
     | instr_llamada_expre       { $p = $instr_llamada_expre.p }
     | instr_structs_identifier  { $p = $instr_structs_identifier.p }
+    | instr_arrays_identifier   { $p = $instr_arrays_identifier.p }
     | ID                        { $p = variable.NewIdentifier($ID.text, $ID.line, localctx.(*PrimitivoContext).Get_ID().GetColumn()) }
 
     | nativa_expre              { $p = $nativa_expre.p }

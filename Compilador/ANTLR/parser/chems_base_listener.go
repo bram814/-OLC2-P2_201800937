@@ -267,6 +267,80 @@ func (s *BaseChemsListener) EnterBlock_structs_parameters(ctx *Block_structs_par
 // ExitBlock_structs_parameters is called when production block_structs_parameters is exited.
 func (s *BaseChemsListener) ExitBlock_structs_parameters(ctx *Block_structs_parametersContext) {}
 
+// EnterInstr_arrays is called when production instr_arrays is entered.
+func (s *BaseChemsListener) EnterInstr_arrays(ctx *Instr_arraysContext) {}
+
+// ExitInstr_arrays is called when production instr_arrays is exited.
+func (s *BaseChemsListener) ExitInstr_arrays(ctx *Instr_arraysContext) {}
+
+// EnterList_arrays_datos is called when production list_arrays_datos is entered.
+func (s *BaseChemsListener) EnterList_arrays_datos(ctx *List_arrays_datosContext) {}
+
+// ExitList_arrays_datos is called when production list_arrays_datos is exited.
+func (s *BaseChemsListener) ExitList_arrays_datos(ctx *List_arrays_datosContext) {}
+
+// EnterBlock_dimensiones_datos is called when production block_dimensiones_datos is entered.
+func (s *BaseChemsListener) EnterBlock_dimensiones_datos(ctx *Block_dimensiones_datosContext) {}
+
+// ExitBlock_dimensiones_datos is called when production block_dimensiones_datos is exited.
+func (s *BaseChemsListener) ExitBlock_dimensiones_datos(ctx *Block_dimensiones_datosContext) {}
+
+// EnterBlock_array_dimensionUno_datos is called when production block_array_dimensionUno_datos is entered.
+func (s *BaseChemsListener) EnterBlock_array_dimensionUno_datos(ctx *Block_array_dimensionUno_datosContext) {
+}
+
+// ExitBlock_array_dimensionUno_datos is called when production block_array_dimensionUno_datos is exited.
+func (s *BaseChemsListener) ExitBlock_array_dimensionUno_datos(ctx *Block_array_dimensionUno_datosContext) {
+}
+
+// EnterList_array_dimUno is called when production list_array_dimUno is entered.
+func (s *BaseChemsListener) EnterList_array_dimUno(ctx *List_array_dimUnoContext) {}
+
+// ExitList_array_dimUno is called when production list_array_dimUno is exited.
+func (s *BaseChemsListener) ExitList_array_dimUno(ctx *List_array_dimUnoContext) {}
+
+// EnterBlock_array_dimUno_datos is called when production block_array_dimUno_datos is entered.
+func (s *BaseChemsListener) EnterBlock_array_dimUno_datos(ctx *Block_array_dimUno_datosContext) {}
+
+// ExitBlock_array_dimUno_datos is called when production block_array_dimUno_datos is exited.
+func (s *BaseChemsListener) ExitBlock_array_dimUno_datos(ctx *Block_array_dimUno_datosContext) {}
+
+// EnterList_arrays_definition is called when production list_arrays_definition is entered.
+func (s *BaseChemsListener) EnterList_arrays_definition(ctx *List_arrays_definitionContext) {}
+
+// ExitList_arrays_definition is called when production list_arrays_definition is exited.
+func (s *BaseChemsListener) ExitList_arrays_definition(ctx *List_arrays_definitionContext) {}
+
+// EnterBlock_dimensiones is called when production block_dimensiones is entered.
+func (s *BaseChemsListener) EnterBlock_dimensiones(ctx *Block_dimensionesContext) {}
+
+// ExitBlock_dimensiones is called when production block_dimensiones is exited.
+func (s *BaseChemsListener) ExitBlock_dimensiones(ctx *Block_dimensionesContext) {}
+
+// EnterBlock_array_dimensionUno is called when production block_array_dimensionUno is entered.
+func (s *BaseChemsListener) EnterBlock_array_dimensionUno(ctx *Block_array_dimensionUnoContext) {}
+
+// ExitBlock_array_dimensionUno is called when production block_array_dimensionUno is exited.
+func (s *BaseChemsListener) ExitBlock_array_dimensionUno(ctx *Block_array_dimensionUnoContext) {}
+
+// EnterInstr_arrays_identifier is called when production instr_arrays_identifier is entered.
+func (s *BaseChemsListener) EnterInstr_arrays_identifier(ctx *Instr_arrays_identifierContext) {}
+
+// ExitInstr_arrays_identifier is called when production instr_arrays_identifier is exited.
+func (s *BaseChemsListener) ExitInstr_arrays_identifier(ctx *Instr_arrays_identifierContext) {}
+
+// EnterList_arrays_parameters_id is called when production list_arrays_parameters_id is entered.
+func (s *BaseChemsListener) EnterList_arrays_parameters_id(ctx *List_arrays_parameters_idContext) {}
+
+// ExitList_arrays_parameters_id is called when production list_arrays_parameters_id is exited.
+func (s *BaseChemsListener) ExitList_arrays_parameters_id(ctx *List_arrays_parameters_idContext) {}
+
+// EnterBlock_arrays_identifier is called when production block_arrays_identifier is entered.
+func (s *BaseChemsListener) EnterBlock_arrays_identifier(ctx *Block_arrays_identifierContext) {}
+
+// ExitBlock_arrays_identifier is called when production block_arrays_identifier is exited.
+func (s *BaseChemsListener) ExitBlock_arrays_identifier(ctx *Block_arrays_identifierContext) {}
+
 // EnterInstr_structs_declaration is called when production instr_structs_declaration is entered.
 func (s *BaseChemsListener) EnterInstr_structs_declaration(ctx *Instr_structs_declarationContext) {}
 

@@ -131,6 +131,42 @@ type ChemsListener interface {
 	// EnterBlock_structs_parameters is called when entering the block_structs_parameters production.
 	EnterBlock_structs_parameters(c *Block_structs_parametersContext)
 
+	// EnterInstr_arrays is called when entering the instr_arrays production.
+	EnterInstr_arrays(c *Instr_arraysContext)
+
+	// EnterList_arrays_datos is called when entering the list_arrays_datos production.
+	EnterList_arrays_datos(c *List_arrays_datosContext)
+
+	// EnterBlock_dimensiones_datos is called when entering the block_dimensiones_datos production.
+	EnterBlock_dimensiones_datos(c *Block_dimensiones_datosContext)
+
+	// EnterBlock_array_dimensionUno_datos is called when entering the block_array_dimensionUno_datos production.
+	EnterBlock_array_dimensionUno_datos(c *Block_array_dimensionUno_datosContext)
+
+	// EnterList_array_dimUno is called when entering the list_array_dimUno production.
+	EnterList_array_dimUno(c *List_array_dimUnoContext)
+
+	// EnterBlock_array_dimUno_datos is called when entering the block_array_dimUno_datos production.
+	EnterBlock_array_dimUno_datos(c *Block_array_dimUno_datosContext)
+
+	// EnterList_arrays_definition is called when entering the list_arrays_definition production.
+	EnterList_arrays_definition(c *List_arrays_definitionContext)
+
+	// EnterBlock_dimensiones is called when entering the block_dimensiones production.
+	EnterBlock_dimensiones(c *Block_dimensionesContext)
+
+	// EnterBlock_array_dimensionUno is called when entering the block_array_dimensionUno production.
+	EnterBlock_array_dimensionUno(c *Block_array_dimensionUnoContext)
+
+	// EnterInstr_arrays_identifier is called when entering the instr_arrays_identifier production.
+	EnterInstr_arrays_identifier(c *Instr_arrays_identifierContext)
+
+	// EnterList_arrays_parameters_id is called when entering the list_arrays_parameters_id production.
+	EnterList_arrays_parameters_id(c *List_arrays_parameters_idContext)
+
+	// EnterBlock_arrays_identifier is called when entering the block_arrays_identifier production.
+	EnterBlock_arrays_identifier(c *Block_arrays_identifierContext)
+
 	// EnterInstr_structs_declaration is called when entering the instr_structs_declaration production.
 	EnterInstr_structs_declaration(c *Instr_structs_declarationContext)
 
@@ -316,6 +352,42 @@ type ChemsListener interface {
 
 	// ExitBlock_structs_parameters is called when exiting the block_structs_parameters production.
 	ExitBlock_structs_parameters(c *Block_structs_parametersContext)
+
+	// ExitInstr_arrays is called when exiting the instr_arrays production.
+	ExitInstr_arrays(c *Instr_arraysContext)
+
+	// ExitList_arrays_datos is called when exiting the list_arrays_datos production.
+	ExitList_arrays_datos(c *List_arrays_datosContext)
+
+	// ExitBlock_dimensiones_datos is called when exiting the block_dimensiones_datos production.
+	ExitBlock_dimensiones_datos(c *Block_dimensiones_datosContext)
+
+	// ExitBlock_array_dimensionUno_datos is called when exiting the block_array_dimensionUno_datos production.
+	ExitBlock_array_dimensionUno_datos(c *Block_array_dimensionUno_datosContext)
+
+	// ExitList_array_dimUno is called when exiting the list_array_dimUno production.
+	ExitList_array_dimUno(c *List_array_dimUnoContext)
+
+	// ExitBlock_array_dimUno_datos is called when exiting the block_array_dimUno_datos production.
+	ExitBlock_array_dimUno_datos(c *Block_array_dimUno_datosContext)
+
+	// ExitList_arrays_definition is called when exiting the list_arrays_definition production.
+	ExitList_arrays_definition(c *List_arrays_definitionContext)
+
+	// ExitBlock_dimensiones is called when exiting the block_dimensiones production.
+	ExitBlock_dimensiones(c *Block_dimensionesContext)
+
+	// ExitBlock_array_dimensionUno is called when exiting the block_array_dimensionUno production.
+	ExitBlock_array_dimensionUno(c *Block_array_dimensionUnoContext)
+
+	// ExitInstr_arrays_identifier is called when exiting the instr_arrays_identifier production.
+	ExitInstr_arrays_identifier(c *Instr_arrays_identifierContext)
+
+	// ExitList_arrays_parameters_id is called when exiting the list_arrays_parameters_id production.
+	ExitList_arrays_parameters_id(c *List_arrays_parameters_idContext)
+
+	// ExitBlock_arrays_identifier is called when exiting the block_arrays_identifier production.
+	ExitBlock_arrays_identifier(c *Block_arrays_identifierContext)
 
 	// ExitInstr_structs_declaration is called when exiting the instr_structs_declaration production.
 	ExitInstr_structs_declaration(c *Instr_structs_declarationContext)
