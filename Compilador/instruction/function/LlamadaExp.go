@@ -92,7 +92,7 @@ func (p LlamadaExpresion) Compilar(env *interfaces.Environment, tree *interfaces
 						gen.AddComment("Guardando Temporal")
 						gen.AddExpression(auxTemp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 						gen.AddStack(auxTemp, instrCall.Value)
-						
+						tree.AddTableSymbol(*interfaces.NewTableSymbol(instrCall.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
 						saveTemps = append(saveTemps, env.Posicion)
 						env.NewPos()
 						
@@ -158,6 +158,6 @@ func (p LlamadaExpresion) Compilar(env *interfaces.Environment, tree *interfaces
 
 
 	}
-
+	fmt.Println(temp)
 	return interfaces.Value{Value: temp, IsTemp: true, Type: symbol.Type, TrueLabel: "", FalseLabel: ""}
 }

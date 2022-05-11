@@ -11,6 +11,7 @@ options {
     import "OLC2/Compilador/interfaces"
     import "OLC2/Compilador/expression"
     import "OLC2/Compilador/instruction"
+    import "OLC2/Compilador/instruction/db"
     import "OLC2/Compilador/instruction/loops"
     import "OLC2/Compilador/instruction/casteo"
     import "OLC2/Compilador/instruction/nativa"
@@ -66,6 +67,7 @@ instruccion returns [interfaces.Instruction instr]
   | instr_return end_instr                  { $instr = $instr_return.instr                }
   | instr_structs_decla                     { $instr = $instr_structs_decla.instr         }
   | instr_arrays end_instr                  { $instr = $instr_arrays.instr                }
+  | instr_db                                { $instr = $instr_db.instr                    }
 ;
 
 
@@ -500,6 +502,11 @@ block_structs_identifier returns [interfaces.Instruction instr]
 /******************************** [STRUCT][ASIGNACION] ********************************/
 instr_structs_assignment returns [interfaces.Instruction instr]
   : ID list_struct_parameters_id TK_IGUAL expressions        { $instr = structs.NewAssignment($ID.text, $list_struct_parameters_id.l, $expressions.p ,$ID.line, localctx.(*Instr_structs_assignmentContext).Get_ID().GetColumn()) }            
+;
+
+/******************************** [DB][DEFINITION] ********************************/
+instr_db returns [interfaces.Instruction instr]
+  : R_MOD ID TK_LLAVEA TK_LLAVEC                             { $instr = db.NewDefinition($ID.text ,$ID.line, localctx.(*Instr_dbContext).Get_ID().GetColumn()) }      
 ;
 
 /******************************** [TIPO] ********************************/

@@ -69,6 +69,7 @@ func (p Declaration) Compilar(env *interfaces.Environment, tree *interfaces.Arbo
 		temp := gen.NewTemp()
 		gen.AddExpression(temp,"P",fmt.Sprintf("%v", env.Posicion),"+")
 		value.Posicion = env.Posicion
+		tree.AddTableSymbol(*interfaces.NewTableSymbol(p.Id,"Struct - Declaracion","Local", p.Row, p.Column, fmt.Sprintf("%v", p.Parameters.Len()), fmt.Sprintf("%v", env.Posicion)))
 		env.NewPos()
 		gen.AddStack(temp, "H")
 		gen.AddExpression("H","H",fmt.Sprintf("%v", p.Parameters.Len()),"+")

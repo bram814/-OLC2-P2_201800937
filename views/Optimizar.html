@@ -48,21 +48,20 @@
                         
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <div>
-                                <button class="btn btn-outline-success">Compilar </button>
-                            </div>
-                            <div>
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-danger" color="black" href="#tablaErroresSL">Tabla de Errores</a>
+                                    <button class="btn btn-outline-light">Optimizar </button>
                                 </li>
                             </div>
+
                             <div>
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-info" color="black" href="#tablaSimbolosSL">Tabla de Simbolos</a>
+                                    <a class="btn btn-outline-info" color="black" href="#reportOptimizar">Reporte de Optmización</a>
                                 </li>
                             </div>
+                            
                             <div>
                                 <li class="nav-item">
-                                    <button class="btn btn-outline-warning">Optimizar </button>
+                                    <a class="btn btn-outline-danger" href="http://127.0.0.1:3000">Compilar </a>
                                 </li>
                             </div>
                             
@@ -110,8 +109,43 @@
                     </div>
                 </div>
             </div>
+            <div class="container-fluid mt-5" id="reportOptimizar">
+        
+                <div class="tabla-report">
+                    <center>
+                        <h1>
+                            <font color="#ffffff" face="Times New Roman">
+                                Reporte de Optimización
+                            </font>
+                        </h1>
+                        
+                    </center>
+                    <table class="table table-dark table-hover shadow p-3 mb-5 bg-body rounded" id="tabla-reporte">
+                        <head>
+                            <tr>
+                                <th>Tipo        </th>
+                                <th>Regla       </th>
+                                <th>Original    </th>
+                                <th>Optimizada  </th>
+                                <th>Row         </th>
+                            </tr>
+                        </head>
 
-         
+                        <tbody>
+                            {{ range .Tabla_Optimizer }}
+                            
+                                <tr>
+                                    <td> {{ .Tipo       }} </td>
+                                    <td> {{ .Regla      }} </td>         
+                                    <td> {{ .Original   }} </td> 
+                                    <td> {{ .Optimizada }} </td>         
+                                    <td> {{ .Row        }} </td>             
+                                </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </form>
         

@@ -49,9 +49,17 @@ func (p Definition) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				fmt.Println(dimUno.Value)
 				aux,_ := strconv.Atoi(dimUno.Value)
 				size = aux
+				if size <= 0 {
+					excep := interfaces.NewException("Semantico", "Error de tam, no debe ser menor o igual a 0.", p.Row, p.Column)
+					tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+					return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+				}
 				saveTemps.Add(size)
 			} else {
 				fmt.Println("error semantico, debe de ser un entero")
+				excep := interfaces.NewException("Semantico", "Debe de ser un entero.", p.Row, p.Column)
+				tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+				return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 			}
 		}
 		
@@ -77,7 +85,7 @@ func (p Definition) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 	env.NewPos()
 	gen.AddStack(temp1,temp)
 	gen.AddHeap(temp, fmt.Sprintf("%v", size))
-	gen.AddExpression("H", "H", fmt.Sprintf("%v", size),"+")
+	gen.AddExpression("H", "H", fmt.Sprintf("%v", size+1),"+")
 
 	cont := 0;
 	for _, s := range p.Datos.ToArray() { 
@@ -117,7 +125,8 @@ func (p Definition) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 	symbolArray.Value = valueArray
 	
 	env.AddSymbolArrays(p.Id, symbolArray, interfaces.ARRAY, p.IsMut, symbolArray.Posicion, env)
-
+	tree.AddTableSymbol(*interfaces.NewTableSymbol(p.Id,"Array - Declaracion","Local", p.Row, p.Column, fmt.Sprintf("%v", size), fmt.Sprintf("%v", symbolArray.Posicion)))
+	
 
 	return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.NULL, TrueLabel: "", FalseLabel: ""}
 }

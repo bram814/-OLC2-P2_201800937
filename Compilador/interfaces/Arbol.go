@@ -17,6 +17,8 @@ type Arbol struct {
 	PosDisplay   int
 	IsReturn  	 bool
 	PosReturn    int
+	_TableSymbol *arrayList.List
+	_TableDB 	 *arrayList.List
 }
 
 type Exception struct {
@@ -25,6 +27,22 @@ type Exception struct {
 	Row         int
 	Column      int
 	Time        string
+}
+
+type TableSymbol struct {
+	Name 		string
+	Tipo        string
+	Ambito      string
+	Row         int
+	Column      int
+	Size  		string
+	Posicion    string
+}
+
+type TableDB struct {
+	Name 		string
+	Row         int
+	Column      int
 }
 
 type Display struct {
@@ -47,6 +65,8 @@ func NewArbol() *Arbol {
 		PosDisplay:   0,
 		IsReturn:  	  false,
 		PosReturn:	  -1,
+		_TableSymbol: arrayList.New(),
+		_TableDB:  	  arrayList.New(),
 	}
 	return &tree
 }
@@ -126,4 +146,50 @@ func (a *Arbol) GetDisplay(pos string) Display {
 
 func (a *Arbol) RestPosDisplay() {
 	a.PosDisplay = a.PosDisplay - 1
+}
+
+/** TABLE SYMBOL*/
+func NewTableSymbol(name string, tipo string, ambito string, row int, column int, size string, pos string) *TableSymbol {
+
+	e := TableSymbol{
+		Name		: name ,
+		Tipo		: tipo ,
+		Ambito		: ambito ,
+		Row			: row ,
+		Column		: column ,	
+		Size		: size,
+		Posicion 	: pos,
+	}
+	return &e
+}
+
+/* Add TableSymbol */
+func (a *Arbol) AddTableSymbol(e TableSymbol) { 
+	a._TableSymbol.Add(e) 
+}
+
+/* Get TableSymbol */
+func (a Arbol) GetTableSymbol() *arrayList.List {
+	return a._TableSymbol
+}
+
+/** TABLE DB*/
+func NewTableDB(name string, row int, column int) *TableDB {
+
+	e := TableDB{
+		Name		: name ,
+		Row			: row ,
+		Column		: column ,
+	}
+	return &e
+}
+
+/* Add TableSymbol */
+func (a *Arbol) AddTableDB(e TableDB) { 
+	a._TableDB.Add(e) 
+}
+
+/* Get TableSymbol */
+func (a Arbol) GetTableDB() *arrayList.List {
+	return a._TableDB
 }

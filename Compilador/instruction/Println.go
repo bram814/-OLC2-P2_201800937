@@ -234,7 +234,9 @@ func devolverPos(text string, pos int) int {
 			if text[pos] == 125 { // ASCII -> }
 				return pos
 			} else {
-				return newPos
+				if text[pos] != 58 && text[pos] != 63 { // ASCCI 58->[:] 63->[?]
+					return newPos
+				}  
 			}
 		}
 

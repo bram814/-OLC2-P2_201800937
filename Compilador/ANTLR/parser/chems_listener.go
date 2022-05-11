@@ -188,6 +188,9 @@ type ChemsListener interface {
 	// EnterInstr_structs_assignment is called when entering the instr_structs_assignment production.
 	EnterInstr_structs_assignment(c *Instr_structs_assignmentContext)
 
+	// EnterInstr_db is called when entering the instr_db production.
+	EnterInstr_db(c *Instr_dbContext)
+
 	// EnterInstr_tipo is called when entering the instr_tipo production.
 	EnterInstr_tipo(c *Instr_tipoContext)
 
@@ -409,6 +412,9 @@ type ChemsListener interface {
 
 	// ExitInstr_structs_assignment is called when exiting the instr_structs_assignment production.
 	ExitInstr_structs_assignment(c *Instr_structs_assignmentContext)
+
+	// ExitInstr_db is called when exiting the instr_db production.
+	ExitInstr_db(c *Instr_dbContext)
 
 	// ExitInstr_tipo is called when exiting the instr_tipo production.
 	ExitInstr_tipo(c *Instr_tipoContext)

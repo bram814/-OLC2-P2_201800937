@@ -387,6 +387,12 @@ func (s *BaseChemsListener) EnterInstr_structs_assignment(ctx *Instr_structs_ass
 // ExitInstr_structs_assignment is called when production instr_structs_assignment is exited.
 func (s *BaseChemsListener) ExitInstr_structs_assignment(ctx *Instr_structs_assignmentContext) {}
 
+// EnterInstr_db is called when production instr_db is entered.
+func (s *BaseChemsListener) EnterInstr_db(ctx *Instr_dbContext) {}
+
+// ExitInstr_db is called when production instr_db is exited.
+func (s *BaseChemsListener) ExitInstr_db(ctx *Instr_dbContext) {}
+
 // EnterInstr_tipo is called when production instr_tipo is entered.
 func (s *BaseChemsListener) EnterInstr_tipo(ctx *Instr_tipoContext) {}
 

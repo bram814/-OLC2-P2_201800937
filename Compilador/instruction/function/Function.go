@@ -24,7 +24,7 @@ func NewFunction(Id string, Parametro *arrayList.List, Instrucciones *arrayList.
 }
 
 func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *interfaces.Generator) interface{} {
-
+	tree.AddTableSymbol(*interfaces.NewTableSymbol("Return","Return","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))				
 	env.NewPos()
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
@@ -62,6 +62,7 @@ func (p Function) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 			result := interfaces.Value{Value: temp1, IsTemp: true, Type: s.(ListExpre).Type, TrueLabel: "", FalseLabel: ""}
 			
 			newTable.AddSymbol(s.(ListExpre).Id, result, s.(ListExpre).Type, true, newTable.Posicion, &newTable)
+			tree.AddTableSymbol(*interfaces.NewTableSymbol(s.(ListExpre).Id,"Parametro","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", newTable.Posicion)))
 			newTable.NewPos()
 
 

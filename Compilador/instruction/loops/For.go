@@ -51,6 +51,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 			gen.AddExpression(temp, "P", fmt.Sprintf("%v", newTable.Posicion), "+")
 			gen.AddStack(temp, left.Value)
 			newTable.AddSymbol(p.Id, left, left.Type, true, newTable.Posicion, &newTable)
+			tree.AddTableSymbol(*interfaces.NewTableSymbol(p.Id,"Variable - for","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", newTable.Posicion)))
 			newTable.NewPos()
 
 		}
@@ -132,6 +133,7 @@ func (p For) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen *
 			gen.AddStack(temp, left.Value)
 			left.Type = interfaces.CHAR
 			newTable.AddSymbol(p.Id, left, interfaces.CHAR, true, newTable.Posicion, &newTable)
+			tree.AddTableSymbol(*interfaces.NewTableSymbol(p.Id,"Variable - for","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", newTable.Posicion)))
 			newTable.NewPos()
 
 			gen.AddExpressionStack(secondTemp, temp)

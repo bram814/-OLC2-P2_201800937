@@ -43,24 +43,32 @@ func (p Identifier) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 		result := s.(ListIdentifier).Size.Compilar(env, tree, gen)
 
 		fmt.Println(reflect.TypeOf(result))
-		if result.Type != interfaces.INTEGER {
+		if result.Type != interfaces.INTEGER || result.IsTemp {
 			excep := interfaces.NewException("Semantico", "Error en Array (indetifier), Las posiciones deben de ser Enteras.", p.Row, p.Column)
 			tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
 			return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
 		} 
+
 		saveTemps = append(saveTemps, result.Value)
 		
 
 	}
 
-	// fmt.Println(len(saveTemps))
+
 	var size int
 	for _, s := range saveTemps {
 		fmt.Println(reflect.TypeOf(s))
 		aux,_ := strconv.Atoi(s.(string))
 		size = aux
+		fmt.Println(size)
 	}
 
+
+	if symbol.Value.(interfaces.Symbol).Value.(interfaces.SymbolArrays).Size <= size {
+		excep := interfaces.NewException("Semantico", "Error en Array (indetifier), se excedio del Tamaño de " + fmt.Sprintf("%v", symbol.Value.(interfaces.Symbol).Value.(interfaces.SymbolArrays).Size) + ".", p.Row, p.Column)
+		tree.AddException(interfaces.Exception{Tipo: excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Column})
+		return interfaces.Value{Value: "", IsTemp: false, Type: interfaces.EXCEPTION, TrueLabel: "", FalseLabel: ""}
+	}
 
 
 	temp := gen.NewTemp()

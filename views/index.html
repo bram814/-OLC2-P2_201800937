@@ -60,6 +60,11 @@
                                     <a class="btn btn-outline-info" color="black" href="#tablaSimbolosSL">Tabla de Simbolos</a>
                                 </li>
                             </div>
+                             <div>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-light" color="black" href="#tablaDB">Reporte DB</a>
+                                </li>
+                            </div>
                             <div>
                                 <li class="nav-item">
                                     <a class="btn btn-outline-warning" color="black" href="/optimizar">Optimizar</a>
@@ -167,17 +172,66 @@
                     <table class="table table-dark table-hover shadow p-3 mb-5 bg-body rounded" id="tabla-reporte">
                         <head>
                             <tr>
-                                <th>Id</th>
-                                <th>Tipo Símbolo</th>
-                                <th>Tipo de Dato</th>
-                                <th>Ámbito</th>
-                                <th>Fila</th>
-                                <th>Columna</th>
+                                <th>Nombre   </th>
+                                <th>Tipo     </th>
+                                <th>Ambito   </th>
+                                <th>Size     </th>
+                                <th>Posicion </th>
+                                <th>Fila     </th>
+                                <th>Columna  </th>
                             </tr>
                         </head>
 
                         <tbody>
-                           
+                            {{ range .Tabla_Symbol }}
+                            
+                                <tr>
+                                    <td> {{ .Name     }} </td>
+                                    <td> {{ .Tipo     }} </td> 		
+                                    <td> {{ .Ambito   }} </td> 
+                                    <td> {{ .Size }} </td> 
+                                    <td> {{ .Posicion }} </td> 
+                                    <td> {{ .Row      }} </td>			
+                                    <td> {{ .Column   }} </td> 			
+                                </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+        
+            </div>
+
+             <div class="container-fluid mt-5" id="tablaDB">
+        
+                <div class="tabla-report">
+                    <center>
+                        <h1>
+                            <font color="#ffffff" face="Times New Roman">
+                                Reporte de Base de Datos Existentes
+                            </font>
+                        </h1>
+                        
+                    </center>
+                    <table class="table table-dark table-hover shadow p-3 mb-5 bg-body rounded" id="tabla-reporte">
+                        <head>
+                            <tr>
+                                <th>Id     </th>
+                                <th>Nombre   </th>
+                                <th>Fila     </th>
+                                <th>Columna  </th>
+                            </tr>
+                        </head>
+
+                        <tbody>
+                            {{ range .Tabla_DB }}
+                            
+                                <tr>
+                                    <td> {{ .Id       }} </td>
+                                    <td> {{ .Name     }} </td>
+                                    <td> {{ .Row      }} </td>          
+                                    <td> {{ .Column   }} </td>          
+                                </tr>
+                            {{ end }}
                         </tbody>
                     </table>
                 </div>

@@ -45,6 +45,7 @@ func (p Potencia) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, 
 		gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 		aux := env.Posicion
 		gen.AddStack(temp, base.Value)
+		tree.AddTableSymbol(*interfaces.NewTableSymbol(base.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
 		env.NewPos()
 
 		exponente = p.Exponente.Compilar(env, tree, gen)

@@ -40,14 +40,16 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 					aux := env.Posicion
 					gen.AddStack(temp, exp_left.Value)
+					tree.AddTableSymbol(*interfaces.NewTableSymbol(exp_left.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
 					env.NewPos()
 					
 					exp_right = p.right.Compilar(env, tree, gen)
 
 					temp = gen.NewTemp()
+					temp1 := gen.NewTemp()
 					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
-					gen.AddExpressionStack(exp_left.Value,temp)
-
+					gen.AddExpressionStack(temp1,temp)
+					exp_left.Value = temp1
 				} else {
 					exp_left = p.left.Compilar(env, tree, gen)
 					exp_right = p.right.Compilar(env, tree, gen)
@@ -123,14 +125,17 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 					aux := env.Posicion
 					gen.AddStack(temp, exp_left.Value)
+					tree.AddTableSymbol(*interfaces.NewTableSymbol(exp_left.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
+					
 					env.NewPos()
 					
 					exp_right = p.right.Compilar(env, tree, gen)
 
 					temp = gen.NewTemp()
+					temp1 := gen.NewTemp()
 					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
-					gen.AddExpressionStack(exp_left.Value,temp)
-
+					gen.AddExpressionStack(temp1,temp)
+					exp_left.Value = temp1
 				} else {
 					exp_left = p.left.Compilar(env, tree, gen)
 					exp_right = p.right.Compilar(env, tree, gen)
@@ -171,13 +176,17 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 					gen.AddExpression(temp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 					aux := env.Posicion
 					gen.AddStack(temp, exp_left.Value)
+					tree.AddTableSymbol(*interfaces.NewTableSymbol(exp_left.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
+	
 					env.NewPos()
 					
 					exp_right = p.right.Compilar(env, tree, gen)
 
 					temp = gen.NewTemp()
+					temp1 := gen.NewTemp()
 					gen.AddExpression(temp, "P", fmt.Sprintf("%v", aux), "+")
-					gen.AddExpressionStack(exp_left.Value,temp)
+					gen.AddExpressionStack(temp1,temp)
+					exp_left.Value = temp1
 
 				} else {
 					exp_left = p.left.Compilar(env, tree, gen)
@@ -247,7 +256,7 @@ func (p Aritmetica) Compilar(env *interfaces.Environment, tree *interfaces.Arbol
 				exp_left = p.left.Compilar(env, tree, gen)
 				exp_right = p.right.Compilar(env, tree, gen)
 			}
-			gen.AddComment("Aritmetica /")
+			gen.AddComment("Aritmetica °|°")
 
 			if !exp_right.IsTemp {
 				if exp_right.Value == "0" {

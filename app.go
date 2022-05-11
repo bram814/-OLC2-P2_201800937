@@ -17,10 +17,15 @@ import (
 	"OLC2/Compilador/ANTLR/parser"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
+	"OLC2/Optimizar/Grammar"
+
 )
 
 var CODE_OUT_ string = ""
+var CODE_HEAD string = ""
 var TSGlobalError []interface{}
+var TSGlobalSymbol []interface{}
+var TSGlobalDB []interface{}
 
 func main() {
 
@@ -46,7 +51,7 @@ func main() {
 	app.Get("/optimizar", func(c *fiber.Ctx) error {
 		// Render index template
 		return c.Render("Optimizar", fiber.Map{
-			"CODE_INPUT":  "",
+			"CODE_INPUT":  CODE_OUT_,
 			"CODE_OUT":    "",
 		})
 	})
@@ -91,9 +96,10 @@ func Execute(c *fiber.Ctx) error {
 		"CODE_INPUT":  data.Input,
 		"CODE_OUT":    CODE_OUT_,
 		"Tabla_Error": TSGlobalError,
+		"Tabla_Symbol": TSGlobalSymbol,
+		"Tabla_DB": TSGlobalDB,
 	})
 }
-
 
 func Optimizar(c *fiber.Ctx) error {
 	data := new(getInput)
@@ -102,15 +108,18 @@ func Optimizar(c *fiber.Ctx) error {
 	if err := c.BodyParser(data); err != nil {
 		return err
 	}
+	// fmt.Println(reflect.TypeOf(data.Input))
+	var out, ts = Grammar.Optimizar(data.Input, CODE_HEAD)
+
 
 	return c.Render("Optimizar", fiber.Map{
 		"CODE_INPUT":  data.Input,
-		"CODE_OUT":    data.Input,
+		"CODE_OUT":    out,
+		"Tabla_Optimizer": ts,
 		})
 	
-
-
 }
+
 
 /* ANTLR*/
 
@@ -126,6 +135,8 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	result := ctx.GetLista()
 
 	TSGlobalError = nil
+	TSGlobalSymbol = nil
+	TSGlobalDB = nil
 	/* SALIDA */
 	var _salida string
 	_salida = ""
@@ -145,7 +156,7 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 	gen.AddComment("Fucniones")
 	for _ , s := range result.ToArray() {
 		newInstr := s.(interfaces.Instruction)
-		if reflect.TypeOf(newInstr).String() != "instruction.Main" && reflect.TypeOf(newInstr).String() != "function.Function" && reflect.TypeOf(newInstr).String() != "structs.Definition" { 
+		if reflect.TypeOf(newInstr).String() != "instruction.Main" && reflect.TypeOf(newInstr).String() != "function.Function" && reflect.TypeOf(newInstr).String() != "structs.Definition" && reflect.TypeOf(newInstr).String() != "db.Definition"  { 
 			excep := interfaces.NewException("Semantico","Solo puede ir Main, Func, Array y Mod.", -1, -1)
 			tree.AddException(interfaces.Exception{Tipo:excep.Tipo, Descripcion: excep.Descripcion, Row: excep.Row, Column: excep.Row})
 			break
@@ -168,13 +179,14 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 				IsMut  : true,
 				Posicion		: 0,
 			}
-
+			tree.AddTableSymbol(*interfaces.NewTableSymbol(value.Id,"Function","Global", newInstr.(function.Function).Row, newInstr.(function.Function).Column, "--", "--"))
+						
 			globalEnv.AddFunction(newInstr.(function.Function).Id, value, newInstr.(function.Function).Type)
 			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
 			gen.AddFunctionEnd(false)
 			globalEnv.UpdatePos(0, 0, true, &globalEnv)
 
-		} else if reflect.TypeOf(newInstr).String() == "structs.Definition" {
+		} else if reflect.TypeOf(newInstr).String() == "structs.Definition" || reflect.TypeOf(newInstr).String() == "db.Definition" {
 			s.(interfaces.Instruction).Compilar(&globalEnv, tree, gen)
 		}
 	}
@@ -247,12 +259,14 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"
 	}
-
+	CODE_HEAD = _salida 
 	for _, s := range gen.GetCode().ToArray() {
 		_salida += "\t" + fmt.Sprintf("%v", s)
 		_salida += "\n"
 	}
 
+
+	fmt.Println("----------")
 	var OutException string
 	OutException = ""
 
@@ -270,6 +284,38 @@ func (this *TreeShapeListener) ExitStart(ctx *parser.StartContext) {
 
 	fmt.Println(OutException)
 	fmt.Println("----------")
+	OutException = ""
+
+	for _, s := range tree.GetTableSymbol().ToArray() {
+		OutException += fmt.Sprintf("%v", s)
+		m := make(map[string]string)
+		m["Name"] 		= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Name)
+		m["Tipo"] 		= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Tipo)
+		m["Ambito"] 	= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Ambito)
+		m["Row"] 		= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Row)
+		m["Column"] 	= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Column)
+		m["Size"] 		= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Size)
+		m["Posicion"] 	= fmt.Sprintf("%v", s.(interfaces.TableSymbol).Posicion)
+
+		TSGlobalSymbol = append(TSGlobalSymbol, m)
+	}
+
+	fmt.Println(OutException)
+
+	fmt.Println("----------")
+
+	auxCont := 1
+	for _, s := range tree.GetTableDB().ToArray() {
+
+		m := make(map[string]string)
+		m["Id"]			= fmt.Sprintf("%v", auxCont)
+		m["Name"] 		= fmt.Sprintf("%v", s.(interfaces.TableDB).Name)
+		m["Row"] 		= fmt.Sprintf("%v", s.(interfaces.TableDB).Row)
+		m["Column"] 	= fmt.Sprintf("%v", s.(interfaces.TableDB).Column)
+
+		TSGlobalDB = append(TSGlobalDB, m)
+		auxCont++
+	}
 
 	CODE_OUT_ = _salida
 

@@ -23,6 +23,10 @@ func (p Main) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, gen 
 	var newTable interfaces.Environment
 	newTable = interfaces.NewEnvironment(env)
 	newTable.UpdatePos(tree.GetPos(), env.Posicion, env.Posicion != 0, &newTable)
+	
+	tsSymbol := interfaces.NewTableSymbol("Main","Funcion","Global", p.Row, p.Column, "--", "--")
+	tree.AddTableSymbol(*tsSymbol)
+	
 
 	if p.Instrucciones != nil {
 		// gen.AddFunction("void","main()")

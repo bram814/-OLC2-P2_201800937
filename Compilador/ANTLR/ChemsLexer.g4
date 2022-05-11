@@ -26,6 +26,9 @@ R_RETURN:       'return';
 R_MAIN:         'main';
 R_FUNCTION:     'fn';
 
+/*BAE DE DATOS */
+R_MOD:     'mod';
+
 /* STRUCT */
 R_STRUCT:       'struct';
 

@@ -89,7 +89,7 @@ func (p Llamada) Compilar(env *interfaces.Environment, tree *interfaces.Arbol, g
 						gen.AddComment("Guardando Temporal")
 						gen.AddExpression(auxTemp,"P", fmt.Sprintf("%v", env.Posicion), "+")
 						gen.AddStack(auxTemp, instrCall.Value)
-						
+						tree.AddTableSymbol(*interfaces.NewTableSymbol(instrCall.Value,"Temporal","Local", p.Row, p.Column, "--", fmt.Sprintf("%v", env.Posicion)))
 						saveTemps = append(saveTemps, env.Posicion)
 						env.NewPos()
 						
