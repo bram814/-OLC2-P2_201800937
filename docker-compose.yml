@@ -1,0 +1,11 @@
+# docker-compose up [--build]
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+
+# sudo docker build -t myapp .
+# sudo docker run --rm -it -p 3000:3000 myapp
